@@ -1,0 +1,286 @@
+---
+title: "Research"
+---
+
+## Journal Articles
+
+---
+
+**Assessing land degradation and drought vulnerability in the Trans-Gangetic Plains using Google Earth Engine and remote sensing for SDG 15.3.1 monitoring** (2025)  
+*Environmental Monitoring and Assessment* | Bhattacharjee S, Basavareddy, Rajput VD, Majumder D, Panja A, Kashyap S, Kumar R  
+[Read Paper](https://link.springer.com/article/10.1007/s10661-025-14371-1)
+
+> Used Google Earth Engine and open source remote sensing tools to map land degradation and drought risk in the Trans-Gangetic Plains, directly contributing to SDG 15.3.1 monitoring frameworks.
+
+---
+
+**Impact of Seasonal Dynamics and Agronomic Practices on Soil Health Indicators: Arbuscular Mycorrhizal Fungi, Glomalin-Related Soil Protein, and Ergosterol** (2025)  
+*Eurasian Soil Science* | Bhattacharjee S, Rajput VD, Biswal B, Basak N, Kumar R
+
+> Examined how seasons and farming practices affect key biological soil health markers — fungi, proteins, and ergosterol — providing insights for sustainable soil management.
+
+---
+
+**Optimizing Oat (Avena sativa L.) Production Strategies to Mitigate Nitrate Toxicity Without Compromising Fodder Quality** (2025)  
+*International Journal of Agronomy* | Pyati PS, Bhattacharjee S, Kumar R, Ram H, et al.
+
+> Identified agronomic strategies to reduce nitrate toxicity in fodder oats while maintaining high nutritional quality — a critical issue for livestock safety.
+
+---
+
+**Soil quality enhancement in arecanut-based agroforestry system: Insights from organic farming and integrated nutrient management** (2025)  
+*The Indian Journal of Agricultural Sciences* | Paramesh V, Kumar P, Kumar RM, Bhattacharjee S, et al.
+
+> Evaluated how organic and integrated nutrient management improves soil quality in arecanut agroforestry — a common coastal farming system.
+
+---
+
+**Assessing the impact of nutrient management on productivity, economics, soil quality, energy efficiency, and life cycle assessment in rice-based farming systems** (2025)  
+*Journal of Agriculture and Food Research* | Paramesha V, Kumar P, Bhattacharjee S, et al.
+
+> Comprehensive assessment of how nutrient management strategies affect multiple sustainability dimensions in rice farming systems.
+
+---
+
+**Impact of Agronomic Management Practices on Quality and Productivity of Fodder Crops: A Review** (2025)  
+*Agricultural Reviews* | Prasanna SP, Choudhary M, Bhattacharjee S, Praveen BR, Naik VS
+
+> Synthesised research on how agronomic practices influence the productivity and nutritional quality of fodder crops.
+
+---
+
+**Optimizing varietal selection and cutting intervals for enhanced fodder productivity, quality and energy content in multi-cut oats** (2025)  
+*Indian Journal of Animal Sciences* | Bhakuni K, Sabal SK, Bhattacharjee S, Kumar R, et al.
+
+> Compared oat varieties and cutting schedules to maximise fodder yield and energy content for dairy and livestock systems.
+
+---
+
+**Long-term effect of rice-rice and rice-cowpea systems on soil carbon and soil quality indicators under rice-based cropping systems in West Coast India** (2026)  
+*Soil Security* | Paramesh V, Kumar P, Bhattacharjee S, et al.
+
+> Investigated how different rice-based cropping systems affect long-term soil carbon and quality on India's west coast — directly relevant to coastal agricultural sustainability.
+
+---
+
+**Comparative Assessment of Ecosystem Services under Conservation Agriculture, Agroforestry, and Traditional Integrated Farming Systems in Tribal Regions of Central India** (2026)  
+*Environmental and Sustainability Indicators* | Pradhan A, Paramesha V, Bhattacharjee S, et al.
+
+> Compared ecosystem services provided by different farming approaches in tribal regions — contributing to evidence-based policy for sustainable agriculture.
+
+---
+
+**Climate Change Trends and their Impact on Cropping Pattern in Cold Desert of India** (2026)  
+*International Journal of Environment and Climate Change* | Pandey S, Bhattacharjee S, Ram H, et al.
+
+> Analysed climate change trends in Ladakh's cold desert and their effects on traditional cropping patterns — important for food security in fragile mountain ecosystems.
+
+---
+
+**From garbage to global warming: a bibliometric analysis of greenhouse gas emissions from municipal solid waste and its relationship with climate change** (2024)  
+*Environment, Development and Sustainability* | Bhattacharjee S, Panja A, Majumder D, Hindorya PS, Kumar R
+
+> Mapped 50 years of global research on waste-related greenhouse gas emissions using bibliometric analysis — identifying key trends and future research directions.
+
+---
+
+**Climate adaptation in agricultural sector of coastal India: a comprehensive exploration of adaptation strategies** (2024)  
+*Mitigation and Adaptation Strategies for Global Change* | Panja A, Garai S, Bhattacharjee S, et al.
+
+> Comprehensively reviewed climate adaptation strategies available for coastal Indian agriculture — a timely and policy-relevant contribution.
+
+---
+
+**The Impact of Integrated Nutrient Management on Trifolium alexandrinum Varietal Performance in the Indo-Gangetic Plains** (2024)  
+*Agronomy* | Hindoriya PS, Kumar R, Bhattacharjee S, et al.
+
+> Compared berseem clover varieties under different nutrient management strategies in the Indo-Gangetic Plains — a key fodder crop region.
+
+---
+
+**Coastal Ecosystem Services: Valuation, Threats, and Sustainable Way Forward** (2024)  
+*Journal of Agricultural Physics* | Kumar P, Das B, Majik S, Bhattacharjee S
+
+> Assessed and valued the ecosystem services provided by coastal regions and outlined threats and sustainability pathways.
+
+---
+
+**Availability and seasonal dynamics of feed sources for Ladakhi cattle breed in the cold arid region of Ladakh** (2024)  
+*Biological Rhythm Research* | Youdol T, Mishra AK, Bhattacharjee S, et al.
+
+> Studied seasonal feed availability for indigenous Ladakhi cattle — important for livestock management in climate-vulnerable high-altitude regions.
+
+---
+
+**Nature-positive strategies for sustainable fodder production and management under changing climatic and soil environments** (2024)  
+*Journal of the Indian Society of Soil Science* | Singh R, Bhattacharjee S, Kumar D, et al.
+
+> Reviewed nature-positive approaches to fodder production under climate and soil change scenarios.
+
+---
+
+**Sustainable Integrated Farming Systems for Coastal Regions of India** (2024)  
+*Indian Journal of Dryland Agricultural Research and Development* | Kumar P, Paramesha V, Bhattacharjee S
+
+> Proposed integrated farming models suited to the specific challenges of India's coastal agricultural zones.
+
+---
+
+**Enhancing growth, yield, and nutrient quality of fodder maize through foliar application of ortho silicic acid** (2024)  
+*Silicon* | Biswal B, Kumar R, Bhattacharjee S, et al.
+
+> Demonstrated that foliar ortho silicic acid application improves both yield and nutritional quality of fodder maize.
+
+---
+
+**How did research on conservation agriculture evolve over the years? A bibliometric analysis** (2023)  
+*Sustainability* | Bhattacharjee S, Panja A, Panda M, Dutta S, et al.  
+[Read Paper](https://doi.org/10.3390/su15032040)
+
+> Traced the global evolution of conservation agriculture research over decades using bibliometric methods — identifying hotspots, key contributors, and emerging themes.
+
+---
+
+**Municipal solid waste compost: a comprehensive bibliometric data-driven review of 50 years of research** (2023)  
+*Environmental Science and Pollution Research* | Bhattacharjee S, Panja A, Kumar R, et al.
+
+> Synthesised 50 years of global research on MSW composting — mapping progress and identifying gaps for future research.
+
+---
+
+**Energy budgeting and carbon footprints estimation of fodder maize varieties under different nutrient management practices** (2023)  
+*Agronomy* | Kumar D, Singh M, Bhattacharjee S, et al.
+
+> Quantified the energy use and carbon footprint of different fodder maize production systems in the Indo-Gangetic Plains.
+
+---
+
+**Assessing the effects of conservation tillage and in-situ crop residue management on crop yield and soil properties in rice-wheat cropping system** (2023)  
+*Sustainability* | Leharwan M, Kumar Y, Bhattacharjee S, et al.
+
+> Evaluated how conservation tillage and residue retention affect productivity and soil health in the dominant rice-wheat system.
+
+---
+
+**Improvement of growth, yield and soil fertility in wheat through tillage and nutrient management practices** (2023)  
+*Journal of Soil Science and Plant Nutrition* | Dutta S, Singh M, Bhattacharjee S, et al.
+
+> Showed how optimised tillage and nutrient combinations can simultaneously improve wheat yields and soil fertility.
+
+---
+
+**Scope of Horse Gram and Bambara Groundnut as Source of Food and Feed Legume: A Review** (2023)  
+*Legume Research: An International Journal* | Biswal B, Kashyap S, Bhattacharjee S, et al.
+
+> Reviewed the potential of two underutilised legumes as food and fodder crops — relevant for diversifying dryland farming systems.
+
+---
+
+**Grain characteristics, proximate composition, phytochemical capacity, and mineral content of aromatic and non-aromatic rice accessions in North-East India** (2022)  
+*Applied Food Research* | Nath S, Bhattacharjee P, Bhattacharjee S, et al.  
+[Read Paper](https://doi.org/10.1016/j.afres.2022.100067)
+
+> Characterised nutritional and phytochemical profiles of traditional North-East Indian rice varieties — valuable for nutritional security and germplasm conservation.
+
+---
+
+**Effect of Potassium and Zinc Nutrition on Growth and Yield of Short Duration Maize under Dryland Vertisols** (2022)  
+*Indian Journal of Agricultural Research* | Bhattacharjee S, Bhale VM, Kumar P, Kumar R
+
+> Quantified how potassium and zinc fertilisation affects maize growth and yield in the challenging dryland Vertisol conditions of central India.
+
+---
+
+**Growth and yield performance of fodder oats grown under different nutrient management practices** (2022)  
+*Indian Journal of Agricultural Sciences* | Kumar D, Singh M, Bhattacharjee S, et al.
+
+> Assessed nutrient management options to improve fodder oat productivity for livestock feeding systems.
+
+---
+
+**Performance of Maize based on yield attributes, nutrient uptake, quality and economics under different zinc-based nutrient management regimes** (2020)  
+*Research Journal of Agriculture Science* | Panda A, Bhattacharjee S, Bhale VM, et al.
+
+> Evaluated zinc-based nutrient management regimes for optimising maize productivity and economic returns.
+
+---
+
+**Influence of sulphur, zinc and organic inorganic assorted customized fertilizer on yield and quality of cotton under rainfed vertisols** (2020)  
+*International Journal of Current Microbiology and Applied Sciences* | Bairwa B, Katkar RN, Bhattacharjee S, et al.
+
+---
+
+**A study on total pest population present in aman paddy at North Tripura** (2019)  
+*Journal of Entomology and Zoology Studies* | Bhattacharjee P, Datta J, Nath S, Bhattacharjee S
+
+---
+
+**Effect of different nutrient management practices and zinc fertilization on growth and development stages of maize under dryland condition** (2019)  
+*International Journal of Current Microbiology and Applied Sciences* | Panda A, Bhale VM, Bhattacharjee S, Kadam SR
+
+---
+
+**Effect of Potassium and Zinc Fertilization on Root Growth Parameters of Maize** (2019)  
+*Bhartiya Krishi Anusandhan Patrika* | Bhattacharjee S, Bhale VM, Bhattacharjee P, Kadam S
+
+---
+
+## Book Chapters
+
+---
+
+**Integrated computational intelligence models to ensure food security withstanding climate change** (2025)  
+*High-Performance Automation Methods for Computational Intelligent Systems* | Majumder D, Bhattacharjee S, et al. — CRC Press
+
+---
+
+**Sustainable Crop Production Using Plant Growth Promoting Rhizobacteria: A Green Technology** (2025)  
+*Smart Technologies in Sustainable Agriculture* | Singh M, Kumar D, Bhattacharjee S, et al. — Apple Academic Press
+
+---
+
+**Advancing Food Science from Field to Fork: The Role of Nanobionics** (2025)  
+*Contemporary Suitability of Nanobionics in Agriculture* | Ramani A, Rout P, Bhattacharjee S — Springer
+
+---
+
+**Amelioration of abiotic stresses in forage crop production using microbial stimulants** (2024)  
+*Microbial Biostimulants for Plant Growth and Abiotic Stress Amelioration* | Kashyap S, Bhattacharjee S, et al. — Elsevier
+
+---
+
+**Exploring the synergy of microbes and plants for managing moisture stress in medicinal and aromatic crops** (2024)  
+*Microbial Biostimulants for Plant Growth and Abiotic Stress Amelioration* | Bhattacharjee P, Bhattacharjee S, et al. — Elsevier
+
+---
+
+**The nexus between environmental damage, poverty, and climate change in hard-to-reach areas** (2024)  
+*Environmental Nexus for Resource Management* | Panja A, Bhattacharjee S, et al. — CRC Press
+
+---
+
+**Advancing of biodynamic and natural farming in achieving sustainable development goals** (2024)  
+*Natural Farming: Basics and Application* | Bhattacharjee S, Kumar R, et al.
+
+---
+
+**Micro- and nanoparticle of chitosan for vitamin encapsulation: A nutshell overview** (2023)  
+*Nano-biofortification for human and environmental health* | Rout P, Ramani A, Bhattacharjee S — Springer
+
+---
+
+## PhD Thesis
+
+**Nutrient Management with Potassium and Zinc for Increased Productivity of Maize** (2017)  
+*Dr. Panjabrao Deshmukh Krishi Vidyapeeth, Akola, Maharashtra*
+
+> Doctoral research examining how potassium and zinc fertilisation strategies can improve maize productivity in dryland Vertisol conditions of central India.
+
+---
+
+## Ongoing Research
+
+- Geospatial assessment of coastal agricultural vulnerability using Google Earth Engine
+- Soil health monitoring in rice-based cropping systems of coastal Goa
+- Climate adaptation strategies for coastal farming communities
+

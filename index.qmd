@@ -1,0 +1,30 @@
+---
+title: "Subhradip Bhattacharjee"
+subtitle: "Geospatial & Agronomy Researcher"
+image: images/profile.png
+about:
+  template: jolla
+  links:
+    - icon: envelope
+      text: Email
+      href: mailto:your@email.com
+    - icon: mortarboard-fill
+      text: Google Scholar
+      href: https://scholar.google.com
+    - icon: file-person
+      text: ResearchGate
+      href: https://www.researchgate.net/profile/Subhradip-Bhattacharjee
+---
+
+I am a researcher at **ICAR - Central Coastal Agricultural Research 
+Institute, Goa**, specialising in geospatial analysis and agronomy.
+
+My work focuses on understanding coastal agricultural systems using 
+remote sensing, GIS, and field-based approaches.
+
+## Research Interests
+
+- Geospatial analysis of agricultural landscapes
+- Coastal agronomy and soil health
+- Remote sensing for crop monitoring
+- Climate impacts on coastal farming systems
