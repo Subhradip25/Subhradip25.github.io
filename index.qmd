@@ -11,11 +11,11 @@ toc: false
     <img src="images/profile.png" class="sb-photo" alt="Subhradip Bhattacharjee"/>
     <div class="sb-hero-text">
       <div class="sb-name">Subhradip Bhattacharjee</div>
-      <div class="sb-role">Geospatial · Agronomy · Climate Researcher</div>
+      <div class="sb-role">Agronomist  Turned  Open- Source Geospatial Analyst and Climate Change Researcher</div>
       <p class="sb-bio">
-        Specialising in geospatial assessment of land degradation, coastal agricultural
-        systems, soil health monitoring, and bibliometric mapping of global agricultural
-        research trends using Google Earth Engine and remote sensing.
+        Specialising in (typical) forage agronomy, open-source remote sensing techniques, agriculture linked big data analysis in climate & climate change science and few other workflows involving R, Python Linux Shell & GEE. 
+        
+        
       </p>
       <div class="sb-tags">
         <span class="sb-tag">Remote Sensing</span>
