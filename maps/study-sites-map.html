@@ -6,228 +6,364 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', sans-serif; background: #0D2137; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #0D2137; }
 
-  .map-container { background: #0D2137; padding: 2rem 5rem 2.5rem; }
-  .map-header {
-    max-width: 1300px; margin: 0 auto 1rem;
-    display: flex; align-items: flex-end;
-    justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  /* ── Header ── */
+  .map-wrap { background: #0D2137; padding: 2rem 5rem 0; }
+  .map-top {
+    max-width: 1300px; margin: 0 auto;
+    display: flex; align-items: flex-start;
+    justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    padding-bottom: 1rem;
   }
   .map-label {
-    color: #5DCAA5; font-size: 0.68rem; font-weight: 700;
-    letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px;
+    color: #5DCAA5; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 5px;
   }
-  .map-title { color: white; font-size: 1.3rem; font-weight: 700; }
-  .map-legend { display: flex; gap: 14px; flex-wrap: wrap; }
-  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.72rem; color: rgba(255,255,255,0.6); }
-  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .map-title { color: white; font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; }
+  .map-sub { color: rgba(255,255,255,0.4); font-size: 0.75rem; margin-top: 3px; }
 
+  /* ── Stats strip ── */
+  .map-stats {
+    display: flex; gap: 0;
+    border: 1px solid #1a3350; border-radius: 8px;
+    overflow: hidden; flex-shrink: 0;
+  }
+  .map-stat-item {
+    padding: 10px 18px; text-align: center;
+    border-right: 1px solid #1a3350;
+    min-width: 80px;
+  }
+  .map-stat-item:last-child { border-right: none; }
+  .map-stat-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    margin: 0 auto 5px;
+  }
+  .map-stat-num {
+    color: white; font-size: 1.1rem; font-weight: 700; line-height: 1;
+  }
+  .map-stat-lbl {
+    color: rgba(255,255,255,0.38); font-size: 0.58rem;
+    text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;
+  }
+
+  /* ── Legend ── */
+  .map-legend-strip {
+    max-width: 1300px; margin: 0 auto;
+    display: flex; gap: 20px; flex-wrap: wrap;
+    padding: 10px 0 12px;
+    border-bottom: 1px solid #1a3350;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .legend-txt { font-size: 0.72rem; color: rgba(255,255,255,0.55); }
+
+  /* ── Map ── */
   #map {
     max-width: 1300px; margin: 0 auto;
-    height: 480px; border-radius: 10px;
-    border: 1px solid #1a3350; overflow: hidden;
+    height: 500px;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #1a3350;
+    border-top: none;
+    overflow: hidden;
+    display: block;
+  }
+  .map-footer {
+    max-width: 1300px; margin: 6px auto 0;
+    font-size: 0.65rem; color: rgba(255,255,255,0.25);
+    text-align: right; padding-bottom: 2rem;
   }
 
-  /* Custom popup styles */
-  .leaflet-popup-content-wrapper {
-    background: #0D2137 !important;
-    border: 1px solid #1D9E75 !important;
-    border-radius: 8px !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
-    padding: 0 !important;
+  /* ── Pulse animation ── */
+  @keyframes pulse {
+    0%   { transform: scale(1);   opacity: 1; }
+    50%  { transform: scale(1.5); opacity: 0; }
+    100% { transform: scale(1);   opacity: 0; }
   }
-  .leaflet-popup-tip { background: #0D2137 !important; }
-  .leaflet-popup-content { margin: 0 !important; min-width: 240px; max-width: 300px; }
-  .popup-inner { padding: 14px 16px; }
-  .popup-theme { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
-  .popup-location { color: white; font-size: 0.95rem; font-weight: 700; margin-bottom: 3px; line-height: 1.3; }
-  .popup-state { color: rgba(255,255,255,0.45); font-size: 0.72rem; margin-bottom: 10px; }
-  .popup-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
-  .popup-tag { font-size: 0.6rem; padding: 2px 7px; border-radius: 20px; font-weight: 600; }
+  .marker-ring {
+    position: absolute;
+    border-radius: 50%;
+    animation: pulse 2s ease-out infinite;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  /* ── Leaflet popup ── */
+  .leaflet-popup-content-wrapper {
+    background: #0a1c2e !important;
+    border: 1px solid #1D9E75 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6) !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  .leaflet-popup-tip-container { display: none !important; }
+  .leaflet-popup-content { margin: 0 !important; min-width: 260px; max-width: 310px; }
+  .leaflet-popup-close-button {
+    color: rgba(255,255,255,0.4) !important;
+    font-size: 18px !important;
+    top: 8px !important; right: 10px !important;
+    z-index: 10;
+  }
+  .leaflet-popup-close-button:hover { color: white !important; }
+
+  .popup-header {
+    padding: 12px 16px 10px;
+    border-bottom: 1px solid #1a3350;
+  }
+  .popup-theme-badge {
+    display: inline-block;
+    font-size: 0.58rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 2px 8px; border-radius: 20px;
+    margin-bottom: 6px;
+  }
+  .popup-location {
+    color: white; font-size: 0.98rem; font-weight: 700;
+    line-height: 1.3; margin-bottom: 2px;
+  }
+  .popup-state { color: rgba(255,255,255,0.4); font-size: 0.7rem; }
+
+  .popup-body { padding: 10px 16px 14px; }
+  .popup-papers-label {
+    font-size: 0.6rem; font-weight: 700;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .popup-paper {
+    display: flex; align-items: flex-start; gap: 8px;
+    margin-bottom: 8px; padding-bottom: 8px;
+    border-bottom: 0.5px solid #1a3350;
+  }
+  .popup-paper:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .popup-paper-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 5px;
+  }
+  .popup-paper-content { flex: 1; }
+  .popup-paper-title {
+    font-size: 0.74rem; color: rgba(255,255,255,0.82);
+    line-height: 1.45; margin-bottom: 3px;
+  }
+  .popup-paper-link {
+    font-size: 0.66rem; font-weight: 700;
+    text-decoration: none; letter-spacing: 0.04em;
+  }
+  .popup-paper-link:hover { text-decoration: underline; }
+
+  .popup-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; padding-top: 8px; border-top: 0.5px solid #1a3350; }
+  .popup-tag { font-size: 0.58rem; padding: 2px 7px; border-radius: 20px; font-weight: 600; }
   .tag-green  { background: #E1F5EE; color: #085041; }
   .tag-blue   { background: #E6F1FB; color: #0C447C; }
   .tag-amber  { background: #FAEEDA; color: #633806; }
   .tag-purple { background: #EEEDFE; color: #3C3489; }
-  .popup-papers { border-top: 1px solid #1a3350; padding-top: 10px; }
-  .popup-papers-label { font-size: 0.62rem; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-  .popup-paper { margin-bottom: 6px; padding-bottom: 6px; border-bottom: 0.5px solid #1a3350; }
-  .popup-paper:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-  .popup-paper-title { font-size: 0.75rem; color: rgba(255,255,255,0.85); line-height: 1.4; margin-bottom: 3px; }
-  .popup-paper-link { font-size: 0.68rem; color: #1D9E75; text-decoration: none; font-weight: 600; }
-  .popup-paper-link:hover { color: #5DCAA5; }
 
-  .map-note {
-    max-width: 1300px; margin: 8px auto 0;
-    font-size: 0.68rem; color: rgba(255,255,255,0.3);
-    font-family: 'Inter', sans-serif; text-align: right;
+  /* Tooltip on hover */
+  .leaflet-tooltip {
+    background: #0D2137 !important;
+    border: 1px solid #1D9E75 !important;
+    color: white !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    border-radius: 5px !important;
+    padding: 4px 10px !important;
+    box-shadow: none !important;
   }
+  .leaflet-tooltip-left::before { border-left-color: #1D9E75 !important; }
+  .leaflet-tooltip-right::before { border-right-color: #1D9E75 !important; }
 </style>
 </head>
 <body>
 
-<div class="map-container">
-  <div class="map-header">
+<div class="map-wrap">
+
+  <div class="map-top">
     <div>
       <div class="map-label">Field Research Locations</div>
       <div class="map-title">Research Study Sites Across India</div>
+      <div class="map-sub">Click any marker to explore publications from that location</div>
     </div>
-    <div class="map-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#1D9E75;"></div>Geospatial & Land Use</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#3B82F6;"></div>Climate & Agronomy</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#F59E0B;"></div>Fodder & Livestock</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#8B5CF6;"></div>Soil & Ecosystem</div>
-    </div>
+    <div class="map-stats" id="stats-strip"></div>
   </div>
+
+  <div class="map-legend-strip" id="legend-strip"></div>
   <div id="map"></div>
-  <div class="map-note">Map tiles © Google Maps · India boundary as per Survey of India</div>
+  <div class="map-footer">Map tiles © Google Maps &nbsp;·&nbsp; India boundary as per Survey of India</div>
+
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 window.addEventListener('load', function() {
 
-  var map = L.map('map', {
-    center: [22.5, 80],
-    zoom: 5,
-    zoomControl: true,
-    scrollWheelZoom: false
-  });
-
-  // Google Maps hybrid tiles — shows India-approved boundaries
-  L.tileLayer('https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}&hl=en&gl=in', {
-    attribution: '&copy; Google Maps · India boundary as per Survey of India',
-    subdomains: ['0','1','2','3'],
-    maxZoom: 18,
-    tileSize: 256
-  }).addTo(map);
-
-  function makeIcon(color) {
-    return L.divIcon({
-      className: '',
-      html: '<div style="width:16px;height:16px;border-radius:50%;background:' + color + ';border:3px solid white;box-shadow:0 0 0 3px ' + color + '66,0 2px 8px rgba(0,0,0,0.5);"></div>',
-      iconSize: [16, 16],
-      iconAnchor: [8, 8],
-      popupAnchor: [0, -12]
-    });
-  }
-
-  var icons = {
-    green:  makeIcon('#1D9E75'),
-    blue:   makeIcon('#3B82F6'),
-    amber:  makeIcon('#F59E0B'),
-    purple: makeIcon('#8B5CF6')
+  var THEMES = {
+    green:  { color: '#1D9E75', bg: '#E1F5EE', text: '#085041', label: 'Geospatial & Land Use' },
+    blue:   { color: '#3B82F6', bg: '#E6F1FB', text: '#0C447C', label: 'Climate & Agronomy' },
+    amber:  { color: '#F59E0B', bg: '#FAEEDA', text: '#633806', label: 'Fodder & Livestock' },
+    purple: { color: '#8B5CF6', bg: '#EEEDFE', text: '#3C3489', label: 'Soil & Ecosystem' }
   };
 
   var sites = [
     {
-      lat: 15.49, lng: 73.82, color: 'green',
-      theme: 'Geospatial & Coastal Agronomy', themeColor: '#1D9E75',
-      location: 'Coastal Goa', state: 'Goa, India — ICAR-CCARI Base Station',
-      tags: [{cls:'tag-green',label:'Coastal Agronomy'},{cls:'tag-blue',label:'Soil Health'}],
-      papers: [
-        {title:'Coastal Ecosystem Services: Valuation, Threats, and Sustainable Way Forward', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
-        {title:'Climate adaptation in agricultural sector of coastal India', link:'https://doi.org/10.1007/s11027-024-10134-y'},
-        {title:'Long-term effect of rice-rice and rice-cowpea systems on soil carbon in West Coast India', link:'https://www.sciencedirect.com/science/article/pii/S2667006226000080'}
+      lat:15.49,lng:73.82,color:'green',
+      location:'Coastal Goa',state:'Goa — ICAR-CCARI Base Station',
+      tags:[{cls:'tag-green',label:'Coastal Agronomy'},{cls:'tag-blue',label:'Soil Health'}],
+      papers:[
+        {title:'Coastal Ecosystem Services: Valuation, Threats, and Sustainable Way Forward',link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
+        {title:'Climate adaptation in agricultural sector of coastal India',link:'https://doi.org/10.1007/s11027-024-10134-y'},
+        {title:'Long-term effect of rice-rice and rice-cowpea systems on soil carbon — West Coast India',link:'https://www.sciencedirect.com/science/article/pii/S2667006226000080'}
       ]
     },
     {
-      lat: 28.8, lng: 77.5, color: 'green',
-      theme: 'Geospatial & Remote Sensing', themeColor: '#1D9E75',
-      location: 'Trans-Gangetic Plains', state: 'Haryana / Western UP, India',
-      tags: [{cls:'tag-green',label:'Google Earth Engine'},{cls:'tag-blue',label:'SDG 15.3.1'}],
-      papers: [
-        {title:'Assessing land degradation and drought vulnerability using GEE for SDG 15.3.1 monitoring', link:'https://link.springer.com/article/10.1007/s10661-025-14371-1'}
+      lat:28.8,lng:77.5,color:'green',
+      location:'Trans-Gangetic Plains',state:'Haryana / Western UP',
+      tags:[{cls:'tag-green',label:'Google Earth Engine'},{cls:'tag-blue',label:'SDG 15.3.1'}],
+      papers:[
+        {title:'Assessing land degradation and drought vulnerability using GEE for SDG 15.3.1 monitoring',link:'https://link.springer.com/article/10.1007/s10661-025-14371-1'}
       ]
     },
     {
-      lat: 34.1, lng: 77.5, color: 'amber',
-      theme: 'Fodder & Livestock Systems', themeColor: '#F59E0B',
-      location: 'Ladakh Cold Desert', state: 'Ladakh, India',
-      tags: [{cls:'tag-amber',label:'Livestock Feed'},{cls:'tag-blue',label:'Climate Vulnerability'}],
-      papers: [
-        {title:'Availability and seasonal dynamics of feed sources for Ladakhi cattle breed in Ladakh', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
-        {title:'Climate Change Trends and their Impact on Cropping Pattern in Cold Desert of India', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
+      lat:34.1,lng:77.5,color:'amber',
+      location:'Ladakh Cold Desert',state:'Ladakh, India',
+      tags:[{cls:'tag-amber',label:'Livestock Feed'},{cls:'tag-blue',label:'Climate Vulnerability'}],
+      papers:[
+        {title:'Availability and seasonal dynamics of feed sources for Ladakhi cattle breed',link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
+        {title:'Climate Change Trends and their Impact on Cropping Pattern in Cold Desert of India',link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
       ]
     },
     {
-      lat: 21.5, lng: 82.5, color: 'purple',
-      theme: 'Ecosystem Services & Tribal Agriculture', themeColor: '#8B5CF6',
-      location: 'Central India — Tribal Regions', state: 'Chhattisgarh / Madhya Pradesh, India',
-      tags: [{cls:'tag-purple',label:'Ecosystem Services'},{cls:'tag-blue',label:'Conservation Agriculture'}],
-      papers: [
-        {title:'Comparative Assessment of Ecosystem Services under Conservation Agriculture, Agroforestry, and Traditional Integrated Farming Systems', link:'https://www.sciencedirect.com/science/article/pii/S2665972726001492'}
+      lat:21.5,lng:82.5,color:'purple',
+      location:'Central India — Tribal Regions',state:'Chhattisgarh / Madhya Pradesh',
+      tags:[{cls:'tag-purple',label:'Ecosystem Services'},{cls:'tag-blue',label:'Conservation Agriculture'}],
+      papers:[
+        {title:'Comparative Assessment of Ecosystem Services under Conservation Agriculture, Agroforestry, and Traditional Integrated Farming Systems',link:'https://www.sciencedirect.com/science/article/pii/S2665972726001492'}
       ]
     },
     {
-      lat: 26.2, lng: 92.7, color: 'blue',
-      theme: 'Rice Agronomy & Food Security', themeColor: '#3B82F6',
-      location: 'North-East India Plains', state: 'Assam / Tripura, India',
-      tags: [{cls:'tag-blue',label:'Rice Varieties'},{cls:'tag-green',label:'Nutritional Security'}],
-      papers: [
-        {title:'Grain characteristics, proximate composition and phytochemical capacity of aromatic and non-aromatic rice accessions', link:'https://doi.org/10.1016/j.afres.2022.100067'},
-        {title:'A study on total pest population present in aman paddy at North Tripura', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
+      lat:26.2,lng:92.7,color:'blue',
+      location:'North-East India Plains',state:'Assam / Tripura',
+      tags:[{cls:'tag-blue',label:'Rice Varieties'},{cls:'tag-green',label:'Nutritional Security'}],
+      papers:[
+        {title:'Grain characteristics, proximate composition and phytochemical capacity of aromatic and non-aromatic rice accessions',link:'https://doi.org/10.1016/j.afres.2022.100067'},
+        {title:'A study on total pest population present in aman paddy at North Tripura',link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
       ]
     },
     {
-      lat: 20.7, lng: 77.0, color: 'blue',
-      theme: 'Dryland Agronomy & Nutrient Management', themeColor: '#3B82F6',
-      location: 'Vidarbha — Central India', state: 'Maharashtra (Akola / Nagpur), India',
-      tags: [{cls:'tag-blue',label:'Dryland Agriculture'},{cls:'tag-green',label:'Maize Agronomy'}],
-      papers: [
-        {title:'Nutrient Management with Potassium and Zinc for Increased Productivity of Maize (PhD Thesis)', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
-        {title:'Effect of Potassium and Zinc Nutrition on Growth and Yield of Short Duration Maize under Dryland Vertisols', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
+      lat:20.7,lng:77.0,color:'blue',
+      location:'Vidarbha — Central India',state:'Maharashtra (Akola / Nagpur)',
+      tags:[{cls:'tag-blue',label:'Dryland Agriculture'},{cls:'tag-green',label:'Maize Agronomy'}],
+      papers:[
+        {title:'Nutrient Management with Potassium and Zinc for Increased Productivity of Maize (PhD Thesis)',link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
+        {title:'Effect of Potassium and Zinc Nutrition on Growth and Yield of Short Duration Maize under Dryland Vertisols',link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
       ]
     },
     {
-      lat: 29.9, lng: 76.8, color: 'amber',
-      theme: 'Fodder Crop Systems', themeColor: '#F59E0B',
-      location: 'Indo-Gangetic Plains', state: 'Haryana / Punjab, India',
-      tags: [{cls:'tag-amber',label:'Fodder Crops'},{cls:'tag-green',label:'Nutrient Management'}],
-      papers: [
-        {title:'Optimizing Oat Production Strategies to Mitigate Nitrate Toxicity Without Compromising Fodder Quality', link:'https://doi.org/10.1155/agro/9767875'},
-        {title:'Energy budgeting and carbon footprints estimation of fodder maize varieties', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
+      lat:29.9,lng:76.8,color:'amber',
+      location:'Indo-Gangetic Plains',state:'Haryana / Punjab',
+      tags:[{cls:'tag-amber',label:'Fodder Crops'},{cls:'tag-green',label:'Nutrient Management'}],
+      papers:[
+        {title:'Optimizing Oat Production Strategies to Mitigate Nitrate Toxicity Without Compromising Fodder Quality',link:'https://doi.org/10.1155/agro/9767875'},
+        {title:'Energy budgeting and carbon footprints estimation of fodder maize varieties',link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
       ]
     },
     {
-      lat: 12.9, lng: 74.9, color: 'purple',
-      theme: 'Soil Health & Agroforestry', themeColor: '#8B5CF6',
-      location: 'Karnataka — West Coast', state: 'Karnataka, India',
-      tags: [{cls:'tag-purple',label:'Agroforestry'},{cls:'tag-green',label:'Soil Quality'}],
-      papers: [
-        {title:'Soil quality enhancement in arecanut-based agroforestry system', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
-        {title:'Assessing the impact of nutrient management on productivity in rice-based farming systems', link:'https://www.sciencedirect.com/science/article/pii/S2666154325006490'}
+      lat:12.9,lng:74.9,color:'purple',
+      location:'Karnataka — West Coast',state:'Karnataka, India',
+      tags:[{cls:'tag-purple',label:'Agroforestry'},{cls:'tag-green',label:'Soil Quality'}],
+      papers:[
+        {title:'Soil quality enhancement in arecanut-based agroforestry system',link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
+        {title:'Assessing the impact of nutrient management in rice-based farming systems',link:'https://www.sciencedirect.com/science/article/pii/S2666154325006490'}
       ]
     }
   ];
 
+  // ── Stats strip ──────────────────────────────────────────────
+  var counts = {green:0,blue:0,amber:0,purple:0};
+  sites.forEach(function(s){ counts[s.color]++; });
+  var statsEl = document.getElementById('stats-strip');
+  Object.keys(THEMES).forEach(function(key){
+    var t = THEMES[key];
+    statsEl.innerHTML += '<div class="map-stat-item">' +
+      '<div class="map-stat-dot" style="background:'+t.color+'"></div>' +
+      '<div class="map-stat-num">'+counts[key]+'</div>' +
+      '<div class="map-stat-lbl">'+t.label.split(' & ')[0]+'</div>' +
+      '</div>';
+  });
+
+  // ── Legend ───────────────────────────────────────────────────
+  var legendEl = document.getElementById('legend-strip');
+  Object.keys(THEMES).forEach(function(key){
+    var t = THEMES[key];
+    legendEl.innerHTML += '<div class="legend-item">' +
+      '<div class="legend-dot" style="background:'+t.color+'"></div>' +
+      '<span class="legend-txt">'+t.label+'</span></div>';
+  });
+
+  // ── Map init ─────────────────────────────────────────────────
+  var map = L.map('map', {
+    center: [23, 80], zoom: 5,
+    zoomControl: true, scrollWheelZoom: false
+  });
+
+  L.tileLayer('https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}&hl=en&gl=in', {
+    attribution: '© Google Maps',
+    subdomains: ['0','1','2','3'],
+    maxZoom: 18
+  }).addTo(map);
+
+  // Custom zoom control position
+  map.zoomControl.setPosition('topright');
+
+  // ── Markers ──────────────────────────────────────────────────
+  function makeIcon(color) {
+    return L.divIcon({
+      className: '',
+      html: '<div style="position:relative;width:22px;height:22px;">' +
+        '<div class="marker-ring" style="width:22px;height:22px;border:2px solid '+color+';margin-top:-11px;margin-left:-11px;"></div>' +
+        '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:'+color+';border:2.5px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.5);"></div>' +
+        '</div>',
+      iconSize: [22, 22],
+      iconAnchor: [11, 11],
+      popupAnchor: [0, -14]
+    });
+  }
+
   sites.forEach(function(site) {
+    var t = THEMES[site.color];
+
     var papersHTML = site.papers.map(function(p) {
       return '<div class="popup-paper">' +
-        '<div class="popup-paper-title">' + p.title + '</div>' +
-        '<a class="popup-paper-link" href="' + p.link + '" target="_blank">View Paper →</a>' +
-        '</div>';
+        '<div class="popup-paper-dot" style="background:'+t.color+'"></div>' +
+        '<div class="popup-paper-content">' +
+          '<div class="popup-paper-title">'+p.title+'</div>' +
+          '<a class="popup-paper-link" style="color:'+t.color+'" href="'+p.link+'" target="_blank">View Paper →</a>' +
+        '</div></div>';
     }).join('');
 
-    var tagsHTML = site.tags.map(function(t) {
-      return '<span class="popup-tag ' + t.cls + '">' + t.label + '</span>';
+    var tagsHTML = site.tags.map(function(tag) {
+      return '<span class="popup-tag '+tag.cls+'">'+tag.label+'</span>';
     }).join('');
 
     var popup =
-      '<div class="popup-inner">' +
-        '<div class="popup-theme" style="color:' + site.themeColor + '">' + site.theme + '</div>' +
-        '<div class="popup-location">' + site.location + '</div>' +
-        '<div class="popup-state">' + site.state + '</div>' +
-        '<div class="popup-tags">' + tagsHTML + '</div>' +
-        '<div class="popup-papers">' +
-          '<div class="popup-papers-label">Publications from this site</div>' +
-          papersHTML +
-        '</div>' +
+      '<div class="popup-header">' +
+        '<div class="popup-theme-badge" style="background:'+t.bg+';color:'+t.text+'">'+t.label+'</div>' +
+        '<div class="popup-location">'+site.location+'</div>' +
+        '<div class="popup-state">'+site.state+'</div>' +
+      '</div>' +
+      '<div class="popup-body">' +
+        '<div class="popup-papers-label">Publications from this site</div>' +
+        papersHTML +
+        '<div class="popup-tags">'+tagsHTML+'</div>' +
       '</div>';
 
-    L.marker([site.lat, site.lng], { icon: icons[site.color] })
+    L.marker([site.lat, site.lng], { icon: makeIcon(t.color) })
       .addTo(map)
-      .bindPopup(popup, { maxWidth: 320, minWidth: 260 });
+      .bindPopup(popup, { maxWidth: 330, minWidth: 270, closeButton: true })
+      .bindTooltip(site.location, { direction: 'top', offset: [0, -14] });
   });
 
 });
