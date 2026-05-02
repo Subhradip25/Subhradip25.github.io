@@ -1,0 +1,825 @@
+---
+title: "Build Your Research Portfolio Website From Scratch"
+subtitle: "A Complete Step-by-Step Guide Using Quarto + GitHub Pages"
+author: "Subhradip Bhattacharjee"
+date: "2025"
+format:
+  typst:
+    toc: true
+    number-sections: true
+---
+
+# Understanding the Basics
+
+## What Are We Building?
+
+Before touching the keyboard, let's understand what we're doing in plain language.
+Your portfolio website is just a collection of text files on your computer.
+**Quarto** reads those files and converts them into a beautiful website.
+**GitHub** is a website where you store your files online — and it automatically
+shows them as a website to anyone in the world.
+
+> **Key idea:** You write content in simple text files → Quarto turns them into a
+> website → GitHub shows that website to the world — for free.
+
+## The Four Tools You Will Use
+
+You will install and use exactly four tools:
+
+| Tool | What It Does |
+|------|-------------|
+| **Git** | Saves and tracks your files; sends them to GitHub |
+| **VS Code** | A free text editor — you write all your content here |
+| **Quarto** | Converts your text files into a beautiful website |
+| **GitHub** | Free online service that hosts your website on the internet |
+
+## What Is a Terminal / Command Prompt?
+
+A terminal (also called command prompt) is a text-based way to control your computer.
+Instead of clicking buttons, you type commands. Don't be scared — you will only use
+about 6 simple commands in this whole guide.
+
+**How to open it on Windows:**
+Press the Windows key → type `cmd` → press Enter. A black window opens.
+That's your terminal. Type commands there and press Enter to run them.
+
+> **Important:** Never close the terminal while a command is still running.
+> Wait for the cursor (`>`) to appear again before typing the next command.
+
+## What Your Finished Website Will Look Like
+
+Your portfolio will have these pages:
+
+- **Home** — Your photo, name, bio, and research interests
+- **About** — Detailed background, education, and experience
+- **Research** — All your papers with links and personal notes
+- **Blog** — Short research notes and field observations
+
+Your website address will be: `https://yourusername.github.io` — free, forever.
+
+---
+
+# Installing the Tools (Windows)
+
+You need to install three tools. Do them in order — do not skip ahead.
+
+## Install Git
+
+Git is a tool that tracks every change you make to your files — like a time machine.
+It also lets you send your files to GitHub.
+
+**Step 1** — Open your browser and go to:
+
+```
+https://git-scm.com/download/win
+```
+
+**Step 2** — The download will start automatically. If it doesn't, click the link that
+says "Click here to download manually".
+
+**Step 3** — Run the installer. Click **Yes** if Windows asks permission.
+Click **Next → Next → Next → Install → Finish**.
+Do NOT change any options. All the default settings are correct.
+
+**Step 4** — Verify it worked. Open a **NEW** terminal window and type:
+
+```bash
+git --version
+```
+
+You should see something like:
+
+```
+git version 2.44.0.windows.1
+```
+
+> **If you see "command not found":** Restart your computer and try again.
+
+## Install VS Code
+
+VS Code is a free text editor made by Microsoft. You will use it to write and edit
+all your website files.
+
+**Step 1** — Go to:
+
+```
+https://code.visualstudio.com
+```
+
+**Step 2** — Click the big blue **Download for Windows** button.
+Run the downloaded installer.
+
+**Step 3** — Go through the installer. On the screen that says
+**"Select Additional Tasks"** — tick these two boxes:
+
+- ✅ Add "Open with Code" action to Windows Explorer file context menu
+- ✅ Add to PATH
+
+Then click **Next → Install → Finish**.
+
+**Step 4** — VS Code will open automatically. Now install the Quarto extension:
+
+- Look at the left side of VS Code — click the **Extensions** icon (4 small squares)
+- In the search box, type: `Quarto`
+- Click the first result (by quarto.org) → click **Install**
+
+> **Tip:** The Quarto extension gives you syntax highlighting, live preview,
+> and helpful autocomplete when writing your website files.
+
+## Install Quarto
+
+Quarto is the tool that reads your text files and builds your actual website.
+
+**Step 1** — Go to:
+
+```
+https://quarto.org/docs/get-started
+```
+
+**Step 2** — Click the download button for Windows.
+Run the file that downloads (ends in `.msi`).
+
+**Step 3** — Click through the installer with all default options.
+
+**Step 4** — **IMPORTANT:** Close your terminal and open a **NEW** one.
+Old terminal windows will not recognise newly installed tools.
+
+**Step 5** — Verify it worked:
+
+```bash
+quarto --version
+```
+
+You should see something like: `1.4.557`
+
+---
+
+# Setting Up GitHub
+
+GitHub is the free service that will host your website. You need one account and one
+"repository" (a folder on GitHub where your files live).
+
+## Create Your GitHub Account
+
+**Step 1** — Go to:
+
+```
+https://github.com
+```
+
+**Step 2** — Click **Sign up**. Fill in:
+
+- Your email address
+- A password
+- A **username** — choose this carefully, it becomes part of your website address
+
+> **Username tips:** Use your real name or a professional variation.
+> No spaces allowed — use a dash or nothing.
+> Example: `subhradip25` or `subhradip-bhattacharjee`
+> Your website will be: `https://subhradip25.github.io`
+
+**Step 3** — GitHub will send a verification code to your email.
+Check your inbox and enter the code to activate your account.
+
+## Create Your Repository
+
+A repository is like a project folder on GitHub.
+
+**Step 1** — After signing in, click the **+** icon at the top right → **New repository**
+
+**Step 2** — In the "Repository name" box, type **EXACTLY**:
+
+```
+yourusername.github.io
+```
+
+Replace `yourusername` with your actual GitHub username.
+For example: `subhradip25.github.io`
+
+**Step 3** — Make sure **Public** is selected (not Private).
+
+**Step 4** — Scroll down and click the green **Create repository** button.
+
+> **Why this special name?** The name `yourusername.github.io` tells GitHub to
+> automatically serve this repository as a live website at
+> `https://yourusername.github.io` — completely free!
+
+---
+
+# Creating Your Quarto Project
+
+Now we create the actual website project on your computer.
+
+## Create the Project
+
+**Step 1** — Open VS Code. Click **Terminal** in the top menu → **New Terminal**.
+A panel opens at the bottom. This is your terminal inside VS Code.
+
+**Step 2** — Navigate to your Documents folder:
+
+```bash
+cd Documents
+```
+
+**Step 3** — Create a new Quarto website project:
+
+```bash
+quarto create project website myportfolio
+```
+
+Quarto will ask one question about the directory name.
+Just press **Enter** to accept.
+
+**Step 4** — Move into the project folder:
+
+```bash
+cd myportfolio
+```
+
+**Step 5** — Open the project in VS Code:
+
+```bash
+code .
+```
+
+> **What does `code .` mean?** The dot ( `.` ) means "open the current folder".
+> VS Code will open with all your project files listed in the left panel.
+
+## Understanding Your File Structure
+
+After creating the project, you will see these files on the left side of VS Code:
+
+| File | Purpose |
+|------|---------|
+| `_quarto.yml` | Master settings — menu, title, theme, output folder |
+| `index.qmd` | Your home page — bio, photo, research interests |
+| `about.qmd` | Your detailed about/CV page |
+| `styles.css` | Custom colours and design tweaks |
+
+## Preview Your Site Locally
+
+Before making any changes, let's see what your site looks like right now.
+
+**Step 1** — In the VS Code terminal, type:
+
+```bash
+quarto preview
+```
+
+**Step 2** — Wait 10–15 seconds. Your browser will automatically open and show your
+website. This is your **local preview** — only visible on your computer.
+
+**Step 3** — When you want to stop the preview, press **Ctrl+C** in the terminal.
+
+> **Live reload:** While the preview is running, every time you save a file
+> (Ctrl+S), the browser automatically refreshes to show your changes.
+> You don't need to restart the preview each time.
+
+---
+
+# Building Your Home Page
+
+The home page is the first thing visitors see — your name, photo, bio, and research
+interests.
+
+## Edit \_quarto.yml — Site Settings
+
+This file controls your site's title, menu structure, and visual theme.
+Click on `_quarto.yml` in the left panel, **select all text** (Ctrl+A),
+**delete it**, and paste this:
+
+```yaml
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Your Full Name"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: research.qmd
+        text: Research
+      - href: blog.qmd
+        text: Blog
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+```
+
+Press **Ctrl+S** to save. Your browser preview will update automatically.
+
+> **Tip:** You can change the `theme` from `cosmo` to other options like
+> `flatly`, `litera`, `sandstone`, or `journal` to change the look of your site.
+
+## Edit index.qmd — Home Page
+
+Click on `index.qmd`, **select all**, **delete**, and paste this template.
+Then fill in your own details:
+
+```markdown
+---
+title: "Your Full Name"
+subtitle: "Geospatial & Agronomy Researcher"
+image: images/profile.png
+about:
+  template: jolla
+  links:
+    - icon: envelope
+      text: Email
+      href: mailto:your@email.com
+    - icon: mortarboard-fill
+      text: Google Scholar
+      href: https://scholar.google.com/your-profile
+    - icon: file-person
+      text: ResearchGate
+      href: https://researchgate.net/your-profile
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/yourprofile
+---
+
+I am a researcher at **Your Institution**, specialising in
+geospatial analysis and agronomy.
+
+My work focuses on understanding agricultural systems using
+remote sensing, GIS, and field-based approaches.
+
+## Research Interests
+
+- Geospatial analysis of agricultural landscapes
+- Coastal agronomy and soil health
+- Remote sensing for crop monitoring
+- Climate impacts on farming systems
+```
+
+Press **Ctrl+S** to save and check your browser.
+
+## Add Your Profile Photo
+
+**Step 1** — Create an `images` folder in the VS Code terminal:
+
+```bash
+mkdir images
+```
+
+**Step 2** — Open Windows File Explorer. Navigate to:
+
+```
+Documents → myportfolio → images
+```
+
+Copy your photo into this folder and **rename it** to exactly:
+`profile.png` (or `profile.jpg` if your photo is a JPG file)
+
+**Step 3** — In `index.qmd`, make sure this line matches your file extension:
+
+```yaml
+image: images/profile.png   # for PNG files
+image: images/profile.jpg   # for JPG files
+```
+
+**Step 4** — Save and check your browser. Your photo will appear in a circle.
+
+> **Photo tips:** Use a clear, well-lit, professional photo.
+> Portrait or square orientation works best.
+
+---
+
+# Building Your Research Page
+
+The research page is the most important page for a researcher. It lists all your
+publications with links, co-authors, and your personal plain-language notes.
+
+## Create research.qmd
+
+In VS Code, click **File → New File** → name it `research.qmd` →
+save it inside your `myportfolio` folder.
+
+## Format for Each Paper
+
+Use this template for each paper. Copy and repeat it for every publication:
+
+```markdown
+---
+title: "Research"
+---
+
+## Journal Articles
+
+---
+
+**Your Paper Title Here** (2024)
+*Journal Name* | Co-authors: Name A, Name B
+[Read Paper](https://doi.org/your-doi-link) | [ResearchGate](https://researchgate.net)
+
+> **In simple words:** Write 2–3 lines here explaining what this paper
+> is about and why it matters. This is your personal note for visitors
+> — not the abstract.
+
+---
+```
+
+## Export All Papers from Google Scholar
+
+If you have many papers, don't type them manually. Use this shortcut:
+
+**Step 1** — Go to your Google Scholar profile and sign in.
+
+**Step 2** — Tick the **checkbox** at the top to select all papers.
+A blue bar will appear.
+
+**Step 3** — Click **Export** → select **BibTeX** →
+a `.bib` file downloads with all your paper details.
+
+**Step 4** — Open [claude.ai](https://claude.ai), paste the BibTeX content, and ask:
+
+> *"Format all these papers into a research.qmd file for a Quarto portfolio"*
+
+Claude will generate the complete, properly formatted page instantly.
+
+> **Suggested structure:** Organise by type:
+> Journal Articles → Book Chapters → Conference Papers → PhD Thesis.
+> Put newest papers first within each section.
+
+---
+
+# Building Your Blog
+
+The blog is where you share short research notes, field observations, and
+methodology explainers — content that is valuable but not suited for a formal paper.
+
+## Create the Blog Structure
+
+**Step 1** — Create `blog.qmd` in your `myportfolio` folder with this content:
+
+```markdown
+---
+title: "Blog"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+---
+```
+
+**Step 2** — Create the `posts` folder in the terminal:
+
+```bash
+mkdir posts
+```
+
+**Step 3** — Create a folder for your first post:
+
+```bash
+mkdir posts\first-post
+```
+
+**Step 4** — In VS Code, right-click the `first-post` folder →
+**New File** → name it `index.qmd`
+
+## Write Your First Blog Post
+
+Paste this template into `posts/first-post/index.qmd`:
+
+```markdown
+---
+title: "Your Post Title Here"
+date: 2025-05-01
+categories: [remote sensing, agronomy]
+---
+
+Write your post content here in plain English.
+
+You can use:
+
+- Bullet points
+- **Bold text**
+- *Italic text*
+
+Add an image like this:
+![Caption text](../../images/your-image.png)
+```
+
+> **Blog ideas for researchers:** Field observations • Methodology notes •
+> Literature review summaries • Conference takeaways • Software tutorials •
+> Data analysis tips • Explaining your paper in simple language
+
+## Adding More Posts Later
+
+For every new blog post, follow the same pattern:
+
+```bash
+# Create a folder for the new post
+mkdir posts\your-post-name
+
+# Then in VS Code, create: posts/your-post-name/index.qmd
+# Fill in title, date, categories, and content
+```
+
+> **Auto-sorted:** Quarto automatically sorts posts by date (newest first)
+> and creates a category filter. You don't need to do anything extra.
+
+---
+
+# Publishing Your Site Live
+
+This is the exciting part — making your site publicly visible on the internet.
+This is a one-time setup. After this, updating takes just 4 commands.
+
+## Step 1 — Tell Git Who You Are
+
+Run these two commands in the VS Code terminal. Use your own email and name:
+
+```bash
+git config --global user.email "your@email.com"
+git config --global user.name "Your Full Name"
+```
+
+## Step 2 — Build the Final Website
+
+This creates the `docs/` folder containing all your website files:
+
+```bash
+quarto render
+```
+
+> **What happens:** Quarto reads all your `.qmd` files and builds the complete
+> website into a folder called `docs/`. You will see this folder appear in your
+> VS Code file panel on the left.
+
+## Step 3 — Connect Your Folder to GitHub
+
+Run these two commands (replace `yourusername` with your actual GitHub username):
+
+```bash
+git init
+git remote add origin https://github.com/yourusername/yourusername.github.io.git
+```
+
+## Step 4 — Upload to GitHub
+
+```bash
+git add .
+git commit -m "My portfolio first version"
+git push -u origin main
+```
+
+> **Authentication:** A browser window may open asking you to authorise
+> Git Credential Manager. Click **"Authorise git-ecosystem"**.
+> This is completely safe and only happens once.
+
+## Step 5 — Configure GitHub Pages
+
+**Step 1** — On GitHub.com, open your repository.
+
+**Step 2** — Click **Settings** in the top menu.
+
+**Step 3** — In the left sidebar, click **Pages**.
+
+**Step 4** — Under "Build and deployment":
+
+- Source → **Deploy from a branch**
+- Branch → **main**
+- Folder → **/docs**
+- Click **Save**
+
+**Step 5** — Wait 2–3 minutes, then visit:
+
+```
+https://yourusername.github.io
+```
+
+> **You're live!** Your site is now publicly accessible — free, forever,
+> no subscription, no ads.
+
+---
+
+# Updating Your Site
+
+After your site is live, updating it is very simple.
+Every time you add or change content, run these four commands:
+
+## The 4-Command Update Workflow
+
+```bash
+quarto render
+git add .
+git commit -m "Describe what you changed"
+git push
+```
+
+Your site will update on the internet within 1–2 minutes.
+Refresh your browser to see the changes.
+
+## Common Update Tasks
+
+| Task | What to do |
+|------|-----------|
+| Add a new blog post | Create `posts/name/index.qmd` → write → run 4 commands |
+| Update your bio | Edit `index.qmd` → save → run 4 commands |
+| Add a new paper | Edit `research.qmd` → add entry → save → run 4 commands |
+| Change your photo | Replace `images/profile.png` → run 4 commands |
+| Fix a typo | Edit the file → save → run 4 commands |
+
+> **Memorise these 4 commands:**
+> `quarto render` → `git add .` → `git commit -m "message"` → `git push`
+>
+> These 4 commands are all you need for the rest of your career
+> to keep your portfolio updated.
+
+---
+
+# Adding Images and Figures
+
+Quarto supports simple images, scientific figures with captions,
+interactive maps, and live charts from Python or R code.
+
+## Simple Photo or Image
+
+Save your image file in the `images/` folder, then add one line to your `.qmd` file:
+
+```markdown
+![Caption for your image](images/my-photo.jpg)
+```
+
+To control the display size:
+
+```markdown
+![My field survey in Goa](images/field.jpg){width=80%}
+```
+
+To align to the right:
+
+```markdown
+![Caption](images/photo.jpg){width=40% fig-align="right"}
+```
+
+## Side-by-Side Image Comparison
+
+Perfect for before/after maps, satellite image comparisons, or treatment effects:
+
+```markdown
+::: {layout-ncol=2}
+![Before treatment](images/before.jpg)
+
+![After treatment](images/after.jpg)
+:::
+```
+
+You can also do a 3-column layout:
+
+```markdown
+::: {layout-ncol=3}
+![2021](images/map2021.jpg)
+
+![2022](images/map2022.jpg)
+
+![2023](images/map2023.jpg)
+:::
+```
+
+## Scientific Figure with Caption and Cross-Reference
+
+For publication-quality figure referencing — exactly like in a research paper:
+
+```markdown
+::: {#fig-ndvi}
+![](images/ndvi-map.png)
+
+NDVI map of the study area, Kharif season 2023.
+Green = healthy vegetation, red = stressed/bare areas.
+:::
+
+As clearly shown in @fig-ndvi, the spatial distribution of
+crop stress follows the drainage pattern of the region.
+```
+
+> **Auto-numbering:** The `@fig-ndvi` reference automatically creates a
+> numbered, clickable figure link. Quarto numbers all your figures
+> automatically — just like LaTeX in a research paper.
+
+## Interactive Map (Python / Folium)
+
+For geospatial researchers, you can embed a fully interactive map
+that visitors can zoom and click:
+
+```python
+#| label: fig-map
+#| fig-cap: "Study sites, ICAR-CCARI research area, Goa"
+
+import folium
+m = folium.Map(location=[15.49, 73.82], zoom_start=11)
+
+folium.Marker(
+    [15.49, 73.82],
+    popup="ICAR-CCARI, Goa",
+    tooltip="Click for details"
+).add_to(m)
+
+m
+```
+
+> **Requirement:** Python and folium must be installed.
+> Install folium with: `pip install folium`
+
+## Charts from Python
+
+Paste your existing Python code directly into your `.qmd` file.
+Quarto runs it and shows the chart automatically — no export needed:
+
+```python
+#| label: fig-yield
+#| fig-cap: "Soybean yield trend, coastal Goa research plots"
+
+import matplotlib.pyplot as plt
+
+years = [2019, 2020, 2021, 2022, 2023]
+yield_data = [2.1, 2.4, 2.0, 2.8, 3.1]
+
+plt.figure(figsize=(8, 4))
+plt.plot(years, yield_data, marker='o', color='#1D9E75', linewidth=2)
+plt.fill_between(years, yield_data, alpha=0.1, color='#1D9E75')
+plt.title("Soybean yield trend, Goa")
+plt.xlabel("Year")
+plt.ylabel("Yield (tonnes/ha)")
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+## Embedding a QGIS Map
+
+Export your QGIS map as an interactive HTML file using the `qgis2web` plugin,
+then embed it in your portfolio:
+
+**Step 1** — In QGIS: Plugins → qgis2web → Export to Leaflet → Save as HTML
+
+**Step 2** — Copy the exported folder into your project (e.g., `maps/my-map/`)
+
+**Step 3** — Embed it in any `.qmd` file:
+
+```html
+```{=html}
+<iframe src="maps/my-map/index.html"
+        width="100%"
+        height="500px"
+        frameborder="0">
+</iframe>
+```
+```
+
+---
+
+# Quick Reference Card
+
+## Commands You Will Use Most
+
+| Command | What it does |
+|---------|-------------|
+| `quarto preview` | Start local preview in browser |
+| `quarto render` | Build the complete website into docs/ |
+| `git add .` | Stage all changed files |
+| `git commit -m "message"` | Save a snapshot with a description |
+| `git push` | Upload to GitHub (site goes live) |
+| `mkdir foldername` | Create a new folder |
+| `cd foldername` | Move into a folder |
+| `code .` | Open current folder in VS Code |
+
+## Markdown Cheat Sheet
+
+| What you type | What appears |
+|---------------|-------------|
+| `**bold text**` | **bold text** |
+| `*italic text*` | *italic text* |
+| `## Heading` | A section heading |
+| `- item` | Bullet point |
+| `[link text](https://url.com)` | Clickable link |
+| `![alt](images/photo.jpg)` | An image |
+| `` `code` `` | Inline code |
+
+## Useful Links
+
+| Resource | Link |
+|----------|------|
+| Quarto documentation | https://quarto.org/docs |
+| Your live portfolio | https://yourusername.github.io |
+| Your GitHub repository | https://github.com/yourusername/yourusername.github.io |
+| Google Scholar export | https://scholar.google.com |
+| ORCID profile | https://orcid.org |
+
+---
+
+*Guide compiled by Subhradip Bhattacharjee,
+ICAR – Central Coastal Agricultural Research Institute, Goa*
+
+*Portfolio: https://subhradip25.github.io*
+
+*2025*

@@ -13,5 +13,11 @@
   },
   "posts/first-post/index.qmd": {
     "index.html": "2d8828d7"
+  },
+  "guide.qmd": {
+    "guide.typ": "b4e6bb6c"
+  },
+  "posts/first-post/guide.qmd": {
+    "guide.typ": "02891028"
   }
 }
