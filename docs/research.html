@@ -133,13 +133,15 @@ ul.task-list li input[type="checkbox"] {
   <div class="rp-header-inner">
     <div class="rp-label">Publications &amp; Research Output</div>
     <div class="rp-title">Research</div>
-    <div class="rp-inst">ICAR – Central Coastal Agricultural Research Institute, Goa, India</div>
+    
     <div class="rp-stats">
-  <div class="rp-stat"><div class="rp-snum">60+</div><div class="rp-slbl">Papers</div></div>
-  <div class="rp-stat"><div class="rp-snum">15+</div><div class="rp-slbl">Journals</div></div>
-  <div class="rp-stat"><div class="rp-snum" id="rp-citations">324</div><div class="rp-slbl">Total Citations</div></div>
-  <div class="rp-stat"><div class="rp-snum" id="rp-hindex">9</div><div class="rp-slbl">h-index</div></div>
-  <div class="rp-stat"><div class="rp-snum">2017–2026</div><div class="rp-slbl">Publication Span</div></div>
+      <div class="rp-stat"><div class="rp-snum">60+</div><div class="rp-slbl">Papers</div></div>
+      <div class="rp-stat"><div class="rp-snum">15+</div><div class="rp-slbl">Journals</div></div>
+      <div class="rp-stat"><div class="rp-snum" id="rp-citations">324</div><div class="rp-slbl">Total Citations</div></div>
+      <div class="rp-stat"><div class="rp-snum" id="rp-hindex">9</div><div class="rp-slbl">h-index</div></div>
+      <div class="rp-stat"><div class="rp-snum">2017–2026</div><div class="rp-slbl">Publication Span</div></div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -151,12 +153,15 @@ fetch('/data/citations.json')
   })
   .catch(function(){});
 </script>
-<!-- ═══ QUICK JUMP NAV ═══ -->
+
+<!-- ═══ QUICK JUMP NAV — aligned with header ═══ -->
 <div class="rp-nav">
-  <a href="#journal-articles">Journal Articles <span class="rp-nav-count">32</span></a>
-  <a href="#book-chapters">Book Chapters <span class="rp-nav-count">8</span></a>
-  <a href="#phd-thesis">PhD Thesis</a>
-  <a href="#ongoing-research">Ongoing Research</a>
+  <div class="rp-nav-inner">
+    <a href="#journal-articles">Journal Articles <span class="rp-nav-count">32</span></a>
+    <a href="#book-chapters">Book Chapters <span class="rp-nav-count">8</span></a>
+    <a href="#phd-thesis">PhD Thesis</a>
+    <a href="#ongoing-research">Ongoing Research</a>
+  </div>
 </div>
 
 <!-- ═══ BODY ═══ -->
@@ -646,7 +651,7 @@ fetch('/data/citations.json')
 
 
 
-</div></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
