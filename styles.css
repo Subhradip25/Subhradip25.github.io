@@ -496,3 +496,13 @@ pre { border-radius: 8px; border-left: 3px solid #1D9E75; font-size: 0.82rem; }
    HR
 ═══════════════════════════════════════ */
 hr { border: none; border-top: 0.5px solid #e0ddd5; margin: 1.5rem 0; }
+/* ── Publication title links on home page ── */
+.sb-ptitle a {
+  color: #0D2137 !important;
+  text-decoration: none !important;
+  font-weight: 600;
+}
+.sb-ptitle a:hover {
+  color: #1D9E75 !important;
+  text-decoration: underline !important;
+}

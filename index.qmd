@@ -12,7 +12,6 @@ toc: false
     <div class="sb-hero-text">
       <div class="sb-name">Subhradip Bhattacharjee</div>
       <div class="sb-role">Geospatial · Agronomy · Climate Researcher</div>
-      
       <p class="sb-bio">
         Specialising in geospatial assessment of land degradation, coastal agricultural
         systems, soil health monitoring, and bibliometric mapping of global agricultural
@@ -40,7 +39,6 @@ toc: false
 </div>
 
 <!-- ═══ STATS BAR ═══ -->
-<!-- ═══ STATS BAR ═══ -->
 <div class="sb-stats">
   <div class="sb-stat"><div class="sb-snum">60+</div><div class="sb-slbl">Publications</div></div>
   <div class="sb-stat"><div class="sb-snum">8+</div><div class="sb-slbl">Years of Research</div></div>
@@ -62,7 +60,7 @@ fetch('/data/citations.json')
 <div class="sb-content-wrapper">
   <div class="sb-content">
 
-    <!-- Left column -->
+    <!-- LEFT COLUMN: Research Areas + Blog Posts -->
     <div class="sb-left">
 
       <div class="sb-section">
@@ -110,52 +108,59 @@ fetch('/data/citations.json')
 
     </div>
 
-    <!-- Right column -->
+    <!-- RIGHT COLUMN: Recent Publications (linked) -->
     <div class="sb-right">
       <div class="sb-section">
         <div class="sb-section-title">Recent Publications</div>
+
+        <div class="sb-pub">
+          <span class="sb-pyear">2026</span>
+          <div>
+            <div class="sb-ptitle"><a href="https://www.sciencedirect.com/science/article/pii/S2665972726001492" target="_blank">Comparative Assessment of Ecosystem Services under Conservation Agriculture, Agroforestry, and Traditional Integrated Farming Systems in Tribal Regions of Central India</a></div>
+            <div class="sb-pjournal">Environmental and Sustainability Indicators · Elsevier</div>
+          </div>
+        </div>
+
+        <div class="sb-pub">
+          <span class="sb-pyear">2026</span>
+          <div>
+            <div class="sb-ptitle"><a href="https://www.sciencedirect.com/science/article/pii/S2667006226000080" target="_blank">Long-term effect of rice-rice and rice-cowpea systems on soil carbon and soil quality indicators under rice-based cropping systems in West Coast India</a></div>
+            <div class="sb-pjournal">Soil Security · Elsevier</div>
+          </div>
+        </div>
+
         <div class="sb-pub">
           <span class="sb-pyear">2025</span>
           <div>
-            <div class="sb-ptitle">Assessing land degradation and drought vulnerability using GEE for SDG 15.3.1</div>
+            <div class="sb-ptitle"><a href="https://www.sciencedirect.com/science/article/pii/S2666154325006490" target="_blank">Assessing the impact of nutrient management on productivity, economics, soil quality, energy efficiency, and life cycle assessment in rice-based farming systems</a></div>
+            <div class="sb-pjournal">Journal of Agriculture and Food Research · Elsevier</div>
+          </div>
+        </div>
+
+        <div class="sb-pub">
+          <span class="sb-pyear">2025</span>
+          <div>
+            <div class="sb-ptitle"><a href="https://link.springer.com/article/10.1007/s10661-025-14371-1" target="_blank">Assessing land degradation and drought vulnerability in the Trans-Gangetic Plains using Google Earth Engine for SDG 15.3.1 monitoring</a></div>
             <div class="sb-pjournal">Environmental Monitoring and Assessment · Springer</div>
           </div>
         </div>
+
         <div class="sb-pub">
           <span class="sb-pyear">2025</span>
           <div>
-            <div class="sb-ptitle">Impact of Seasonal Dynamics on Soil Health: AMF, GRSP, and Ergosterol</div>
-            <div class="sb-pjournal">Eurasian Soil Science · Pleiades Publishing</div>
+            <div class="sb-ptitle"><a href="https://link.springer.com/article/10.1134/S1064229324604165" target="_blank">Impact of Seasonal Dynamics and Agronomic Practices on Soil Health Indicators: AMF, GRSP, and Ergosterol</a></div>
+            <div class="sb-pjournal">Eurasian Soil Science · Springer</div>
           </div>
         </div>
+
         <div class="sb-pub">
-          <span class="sb-pyear">2025</span>
+          <span class="sb-pyear">2023</span>
           <div>
-            <div class="sb-ptitle">Optimizing Oat Production Strategies to Mitigate Nitrate Toxicity</div>
-            <div class="sb-pjournal">International Journal of Agronomy · Wiley</div>
-          </div>
-        </div>
-        <div class="sb-pub">
-          <span class="sb-pyear">2024</span>
-          <div>
-            <div class="sb-ptitle">Climate adaptation in agricultural sector of coastal India</div>
-            <div class="sb-pjournal">Mitigation and Adaptation Strategies · Springer</div>
-          </div>
-        </div>
-        <div class="sb-pub">
-          <span class="sb-pyear">2024</span>
-          <div>
-            <div class="sb-ptitle">From garbage to global warming: bibliometric analysis of MSW emissions</div>
+            <div class="sb-ptitle"><a href="https://link.springer.com/article/10.1007/s10668-023-04145-5" target="_blank">From garbage to global warming: a bibliometric analysis of greenhouse gas emissions from municipal solid waste</a></div>
             <div class="sb-pjournal">Environment, Development and Sustainability · Springer</div>
           </div>
         </div>
-        <div class="sb-pub">
-          <span class="sb-pyear">2024</span>
-          <div>
-            <div class="sb-ptitle">Coastal Ecosystem Services: Valuation, Threats, and Sustainable Way Forward</div>
-            <div class="sb-pjournal">Journal of Agricultural Physics</div>
-          </div>
-        </div>
+
         <a href="research.html" class="sb-view-all">View all 60+ publications →</a>
       </div>
     </div>
