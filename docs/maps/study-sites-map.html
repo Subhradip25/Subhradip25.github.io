@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #0D2137; }
+
+  .map-container { background: #0D2137; padding: 2rem 5rem 2.5rem; }
+  .map-header {
+    max-width: 1300px; margin: 0 auto 1rem;
+    display: flex; align-items: flex-end;
+    justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+  .map-label {
+    color: #5DCAA5; font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .map-title { color: white; font-size: 1.3rem; font-weight: 700; }
+  .map-legend { display: flex; gap: 14px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  #map {
+    max-width: 1300px; margin: 0 auto;
+    height: 480px; border-radius: 10px;
+    border: 1px solid #1a3350; overflow: hidden;
+  }
+
+  /* Custom popup styles */
+  .leaflet-popup-content-wrapper {
+    background: #0D2137 !important;
+    border: 1px solid #1D9E75 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+    padding: 0 !important;
+  }
+  .leaflet-popup-tip { background: #0D2137 !important; }
+  .leaflet-popup-content { margin: 0 !important; min-width: 240px; max-width: 300px; }
+  .popup-inner { padding: 14px 16px; }
+  .popup-theme { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
+  .popup-location { color: white; font-size: 0.95rem; font-weight: 700; margin-bottom: 3px; line-height: 1.3; }
+  .popup-state { color: rgba(255,255,255,0.45); font-size: 0.72rem; margin-bottom: 10px; }
+  .popup-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+  .popup-tag { font-size: 0.6rem; padding: 2px 7px; border-radius: 20px; font-weight: 600; }
+  .tag-green  { background: #E1F5EE; color: #085041; }
+  .tag-blue   { background: #E6F1FB; color: #0C447C; }
+  .tag-amber  { background: #FAEEDA; color: #633806; }
+  .tag-purple { background: #EEEDFE; color: #3C3489; }
+  .popup-papers { border-top: 1px solid #1a3350; padding-top: 10px; }
+  .popup-papers-label { font-size: 0.62rem; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .popup-paper { margin-bottom: 6px; padding-bottom: 6px; border-bottom: 0.5px solid #1a3350; }
+  .popup-paper:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .popup-paper-title { font-size: 0.75rem; color: rgba(255,255,255,0.85); line-height: 1.4; margin-bottom: 3px; }
+  .popup-paper-link { font-size: 0.68rem; color: #1D9E75; text-decoration: none; font-weight: 600; }
+  .popup-paper-link:hover { color: #5DCAA5; }
+
+  .map-note {
+    max-width: 1300px; margin: 8px auto 0;
+    font-size: 0.68rem; color: rgba(255,255,255,0.3);
+    font-family: 'Inter', sans-serif; text-align: right;
+  }
+</style>
+</head>
+<body>
+
+<div class="map-container">
+  <div class="map-header">
+    <div>
+      <div class="map-label">Field Research Locations</div>
+      <div class="map-title">Research Study Sites Across India</div>
+    </div>
+    <div class="map-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#1D9E75;"></div>Geospatial & Land Use</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#3B82F6;"></div>Climate & Agronomy</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#F59E0B;"></div>Fodder & Livestock</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#8B5CF6;"></div>Soil & Ecosystem</div>
+    </div>
+  </div>
+  <div id="map"></div>
+  <div class="map-note">Map tiles © Google Maps · India boundary as per Survey of India</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+window.addEventListener('load', function() {
+
+  var map = L.map('map', {
+    center: [22.5, 80],
+    zoom: 5,
+    zoomControl: true,
+    scrollWheelZoom: false
+  });
+
+  // Google Maps hybrid tiles — shows India-approved boundaries
+  L.tileLayer('https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}&hl=en&gl=in', {
+    attribution: '&copy; Google Maps · India boundary as per Survey of India',
+    subdomains: ['0','1','2','3'],
+    maxZoom: 18,
+    tileSize: 256
+  }).addTo(map);
+
+  function makeIcon(color) {
+    return L.divIcon({
+      className: '',
+      html: '<div style="width:16px;height:16px;border-radius:50%;background:' + color + ';border:3px solid white;box-shadow:0 0 0 3px ' + color + '66,0 2px 8px rgba(0,0,0,0.5);"></div>',
+      iconSize: [16, 16],
+      iconAnchor: [8, 8],
+      popupAnchor: [0, -12]
+    });
+  }
+
+  var icons = {
+    green:  makeIcon('#1D9E75'),
+    blue:   makeIcon('#3B82F6'),
+    amber:  makeIcon('#F59E0B'),
+    purple: makeIcon('#8B5CF6')
+  };
+
+  var sites = [
+    {
+      lat: 15.49, lng: 73.82, color: 'green',
+      theme: 'Geospatial & Coastal Agronomy', themeColor: '#1D9E75',
+      location: 'Coastal Goa', state: 'Goa, India — ICAR-CCARI Base Station',
+      tags: [{cls:'tag-green',label:'Coastal Agronomy'},{cls:'tag-blue',label:'Soil Health'}],
+      papers: [
+        {title:'Coastal Ecosystem Services: Valuation, Threats, and Sustainable Way Forward', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
+        {title:'Climate adaptation in agricultural sector of coastal India', link:'https://doi.org/10.1007/s11027-024-10134-y'},
+        {title:'Long-term effect of rice-rice and rice-cowpea systems on soil carbon in West Coast India', link:'https://www.sciencedirect.com/science/article/pii/S2667006226000080'}
+      ]
+    },
+    {
+      lat: 28.8, lng: 77.5, color: 'green',
+      theme: 'Geospatial & Remote Sensing', themeColor: '#1D9E75',
+      location: 'Trans-Gangetic Plains', state: 'Haryana / Western UP, India',
+      tags: [{cls:'tag-green',label:'Google Earth Engine'},{cls:'tag-blue',label:'SDG 15.3.1'}],
+      papers: [
+        {title:'Assessing land degradation and drought vulnerability using GEE for SDG 15.3.1 monitoring', link:'https://link.springer.com/article/10.1007/s10661-025-14371-1'}
+      ]
+    },
+    {
+      lat: 34.1, lng: 77.5, color: 'amber',
+      theme: 'Fodder & Livestock Systems', themeColor: '#F59E0B',
+      location: 'Ladakh Cold Desert', state: 'Ladakh, India',
+      tags: [{cls:'tag-amber',label:'Livestock Feed'},{cls:'tag-blue',label:'Climate Vulnerability'}],
+      papers: [
+        {title:'Availability and seasonal dynamics of feed sources for Ladakhi cattle breed in Ladakh', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
+        {title:'Climate Change Trends and their Impact on Cropping Pattern in Cold Desert of India', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
+      ]
+    },
+    {
+      lat: 21.5, lng: 82.5, color: 'purple',
+      theme: 'Ecosystem Services & Tribal Agriculture', themeColor: '#8B5CF6',
+      location: 'Central India — Tribal Regions', state: 'Chhattisgarh / Madhya Pradesh, India',
+      tags: [{cls:'tag-purple',label:'Ecosystem Services'},{cls:'tag-blue',label:'Conservation Agriculture'}],
+      papers: [
+        {title:'Comparative Assessment of Ecosystem Services under Conservation Agriculture, Agroforestry, and Traditional Integrated Farming Systems', link:'https://www.sciencedirect.com/science/article/pii/S2665972726001492'}
+      ]
+    },
+    {
+      lat: 26.2, lng: 92.7, color: 'blue',
+      theme: 'Rice Agronomy & Food Security', themeColor: '#3B82F6',
+      location: 'North-East India Plains', state: 'Assam / Tripura, India',
+      tags: [{cls:'tag-blue',label:'Rice Varieties'},{cls:'tag-green',label:'Nutritional Security'}],
+      papers: [
+        {title:'Grain characteristics, proximate composition and phytochemical capacity of aromatic and non-aromatic rice accessions', link:'https://doi.org/10.1016/j.afres.2022.100067'},
+        {title:'A study on total pest population present in aman paddy at North Tripura', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
+      ]
+    },
+    {
+      lat: 20.7, lng: 77.0, color: 'blue',
+      theme: 'Dryland Agronomy & Nutrient Management', themeColor: '#3B82F6',
+      location: 'Vidarbha — Central India', state: 'Maharashtra (Akola / Nagpur), India',
+      tags: [{cls:'tag-blue',label:'Dryland Agriculture'},{cls:'tag-green',label:'Maize Agronomy'}],
+      papers: [
+        {title:'Nutrient Management with Potassium and Zinc for Increased Productivity of Maize (PhD Thesis)', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
+        {title:'Effect of Potassium and Zinc Nutrition on Growth and Yield of Short Duration Maize under Dryland Vertisols', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
+      ]
+    },
+    {
+      lat: 29.9, lng: 76.8, color: 'amber',
+      theme: 'Fodder Crop Systems', themeColor: '#F59E0B',
+      location: 'Indo-Gangetic Plains', state: 'Haryana / Punjab, India',
+      tags: [{cls:'tag-amber',label:'Fodder Crops'},{cls:'tag-green',label:'Nutrient Management'}],
+      papers: [
+        {title:'Optimizing Oat Production Strategies to Mitigate Nitrate Toxicity Without Compromising Fodder Quality', link:'https://doi.org/10.1155/agro/9767875'},
+        {title:'Energy budgeting and carbon footprints estimation of fodder maize varieties', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'}
+      ]
+    },
+    {
+      lat: 12.9, lng: 74.9, color: 'purple',
+      theme: 'Soil Health & Agroforestry', themeColor: '#8B5CF6',
+      location: 'Karnataka — West Coast', state: 'Karnataka, India',
+      tags: [{cls:'tag-purple',label:'Agroforestry'},{cls:'tag-green',label:'Soil Quality'}],
+      papers: [
+        {title:'Soil quality enhancement in arecanut-based agroforestry system', link:'https://www.researchgate.net/profile/Subhradip-Bhattacharjee'},
+        {title:'Assessing the impact of nutrient management on productivity in rice-based farming systems', link:'https://www.sciencedirect.com/science/article/pii/S2666154325006490'}
+      ]
+    }
+  ];
+
+  sites.forEach(function(site) {
+    var papersHTML = site.papers.map(function(p) {
+      return '<div class="popup-paper">' +
+        '<div class="popup-paper-title">' + p.title + '</div>' +
+        '<a class="popup-paper-link" href="' + p.link + '" target="_blank">View Paper →</a>' +
+        '</div>';
+    }).join('');
+
+    var tagsHTML = site.tags.map(function(t) {
+      return '<span class="popup-tag ' + t.cls + '">' + t.label + '</span>';
+    }).join('');
+
+    var popup =
+      '<div class="popup-inner">' +
+        '<div class="popup-theme" style="color:' + site.themeColor + '">' + site.theme + '</div>' +
+        '<div class="popup-location">' + site.location + '</div>' +
+        '<div class="popup-state">' + site.state + '</div>' +
+        '<div class="popup-tags">' + tagsHTML + '</div>' +
+        '<div class="popup-papers">' +
+          '<div class="popup-papers-label">Publications from this site</div>' +
+          papersHTML +
+        '</div>' +
+      '</div>';
+
+    L.marker([site.lat, site.lng], { icon: icons[site.color] })
+      .addTo(map)
+      .bindPopup(popup, { maxWidth: 320, minWidth: 260 });
+  });
+
+});
+</script>
+</body>
+</html>
