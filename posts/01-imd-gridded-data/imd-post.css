@@ -1,0 +1,256 @@
+/* ─────────────────────────────────────────────────────────────
+   IMD Rainfall Blog Post — Custom Styles
+   Palette: deep teal + warm amber + soft sage on paper white
+   ───────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;700&display=swap');
+
+/* ── Root Variables ────────────────────────────────────────── */
+:root {
+  --clr-teal:       #1a6b6b;
+  --clr-teal-light: #e8f4f4;
+  --clr-amber:      #c97a1c;
+  --clr-amber-bg:   #fdf5e8;
+  --clr-sage:       #4a7c59;
+  --clr-sage-bg:    #eef5f1;
+  --clr-red-bg:     #fdf0f0;
+  --clr-red:        #b94040;
+  --clr-paper:      #fafaf8;
+  --clr-text:       #2a2a2a;
+  --clr-muted:      #6b6b6b;
+  --clr-border:     #d8d8d4;
+  --radius:         6px;
+}
+
+/* ── Base Typography ───────────────────────────────────────── */
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16.5px;
+  color: var(--clr-text);
+  background-color: var(--clr-paper);
+  line-height: 1.78;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 600;
+  color: var(--clr-teal);
+  letter-spacing: -0.01em;
+}
+
+h1.title {
+  font-size: 2.2rem;
+  line-height: 1.2;
+  border-bottom: 3px solid var(--clr-teal);
+  padding-bottom: 0.4em;
+  margin-bottom: 0.2em;
+}
+
+.subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: var(--clr-muted);
+  margin-top: 0.1em;
+}
+
+h2 { 
+  font-size: 1.55rem; 
+  margin-top: 2.8rem;
+  padding-bottom: 0.25em;
+  border-bottom: 1.5px solid var(--clr-border);
+}
+
+h3 { font-size: 1.2rem; color: #2a5a5a; margin-top: 2rem; }
+
+/* ── Code Blocks ───────────────────────────────────────────── */
+pre, code {
+  font-family: 'DM Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.875em;
+}
+
+pre.sourceCode {
+  border-left: 3px solid var(--clr-teal);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.1em 1.4em;
+  background: #f5f8f8 !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  overflow-x: auto;
+}
+
+code.sourceCode {
+  background: transparent !important;
+}
+
+/* Inline code */
+p code, li code, td code {
+  background: #eef4f4;
+  color: var(--clr-teal);
+  padding: 0.12em 0.35em;
+  border-radius: 3px;
+  font-size: 0.87em;
+}
+
+/* ── Callout Boxes ─────────────────────────────────────────── */
+.callout {
+  border-radius: var(--radius);
+  margin: 1.6em 0;
+  padding: 0.9em 1.3em;
+  font-size: 0.96em;
+  border: none;
+}
+
+.callout-note {
+  background-color: var(--clr-teal-light);
+  border-left: 4px solid var(--clr-teal);
+}
+
+.callout-tip {
+  background-color: var(--clr-sage-bg);
+  border-left: 4px solid var(--clr-sage);
+}
+
+.callout-warning {
+  background-color: var(--clr-amber-bg);
+  border-left: 4px solid var(--clr-amber);
+}
+
+.callout-important {
+  background-color: var(--clr-red-bg);
+  border-left: 4px solid var(--clr-red);
+}
+
+.callout-header {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.92em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5em;
+}
+
+/* ── Tables ────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92em;
+  margin: 1.2em 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+thead tr {
+  background-color: var(--clr-teal);
+  color: #fff;
+}
+
+thead th {
+  padding: 0.65em 1em;
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.88em;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+tbody tr:nth-child(even) { background-color: #f2f7f7; }
+tbody tr:hover { background-color: #e6f0f0; transition: background 0.15s; }
+
+tbody td {
+  padding: 0.55em 1em;
+  border-bottom: 1px solid var(--clr-border);
+  vertical-align: top;
+}
+
+/* ── Horizontal Rule ───────────────────────────────────────── */
+hr {
+  border: none;
+  border-top: 1.5px solid var(--clr-border);
+  margin: 2.5em 0;
+}
+
+/* ── Table of Contents ─────────────────────────────────────── */
+#TOC {
+  font-size: 0.88em;
+  line-height: 1.6;
+  border-left: 2px solid var(--clr-teal);
+  padding-left: 1em;
+}
+
+#TOC a {
+  color: var(--clr-teal);
+  text-decoration: none;
+}
+
+#TOC a:hover {
+  text-decoration: underline;
+}
+
+/* ── Figure Captions ───────────────────────────────────────── */
+figcaption, .figure-caption {
+  font-size: 0.85em;
+  color: var(--clr-muted);
+  font-style: italic;
+  text-align: center;
+  margin-top: 0.4em;
+  font-family: 'Lora', serif;
+}
+
+/* ── Blockquotes ───────────────────────────────────────────── */
+blockquote {
+  border-left: 4px solid var(--clr-amber);
+  background: var(--clr-amber-bg);
+  margin: 1.5em 0;
+  padding: 0.7em 1.2em;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-style: italic;
+  color: #5a4000;
+}
+
+/* ── Links ─────────────────────────────────────────────────── */
+a {
+  color: var(--clr-teal);
+  text-decoration-color: rgba(26, 107, 107, 0.35);
+}
+
+a:hover {
+  color: #125050;
+  text-decoration-color: var(--clr-teal);
+}
+
+/* ── Post Meta ─────────────────────────────────────────────── */
+.quarto-title-meta {
+  font-size: 0.88em;
+  color: var(--clr-muted);
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Category Badges ───────────────────────────────────────── */
+.quarto-category {
+  background: var(--clr-teal-light);
+  color: var(--clr-teal);
+  border-radius: 20px;
+  padding: 0.2em 0.75em;
+  font-size: 0.8em;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Code Copy Button ──────────────────────────────────────── */
+.code-copy-button {
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.code-copy-button:hover { opacity: 1; }
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  h1.title { font-size: 1.7rem; }
+  h2 { font-size: 1.3rem; }
+  pre.sourceCode { padding: 0.8em 1em; }
+  table { font-size: 0.82em; }
+}

@@ -6,12 +6,15 @@ page-layout: full
 
 ```{=html}
 
+<style>
+.ptag-sdg { background: #1a5276; color: #fff; font-weight: 600; border: none; }
+</style>
+
 <!-- ═══ PAGE HEADER ═══ -->
 <div class="rp-header">
   <div class="rp-header-inner">
     <div class="rp-label">Publications & Research Output</div>
     <div class="rp-title">Research</div>
-    
     <div class="rp-stats">
       <div class="rp-stat"><div class="rp-snum">60+</div><div class="rp-slbl">Papers</div></div>
       <div class="rp-stat"><div class="rp-snum">15+</div><div class="rp-slbl">Journals</div></div>
@@ -32,7 +35,7 @@ fetch('/data/citations.json')
   .catch(function(){});
 </script>
 
-<!-- ═══ QUICK JUMP NAV — aligned with header ═══ -->
+<!-- ═══ QUICK JUMP NAV ═══ -->
 <div class="rp-nav">
   <div class="rp-nav-inner">
     <a href="#journal-articles">Journal Articles <span class="rp-nav-count">32</span></a>
@@ -53,6 +56,7 @@ fetch('/data/citations.json')
   <div class="rp-legend-item"><div class="rp-legend-dot" style="background:#0C447C;"></div>Climate & Policy</div>
   <div class="rp-legend-item"><div class="rp-legend-dot" style="background:#633806;"></div>Fodder & Livestock</div>
   <div class="rp-legend-item"><div class="rp-legend-dot" style="background:#3C3489;"></div>Bibliometrics & Technology</div>
+  <div class="rp-legend-item"><div class="rp-legend-dot" style="background:#1a5276;"></div>SDG Alignment</div>
 </div>
 
 <!-- ══════════════════════════════
@@ -69,8 +73,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Long-term effect of rice-rice and rice-cowpea systems on soil carbon and soil quality indicators under rice-based cropping systems in West Coast India</div>
     <div class="pub-meta"><span class="pub-journal">Soil Security</span><span class="pub-sep">·</span><span>Elsevier</span><span class="pub-sep">·</span><span class="pub-authors">Paramesh V, Kumar P, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Soil Carbon</span><span class="ptag ptag-green">Coastal Agronomy</span><span class="ptag ptag-blue">Cropping Systems</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Soil Carbon</span><span class="ptag ptag-green">Coastal Agronomy</span><span class="ptag ptag-blue">Cropping Systems</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Investigated how different rice-based cropping systems affect long-term soil carbon and quality on India's west coast — directly relevant to coastal agricultural sustainability.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="https://www.sciencedirect.com/science/article/pii/S2667006226000080" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -79,8 +90,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Comparative Assessment of Ecosystem Services under Conservation Agriculture, Agroforestry, and Traditional Integrated Farming Systems in Tribal Regions of Central India</div>
     <div class="pub-meta"><span class="pub-journal">Environmental and Sustainability Indicators</span><span class="pub-sep">·</span><span>Elsevier</span><span class="pub-sep">·</span><span class="pub-authors">Pradhan A, Paramesha V, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-blue">Ecosystem Services</span><span class="ptag ptag-green">Conservation Agriculture</span><span class="ptag ptag-blue">Sustainability</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-blue">Ecosystem Services</span><span class="ptag ptag-green">Conservation Agriculture</span><span class="ptag ptag-blue">Sustainability</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Compared ecosystem services provided by different farming approaches in tribal regions — contributing to evidence-based policy for sustainable agriculture.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -89,8 +107,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Climate Change Trends and their Impact on Cropping Pattern in Cold Desert of India</div>
     <div class="pub-meta"><span class="pub-journal">International Journal of Environment and Climate Change</span><span class="pub-sep">·</span><span class="pub-authors">Pandey S, Bhattacharjee S, Ram H, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-blue">Climate Change</span><span class="ptag ptag-blue">Cold Desert</span><span class="ptag ptag-green">Cropping Patterns</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-blue">Climate Change</span><span class="ptag ptag-blue">Cold Desert</span><span class="ptag ptag-green">Cropping Patterns</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Analysed climate change trends in Ladakh's cold desert and their effects on traditional cropping patterns — important for food security in fragile mountain ecosystems.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -99,7 +124,10 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Assessing land degradation and drought vulnerability in the Trans-Gangetic Plains using Google Earth Engine and remote sensing for SDG 15.3.1 monitoring</div>
     <div class="pub-meta"><span class="pub-journal">Environmental Monitoring and Assessment</span><span class="pub-sep">·</span><span>Springer</span><span class="pub-sep">·</span><span class="pub-authors">Bhattacharjee S, Basavareddy, Rajput VD, Majumder D, Panja A, Kashyap S, Kumar R</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Geospatial</span><span class="ptag ptag-green">Google Earth Engine</span><span class="ptag ptag-blue">SDG 15.3.1</span><span class="ptag ptag-blue">Land Degradation</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Geospatial</span><span class="ptag ptag-green">Google Earth Engine</span><span class="ptag ptag-blue">SDG 15.3.1</span><span class="ptag ptag-blue">Land Degradation</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Used GEE and multi-temporal remote sensing to map land degradation and drought vulnerability across the Trans-Gangetic Plains, contributing directly to national SDG monitoring frameworks.</div>
     <div class="pub-links">
       <a class="plink plink-dark" href="https://link.springer.com/article/10.1007/s10661-025-14371-1" target="_blank">Read Paper</a>
@@ -113,8 +141,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Impact of Seasonal Dynamics and Agronomic Practices on Soil Health Indicators: Arbuscular Mycorrhizal Fungi, Glomalin-Related Soil Protein, and Ergosterol</div>
     <div class="pub-meta"><span class="pub-journal">Eurasian Soil Science</span><span class="pub-sep">·</span><span>Pleiades Publishing</span><span class="pub-sep">·</span><span class="pub-authors">Bhattacharjee S, Rajput VD, Biswal B, Basak N, Kumar R</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Soil Health</span><span class="ptag ptag-amber">Mycorrhizal Fungi</span><span class="ptag ptag-green">Agronomy</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Soil Health</span><span class="ptag ptag-amber">Mycorrhizal Fungi</span><span class="ptag ptag-green">Agronomy</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Examined how seasons and farming practices affect key biological soil health markers — fungi, proteins, and ergosterol — providing insights for sustainable soil management.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -123,8 +158,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Optimizing Oat (Avena sativa L.) Production Strategies to Mitigate Nitrate Toxicity Without Compromising Fodder Quality</div>
     <div class="pub-meta"><span class="pub-journal">International Journal of Agronomy</span><span class="pub-sep">·</span><span>Wiley</span><span class="pub-sep">·</span><span class="pub-authors">Pyati PS, Bhattacharjee S, Kumar R, Ram H, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-amber">Fodder Quality</span><span class="ptag ptag-green">Oat Production</span><span class="ptag ptag-amber">Nitrate Toxicity</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-amber">Fodder Quality</span><span class="ptag ptag-green">Oat Production</span><span class="ptag ptag-amber">Nitrate Toxicity</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 3</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Identified agronomic strategies to reduce nitrate toxicity in fodder oats while maintaining high nutritional quality — a critical issue for livestock safety.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -133,8 +175,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Soil quality enhancement in arecanut-based agroforestry system: Insights from organic farming and integrated nutrient management</div>
     <div class="pub-meta"><span class="pub-journal">The Indian Journal of Agricultural Sciences</span><span class="pub-sep">·</span><span class="pub-authors">Paramesh V, Kumar P, Kumar RM, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Agroforestry</span><span class="ptag ptag-green">Soil Quality</span><span class="ptag ptag-blue">Organic Farming</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Agroforestry</span><span class="ptag ptag-green">Soil Quality</span><span class="ptag ptag-blue">Organic Farming</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Evaluated how organic and integrated nutrient management improves soil quality in arecanut agroforestry — a common coastal farming system.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -143,8 +192,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Assessing the impact of nutrient management on productivity, economics, soil quality, energy efficiency, and life cycle assessment in rice-based farming systems</div>
     <div class="pub-meta"><span class="pub-journal">Journal of Agriculture and Food Research</span><span class="pub-sep">·</span><span>Elsevier</span><span class="pub-sep">·</span><span class="pub-authors">Paramesha V, Kumar P, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Rice Farming</span><span class="ptag ptag-blue">Life Cycle Assessment</span><span class="ptag ptag-blue">Sustainability</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Rice Farming</span><span class="ptag ptag-blue">Life Cycle Assessment</span><span class="ptag ptag-blue">Sustainability</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 13</span>
+    </div>
     <div class="pub-note">Comprehensive assessment of how nutrient management strategies affect multiple sustainability dimensions in rice farming systems.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -153,8 +209,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Impact of Agronomic Management Practices on Quality and Productivity of Fodder Crops: A Review</div>
     <div class="pub-meta"><span class="pub-journal">Agricultural Reviews</span><span class="pub-sep">·</span><span class="pub-authors">Prasanna SP, Choudhary M, Bhattacharjee S, Praveen BR, Naik VS</span></div>
-    <div class="pub-tags"><span class="ptag ptag-amber">Fodder Crops</span><span class="ptag ptag-green">Agronomy</span><span class="ptag ptag-blue">Review</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-amber">Fodder Crops</span><span class="ptag ptag-green">Agronomy</span><span class="ptag ptag-blue">Review</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Synthesised research on how agronomic practices influence the productivity and nutritional quality of fodder crops.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -163,8 +226,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Optimizing varietal selection and cutting intervals for enhanced fodder productivity, quality and energy content in multi-cut oats</div>
     <div class="pub-meta"><span class="pub-journal">Indian Journal of Animal Sciences</span><span class="pub-sep">·</span><span class="pub-authors">Bhakuni K, Sabal SK, Bhattacharjee S, Kumar R, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-amber">Fodder Oats</span><span class="ptag ptag-amber">Livestock Systems</span><span class="ptag ptag-green">Varietal Selection</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-amber">Fodder Oats</span><span class="ptag ptag-amber">Livestock Systems</span><span class="ptag ptag-green">Varietal Selection</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Compared oat varieties and cutting schedules to maximise fodder yield and energy content for dairy and livestock systems.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -173,8 +243,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">From garbage to global warming: a bibliometric analysis of greenhouse gas emissions from municipal solid waste and its relationship with climate change</div>
     <div class="pub-meta"><span class="pub-journal">Environment, Development and Sustainability</span><span class="pub-sep">·</span><span>Springer</span><span class="pub-sep">·</span><span class="pub-authors">Bhattacharjee S, Panja A, Majumder D, Hindorya PS, Kumar R</span></div>
-    <div class="pub-tags"><span class="ptag ptag-purple">Bibliometrics</span><span class="ptag ptag-blue">Climate Change</span><span class="ptag ptag-blue">Municipal Solid Waste</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-purple">Bibliometrics</span><span class="ptag ptag-blue">Climate Change</span><span class="ptag ptag-blue">Municipal Solid Waste</span>
+      <span class="ptag ptag-sdg">SDG 11</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 13</span>
+    </div>
     <div class="pub-note">Mapped 50 years of global research on waste-related greenhouse gas emissions using bibliometric analysis — identifying key trends and future research directions.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -183,8 +260,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Climate adaptation in agricultural sector of coastal India: a comprehensive exploration of adaptation strategies</div>
     <div class="pub-meta"><span class="pub-journal">Mitigation and Adaptation Strategies for Global Change</span><span class="pub-sep">·</span><span>Springer</span><span class="pub-sep">·</span><span class="pub-authors">Panja A, Garai S, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-blue">Climate Adaptation</span><span class="ptag ptag-green">Coastal Agriculture</span><span class="ptag ptag-blue">Policy</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-blue">Climate Adaptation</span><span class="ptag ptag-green">Coastal Agriculture</span><span class="ptag ptag-blue">Policy</span>
+      <span class="ptag ptag-sdg">SDG 1</span><span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span>
+    </div>
     <div class="pub-note">Comprehensively reviewed climate adaptation strategies available for coastal Indian agriculture — a timely and policy-relevant contribution.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -193,8 +277,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">The Impact of Integrated Nutrient Management on Trifolium alexandrinum Varietal Performance in the Indo-Gangetic Plains</div>
     <div class="pub-meta"><span class="pub-journal">Agronomy</span><span class="pub-sep">·</span><span>MDPI</span><span class="pub-sep">·</span><span class="pub-authors">Hindoriya PS, Kumar R, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Nutrient Management</span><span class="ptag ptag-amber">Fodder Crops</span><span class="ptag ptag-green">Agronomy</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Nutrient Management</span><span class="ptag ptag-amber">Fodder Crops</span><span class="ptag ptag-green">Agronomy</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Compared berseem clover varieties under different nutrient management strategies in the Indo-Gangetic Plains — a key fodder crop region.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -203,8 +294,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Coastal Ecosystem Services: Valuation, Threats, and Sustainable Way Forward</div>
     <div class="pub-meta"><span class="pub-journal">Journal of Agricultural Physics</span><span class="pub-sep">·</span><span class="pub-authors">Kumar P, Das B, Majik S, Bhattacharjee S</span></div>
-    <div class="pub-tags"><span class="ptag ptag-blue">Ecosystem Services</span><span class="ptag ptag-green">Coastal Systems</span><span class="ptag ptag-blue">Sustainability</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-blue">Ecosystem Services</span><span class="ptag ptag-green">Coastal Systems</span><span class="ptag ptag-blue">Sustainability</span>
+      <span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 14</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Assessed and valued the ecosystem services provided by coastal regions and outlined threats and sustainability pathways.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -212,9 +310,16 @@ fetch('/data/citations.json')
   <div class="pub-left"><div class="pub-year-badge">2024</div><div class="pub-type-label">Journal</div></div>
   <div>
     <div class="pub-title">Availability and seasonal dynamics of feed sources for Ladakhi cattle breed in the cold arid region of Ladakh</div>
-    <div class="pub-meta"><span class="pub-journal">Biological Rhythm Research</span><span class="pub-sep">·</span><span>Taylor & Francis</span><span class="pub-sep">·</span><span class="pub-authors">Youdol T, Mishra AK, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-amber">Livestock Feed</span><span class="ptag ptag-blue">Climate Vulnerability</span><span class="ptag ptag-green">High-Altitude Agriculture</span></div>
+    <div class="pub-meta"><span class="pub-journal">Biological Rhythm Research</span><span class="pub-sep">·</span><span>Taylor &amp; Francis</span><span class="pub-sep">·</span><span class="pub-authors">Youdol T, Mishra AK, Bhattacharjee S, et al.</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-amber">Livestock Feed</span><span class="ptag ptag-blue">Climate Vulnerability</span><span class="ptag ptag-green">High-Altitude Agriculture</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Studied seasonal feed availability for indigenous Ladakhi cattle — important for livestock management in climate-vulnerable high-altitude regions.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -223,8 +328,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Nature-positive strategies for sustainable fodder production and management under changing climatic and soil environments</div>
     <div class="pub-meta"><span class="pub-journal">Journal of the Indian Society of Soil Science</span><span class="pub-sep">·</span><span class="pub-authors">Singh R, Bhattacharjee S, Kumar D, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Fodder Production</span><span class="ptag ptag-blue">Climate Change</span><span class="ptag ptag-blue">Sustainability</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Fodder Production</span><span class="ptag ptag-blue">Climate Change</span><span class="ptag ptag-blue">Sustainability</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Reviewed nature-positive approaches to fodder production under climate and soil change scenarios.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -233,8 +345,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Sustainable Integrated Farming Systems for Coastal Regions of India</div>
     <div class="pub-meta"><span class="pub-journal">Indian Journal of Dryland Agricultural Research and Development</span><span class="pub-sep">·</span><span class="pub-authors">Kumar P, Paramesha V, Bhattacharjee S</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Coastal Agriculture</span><span class="ptag ptag-blue">Integrated Farming</span><span class="ptag ptag-blue">Sustainability</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Coastal Agriculture</span><span class="ptag ptag-blue">Integrated Farming</span><span class="ptag ptag-blue">Sustainability</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 14</span>
+    </div>
     <div class="pub-note">Proposed integrated farming models suited to the specific challenges of India's coastal agricultural zones.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -243,8 +362,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Enhancing growth, yield, and nutrient quality of fodder maize through foliar application of ortho silicic acid</div>
     <div class="pub-meta"><span class="pub-journal">Silicon</span><span class="pub-sep">·</span><span>Springer Netherlands</span><span class="pub-sep">·</span><span class="pub-authors">Biswal B, Kumar R, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-amber">Fodder Maize</span><span class="ptag ptag-green">Nutrient Quality</span><span class="ptag ptag-green">Silicon</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-amber">Fodder Maize</span><span class="ptag ptag-green">Nutrient Quality</span><span class="ptag ptag-green">Silicon</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Demonstrated that foliar ortho silicic acid application improves both yield and nutritional quality of fodder maize.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -253,7 +379,10 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">How did research on conservation agriculture evolve over the years? A bibliometric analysis</div>
     <div class="pub-meta"><span class="pub-journal">Sustainability</span><span class="pub-sep">·</span><span>MDPI</span><span class="pub-sep">·</span><span class="pub-authors">Bhattacharjee S, Panja A, Panda M, Dutta S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-purple">Bibliometrics</span><span class="ptag ptag-green">Conservation Agriculture</span><span class="ptag ptag-blue">Sustainability</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-purple">Bibliometrics</span><span class="ptag ptag-green">Conservation Agriculture</span><span class="ptag ptag-blue">Sustainability</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Traced the global evolution of conservation agriculture research over decades using bibliometric methods — identifying hotspots, key contributors, and emerging themes.</div>
     <div class="pub-links">
       <a class="plink plink-dark" href="https://doi.org/10.3390/su15032040" target="_blank">Read Paper</a>
@@ -267,8 +396,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Municipal solid waste compost: a comprehensive bibliometric data-driven review of 50 years of research</div>
     <div class="pub-meta"><span class="pub-journal">Environmental Science and Pollution Research</span><span class="pub-sep">·</span><span>Springer</span><span class="pub-sep">·</span><span class="pub-authors">Bhattacharjee S, Panja A, Kumar R, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-purple">Bibliometrics</span><span class="ptag ptag-blue">Composting</span><span class="ptag ptag-blue">Waste Management</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-purple">Bibliometrics</span><span class="ptag ptag-blue">Composting</span><span class="ptag ptag-blue">Waste Management</span>
+      <span class="ptag ptag-sdg">SDG 11</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 13</span>
+    </div>
     <div class="pub-note">Synthesised 50 years of global research on MSW composting — mapping progress and identifying gaps for future research.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -277,8 +413,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Energy budgeting and carbon footprints estimation of fodder maize varieties under different nutrient management practices</div>
     <div class="pub-meta"><span class="pub-journal">Agronomy</span><span class="pub-sep">·</span><span>MDPI</span><span class="pub-sep">·</span><span class="pub-authors">Kumar D, Singh M, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-blue">Carbon Footprint</span><span class="ptag ptag-amber">Fodder Maize</span><span class="ptag ptag-blue">Energy Budget</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-blue">Carbon Footprint</span><span class="ptag ptag-amber">Fodder Maize</span><span class="ptag ptag-blue">Energy Budget</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 13</span>
+    </div>
     <div class="pub-note">Quantified the energy use and carbon footprint of different fodder maize production systems in the Indo-Gangetic Plains.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -287,8 +430,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Assessing the effects of conservation tillage and in-situ crop residue management on crop yield and soil properties in rice-wheat cropping system</div>
     <div class="pub-meta"><span class="pub-journal">Sustainability</span><span class="pub-sep">·</span><span>MDPI</span><span class="pub-sep">·</span><span class="pub-authors">Leharwan M, Kumar Y, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Conservation Tillage</span><span class="ptag ptag-green">Soil Health</span><span class="ptag ptag-blue">Rice-Wheat System</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Conservation Tillage</span><span class="ptag ptag-green">Soil Health</span><span class="ptag ptag-blue">Rice-Wheat System</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Evaluated how conservation tillage and residue retention affect productivity and soil health in the dominant rice-wheat system.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -297,8 +447,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Improvement of growth, yield and soil fertility in wheat through tillage and nutrient management practices</div>
     <div class="pub-meta"><span class="pub-journal">Journal of Soil Science and Plant Nutrition</span><span class="pub-sep">·</span><span>Springer</span><span class="pub-sep">·</span><span class="pub-authors">Dutta S, Singh M, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Wheat Yield</span><span class="ptag ptag-green">Soil Fertility</span><span class="ptag ptag-green">Tillage</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Wheat Yield</span><span class="ptag ptag-green">Soil Fertility</span><span class="ptag ptag-green">Tillage</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Showed how optimised tillage and nutrient combinations can simultaneously improve wheat yields and soil fertility.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -307,8 +464,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Scope of Horse Gram and Bambara Groundnut as Source of Food and Feed Legume: A Review</div>
     <div class="pub-meta"><span class="pub-journal">Legume Research: An International Journal</span><span class="pub-sep">·</span><span class="pub-authors">Biswal B, Kashyap S, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-amber">Legumes</span><span class="ptag ptag-green">Dryland Agriculture</span><span class="ptag ptag-blue">Food Security</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-amber">Legumes</span><span class="ptag ptag-green">Dryland Agriculture</span><span class="ptag ptag-blue">Food Security</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 3</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Reviewed the potential of two underutilised legumes as food and fodder crops — relevant for diversifying dryland farming systems.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -317,7 +481,10 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Grain characteristics, proximate composition, phytochemical capacity, and mineral content of aromatic and non-aromatic rice accessions in North-East India</div>
     <div class="pub-meta"><span class="pub-journal">Applied Food Research</span><span class="pub-sep">·</span><span>Elsevier</span><span class="pub-sep">·</span><span class="pub-authors">Nath S, Bhattacharjee P, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Rice Varieties</span><span class="ptag ptag-blue">Nutritional Security</span><span class="ptag ptag-green">Phytochemicals</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Rice Varieties</span><span class="ptag ptag-blue">Nutritional Security</span><span class="ptag ptag-green">Phytochemicals</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 3</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Characterised nutritional and phytochemical profiles of traditional North-East Indian rice varieties — valuable for nutritional security and germplasm conservation.</div>
     <div class="pub-links">
       <a class="plink plink-dark" href="https://doi.org/10.1016/j.afres.2022.100067" target="_blank">Read Paper</a>
@@ -331,8 +498,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Effect of Potassium and Zinc Nutrition on Growth and Yield of Short Duration Maize under Dryland Vertisols</div>
     <div class="pub-meta"><span class="pub-journal">Indian Journal of Agricultural Research</span><span class="pub-sep">·</span><span class="pub-authors">Bhattacharjee S, Bhale VM, Kumar P, Kumar R</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Maize</span><span class="ptag ptag-green">Nutrient Management</span><span class="ptag ptag-green">Dryland Agriculture</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Maize</span><span class="ptag ptag-green">Nutrient Management</span><span class="ptag ptag-green">Dryland Agriculture</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Quantified how potassium and zinc fertilisation affects maize growth and yield in the challenging dryland Vertisol conditions of central India.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -341,8 +515,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Growth and yield performance of fodder oats grown under different nutrient management practices</div>
     <div class="pub-meta"><span class="pub-journal">Indian Journal of Agricultural Sciences</span><span class="pub-sep">·</span><span class="pub-authors">Kumar D, Singh M, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-amber">Fodder Oats</span><span class="ptag ptag-green">Nutrient Management</span><span class="ptag ptag-amber">Livestock Systems</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-amber">Fodder Oats</span><span class="ptag ptag-green">Nutrient Management</span><span class="ptag ptag-amber">Livestock Systems</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Assessed nutrient management options to improve fodder oat productivity for livestock feeding systems.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -351,8 +532,15 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Performance of Maize based on yield attributes, nutrient uptake, quality and economics under different zinc-based nutrient management regimes</div>
     <div class="pub-meta"><span class="pub-journal">Research Journal of Agriculture Science</span><span class="pub-sep">·</span><span class="pub-authors">Panda A, Bhattacharjee S, Bhale VM, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Maize</span><span class="ptag ptag-green">Zinc Nutrition</span><span class="ptag ptag-amber">Crop Economics</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Maize</span><span class="ptag ptag-green">Zinc Nutrition</span><span class="ptag ptag-amber">Crop Economics</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
     <div class="pub-note">Evaluated zinc-based nutrient management regimes for optimising maize productivity and economic returns.</div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -361,7 +549,14 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Influence of sulphur, zinc and organic inorganic assorted customized fertilizer on yield and quality of cotton under rainfed vertisols</div>
     <div class="pub-meta"><span class="pub-journal">International Journal of Current Microbiology and Applied Sciences</span><span class="pub-sep">·</span><span class="pub-authors">Bairwa B, Katkar RN, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Cotton</span><span class="ptag ptag-green">Sulphur Nutrition</span><span class="ptag ptag-green">Rainfed Agriculture</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Cotton</span><span class="ptag ptag-green">Sulphur Nutrition</span><span class="ptag ptag-green">Rainfed Agriculture</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -370,7 +565,14 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">A study on total pest population present in aman paddy at North Tripura</div>
     <div class="pub-meta"><span class="pub-journal">Journal of Entomology and Zoology Studies</span><span class="pub-sep">·</span><span class="pub-authors">Bhattacharjee P, Datta J, Nath S, Bhattacharjee S</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Rice Pest</span><span class="ptag ptag-green">North-East India</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Rice Pest</span><span class="ptag ptag-green">North-East India</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 3</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -379,7 +581,14 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Effect of different nutrient management practices and zinc fertilization on growth and development stages of maize under dryland condition</div>
     <div class="pub-meta"><span class="pub-journal">International Journal of Current Microbiology and Applied Sciences</span><span class="pub-sep">·</span><span class="pub-authors">Panda A, Bhale VM, Bhattacharjee S, Kadam SR</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Maize</span><span class="ptag ptag-green">Zinc Fertilization</span><span class="ptag ptag-green">Dryland Agriculture</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Maize</span><span class="ptag ptag-green">Zinc Fertilization</span><span class="ptag ptag-green">Dryland Agriculture</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -388,9 +597,17 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Effect of Potassium and Zinc Fertilization on Root Growth Parameters of Maize</div>
     <div class="pub-meta"><span class="pub-journal">Bhartiya Krishi Anusandhan Patrika</span><span class="pub-sep">·</span><span class="pub-authors">Bhattacharjee S, Bhale VM, Bhattacharjee P, Kadam S</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Maize Root Growth</span><span class="ptag ptag-green">Potassium</span><span class="ptag ptag-green">Zinc</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Maize Root Growth</span><span class="ptag ptag-green">Potassium</span><span class="ptag ptag-green">Zinc</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Paper</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
+
 
 <!-- ══════════════════════════════
      BOOK CHAPTERS
@@ -406,7 +623,14 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Integrated computational intelligence models to ensure food security withstanding climate change</div>
     <div class="pub-meta"><span class="pub-journal">High-Performance Automation Methods for Computational Intelligent Systems</span><span class="pub-sep">·</span><span>CRC Press</span><span class="pub-sep">·</span><span class="pub-authors">Majumder D, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-blue">Food Security</span><span class="ptag ptag-blue">Climate Change</span><span class="ptag ptag-purple">Computational Intelligence</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-blue">Food Security</span><span class="ptag ptag-blue">Climate Change</span><span class="ptag ptag-purple">Computational Intelligence</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 9</span><span class="ptag ptag-sdg">SDG 13</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Chapter</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -415,7 +639,14 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Sustainable Crop Production Using Plant Growth Promoting Rhizobacteria: A Green Technology</div>
     <div class="pub-meta"><span class="pub-journal">Smart Technologies in Sustainable Agriculture</span><span class="pub-sep">·</span><span>Apple Academic Press</span><span class="pub-sep">·</span><span class="pub-authors">Singh M, Kumar D, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">PGPR</span><span class="ptag ptag-green">Sustainable Agriculture</span><span class="ptag ptag-blue">Green Technology</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">PGPR</span><span class="ptag ptag-green">Sustainable Agriculture</span><span class="ptag ptag-blue">Green Technology</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Chapter</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -424,7 +655,14 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Advancing Food Science from Field to Fork: The Role of Nanobionics in Enhancing Safety, Quality, and Sustainability</div>
     <div class="pub-meta"><span class="pub-journal">Contemporary Suitability of Nanobionics in Agriculture</span><span class="pub-sep">·</span><span>Springer Nature</span><span class="pub-sep">·</span><span class="pub-authors">Ramani A, Rout P, Bhattacharjee S</span></div>
-    <div class="pub-tags"><span class="ptag ptag-purple">Nanobionics</span><span class="ptag ptag-blue">Food Safety</span><span class="ptag ptag-blue">Sustainability</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-purple">Nanobionics</span><span class="ptag ptag-blue">Food Safety</span><span class="ptag ptag-blue">Sustainability</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 3</span><span class="ptag ptag-sdg">SDG 12</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Chapter</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -433,7 +671,14 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Amelioration of abiotic stresses in forage crop production using microbial stimulants: An overview</div>
     <div class="pub-meta"><span class="pub-journal">Microbial Biostimulants for Plant Growth and Abiotic Stress Amelioration</span><span class="pub-sep">·</span><span>Elsevier</span><span class="pub-sep">·</span><span class="pub-authors">Kashyap S, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Abiotic Stress</span><span class="ptag ptag-green">Microbial Stimulants</span><span class="ptag ptag-amber">Forage Crops</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Abiotic Stress</span><span class="ptag ptag-green">Microbial Stimulants</span><span class="ptag ptag-amber">Forage Crops</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Chapter</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -442,7 +687,14 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Exploring the synergy of microbes and plants for managing moisture stress in medicinal and aromatic crops</div>
     <div class="pub-meta"><span class="pub-journal">Microbial Biostimulants for Plant Growth and Abiotic Stress Amelioration</span><span class="pub-sep">·</span><span>Elsevier</span><span class="pub-sep">·</span><span class="pub-authors">Bhattacharjee P, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Medicinal Crops</span><span class="ptag ptag-green">Moisture Stress</span><span class="ptag ptag-green">Microbial Synergy</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Medicinal Crops</span><span class="ptag ptag-green">Moisture Stress</span><span class="ptag ptag-green">Microbial Synergy</span>
+      <span class="ptag ptag-sdg">SDG 3</span><span class="ptag ptag-sdg">SDG 13</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Chapter</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -451,7 +703,14 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">The nexus between environmental damage, poverty, and climate change in hard-to-reach areas</div>
     <div class="pub-meta"><span class="pub-journal">Environmental Nexus for Resource Management</span><span class="pub-sep">·</span><span>CRC Press</span><span class="pub-sep">·</span><span class="pub-authors">Panja A, Bhattacharjee S, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-blue">Climate Change</span><span class="ptag ptag-blue">Environmental Nexus</span><span class="ptag ptag-blue">Poverty</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-blue">Climate Change</span><span class="ptag ptag-blue">Environmental Nexus</span><span class="ptag ptag-blue">Poverty</span>
+      <span class="ptag ptag-sdg">SDG 1</span><span class="ptag ptag-sdg">SDG 10</span><span class="ptag ptag-sdg">SDG 13</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Chapter</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -460,7 +719,14 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Advancing of biodynamic and natural farming in achieving sustainable development goals</div>
     <div class="pub-meta"><span class="pub-journal">Natural Farming: Basics and Application</span><span class="pub-sep">·</span><span class="pub-authors">Bhattacharjee S, Kumar R, et al.</span></div>
-    <div class="pub-tags"><span class="ptag ptag-green">Natural Farming</span><span class="ptag ptag-blue">SDGs</span><span class="ptag ptag-blue">Sustainability</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-green">Natural Farming</span><span class="ptag ptag-blue">SDGs</span><span class="ptag ptag-blue">Sustainability</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 12</span><span class="ptag ptag-sdg">SDG 15</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Chapter</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
 
@@ -469,9 +735,17 @@ fetch('/data/citations.json')
   <div>
     <div class="pub-title">Micro- and nanoparticle of chitosan for vitamin encapsulation: A nutshell overview</div>
     <div class="pub-meta"><span class="pub-journal">Nano-biofortification for human and environmental health</span><span class="pub-sep">·</span><span>Springer</span><span class="pub-sep">·</span><span class="pub-authors">Rout P, Ramani A, Bhattacharjee S</span></div>
-    <div class="pub-tags"><span class="ptag ptag-purple">Nanotechnology</span><span class="ptag ptag-blue">Biofortification</span><span class="ptag ptag-blue">Nutrition</span></div>
+    <div class="pub-tags">
+      <span class="ptag ptag-purple">Nanotechnology</span><span class="ptag ptag-blue">Biofortification</span><span class="ptag ptag-blue">Nutrition</span>
+      <span class="ptag ptag-sdg">SDG 2</span><span class="ptag ptag-sdg">SDG 3</span><span class="ptag ptag-sdg">SDG 12</span>
+    </div>
+    <div class="pub-links">
+      <a class="plink plink-dark" href="LINK_HERE" target="_blank">Read Chapter</a>
+      <a class="plink plink-outline" href="DOI_HERE" target="_blank">DOI</a>
+    </div>
   </div>
 </div>
+
 
 <!-- ══════════════════════════════
      PHD THESIS
@@ -501,6 +775,7 @@ fetch('/data/citations.json')
   </div>
 </div>
 
+
 <!-- ══════════════════════════════
      ONGOING RESEARCH
 ══════════════════════════════ -->
@@ -527,4 +802,3 @@ fetch('/data/citations.json')
 </div>
 </div>
 ```
-

@@ -1,0 +1,712 @@
+---
+title: "Downloading & Processing IMD Gridded Rainfall Data with Python"
+subtitle: "A step-by-step guide for agricultural researchers and students"
+author: "Subhradip Bhattacharjee"
+date: "2025-05-08"
+date-modified: today
+categories: [Python, Climate Data, Agriculture, IMD, Tutorial]
+image: "thumbnail.png"
+
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "In This Post"
+    toc-location: left
+    number-sections: false
+    code-fold: false
+    code-tools: true
+    code-copy: true
+    highlight-style: github
+    fig-align: center
+    fig-cap-location: bottom
+    css: imd-post.css
+    theme:
+      light: flatly
+      dark: darkly
+
+execute:
+  eval: false
+  echo: true
+  warning: false
+  message: false
+  freeze: true
+
+draft: false
+
+description: |
+  Learn how to set up Anaconda and JupyterLab for climate analysis, then 
+  download IMD 0.25° daily rainfall data with imdlib, quality-check it, 
+  subset to your region, and save as NetCDF from scratch.
+---
+
+---
+
+## 🌧️ What Is IMD Gridded Data — and Why Should You Care?
+
+If you're studying agriculture, food security, hydrology  or climate change science in India, **rainfall data is your foundation**. Every question — *Did the monsoon arrive late? Is drought risk increasing? How much water does the Kharif crop need?* all starts with good precipitation records.
+
+The **India Meteorological Department (IMD)** provides one of the most valuable publicly available climate datasets for India: **high-resolution gridded daily rainfall**. Here's what makes it special:
+
+::: {.callout-note icon=false}
+## 📌 Key Facts About IMD Gridded Rainfall
+
+| Feature | Details |
+|---|---|
+| **Spatial Resolution** | 0.25° × 0.25° (~28 km grid) |
+| **Temporal Resolution** | Daily |
+| **Coverage** | Entire India |
+| **Period Available** | 1901 – present |
+| **Data Type** | Rain gauge–interpolated gridded data |
+| **Citation** | Pai et al. (2014); Rajeevan et al. (2006) |
+:::
+
+The data is derived by interpolating observations from **~6,950 rain gauge stations** across India into a regular grid. This means even if there's no station in your district, you still get a daily rainfall estimate for every 0.25° cell.
+
+::: {.callout-tip icon=true}
+## 🌾 Why It Matters for Agricultural Research
+
+For crop science and agronomy students, this data unlocks:
+
+- **Drought monitoring** : identify consecutive dry days during growing seasons
+- **Rainfall onset/withdrawal** : track monsoon onset for sowing decisions
+- **Excess rainfall events** : assess waterlogging risk in paddy fields
+- **Long-term trend analysis** : is rainfall becoming more erratic over 50+ years?
+- **Agro-climatic zone characterization** : classify regions by rainfall patterns
+:::
+
+---
+
+## 🗺️ Understanding the Data Format
+
+Before writing any code, let's understand what you're downloading.
+
+IMD provides data in a custom binary `.grd` format — **one file per year**. Each file contains a 3D array:
+
+```
+Shape: (365 or 366 days) × (latitudes) × (longitudes)
+```
+
+The full-India grid covers:
+
+- **Latitude:** 6.5°N to 38.5°N (129 grid points)
+- **Longitude:** 66.5°E to 100.0°E (135 grid points)
+
+So for each year, you're getting: `365 × 129 × 135 = ~6.3 million values`.
+
+We use the [`imdlib`](https://github.com/iamsaswata/imdlib) Python library — built specifically for this format — to make downloading and reading these files effortless.
+
+---
+
+## 🐍 Setting Up Anaconda & JupyterLab
+
+This is the most important section if you're just starting out. **Anaconda** is the standard Python distribution for scientific computing — it bundles Python, a package manager (`conda`), and hundreds of scientific libraries in one installer. Think of it as your complete climate science workbench.
+
+### Why Anaconda — and Not Plain Python?
+
+::: {.callout-note icon=false}
+## Anaconda vs Plain Python + pip
+
+| | Plain Python + pip | Anaconda + conda |
+|---|---|---|
+| **Package conflicts** | Common and frustrating | Rare — conda resolves dependencies properly |
+| **Scientific libraries** | Install each one manually | Most included out of the box |
+| **Environments** | Possible but fiddly | First-class, trivial to create |
+| **Geospatial tools** (GDAL, cartopy) | Often breaks on install | Works reliably via `conda-forge` |
+| **Best for** | Web/app developers | Scientists and researchers ✅ |
+:::
+
+### Step 1 — Download the Installer
+
+You have two solid options:
+
+**Option A — Anaconda (full installer, ~800 MB)**  
+Includes Python, conda, JupyterLab, and 250+ scientific packages pre-installed.  
+Best if you want zero-friction setup and have disk space to spare.
+
+→ Download: [https://www.anaconda.com/download](https://www.anaconda.com/download)  
+Choose your OS (Windows / macOS / Linux).
+
+**Option B — Miniforge (minimal installer, ~90 MB)**  
+Lighter and faster. Defaults to the `conda-forge` channel which has more up-to-date climate packages. This is what the author uses.
+
+→ Download: [https://github.com/conda-forge/miniforge/releases/latest](https://github.com/conda-forge/miniforge/releases/latest)
+
+::: {.callout-tip}
+## 💡 Which Should You Choose?
+
+**New to Python / student?** → Go with **Anaconda (Option A)**. Larger download, but requires zero extra configuration.
+
+**Comfortable with terminals?** → Go with **Miniforge (Option B)**. Faster, leaner, and `conda-forge` packages are more current.
+:::
+
+### Step 2 — Install
+
+**On Windows:**
+
+1. Run the downloaded `.exe` installer
+2. Select **"Just Me"** (not "All Users")
+3. ✅ Check **"Add Anaconda to my PATH"** — essential for terminal access
+4. Click Install, wait ~5 minutes
+
+Open **Anaconda Prompt** from the Start menu to test it.
+
+**On Linux / macOS:**
+
+```bash
+# Make the installer executable, then run it
+chmod +x Anaconda3-*.sh      # or Miniforge3-*.sh
+bash Anaconda3-*.sh
+
+# Say YES when asked to initialise conda
+# Then restart your terminal (close and reopen)
+```
+
+**Verify it worked:**
+
+```bash
+conda --version
+# Expected: conda 24.x.x
+
+python --version
+# Expected: Python 3.12.x
+```
+
+If either command says "not found", the PATH wasn't set correctly — re-run the installer and check the PATH option.
+
+### Step 3 — Create a Dedicated `climate` Environment
+
+::: {.callout-warning}
+## ⚠️ Never Work in the `base` Environment
+
+The `base` environment is conda's default. Treat it as read-only. Installing packages directly into `base` causes version conflicts that are painful to debug.
+
+Always create a **named environment per project**. It takes 2 minutes and saves hours of frustration.
+:::
+
+```bash
+# Create a fresh environment called 'climate' with Python 3.11
+# (3.11 has the best compatibility with climate packages as of 2025)
+conda create -n climate python=3.11 -y
+```
+
+Now activate it:
+
+```bash
+conda activate climate
+```
+
+Your terminal prompt changes from `(base)` to `(climate)` — this confirms which environment is active. **Always check this before installing or running anything.**
+
+To see all your environments at any time:
+
+```bash
+conda info --envs
+# The active one has a * next to it
+```
+
+### Step 4 — Install the Full Climate Stack
+
+With `(climate)` active, install everything in one command. We use `-c conda-forge` because conda-forge has more up-to-date and compatible builds of scientific packages than the default Anaconda channel:
+
+```bash
+conda install -c conda-forge \
+  jupyter jupyterlab \
+  numpy pandas \
+  xarray netcdf4 h5netcdf \
+  matplotlib cartopy \
+  imdlib \
+  ipykernel \
+  -y
+```
+
+This will take 3–8 minutes. Grab a coffee.
+
+::: {.callout-note icon=false}
+## 📦 What Each Package Does
+
+| Package | Role in This Workflow |
+|---|---|
+| `jupyterlab` | The interactive notebook interface we'll work in |
+| `numpy` | Fast numerical arrays — the backbone of everything |
+| `pandas` | Tabular data (used for CSV exports and time series) |
+| `xarray` | Labelled multi-dimensional arrays — our main data container |
+| `netcdf4` / `h5netcdf` | Engines to read/write NetCDF `.nc` files |
+| `matplotlib` | Plotting and figures |
+| `cartopy` | Geographic projections and map features |
+| `imdlib` | Read and download IMD `.grd` binary files |
+| `ipykernel` | Connects this environment as a kernel inside JupyterLab |
+:::
+
+Verify everything installed correctly:
+
+```bash
+python -c "import imdlib, xarray, cartopy, jupyterlab; print('✅ All packages ready')"
+```
+
+### Step 5 — Register the Environment as a JupyterLab Kernel
+
+This one-time step makes the `climate` environment appear as a selectable kernel inside JupyterLab:
+
+```bash
+python -m ipykernel install --user --name climate --display-name "Python (climate)"
+```
+
+You only need to do this once. After this, every time you open JupyterLab you'll see **"Python (climate)"** as a kernel option.
+
+### Step 6 — Launch JupyterLab
+
+```bash
+# Step 1: activate the environment
+conda activate climate
+
+# Step 2: navigate to your project folder
+cd ~/your-project-folder
+
+# Step 3: launch
+jupyter lab
+```
+
+JupyterLab will open automatically in your browser at `http://localhost:8888`.
+
+::: {.callout-tip}
+## 🖥️ Quick JupyterLab Orientation
+
+When it opens you'll see:
+
+- **Left sidebar** — file browser, running sessions, table of contents
+- **Launcher tab** — the starting screen; click **"Python (climate)"** under Notebook to create a new notebook
+- **Main area** — where notebooks open as tabs
+- **Kernel indicator (top-right of each notebook)** — always check it shows **"Python (climate)"**, not "Python 3" or "base"
+
+If the kernel is wrong, click it → select **Python (climate)** from the dropdown.
+:::
+
+### Your Daily Workflow (3 Commands)
+
+After the one-time setup above, starting work every day is just:
+
+```bash
+conda activate climate          # 1. activate the environment
+cd ~/projects/climate_analysis  # 2. go to your project
+jupyter lab                     # 3. open JupyterLab
+```
+
+---
+
+## 🗂️ Project Folder Structure
+
+Organise your project before you start — it makes everything easier as your analysis grows:
+
+```
+climate_analysis/
+├── 01_Download_IMD_data.ipynb     ← This notebook
+├── 02_Rainfall_Indices.ipynb
+├── 03_Trend_Analysis.ipynb
+├── data/
+│   └── imd_rain/                  ← Raw .grd files land here
+│       └── rain/                  ← imdlib creates this subfolder automatically
+└── outputs/                       ← Figures and processed NetCDF files
+```
+
+Create the folders from inside your first notebook cell:
+
+```{python}
+#| label: setup-dirs
+#| code-summary: "Create project directories"
+
+import os
+
+os.makedirs('./data/imd_rain', exist_ok=True)
+os.makedirs('./outputs', exist_ok=True)
+
+print("✅ Directories ready.")
+```
+
+---
+
+## ⬇️ Step 1: Download the Data
+
+`imd.get_data()` connects to the IMD FTP server, downloads one `.grd` file per year, and saves it locally. Run this **once** — the files will live on your disk and you never need to re-download.
+
+```{python}
+#| label: download-data
+#| code-summary: "Download IMD rainfall data (1965–2025)"
+
+import imdlib as imd
+
+start_yr = 1965
+end_yr   = 2025
+
+data = imd.get_data(
+    var_type  = 'rain',       # 'rain', 'tmax', or 'tmin'
+    start_yr  = start_yr,
+    end_yr    = end_yr,
+    fn_format = 'yearwise',   # one .grd file per year
+    file_dir  = './data/imd_rain/'
+)
+
+print("✅ Download complete.")
+print(data)
+```
+
+::: {.callout-tip icon=true}
+## 💡 What Can You Download?
+
+| `var_type` | Variable | Resolution |
+|---|---|---|
+| `'rain'` | Daily rainfall | 0.25° |
+| `'tmax'` | Daily maximum temperature | 1.0° |
+| `'tmin'` | Daily minimum temperature | 1.0° |
+:::
+
+::: {.callout-warning}
+## ⏱️ Download Time
+
+61 files, ~400–600 MB total. Expect **10–45 minutes** depending on your connection. If it stalls, just re-run the cell — `imdlib` skips files already downloaded.
+:::
+
+### Verify the Downloaded Files
+
+```{python}
+#| label: verify-files
+#| code-summary: "Check downloaded .grd files"
+
+import glob, os
+
+# imdlib saves inside a 'rain/' subfolder automatically
+files = sorted(glob.glob('./data/imd_rain/rain/*.grd'))
+
+print(f"Total .grd files found : {len(files)}")
+print("First 3 :", files[:3])
+print("Last  3 :", files[-3:])
+```
+
+You should see 61 files with the pattern `rain_YYYY.grd`.
+
+---
+
+## 📂 Step 2: Load Data into Python (xarray)
+
+Read all the binary `.grd` files into a single in-memory dataset using `xarray`. Think of it as pandas — but for multi-dimensional arrays with labelled axes (time, latitude, longitude).
+
+```{python}
+#| label: open-data
+#| code-summary: "Open all .grd files as a single xarray Dataset"
+
+import imdlib as imd
+import xarray as xr
+
+data = imd.open_data(
+    var_type  = 'rain',
+    start_yr  = 1965,
+    end_yr    = 2025,
+    fn_format = 'yearwise',
+    file_dir  = './data/imd_rain/'
+)
+
+ds = data.get_xarray()
+
+print(ds)
+print("\nDimensions :", dict(ds.dims))
+print("Variables  :", list(ds.data_vars))
+print("Time range :", str(ds.time.values[0])[:10], "→", str(ds.time.values[-1])[:10])
+print("Lat range  :", float(ds.lat.min()), "→", float(ds.lat.max()))
+print("Lon range  :", float(ds.lon.min()), "→", float(ds.lon.max()))
+```
+
+Expected output:
+
+```
+<xarray.Dataset>
+Dimensions:  (lat: 129, lon: 135, time: 22281)
+Coordinates:
+  * lat      (lat) float32 6.5 6.75 ... 38.25 38.5
+  * lon      (lon) float32 66.5 66.75 ... 99.75 100.0
+  * time     (time) datetime64[ns] 1965-01-01 ... 2025-12-31
+Data variables:
+    rain     (time, lat, lon) float32 ...
+```
+
+::: {.callout-note icon=false}
+## 🧩 Understanding the xarray Dataset
+
+| Dimension | Size | What it Represents |
+|---|---|---|
+| `time` | 22,281 | One entry per day, 1965–2025 |
+| `lat` | 129 | 6.5°N → 38.5°N in 0.25° steps |
+| `lon` | 135 | 66.5°E → 100.0°E in 0.25° steps |
+
+The variable `rain` holds daily rainfall in mm/day at every grid point and time step.
+:::
+
+---
+
+## ✂️ Step 3: Subset to Your Region of Interest
+
+Loading all of India when you only need one region wastes memory. Use `.sel()` to clip to your bounding box.
+
+```{python}
+#| label: subset-region
+#| code-summary: "Subset to North East India"
+
+LAT_MIN, LAT_MAX = 21.0, 29.5
+LON_MIN, LON_MAX = 88.0, 97.5
+
+ds_nei = ds.sel(
+    lat = slice(LAT_MIN, LAT_MAX),
+    lon = slice(LON_MIN, LON_MAX)
+)
+
+print("✅ Regional subset created.")
+print(f"Grid size  : {len(ds_nei.lat)} lats × {len(ds_nei.lon)} lons")
+print(f"Time steps : {len(ds_nei.time)} days (~{len(ds_nei.time)//365} years)")
+```
+
+::: {.callout-tip}
+## 📍 Bounding Boxes for Common Indian Regions
+
+| Region | Lat Range | Lon Range |
+|---|---|---|
+| North East India | 21.0 – 29.5 | 88.0 – 97.5 |
+| Indo-Gangetic Plain | 24.0 – 30.0 | 74.0 – 88.0 |
+| Peninsular India | 8.0 – 20.0 | 74.0 – 84.0 |
+| Western Ghats | 8.0 – 21.0 | 73.5 – 77.5 |
+| Rajasthan (arid) | 24.0 – 30.0 | 69.0 – 78.5 |
+:::
+
+### Adding CF Metadata Attributes
+
+Rename `rain` → `pr` and add standard attributes so downstream climate libraries (`xclim`, `xcdat`) recognise the variable automatically:
+
+```{python}
+#| label: add-attributes
+#| code-summary: "Rename variable and add CF metadata"
+
+ds_nei = ds_nei.rename({'rain': 'pr'})
+
+ds_nei['pr'].attrs['units']          = 'mm/day'
+ds_nei['pr'].attrs['cell_methods']   = 'time: sum within days'
+ds_nei['pr'].attrs['long_name']      = 'Daily Precipitation'
+ds_nei['pr'].attrs['standard_name']  = 'precipitation_flux'
+
+print("✅ Attributes added:")
+print(ds_nei['pr'].attrs)
+```
+
+::: {.callout-note}
+## Why `'pr'` and Not `'rain'`?
+
+Climate science tools follow the **CF Conventions** standard which uses `pr` for precipitation. Renaming now means your Notebook 2, 3, 4… code works with `xclim` and others without any changes.
+:::
+
+---
+
+## 🔍 Step 4: Data Quality Checks
+
+Never skip this. IMD data can contain fill values (often `-999`), unexpected negatives, or missing time steps. Catching them now prevents silent errors later.
+
+```{python}
+#| label: quality-check
+#| code-summary: "Run a data quality report"
+
+import numpy as np
+
+pr = ds_nei['pr']
+
+print("=" * 45)
+print("       DATA QUALITY REPORT")
+print("=" * 45)
+print(f"  Period     : 1965–2025 (61 years)")
+print(f"  Grid size  : {len(ds_nei.lat)} × {len(ds_nei.lon)}")
+print(f"  Min value  : {float(pr.min().values):.2f} mm/day")
+print(f"  Max value  : {float(pr.max().values):.2f} mm/day")
+print(f"  Mean value : {float(pr.mean().values):.2f} mm/day")
+print(f"  NaN count  : {int(pr.isnull().sum().values)}")
+print(f"  % NaN      : {100 * float(pr.isnull().mean().values):.4f}%")
+
+neg = int((pr < 0).sum().values)
+print(f"  Negatives  : {neg} ({'✅ none' if neg == 0 else '⚠️  found — masking'})")
+print("=" * 45)
+
+if neg > 0:
+    ds_nei['pr'] = ds_nei['pr'].where(ds_nei['pr'] >= 0)
+    print("\n  → Negative values replaced with NaN.")
+```
+
+Expected output for a clean download:
+
+```
+=============================================
+       DATA QUALITY REPORT
+=============================================
+  Period     : 1965–2025 (61 years)
+  Grid size  : 35 × 39
+  Min value  : 0.00 mm/day
+  Max value  : 438.60 mm/day
+  Mean value : 4.38 mm/day
+  NaN count  : 0
+  % NaN      : 0.0000%
+  Negatives  : 0 ✅ none
+=============================================
+```
+
+::: {.callout-warning}
+## 🚩 Red Flags to Watch For
+
+| Issue | Likely Cause | Fix |
+|---|---|---|
+| Max value > 1000 mm/day | `-999` fill value not masked | `ds['pr'].where(ds['pr'] >= 0)` |
+| High NaN % | Incomplete or corrupt download | Re-run the download cell |
+| Only 364 days in a year | Leap year bug in old imdlib | `conda update -c conda-forge imdlib` |
+| Uniform values everywhere | Wrong `var_type` argument | Check the `imd.get_data()` call |
+:::
+
+---
+
+## 🗺️ Step 5: Visualise — Mean Annual Rainfall Map
+
+A spatial map is the fastest sanity check. North East India should show some of the highest rainfall values in the subcontinent — if it doesn't, something is wrong with the data or subset.
+
+```{python}
+#| label: fig-annual-rainfall
+#| fig-cap: "Mean annual rainfall (mm/year) over North East India, 1965–2025."
+#| fig-width: 9
+#| fig-height: 7
+#| code-summary: "Plot mean annual rainfall map with cartopy"
+
+import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+
+# Sum over each year → average across all years
+annual_mean = ds_nei['pr'].resample(time='YE').sum().mean('time')
+
+fig, ax = plt.subplots(
+    figsize=(9, 7),
+    subplot_kw={'projection': ccrs.PlateCarree()}
+)
+
+annual_mean.plot(
+    ax=ax,
+    transform=ccrs.PlateCarree(),
+    cmap='YlGnBu',
+    cbar_kwargs={
+        'label'  : 'Mean Annual Rainfall (mm)',
+        'shrink' : 0.85,
+        'pad'    : 0.03
+    }
+)
+
+ax.add_feature(cfeature.BORDERS,   linewidth=1.0)
+ax.add_feature(cfeature.COASTLINE, linewidth=0.8)
+ax.add_feature(cfeature.STATES,    linewidth=0.5, edgecolor='gray')
+
+gl = ax.gridlines(draw_labels=True, linewidth=0.4, linestyle='--', color='gray')
+gl.top_labels   = False
+gl.right_labels = False
+
+ax.set_extent([88, 97.5, 21, 29.5])
+ax.set_title(
+    'Mean Annual Rainfall — North East India (1965–2025)',
+    fontsize=13, pad=12, fontweight='bold'
+)
+
+plt.tight_layout()
+plt.savefig('./outputs/fig01_mean_annual_rainfall_NEI.png', dpi=300, bbox_inches='tight')
+plt.show()
+print("✅ Figure saved → ./outputs/fig01_mean_annual_rainfall_NEI.png")
+```
+
+::: {.callout-tip}
+## 🎨 Choosing a Good Colormap
+
+| Colormap | Best For |
+|---|---|
+| `YlGnBu` | General rainfall totals |
+| `Blues` | Clean, minimal look |
+| `viridis` | Perceptually uniform, colourblind-safe |
+| `RdBu_r` | Anomalies (wet/dry departures from mean) |
+
+Avoid `jet` — it creates misleading visual artefacts at the colour transitions.
+:::
+
+---
+
+## 💾 Step 6: Save the Processed Data
+
+Save the clean, subsetted dataset as **NetCDF** — the standard format in climate science.
+
+```{python}
+#| label: save-netcdf
+#| code-summary: "Save to NetCDF"
+
+import os
+
+out_path = './data/NEI_rainfall_1965_2025.nc'
+ds_nei.to_netcdf(out_path)
+
+print(f"✅ Saved : {out_path}")
+print(f"   Size  : {os.path.getsize(out_path)/1e6:.1f} MB")
+```
+
+::: {.callout-note}
+## 📁 Why NetCDF?
+
+- **Self-describing** — coordinates, units, and metadata are embedded in the file itself
+- **Efficient** — compressed, supports fast partial reads (load just one year or grid cell)
+- **Universal** — opens in Python (`xarray`), R (`ncdf4`), MATLAB, QGIS, ArcGIS
+- **Shareable** — any collaborator can open it immediately without running your scripts
+:::
+
+---
+
+## ✅ Summary & What's Next
+
+| Step | What We Did |
+|---|---|
+| **Environment** | Installed Anaconda → created `climate` conda env → launched JupyterLab |
+| **Download** | Fetched 61 years of IMD daily `.grd` files with `imdlib` |
+| **Load** | Opened all files as one `xarray` Dataset |
+| **Subset** | Clipped to North East India with `.sel()` |
+| **Metadata** | Added CF-convention attributes |
+| **QC** | Checked for NaNs, negatives, anomalous values |
+| **Visualise** | Plotted mean annual rainfall map with `cartopy` |
+| **Save** | Exported clean dataset as NetCDF |
+
+### 🚀 What Comes Next
+
+- **Notebook 2 →** Compute rainfall indices (CDD, CWD, PRCPTOT, Rx1day, Rx5day) using `xclim`
+- **Notebook 3 →** Detect trends using Mann-Kendall test and Sen's slope
+- **Notebook 4 →** Spatial correlation with crop yield data
+- **Notebook 5 →** Seasonal decomposition and monsoon onset detection
+
+---
+
+## 📚 References & Resources
+
+- **Pai, D. S., et al. (2014)**. Development of a new high spatial resolution (0.25° × 0.25°) daily gridded rainfall data set over India. *Mausam*, 65(1), 1–18.
+- **Rajeevan, M., et al. (2006)**. High resolution daily gridded rainfall data for the Indian region. *Current Science*, 91(3), 296–306.
+- **imdlib:** [https://imdlib.readthedocs.io](https://imdlib.readthedocs.io)
+- **xarray:** [https://docs.xarray.dev](https://docs.xarray.dev)
+- **Anaconda:** [https://www.anaconda.com/download](https://www.anaconda.com/download)
+- **Miniforge:** [https://github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge)
+- **IMD Open Data:** [https://www.imdpune.gov.in](https://www.imdpune.gov.in)
+
+---
+
+::: {.callout-note icon=false}
+## 💬 Common Issues & Fixes
+
+| Problem | Fix |
+|---|---|
+| Wrong kernel in JupyterLab | Click kernel name (top-right) → select **Python (climate)** |
+| `imdlib` not found | `conda activate climate` first, then re-launch `jupyter lab` |
+| Cartopy install error | `conda install -c conda-forge cartopy` — never use pip for cartopy |
+| Download stalls mid-way | Re-run the cell — imdlib skips already-downloaded files |
+| `ModuleNotFoundError: yaml` | `conda install -c conda-forge pyyaml jupyter` |
+:::
+
+---
+
+*This post is part of the series: **"Climate Data Analysis for Agricultural Research in India"**.*

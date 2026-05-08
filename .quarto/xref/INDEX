@@ -19,5 +19,8 @@
   },
   "posts/first-post/guide.qmd": {
     "guide.typ": "02891028"
+  },
+  "posts/01-imd-gridded-data/index.qmd": {
+    "index.html": "9f78f2c4"
   }
 }
