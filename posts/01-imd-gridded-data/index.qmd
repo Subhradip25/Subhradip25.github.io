@@ -17,10 +17,11 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    highlight-style: github
+    highlight-style: dracula
     fig-align: center
     fig-cap-location: bottom
     css: imd-post.css
+    include-after-body: post-enhancements.js
     theme:
       light: flatly
       dark: darkly

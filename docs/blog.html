@@ -78,9 +78,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-image','listing-date','listing-title','listing-description','listing-categories','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -205,20 +205,42 @@ window.Quarto = {
 
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="UHl0aG9uJTJDQ2xpbWF0ZSUyMERhdGElMkNBZ3JpY3VsdHVyZSUyQ0lNRCUyQ1R1dG9yaWFs" data-listing-date-sort="1746642600000" data-listing-file-modified-sort="1778238809230" data-listing-date-modified-sort="1778178600000" data-listing-reading-time-sort="16" data-listing-word-count-sort="3008">
-<div class="thumbnail">
-<p><a href="./posts/01-imd-gridded-data/index.html" class="no-external"></a></p><a href="./posts/01-imd-gridded-data/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/01-imd-gridded-data/thumbnail.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/01-imd-gridded-data/index.html" class="no-external"></a></p>
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-date-sort" data-direction="asc">
+          Date - Oldest
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          Date - Newest
+        </option>
+     </select>
+  </div>
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
 </div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/01-imd-gridded-data/index.html" class="no-external">Downloading &amp; Processing IMD Gridded Rainfall Data with Python</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/01-imd-gridded-data/index.html" class="no-external">A step-by-step guide for agricultural researchers and students</a>
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="UHl0aG9uJTJDQ2xpbWF0ZSUyMERhdGElMkNBZ3JpY3VsdHVyZSUyQ0lNRCUyQ1R1dG9yaWFs" data-listing-date-sort="1746642600000" data-listing-file-modified-sort="1778283952798" data-listing-date-modified-sort="1778265000000" data-listing-reading-time-sort="16" data-listing-word-count-sort="3008">
+<a href="./posts/01-imd-gridded-data/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/01-imd-gridded-data/thumbnail.png" class="thumbnail-image card-img" style="height: 200px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Downloading &amp; Processing IMD Gridded Rainfall Data with Python
+</h5>
+<div class="listing-reading-time card-text text-muted">
+16 min
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">
@@ -237,20 +259,17 @@ IMD
 Tutorial
 </div>
 </div>
-<div class="listing-description">
-<a href="./posts/01-imd-gridded-data/index.html" class="no-external">Learn how to set up Anaconda and JupyterLab for climate analysis, then download IMD 0.25° daily rainfall data with imdlib, quality-check it, subset to your region, and save as NetCDF from scratch. </a>
+<div class="card-text listing-description">
+Learn how to set up Anaconda and JupyterLab for climate analysis, then download IMD 0.25° daily rainfall data with imdlib, quality-check it, subset to your region, and save…
 </div>
-</div>
-<div class="metadata">
-<a href="./posts/01-imd-gridded-data/index.html" class="no-external">
+<div class="card-attribution card-text-small end">
 <div class="listing-date">
 May 8, 2025
 </div>
-<div class="listing-author">
-Subhradip Bhattacharjee
+</div>
+</div>
 </div>
 </a>
-</div>
 </div>
 </div>
 <div class="listing-no-matching d-none">

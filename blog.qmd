@@ -3,6 +3,13 @@ title: "Blog"
 listing:
   contents: posts
   sort: "date desc"
-  type: default
+  type: grid
+  grid-columns: 3
   categories: true
+  sort-ui: true
+  filter-ui: true
+  fields: [image, date, title, description, categories, reading-time]
+  feed: true
+  page-size: 12
+  image-height: "200px"
 ---
