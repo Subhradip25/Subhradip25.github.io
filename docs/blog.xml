@@ -1,0 +1,1785 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Subhradip Bhattacharjee</title>
+<link>https://subhradip25.github.io/blog.html</link>
+<atom:link href="https://subhradip25.github.io/blog.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.6.42</generator>
+<lastBuildDate>Wed, 07 May 2025 18:30:00 GMT</lastBuildDate>
+<item>
+  <title>Downloading &amp; Processing IMD Gridded Rainfall Data with Python</title>
+  <dc:creator>Subhradip Bhattacharjee</dc:creator>
+  <link>https://subhradip25.github.io/posts/01-imd-gridded-data/</link>
+  <description><![CDATA[ 
+
+
+
+
+<hr>
+<section id="what-is-imd-gridded-data-and-why-should-you-care" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-imd-gridded-data-and-why-should-you-care">🌧️ What Is IMD Gridded Data — and Why Should You Care?</h2>
+<p>If you’re studying agriculture, food security, hydrology or climate change science in India, <strong>rainfall data is your foundation</strong>. Every question — <em>Did the monsoon arrive late? Is drought risk increasing? How much water does the Kharif crop need?</em> all starts with good precipitation records.</p>
+<p>The <strong>India Meteorological Department (IMD)</strong> provides one of the most valuable publicly available climate datasets for India: <strong>high-resolution gridded daily rainfall</strong>. Here’s what makes it special:</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+📌 Key Facts About IMD Gridded Rainfall
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Spatial Resolution</strong></td>
+<td>0.25° × 0.25° (~28 km grid)</td>
+</tr>
+<tr class="even">
+<td><strong>Temporal Resolution</strong></td>
+<td>Daily</td>
+</tr>
+<tr class="odd">
+<td><strong>Coverage</strong></td>
+<td>Entire India</td>
+</tr>
+<tr class="even">
+<td><strong>Period Available</strong></td>
+<td>1901 – present</td>
+</tr>
+<tr class="odd">
+<td><strong>Data Type</strong></td>
+<td>Rain gauge–interpolated gridded data</td>
+</tr>
+<tr class="even">
+<td><strong>Citation</strong></td>
+<td>Pai et al.&nbsp;(2014); Rajeevan et al.&nbsp;(2006)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The data is derived by interpolating observations from <strong>~6,950 rain gauge stations</strong> across India into a regular grid. This means even if there’s no station in your district, you still get a daily rainfall estimate for every 0.25° cell.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+🌾 Why It Matters for Agricultural Research
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For crop science and agronomy students, this data unlocks:</p>
+<ul>
+<li><strong>Drought monitoring</strong> : identify consecutive dry days during growing seasons</li>
+<li><strong>Rainfall onset/withdrawal</strong> : track monsoon onset for sowing decisions</li>
+<li><strong>Excess rainfall events</strong> : assess waterlogging risk in paddy fields</li>
+<li><strong>Long-term trend analysis</strong> : is rainfall becoming more erratic over 50+ years?</li>
+<li><strong>Agro-climatic zone characterization</strong> : classify regions by rainfall patterns</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="understanding-the-data-format" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-the-data-format">🗺️ Understanding the Data Format</h2>
+<p>Before writing any code, let’s understand what you’re downloading.</p>
+<p>IMD provides data in a custom binary <code>.grd</code> format — <strong>one file per year</strong>. Each file contains a 3D array:</p>
+<pre><code>Shape: (365 or 366 days) × (latitudes) × (longitudes)</code></pre>
+<p>The full-India grid covers:</p>
+<ul>
+<li><strong>Latitude:</strong> 6.5°N to 38.5°N (129 grid points)</li>
+<li><strong>Longitude:</strong> 66.5°E to 100.0°E (135 grid points)</li>
+</ul>
+<p>So for each year, you’re getting: <code>365 × 129 × 135 = ~6.3 million values</code>.</p>
+<p>We use the <a href="https://github.com/iamsaswata/imdlib"><code>imdlib</code></a> Python library — built specifically for this format — to make downloading and reading these files effortless.</p>
+<hr>
+</section>
+<section id="setting-up-anaconda-jupyterlab" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-anaconda-jupyterlab">🐍 Setting Up Anaconda &amp; JupyterLab</h2>
+<p>This is the most important section if you’re just starting out. <strong>Anaconda</strong> is the standard Python distribution for scientific computing — it bundles Python, a package manager (<code>conda</code>), and hundreds of scientific libraries in one installer. Think of it as your complete climate science workbench.</p>
+<section id="why-anaconda-and-not-plain-python" class="level3">
+<h3 class="anchored" data-anchor-id="why-anaconda-and-not-plain-python">Why Anaconda — and Not Plain Python?</h3>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Anaconda vs Plain Python + pip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Plain Python + pip</th>
+<th>Anaconda + conda</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Package conflicts</strong></td>
+<td>Common and frustrating</td>
+<td>Rare — conda resolves dependencies properly</td>
+</tr>
+<tr class="even">
+<td><strong>Scientific libraries</strong></td>
+<td>Install each one manually</td>
+<td>Most included out of the box</td>
+</tr>
+<tr class="odd">
+<td><strong>Environments</strong></td>
+<td>Possible but fiddly</td>
+<td>First-class, trivial to create</td>
+</tr>
+<tr class="even">
+<td><strong>Geospatial tools</strong> (GDAL, cartopy)</td>
+<td>Often breaks on install</td>
+<td>Works reliably via <code>conda-forge</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Best for</strong></td>
+<td>Web/app developers</td>
+<td>Scientists and researchers ✅</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="step-1-download-the-installer" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-download-the-installer">Step 1 — Download the Installer</h3>
+<p>You have two solid options:</p>
+<p><strong>Option A — Anaconda (full installer, ~800 MB)</strong><br>
+Includes Python, conda, JupyterLab, and 250+ scientific packages pre-installed.<br>
+Best if you want zero-friction setup and have disk space to spare.</p>
+<p>→ Download: <a href="https://www.anaconda.com/download">https://www.anaconda.com/download</a><br>
+Choose your OS (Windows / macOS / Linux).</p>
+<p><strong>Option B — Miniforge (minimal installer, ~90 MB)</strong><br>
+Lighter and faster. Defaults to the <code>conda-forge</code> channel which has more up-to-date climate packages. This is what the author uses.</p>
+<p>→ Download: <a href="https://github.com/conda-forge/miniforge/releases/latest">https://github.com/conda-forge/miniforge/releases/latest</a></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+💡 Which Should You Choose?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>New to Python / student?</strong> → Go with <strong>Anaconda (Option A)</strong>. Larger download, but requires zero extra configuration.</p>
+<p><strong>Comfortable with terminals?</strong> → Go with <strong>Miniforge (Option B)</strong>. Faster, leaner, and <code>conda-forge</code> packages are more current.</p>
+</div>
+</div>
+</section>
+<section id="step-2-install" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-install">Step 2 — Install</h3>
+<p><strong>On Windows:</strong></p>
+<ol type="1">
+<li>Run the downloaded <code>.exe</code> installer</li>
+<li>Select <strong>“Just Me”</strong> (not “All Users”)</li>
+<li>✅ Check <strong>“Add Anaconda to my PATH”</strong> — essential for terminal access</li>
+<li>Click Install, wait ~5 minutes</li>
+</ol>
+<p>Open <strong>Anaconda Prompt</strong> from the Start menu to test it.</p>
+<p><strong>On Linux / macOS:</strong></p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Make the installer executable, then run it</span></span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">chmod</span> +x Anaconda3-<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*</span>.sh      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># or Miniforge3-*.sh</span></span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bash</span> Anaconda3-<span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">*</span>.sh</span>
+<span id="cb2-4"></span>
+<span id="cb2-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Say YES when asked to initialise conda</span></span>
+<span id="cb2-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Then restart your terminal (close and reopen)</span></span></code></pre></div>
+<p><strong>Verify it worked:</strong></p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--version</span></span>
+<span id="cb3-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Expected: conda 24.x.x</span></span>
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">python</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--version</span></span>
+<span id="cb3-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Expected: Python 3.12.x</span></span></code></pre></div>
+<p>If either command says “not found”, the PATH wasn’t set correctly — re-run the installer and check the PATH option.</p>
+</section>
+<section id="step-3-create-a-dedicated-climate-environment" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-create-a-dedicated-climate-environment">Step 3 — Create a Dedicated <code>climate</code> Environment</h3>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+⚠️ Never Work in the <code>base</code> Environment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>base</code> environment is conda’s default. Treat it as read-only. Installing packages directly into <code>base</code> causes version conflicts that are painful to debug.</p>
+<p>Always create a <strong>named environment per project</strong>. It takes 2 minutes and saves hours of frustration.</p>
+</div>
+</div>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create a fresh environment called 'climate' with Python 3.11</span></span>
+<span id="cb4-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># (3.11 has the best compatibility with climate packages as of 2025)</span></span>
+<span id="cb4-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> create <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-n</span> climate python=3.11 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-y</span></span></code></pre></div>
+<p>Now activate it:</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> activate climate</span></code></pre></div>
+<p>Your terminal prompt changes from <code>(base)</code> to <code>(climate)</code> — this confirms which environment is active. <strong>Always check this before installing or running anything.</strong></p>
+<p>To see all your environments at any time:</p>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> info <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--envs</span></span>
+<span id="cb6-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># The active one has a * next to it</span></span></code></pre></div>
+</section>
+<section id="step-4-install-the-full-climate-stack" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-install-the-full-climate-stack">Step 4 — Install the Full Climate Stack</h3>
+<p>With <code>(climate)</code> active, install everything in one command. We use <code>-c conda-forge</code> because conda-forge has more up-to-date and compatible builds of scientific packages than the default Anaconda channel:</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-c</span> conda-forge <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb7-2">  jupyter jupyterlab <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb7-3">  numpy pandas <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb7-4">  xarray netcdf4 h5netcdf <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb7-5">  matplotlib cartopy <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb7-6">  imdlib <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb7-7">  ipykernel <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb7-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-y</span></span></code></pre></div>
+<p>This will take 3–8 minutes. Grab a coffee.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+📦 What Each Package Does
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Role in This Workflow</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>jupyterlab</code></td>
+<td>The interactive notebook interface we’ll work in</td>
+</tr>
+<tr class="even">
+<td><code>numpy</code></td>
+<td>Fast numerical arrays — the backbone of everything</td>
+</tr>
+<tr class="odd">
+<td><code>pandas</code></td>
+<td>Tabular data (used for CSV exports and time series)</td>
+</tr>
+<tr class="even">
+<td><code>xarray</code></td>
+<td>Labelled multi-dimensional arrays — our main data container</td>
+</tr>
+<tr class="odd">
+<td><code>netcdf4</code> / <code>h5netcdf</code></td>
+<td>Engines to read/write NetCDF <code>.nc</code> files</td>
+</tr>
+<tr class="even">
+<td><code>matplotlib</code></td>
+<td>Plotting and figures</td>
+</tr>
+<tr class="odd">
+<td><code>cartopy</code></td>
+<td>Geographic projections and map features</td>
+</tr>
+<tr class="even">
+<td><code>imdlib</code></td>
+<td>Read and download IMD <code>.grd</code> binary files</td>
+</tr>
+<tr class="odd">
+<td><code>ipykernel</code></td>
+<td>Connects this environment as a kernel inside JupyterLab</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Verify everything installed correctly:</p>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">python</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-c</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"import imdlib, xarray, cartopy, jupyterlab; print('✅ All packages ready')"</span></span></code></pre></div>
+</section>
+<section id="step-5-register-the-environment-as-a-jupyterlab-kernel" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-register-the-environment-as-a-jupyterlab-kernel">Step 5 — Register the Environment as a JupyterLab Kernel</h3>
+<p>This one-time step makes the <code>climate</code> environment appear as a selectable kernel inside JupyterLab:</p>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">python</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-m</span> ipykernel install <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--user</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--name</span> climate <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--display-name</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Python (climate)"</span></span></code></pre></div>
+<p>You only need to do this once. After this, every time you open JupyterLab you’ll see <strong>“Python (climate)”</strong> as a kernel option.</p>
+</section>
+<section id="step-6-launch-jupyterlab" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-launch-jupyterlab">Step 6 — Launch JupyterLab</h3>
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Step 1: activate the environment</span></span>
+<span id="cb10-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> activate climate</span>
+<span id="cb10-3"></span>
+<span id="cb10-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Step 2: navigate to your project folder</span></span>
+<span id="cb10-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">cd</span> ~/your-project-folder</span>
+<span id="cb10-6"></span>
+<span id="cb10-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Step 3: launch</span></span>
+<span id="cb10-8"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">jupyter</span> lab</span></code></pre></div>
+<p>JupyterLab will open automatically in your browser at <code>http://localhost:8888</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+🖥️ Quick JupyterLab Orientation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When it opens you’ll see:</p>
+<ul>
+<li><strong>Left sidebar</strong> — file browser, running sessions, table of contents</li>
+<li><strong>Launcher tab</strong> — the starting screen; click <strong>“Python (climate)”</strong> under Notebook to create a new notebook</li>
+<li><strong>Main area</strong> — where notebooks open as tabs</li>
+<li><strong>Kernel indicator (top-right of each notebook)</strong> — always check it shows <strong>“Python (climate)”</strong>, not “Python 3” or “base”</li>
+</ul>
+<p>If the kernel is wrong, click it → select <strong>Python (climate)</strong> from the dropdown.</p>
+</div>
+</div>
+</section>
+<section id="your-daily-workflow-3-commands" class="level3">
+<h3 class="anchored" data-anchor-id="your-daily-workflow-3-commands">Your Daily Workflow (3 Commands)</h3>
+<p>After the one-time setup above, starting work every day is just:</p>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">conda</span> activate climate          <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 1. activate the environment</span></span>
+<span id="cb11-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">cd</span> ~/projects/climate_analysis  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 2. go to your project</span></span>
+<span id="cb11-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">jupyter</span> lab                     <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 3. open JupyterLab</span></span></code></pre></div>
+<hr>
+</section>
+</section>
+<section id="project-folder-structure" class="level2">
+<h2 class="anchored" data-anchor-id="project-folder-structure">🗂️ Project Folder Structure</h2>
+<p>Organise your project before you start — it makes everything easier as your analysis grows:</p>
+<pre><code>climate_analysis/
+├── 01_Download_IMD_data.ipynb     ← This notebook
+├── 02_Rainfall_Indices.ipynb
+├── 03_Trend_Analysis.ipynb
+├── data/
+│   └── imd_rain/                  ← Raw .grd files land here
+│       └── rain/                  ← imdlib creates this subfolder automatically
+└── outputs/                       ← Figures and processed NetCDF files</code></pre>
+<p>Create the folders from inside your first notebook cell:</p>
+<div id="setup-dirs" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> os</span>
+<span id="cb13-2"></span>
+<span id="cb13-3">os.makedirs(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'./data/imd_rain'</span>, exist_ok<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb13-4">os.makedirs(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'./outputs'</span>, exist_ok<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb13-5"></span>
+<span id="cb13-6"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"✅ Directories ready."</span>)</span></code></pre></div>
+</div>
+<hr>
+</section>
+<section id="step-1-download-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-download-the-data">⬇️ Step 1: Download the Data</h2>
+<p><code>imd.get_data()</code> connects to the IMD FTP server, downloads one <code>.grd</code> file per year, and saves it locally. Run this <strong>once</strong> — the files will live on your disk and you never need to re-download.</p>
+<div id="download-data" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> imdlib <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> imd</span>
+<span id="cb14-2"></span>
+<span id="cb14-3">start_yr <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1965</span></span>
+<span id="cb14-4">end_yr   <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2025</span></span>
+<span id="cb14-5"></span>
+<span id="cb14-6">data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> imd.get_data(</span>
+<span id="cb14-7">    var_type  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'rain'</span>,       <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 'rain', 'tmax', or 'tmin'</span></span>
+<span id="cb14-8">    start_yr  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> start_yr,</span>
+<span id="cb14-9">    end_yr    <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> end_yr,</span>
+<span id="cb14-10">    fn_format <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'yearwise'</span>,   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># one .grd file per year</span></span>
+<span id="cb14-11">    file_dir  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'./data/imd_rain/'</span></span>
+<span id="cb14-12">)</span>
+<span id="cb14-13"></span>
+<span id="cb14-14"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"✅ Download complete."</span>)</span>
+<span id="cb14-15"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(data)</span></code></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+💡 What Can You Download?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><code>var_type</code></th>
+<th>Variable</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>'rain'</code></td>
+<td>Daily rainfall</td>
+<td>0.25°</td>
+</tr>
+<tr class="even">
+<td><code>'tmax'</code></td>
+<td>Daily maximum temperature</td>
+<td>1.0°</td>
+</tr>
+<tr class="odd">
+<td><code>'tmin'</code></td>
+<td>Daily minimum temperature</td>
+<td>1.0°</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+⏱️ Download Time
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>61 files, ~400–600 MB total. Expect <strong>10–45 minutes</strong> depending on your connection. If it stalls, just re-run the cell — <code>imdlib</code> skips files already downloaded.</p>
+</div>
+</div>
+<section id="verify-the-downloaded-files" class="level3">
+<h3 class="anchored" data-anchor-id="verify-the-downloaded-files">Verify the Downloaded Files</h3>
+<div id="verify-files" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> glob, os</span>
+<span id="cb15-2"></span>
+<span id="cb15-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># imdlib saves inside a 'rain/' subfolder automatically</span></span>
+<span id="cb15-4">files <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sorted</span>(glob.glob(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'./data/imd_rain/rain/*.grd'</span>))</span>
+<span id="cb15-5"></span>
+<span id="cb15-6"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Total .grd files found : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(files)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb15-7"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"First 3 :"</span>, files[:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>])</span>
+<span id="cb15-8"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Last  3 :"</span>, files[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>:])</span></code></pre></div>
+</div>
+<p>You should see 61 files with the pattern <code>rain_YYYY.grd</code>.</p>
+<hr>
+</section>
+</section>
+<section id="step-2-load-data-into-python-xarray" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-load-data-into-python-xarray">📂 Step 2: Load Data into Python (xarray)</h2>
+<p>Read all the binary <code>.grd</code> files into a single in-memory dataset using <code>xarray</code>. Think of it as pandas — but for multi-dimensional arrays with labelled axes (time, latitude, longitude).</p>
+<div id="open-data" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> imdlib <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> imd</span>
+<span id="cb16-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> xarray <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> xr</span>
+<span id="cb16-3"></span>
+<span id="cb16-4">data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> imd.open_data(</span>
+<span id="cb16-5">    var_type  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'rain'</span>,</span>
+<span id="cb16-6">    start_yr  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1965</span>,</span>
+<span id="cb16-7">    end_yr    <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2025</span>,</span>
+<span id="cb16-8">    fn_format <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'yearwise'</span>,</span>
+<span id="cb16-9">    file_dir  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'./data/imd_rain/'</span></span>
+<span id="cb16-10">)</span>
+<span id="cb16-11"></span>
+<span id="cb16-12">ds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data.get_xarray()</span>
+<span id="cb16-13"></span>
+<span id="cb16-14"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(ds)</span>
+<span id="cb16-15"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Dimensions :"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">dict</span>(ds.dims))</span>
+<span id="cb16-16"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Variables  :"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(ds.data_vars))</span>
+<span id="cb16-17"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Time range :"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>(ds.time.values[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>])[:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"→"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>(ds.time.values[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>])[:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>])</span>
+<span id="cb16-18"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Lat range  :"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(ds.lat.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>()), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"→"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(ds.lat.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>()))</span>
+<span id="cb16-19"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Lon range  :"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(ds.lon.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>()), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"→"</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(ds.lon.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>()))</span></code></pre></div>
+</div>
+<p>Expected output:</p>
+<pre><code>&lt;xarray.Dataset&gt;
+Dimensions:  (lat: 129, lon: 135, time: 22281)
+Coordinates:
+  * lat      (lat) float32 6.5 6.75 ... 38.25 38.5
+  * lon      (lon) float32 66.5 66.75 ... 99.75 100.0
+  * time     (time) datetime64[ns] 1965-01-01 ... 2025-12-31
+Data variables:
+    rain     (time, lat, lon) float32 ...</code></pre>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+🧩 Understanding the xarray Dataset
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dimension</th>
+<th>Size</th>
+<th>What it Represents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>time</code></td>
+<td>22,281</td>
+<td>One entry per day, 1965–2025</td>
+</tr>
+<tr class="even">
+<td><code>lat</code></td>
+<td>129</td>
+<td>6.5°N → 38.5°N in 0.25° steps</td>
+</tr>
+<tr class="odd">
+<td><code>lon</code></td>
+<td>135</td>
+<td>66.5°E → 100.0°E in 0.25° steps</td>
+</tr>
+</tbody>
+</table>
+<p>The variable <code>rain</code> holds daily rainfall in mm/day at every grid point and time step.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="step-3-subset-to-your-region-of-interest" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-subset-to-your-region-of-interest">✂️ Step 3: Subset to Your Region of Interest</h2>
+<p>Loading all of India when you only need one region wastes memory. Use <code>.sel()</code> to clip to your bounding box.</p>
+<div id="subset-region" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">LAT_MIN, LAT_MAX <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">21.0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">29.5</span></span>
+<span id="cb18-2">LON_MIN, LON_MAX <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">88.0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">97.5</span></span>
+<span id="cb18-3"></span>
+<span id="cb18-4">ds_nei <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ds.sel(</span>
+<span id="cb18-5">    lat <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">slice</span>(LAT_MIN, LAT_MAX),</span>
+<span id="cb18-6">    lon <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">slice</span>(LON_MIN, LON_MAX)</span>
+<span id="cb18-7">)</span>
+<span id="cb18-8"></span>
+<span id="cb18-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"✅ Regional subset created."</span>)</span>
+<span id="cb18-10"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Grid size  : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(ds_nei.lat)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> lats × </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(ds_nei.lon)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> lons"</span>)</span>
+<span id="cb18-11"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"Time steps : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(ds_nei.time)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> days (~</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(ds_nei.time)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">365</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> years)"</span>)</span></code></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+📍 Bounding Boxes for Common Indian Regions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Region</th>
+<th>Lat Range</th>
+<th>Lon Range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>North East India</td>
+<td>21.0 – 29.5</td>
+<td>88.0 – 97.5</td>
+</tr>
+<tr class="even">
+<td>Indo-Gangetic Plain</td>
+<td>24.0 – 30.0</td>
+<td>74.0 – 88.0</td>
+</tr>
+<tr class="odd">
+<td>Peninsular India</td>
+<td>8.0 – 20.0</td>
+<td>74.0 – 84.0</td>
+</tr>
+<tr class="even">
+<td>Western Ghats</td>
+<td>8.0 – 21.0</td>
+<td>73.5 – 77.5</td>
+</tr>
+<tr class="odd">
+<td>Rajasthan (arid)</td>
+<td>24.0 – 30.0</td>
+<td>69.0 – 78.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="adding-cf-metadata-attributes" class="level3">
+<h3 class="anchored" data-anchor-id="adding-cf-metadata-attributes">Adding CF Metadata Attributes</h3>
+<p>Rename <code>rain</code> → <code>pr</code> and add standard attributes so downstream climate libraries (<code>xclim</code>, <code>xcdat</code>) recognise the variable automatically:</p>
+<div id="add-attributes" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">ds_nei <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ds_nei.rename({<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'rain'</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pr'</span>})</span>
+<span id="cb19-2"></span>
+<span id="cb19-3">ds_nei[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pr'</span>].attrs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'units'</span>]          <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'mm/day'</span></span>
+<span id="cb19-4">ds_nei[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pr'</span>].attrs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'cell_methods'</span>]   <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'time: sum within days'</span></span>
+<span id="cb19-5">ds_nei[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pr'</span>].attrs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'long_name'</span>]      <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Daily Precipitation'</span></span>
+<span id="cb19-6">ds_nei[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pr'</span>].attrs[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'standard_name'</span>]  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'precipitation_flux'</span></span>
+<span id="cb19-7"></span>
+<span id="cb19-8"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"✅ Attributes added:"</span>)</span>
+<span id="cb19-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(ds_nei[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pr'</span>].attrs)</span></code></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why <code>'pr'</code> and Not <code>'rain'</code>?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Climate science tools follow the <strong>CF Conventions</strong> standard which uses <code>pr</code> for precipitation. Renaming now means your Notebook 2, 3, 4… code works with <code>xclim</code> and others without any changes.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="step-4-data-quality-checks" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-data-quality-checks">🔍 Step 4: Data Quality Checks</h2>
+<p>Never skip this. IMD data can contain fill values (often <code>-999</code>), unexpected negatives, or missing time steps. Catching them now prevents silent errors later.</p>
+<div id="quality-check" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb20-2"></span>
+<span id="cb20-3">pr <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ds_nei[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pr'</span>]</span>
+<span id="cb20-4"></span>
+<span id="cb20-5"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"="</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">45</span>)</span>
+<span id="cb20-6"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"       DATA QUALITY REPORT"</span>)</span>
+<span id="cb20-7"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"="</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">45</span>)</span>
+<span id="cb20-8"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"  Period     : 1965–2025 (61 years)"</span>)</span>
+<span id="cb20-9"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"  Grid size  : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(ds_nei.lat)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> × </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(ds_nei.lon)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb20-10"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"  Min value  : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(pr.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>().values)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.2f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> mm/day"</span>)</span>
+<span id="cb20-11"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"  Max value  : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(pr.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>().values)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.2f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> mm/day"</span>)</span>
+<span id="cb20-12"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"  Mean value : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(pr.mean().values)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.2f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> mm/day"</span>)</span>
+<span id="cb20-13"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"  NaN count  : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>(pr.isnull().<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>().values)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb20-14"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"  % NaN      : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">float</span>(pr.isnull().mean().values)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.4f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">%"</span>)</span>
+<span id="cb20-15"></span>
+<span id="cb20-16">neg <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">int</span>((pr <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>).<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>().values)</span>
+<span id="cb20-17"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"  Negatives  : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>neg<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> (</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'✅ none'</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> neg <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'⚠️  found — masking'</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">)"</span>)</span>
+<span id="cb20-18"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"="</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">45</span>)</span>
+<span id="cb20-19"></span>
+<span id="cb20-20"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> neg <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb20-21">    ds_nei[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pr'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ds_nei[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pr'</span>].where(ds_nei[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pr'</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb20-22">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">  → Negative values replaced with NaN."</span>)</span></code></pre></div>
+</div>
+<p>Expected output for a clean download:</p>
+<pre><code>=============================================
+       DATA QUALITY REPORT
+=============================================
+  Period     : 1965–2025 (61 years)
+  Grid size  : 35 × 39
+  Min value  : 0.00 mm/day
+  Max value  : 438.60 mm/day
+  Mean value : 4.38 mm/day
+  NaN count  : 0
+  % NaN      : 0.0000%
+  Negatives  : 0 ✅ none
+=============================================</code></pre>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+🚩 Red Flags to Watch For
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Issue</th>
+<th>Likely Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Max value &gt; 1000 mm/day</td>
+<td><code>-999</code> fill value not masked</td>
+<td><code>ds['pr'].where(ds['pr'] &gt;= 0)</code></td>
+</tr>
+<tr class="even">
+<td>High NaN %</td>
+<td>Incomplete or corrupt download</td>
+<td>Re-run the download cell</td>
+</tr>
+<tr class="odd">
+<td>Only 364 days in a year</td>
+<td>Leap year bug in old imdlib</td>
+<td><code>conda update -c conda-forge imdlib</code></td>
+</tr>
+<tr class="even">
+<td>Uniform values everywhere</td>
+<td>Wrong <code>var_type</code> argument</td>
+<td>Check the <code>imd.get_data()</code> call</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr>
+</section>
+<section id="step-5-visualise-mean-annual-rainfall-map" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-visualise-mean-annual-rainfall-map">🗺️ Step 5: Visualise — Mean Annual Rainfall Map</h2>
+<p>A spatial map is the fastest sanity check. North East India should show some of the highest rainfall values in the subcontinent — if it doesn’t, something is wrong with the data or subset.</p>
+<div id="fig-annual-rainfall" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="8" data-fig-height="7" data-fig-width="9">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-annual-rainfall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="fig-annual-rainfall" data-execution_count="8" data-fig-height="7" data-fig-width="9" style="background: #f1f3f5;"><pre class="sourceCode python cell code-with-copy"><code class="sourceCode python"><span id="fig-annual-rainfall-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="fig-annual-rainfall-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> cartopy.crs <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> ccrs</span>
+<span id="fig-annual-rainfall-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> cartopy.feature <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> cfeature</span>
+<span id="fig-annual-rainfall-4"></span>
+<span id="fig-annual-rainfall-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Sum over each year → average across all years</span></span>
+<span id="fig-annual-rainfall-6">annual_mean <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ds_nei[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pr'</span>].resample(time<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'YE'</span>).<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>().mean(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'time'</span>)</span>
+<span id="fig-annual-rainfall-7"></span>
+<span id="fig-annual-rainfall-8">fig, ax <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plt.subplots(</span>
+<span id="fig-annual-rainfall-9">    figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>),</span>
+<span id="fig-annual-rainfall-10">    subplot_kw<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>{<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'projection'</span>: ccrs.PlateCarree()}</span>
+<span id="fig-annual-rainfall-11">)</span>
+<span id="fig-annual-rainfall-12"></span>
+<span id="fig-annual-rainfall-13">annual_mean.plot(</span>
+<span id="fig-annual-rainfall-14">    ax<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ax,</span>
+<span id="fig-annual-rainfall-15">    transform<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>ccrs.PlateCarree(),</span>
+<span id="fig-annual-rainfall-16">    cmap<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'YlGnBu'</span>,</span>
+<span id="fig-annual-rainfall-17">    cbar_kwargs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>{</span>
+<span id="fig-annual-rainfall-18">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'label'</span>  : <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Mean Annual Rainfall (mm)'</span>,</span>
+<span id="fig-annual-rainfall-19">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'shrink'</span> : <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.85</span>,</span>
+<span id="fig-annual-rainfall-20">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pad'</span>    : <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.03</span></span>
+<span id="fig-annual-rainfall-21">    }</span>
+<span id="fig-annual-rainfall-22">)</span>
+<span id="fig-annual-rainfall-23"></span>
+<span id="fig-annual-rainfall-24">ax.add_feature(cfeature.BORDERS,   linewidth<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>)</span>
+<span id="fig-annual-rainfall-25">ax.add_feature(cfeature.COASTLINE, linewidth<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>)</span>
+<span id="fig-annual-rainfall-26">ax.add_feature(cfeature.STATES,    linewidth<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, edgecolor<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'gray'</span>)</span>
+<span id="fig-annual-rainfall-27"></span>
+<span id="fig-annual-rainfall-28">gl <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> ax.gridlines(draw_labels<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>, linewidth<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.4</span>, linestyle<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'--'</span>, color<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'gray'</span>)</span>
+<span id="fig-annual-rainfall-29">gl.top_labels   <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span></span>
+<span id="fig-annual-rainfall-30">gl.right_labels <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span></span>
+<span id="fig-annual-rainfall-31"></span>
+<span id="fig-annual-rainfall-32">ax.set_extent([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">88</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">97.5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">21</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">29.5</span>])</span>
+<span id="fig-annual-rainfall-33">ax.set_title(</span>
+<span id="fig-annual-rainfall-34">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Mean Annual Rainfall — North East India (1965–2025)'</span>,</span>
+<span id="fig-annual-rainfall-35">    fontsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">13</span>, pad<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">12</span>, fontweight<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'bold'</span></span>
+<span id="fig-annual-rainfall-36">)</span>
+<span id="fig-annual-rainfall-37"></span>
+<span id="fig-annual-rainfall-38">plt.tight_layout()</span>
+<span id="fig-annual-rainfall-39">plt.savefig(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'./outputs/fig01_mean_annual_rainfall_NEI.png'</span>, dpi<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">300</span>, bbox_inches<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'tight'</span>)</span>
+<span id="fig-annual-rainfall-40">plt.show()</span>
+<span id="fig-annual-rainfall-41"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"✅ Figure saved → ./outputs/fig01_mean_annual_rainfall_NEI.png"</span>)</span></code></pre></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-annual-rainfall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+🎨 Choosing a Good Colormap
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Colormap</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>YlGnBu</code></td>
+<td>General rainfall totals</td>
+</tr>
+<tr class="even">
+<td><code>Blues</code></td>
+<td>Clean, minimal look</td>
+</tr>
+<tr class="odd">
+<td><code>viridis</code></td>
+<td>Perceptually uniform, colourblind-safe</td>
+</tr>
+<tr class="even">
+<td><code>RdBu_r</code></td>
+<td>Anomalies (wet/dry departures from mean)</td>
+</tr>
+</tbody>
+</table>
+<p>Avoid <code>jet</code> — it creates misleading visual artefacts at the colour transitions.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="step-6-save-the-processed-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-save-the-processed-data">💾 Step 6: Save the Processed Data</h2>
+<p>Save the clean, subsetted dataset as <strong>NetCDF</strong> — the standard format in climate science.</p>
+<div id="save-netcdf" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> os</span>
+<span id="cb22-2"></span>
+<span id="cb22-3">out_path <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'./data/NEI_rainfall_1965_2025.nc'</span></span>
+<span id="cb22-4">ds_nei.to_netcdf(out_path)</span>
+<span id="cb22-5"></span>
+<span id="cb22-6"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"✅ Saved : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>out_path<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb22-7"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"   Size  : </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>os<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>path<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>getsize(out_path)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e6</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:.1f}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> MB"</span>)</span></code></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+📁 Why NetCDF?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Self-describing</strong> — coordinates, units, and metadata are embedded in the file itself</li>
+<li><strong>Efficient</strong> — compressed, supports fast partial reads (load just one year or grid cell)</li>
+<li><strong>Universal</strong> — opens in Python (<code>xarray</code>), R (<code>ncdf4</code>), MATLAB, QGIS, ArcGIS</li>
+<li><strong>Shareable</strong> — any collaborator can open it immediately without running your scripts</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="summary-whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="summary-whats-next">✅ Summary &amp; What’s Next</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>What We Did</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Environment</strong></td>
+<td>Installed Anaconda → created <code>climate</code> conda env → launched JupyterLab</td>
+</tr>
+<tr class="even">
+<td><strong>Download</strong></td>
+<td>Fetched 61 years of IMD daily <code>.grd</code> files with <code>imdlib</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Load</strong></td>
+<td>Opened all files as one <code>xarray</code> Dataset</td>
+</tr>
+<tr class="even">
+<td><strong>Subset</strong></td>
+<td>Clipped to North East India with <code>.sel()</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Metadata</strong></td>
+<td>Added CF-convention attributes</td>
+</tr>
+<tr class="even">
+<td><strong>QC</strong></td>
+<td>Checked for NaNs, negatives, anomalous values</td>
+</tr>
+<tr class="odd">
+<td><strong>Visualise</strong></td>
+<td>Plotted mean annual rainfall map with <code>cartopy</code></td>
+</tr>
+<tr class="even">
+<td><strong>Save</strong></td>
+<td>Exported clean dataset as NetCDF</td>
+</tr>
+</tbody>
+</table>
+<section id="what-comes-next" class="level3">
+<h3 class="anchored" data-anchor-id="what-comes-next">🚀 What Comes Next</h3>
+<ul>
+<li><strong>Notebook 2 →</strong> Compute rainfall indices (CDD, CWD, PRCPTOT, Rx1day, Rx5day) using <code>xclim</code></li>
+<li><strong>Notebook 3 →</strong> Detect trends using Mann-Kendall test and Sen’s slope</li>
+<li><strong>Notebook 4 →</strong> Spatial correlation with crop yield data</li>
+<li><strong>Notebook 5 →</strong> Seasonal decomposition and monsoon onset detection</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="references-resources" class="level2">
+<h2 class="anchored" data-anchor-id="references-resources">📚 References &amp; Resources</h2>
+<ul>
+<li><strong>Pai, D. S., et al.&nbsp;(2014)</strong>. Development of a new high spatial resolution (0.25° × 0.25°) daily gridded rainfall data set over India. <em>Mausam</em>, 65(1), 1–18.</li>
+<li><strong>Rajeevan, M., et al.&nbsp;(2006)</strong>. High resolution daily gridded rainfall data for the Indian region. <em>Current Science</em>, 91(3), 296–306.</li>
+<li><strong>imdlib:</strong> <a href="https://imdlib.readthedocs.io">https://imdlib.readthedocs.io</a></li>
+<li><strong>xarray:</strong> <a href="https://docs.xarray.dev">https://docs.xarray.dev</a></li>
+<li><strong>Anaconda:</strong> <a href="https://www.anaconda.com/download">https://www.anaconda.com/download</a></li>
+<li><strong>Miniforge:</strong> <a href="https://github.com/conda-forge/miniforge">https://github.com/conda-forge/miniforge</a></li>
+<li><strong>IMD Open Data:</strong> <a href="https://www.imdpune.gov.in">https://www.imdpune.gov.in</a></li>
+</ul>
+<hr>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+💬 Common Issues &amp; Fixes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wrong kernel in JupyterLab</td>
+<td>Click kernel name (top-right) → select <strong>Python (climate)</strong></td>
+</tr>
+<tr class="even">
+<td><code>imdlib</code> not found</td>
+<td><code>conda activate climate</code> first, then re-launch <code>jupyter lab</code></td>
+</tr>
+<tr class="odd">
+<td>Cartopy install error</td>
+<td><code>conda install -c conda-forge cartopy</code> — never use pip for cartopy</td>
+</tr>
+<tr class="even">
+<td>Download stalls mid-way</td>
+<td>Re-run the cell — imdlib skips already-downloaded files</td>
+</tr>
+<tr class="odd">
+<td><code>ModuleNotFoundError: yaml</code></td>
+<td><code>conda install -c conda-forge pyyaml jupyter</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr>
+<p><em>This post is part of the series: <strong>“Climate Data Analysis for Agricultural Research in India”</strong>.</em></p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>Python</category>
+  <category>Climate Data</category>
+  <category>Agriculture</category>
+  <category>IMD</category>
+  <category>Tutorial</category>
+  <guid>https://subhradip25.github.io/posts/01-imd-gridded-data/</guid>
+  <pubDate>Wed, 07 May 2025 18:30:00 GMT</pubDate>
+  <media:content url="https://subhradip25.github.io/posts/01-imd-gridded-data/thumbnail.png" medium="image" type="image/png" height="108" width="144"/>
+</item>
+</channel>
+</rss>

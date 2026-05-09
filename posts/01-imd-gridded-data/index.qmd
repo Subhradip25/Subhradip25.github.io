@@ -21,7 +21,7 @@ format:
     fig-align: center
     fig-cap-location: bottom
     css: imd-post.css
-    include-after-body: post-enhancements.js
+    include-after-body: post-enhancements.html
     theme:
       light: flatly
       dark: darkly

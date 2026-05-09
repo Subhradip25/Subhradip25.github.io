@@ -507,3 +507,198 @@ hr { border: none; border-top: 0.5px solid #e0ddd5; margin: 1.5rem 0; }
   text-decoration: underline !important;
 }
 .ptag-sdg { background: #1a5276; color: #fff; font-weight: 600; border: none; }
+/* ═══════════════════════════════════════
+   MOBILE RESPONSIVE — add to end of styles.css
+═══════════════════════════════════════ */
+
+/* ── Tablet (≤ 1024px) ── */
+@media (max-width: 1024px) {
+  .sb-hero-inner,
+  .rp-header-inner,
+  .rp-nav-inner,
+  .rp-body-inner {
+    padding: 0 2rem !important;
+  }
+  .sb-content {
+    padding: 28px 2rem !important;
+    grid-template-columns: 1fr !important;
+  }
+  .navbar {
+    padding: 0.6rem 1.5rem !important;
+  }
+  .sb-blog-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ── Mobile (≤ 768px) ── */
+@media (max-width: 768px) {
+
+  /* Prevent horizontal scroll globally */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  /* ── Navbar ── */
+  .navbar {
+    padding: 0.5rem 1rem !important;
+  }
+
+  /* ── Hero: stack photo above text ── */
+  .sb-hero {
+    padding: 2rem 0 1.8rem !important;
+  }
+  .sb-hero-inner {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 1.5rem !important;
+    padding: 0 1.25rem !important;
+  }
+  .sb-photo {
+    width: 140px !important;
+    height: 140px !important;
+  }
+  .sb-name {
+    font-size: 1.75rem !important;
+  }
+  .sb-bio {
+    font-size: 0.88rem !important;
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+  .sb-role {
+    font-size: 0.72rem !important;
+  }
+  .sb-tags {
+    justify-content: center !important;
+  }
+  .sb-btns {
+    justify-content: center !important;
+    max-width: 100% !important;
+  }
+  .sb-inst {
+    justify-content: center !important;
+  }
+
+  /* ── Stats bar: 2×2 grid ── */
+  .sb-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .sb-stat {
+    border-right: none !important;
+    border-bottom: 1px solid #1a3350 !important;
+  }
+  .sb-stat:nth-child(odd) {
+    border-right: 1px solid #1a3350 !important;
+  }
+  .sb-stat:nth-child(3),
+  .sb-stat:nth-child(4) {
+    border-bottom: none !important;
+  }
+  .sb-snum {
+    font-size: 1.7rem !important;
+  }
+
+  /* ── Content: single column ── */
+  .sb-content {
+    grid-template-columns: 1fr !important;
+    padding: 20px 1.25rem !important;
+    gap: 0 !important;
+  }
+
+  /* ── Research area grid: 1 column ── */
+  .sb-ri-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Blog cards: 1 column ── */
+  .sb-blog-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Research page header ── */
+  .rp-header {
+    padding: 1.8rem 0 1.5rem !important;
+  }
+  .rp-header-inner {
+    padding: 0 1.25rem !important;
+  }
+  .rp-title {
+    font-size: 1.4rem !important;
+  }
+  .rp-stats {
+    gap: 0 !important;
+    flex-wrap: wrap !important;
+  }
+  .rp-stat {
+    padding: 0.4rem 1rem 0.4rem 0 !important;
+    margin-right: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* ── Research nav ── */
+  .rp-nav {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .rp-nav-inner {
+    padding: 0 1.25rem !important;
+    min-width: max-content !important;
+  }
+
+  /* ── Research body ── */
+  .rp-body-inner {
+    padding: 0 1.25rem !important;
+  }
+
+  /* ── Publication cards: single column layout ── */
+  .pub-card {
+    grid-template-columns: 48px 1fr !important;
+    gap: 10px !important;
+    padding: 0.9rem 1rem !important;
+  }
+  .pub-title {
+    font-size: 0.84rem !important;
+  }
+
+  /* ── Map iframe ── */
+  div[style*="100vw"] iframe {
+    height: 320px !important;
+  }
+
+  /* ── Footer ── */
+  .nav-footer {
+    padding: 1rem !important;
+    text-align: center !important;
+  }
+  .nav-footer-left,
+  .nav-footer-center,
+  .nav-footer-right {
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  /* ── Blog listing page ── */
+  .quarto-listing-default .list,
+  #quarto-listing-posts .list {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Blog post page ── */
+  .quarto-title-meta {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  #TOC {
+    display: none !important;
+  }
+}
+
+/* ── Small mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  .sb-name { font-size: 1.5rem !important; }
+  .sb-btns a { font-size: 0.76rem !important; padding: 6px 12px !important; }
+  .pub-card { grid-template-columns: 1fr !important; }
+  .pub-left { flex-direction: row !important; align-items: center !important; gap: 8px !important; }
+}

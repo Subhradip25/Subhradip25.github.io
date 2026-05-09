@@ -1,0 +1,40 @@
+<script>
+(function () {
+  'use strict';
+
+  // ── Reading Progress Bar ──────────────────────────────
+  function updateProgress() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    document.documentElement.style.setProperty('--scroll-progress', pct.toFixed(2) + '%');
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // ── Active TOC Section Highlighting ──────────────────
+  var tocLinks = document.querySelectorAll('#TOC a');
+  if (tocLinks.length === 0) return;
+
+  var headings = Array.from(document.querySelectorAll('h2[id], h3[id]'));
+
+  var observer = new IntersectionObserver(
+    function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.getAttribute('id');
+          tocLinks.forEach(function(link) {
+            link.classList.remove('toc-active-link');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('toc-active-link');
+            }
+          });
+        }
+      });
+    },
+    { rootMargin: '-10% 0px -80% 0px', threshold: 0 }
+  );
+
+  headings.forEach(function(h) { observer.observe(h); });
+})();
+</script>

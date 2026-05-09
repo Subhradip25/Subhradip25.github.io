@@ -970,10 +970,10 @@ Why <code>'pr'</code> and Not <code>'rain'</code>?
 <section id="step-5-visualise-mean-annual-rainfall-map" class="level2">
 <h2 class="anchored" data-anchor-id="step-5-visualise-mean-annual-rainfall-map">🗺️ Step 5: Visualise — Mean Annual Rainfall Map</h2>
 <p>A spatial map is the fastest sanity check. North East India should show some of the highest rainfall values in the subcontinent — if it doesn’t, something is wrong with the data or subset.</p>
-<div id="fig-annual-rainfall" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-fig-width="9" data-execution_count="8" data-fig-height="7">
+<div id="fig-annual-rainfall" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="8" data-fig-height="7" data-fig-width="9">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-annual-rainfall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="fig-annual-rainfall" data-fig-width="9" data-execution_count="8" data-fig-height="7"><pre class="sourceCode python cell code-with-copy"><code class="sourceCode python"><span id="fig-annual-rainfall-1"><a href="#fig-annual-rainfall-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<div class="sourceCode cell-code" id="fig-annual-rainfall" data-execution_count="8" data-fig-height="7" data-fig-width="9"><pre class="sourceCode python cell code-with-copy"><code class="sourceCode python"><span id="fig-annual-rainfall-1"><a href="#fig-annual-rainfall-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="fig-annual-rainfall-2"><a href="#fig-annual-rainfall-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
 <span id="fig-annual-rainfall-3"><a href="#fig-annual-rainfall-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
 <span id="fig-annual-rainfall-4"><a href="#fig-annual-rainfall-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1219,41 +1219,32 @@ Figure&nbsp;1
 </section>
 
 </main> <!-- /main -->
-/* post-enhancements.js
-   Reading progress bar + active TOC section highlighting
-   Drop in posts/01-imd-gridded-data/ and reference in YAML:
-     format:
-       html:
-         include-after-body: post-enhancements.js
-*/
-
+<script>
 (function () {
   'use strict';
 
-  /* ── Reading Progress Bar ─────────────────────────────── */
+  // ── Reading Progress Bar ──────────────────────────────
   function updateProgress() {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = docHeight &gt; 0 ? (scrollTop / docHeight) * 100 : 0;
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
     document.documentElement.style.setProperty('--scroll-progress', pct.toFixed(2) + '%');
   }
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
 
-  /* ── Active TOC Section Highlighting ─────────────────── */
-  const tocLinks = document.querySelectorAll('#TOC a');
+  // ── Active TOC Section Highlighting ──────────────────
+  var tocLinks = document.querySelectorAll('#TOC a');
   if (tocLinks.length === 0) return;
 
-  const headings = Array.from(
-    document.querySelectorAll('h2[id], h3[id]')
-  );
+  var headings = Array.from(document.querySelectorAll('h2[id], h3[id]'));
 
-  const observer = new IntersectionObserver(
-    (entries) =&gt; {
-      entries.forEach((entry) =&gt; {
+  var observer = new IntersectionObserver(
+    function(entries) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          tocLinks.forEach((link) =&gt; {
+          var id = entry.target.getAttribute('id');
+          tocLinks.forEach(function(link) {
             link.classList.remove('toc-active-link');
             if (link.getAttribute('href') === '#' + id) {
               link.classList.add('toc-active-link');
@@ -1262,14 +1253,12 @@ Figure&nbsp;1
         }
       });
     },
-    {
-      rootMargin: '-10% 0px -80% 0px',
-      threshold: 0,
-    }
+    { rootMargin: '-10% 0px -80% 0px', threshold: 0 }
   );
 
-  headings.forEach((h) =&gt; observer.observe(h));
+  headings.forEach(function(h) { observer.observe(h); });
 })();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1555,7 +1544,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/subhradip25\.github\.io");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1905,7 +1894,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-align: center</span></span>
 <span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-cap-location: bottom</span></span>
 <span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="co">    css: imd-post.css</span></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="co">    include-after-body: post-enhancements.js</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a><span class="co">    include-after-body: post-enhancements.html</span></span>
 <span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="co">    theme:</span></span>
 <span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="co">      light: flatly</span></span>
 <span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a><span class="co">      dark: darkly</span></span>
