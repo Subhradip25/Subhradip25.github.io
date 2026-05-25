@@ -9,13 +9,14 @@
 <link>https://subhradip25.github.io/blog.html</link>
 <atom:link href="https://subhradip25.github.io/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.6.42</generator>
+<generator>quarto-1.9.37</generator>
 <lastBuildDate>Wed, 07 May 2025 18:30:00 GMT</lastBuildDate>
 <item>
   <title>Downloading &amp; Processing IMD Gridded Rainfall Data with Python</title>
   <dc:creator>Subhradip Bhattacharjee</dc:creator>
   <link>https://subhradip25.github.io/posts/01-imd-gridded-data/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -31,7 +32,7 @@
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📌 Key Facts About IMD Gridded Rainfall
+<span class="screen-reader-only">Note</span>📌 Key Facts About IMD Gridded Rainfall
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -78,7 +79,7 @@
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🌾 Why It Matters for Agricultural Research
+<span class="screen-reader-only">Tip</span>🌾 Why It Matters for Agricultural Research
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -119,7 +120,7 @@
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Anaconda vs Plain Python + pip
+<span class="screen-reader-only">Note</span>Anaconda vs Plain Python + pip
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -184,7 +185,7 @@ Lighter and faster. Defaults to the <code>conda-forge</code> channel which has m
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-💡 Which Should You Choose?
+<span class="screen-reader-only">Tip</span>💡 Which Should You Choose?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -204,7 +205,7 @@ Lighter and faster. Defaults to the <code>conda-forge</code> channel which has m
 </ol>
 <p>Open <strong>Anaconda Prompt</strong> from the Start menu to test it.</p>
 <p><strong>On Linux / macOS:</strong></p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Make the installer executable, then run it</span></span>
 <span id="cb2-2"><span class="fu" style="color: #4758AB;
@@ -225,9 +226,9 @@ background-color: null;
 font-style: inherit;"># Say YES when asked to initialise conda</span></span>
 <span id="cb2-6"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># Then restart your terminal (close and reopen)</span></span></code></pre></div>
+font-style: inherit;"># Then restart your terminal (close and reopen)</span></span></code></pre></div></div>
 <p><strong>Verify it worked:</strong></p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">conda</span> <span class="at" style="color: #657422;
 background-color: null;
@@ -243,7 +244,7 @@ background-color: null;
 font-style: inherit;">--version</span></span>
 <span id="cb3-5"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># Expected: Python 3.12.x</span></span></code></pre></div>
+font-style: inherit;"># Expected: Python 3.12.x</span></span></code></pre></div></div>
 <p>If either command says “not found”, the PATH wasn’t set correctly — re-run the installer and check the PATH option.</p>
 </section>
 <section id="step-3-create-a-dedicated-climate-environment" class="level3">
@@ -254,7 +255,7 @@ font-style: inherit;"># Expected: Python 3.12.x</span></span></code></pre></div>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-⚠️ Never Work in the <code>base</code> Environment
+<span class="screen-reader-only">Warning</span>⚠️ Never Work in the <code>base</code> Environment
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -262,7 +263,7 @@ font-style: inherit;"># Expected: Python 3.12.x</span></span></code></pre></div>
 <p>Always create a <strong>named environment per project</strong>. It takes 2 minutes and saves hours of frustration.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Create a fresh environment called 'climate' with Python 3.11</span></span>
 <span id="cb4-2"><span class="co" style="color: #5E5E5E;
@@ -274,26 +275,26 @@ font-style: inherit;">conda</span> create <span class="at" style="color: #657422
 background-color: null;
 font-style: inherit;">-n</span> climate python=3.11 <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">-y</span></span></code></pre></div>
+font-style: inherit;">-y</span></span></code></pre></div></div>
 <p>Now activate it:</p>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">conda</span> activate climate</span></code></pre></div>
+font-style: inherit;">conda</span> activate climate</span></code></pre></div></div>
 <p>Your terminal prompt changes from <code>(base)</code> to <code>(climate)</code> — this confirms which environment is active. <strong>Always check this before installing or running anything.</strong></p>
 <p>To see all your environments at any time:</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">conda</span> info <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">--envs</span></span>
 <span id="cb6-2"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># The active one has a * next to it</span></span></code></pre></div>
+font-style: inherit;"># The active one has a * next to it</span></span></code></pre></div></div>
 </section>
 <section id="step-4-install-the-full-climate-stack" class="level3">
 <h3 class="anchored" data-anchor-id="step-4-install-the-full-climate-stack">Step 4 — Install the Full Climate Stack</h3>
 <p>With <code>(climate)</code> active, install everything in one command. We use <code>-c conda-forge</code> because conda-forge has more up-to-date and compatible builds of scientific packages than the default Anaconda channel:</p>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">conda</span> install <span class="at" style="color: #657422;
 background-color: null;
@@ -320,7 +321,7 @@ background-color: null;
 font-style: inherit;">\</span></span>
 <span id="cb7-8">  <span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">-y</span></span></code></pre></div>
+font-style: inherit;">-y</span></span></code></pre></div></div>
 <p>This will take 3–8 minutes. Grab a coffee.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -328,7 +329,7 @@ font-style: inherit;">-y</span></span></code></pre></div>
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📦 What Each Package Does
+<span class="screen-reader-only">Note</span>📦 What Each Package Does
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -385,18 +386,18 @@ font-style: inherit;">-y</span></span></code></pre></div>
 </div>
 </div>
 <p>Verify everything installed correctly:</p>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">-c</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"import imdlib, xarray, cartopy, jupyterlab; print('✅ All packages ready')"</span></span></code></pre></div>
+font-style: inherit;">"import imdlib, xarray, cartopy, jupyterlab; print('✅ All packages ready')"</span></span></code></pre></div></div>
 </section>
 <section id="step-5-register-the-environment-as-a-jupyterlab-kernel" class="level3">
 <h3 class="anchored" data-anchor-id="step-5-register-the-environment-as-a-jupyterlab-kernel">Step 5 — Register the Environment as a JupyterLab Kernel</h3>
 <p>This one-time step makes the <code>climate</code> environment appear as a selectable kernel inside JupyterLab:</p>
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">python</span> <span class="at" style="color: #657422;
 background-color: null;
@@ -408,12 +409,12 @@ font-style: inherit;">--name</span> climate <span class="at" style="color: #6574
 background-color: null;
 font-style: inherit;">--display-name</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Python (climate)"</span></span></code></pre></div>
+font-style: inherit;">"Python (climate)"</span></span></code></pre></div></div>
 <p>You only need to do this once. After this, every time you open JupyterLab you’ll see <strong>“Python (climate)”</strong> as a kernel option.</p>
 </section>
 <section id="step-6-launch-jupyterlab" class="level3">
 <h3 class="anchored" data-anchor-id="step-6-launch-jupyterlab">Step 6 — Launch JupyterLab</h3>
-<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Step 1: activate the environment</span></span>
 <span id="cb10-2"><span class="ex" style="color: null;
@@ -432,7 +433,7 @@ background-color: null;
 font-style: inherit;"># Step 3: launch</span></span>
 <span id="cb10-8"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">jupyter</span> lab</span></code></pre></div>
+font-style: inherit;">jupyter</span> lab</span></code></pre></div></div>
 <p>JupyterLab will open automatically in your browser at <code>http://localhost:8888</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -440,7 +441,7 @@ font-style: inherit;">jupyter</span> lab</span></code></pre></div>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🖥️ Quick JupyterLab Orientation
+<span class="screen-reader-only">Tip</span>🖥️ Quick JupyterLab Orientation
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -458,7 +459,7 @@ font-style: inherit;">jupyter</span> lab</span></code></pre></div>
 <section id="your-daily-workflow-3-commands" class="level3">
 <h3 class="anchored" data-anchor-id="your-daily-workflow-3-commands">Your Daily Workflow (3 Commands)</h3>
 <p>After the one-time setup above, starting work every day is just:</p>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="ex" style="color: null;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">conda</span> activate climate          <span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -472,7 +473,7 @@ font-style: inherit;"># 2. go to your project</span></span>
 background-color: null;
 font-style: inherit;">jupyter</span> lab                     <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># 3. open JupyterLab</span></span></code></pre></div>
+font-style: inherit;"># 3. open JupyterLab</span></span></code></pre></div></div>
 <hr>
 </section>
 </section>
@@ -489,7 +490,7 @@ font-style: inherit;"># 3. open JupyterLab</span></span></code></pre></div>
 └── outputs/                       ← Figures and processed NetCDF files</code></pre>
 <p>Create the folders from inside your first notebook cell:</p>
 <div id="setup-dirs" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> os</span>
 <span id="cb13-2"></span>
@@ -512,7 +513,7 @@ font-style: inherit;">True</span>)</span>
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"✅ Directories ready."</span>)</span></code></pre></div>
+font-style: inherit;">"✅ Directories ready."</span>)</span></code></pre></div></div>
 </div>
 <hr>
 </section>
@@ -520,7 +521,7 @@ font-style: inherit;">"✅ Directories ready."</span>)</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="step-1-download-the-data">⬇️ Step 1: Download the Data</h2>
 <p><code>imd.get_data()</code> connects to the IMD FTP server, downloads one <code>.grd</code> file per year, and saves it locally. Run this <strong>once</strong> — the files will live on your disk and you never need to re-download.</p>
 <div id="download-data" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> imdlib <span class="im" style="color: #00769E;
 background-color: null;
@@ -574,7 +575,7 @@ background-color: null;
 font-style: inherit;">"✅ Download complete."</span>)</span>
 <span id="cb14-15"><span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">print</span>(data)</span></code></pre></div>
+font-style: inherit;">print</span>(data)</span></code></pre></div></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -582,7 +583,7 @@ font-style: inherit;">print</span>(data)</span></code></pre></div>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-💡 What Can You Download?
+<span class="screen-reader-only">Tip</span>💡 What Can You Download?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -620,7 +621,7 @@ font-style: inherit;">print</span>(data)</span></code></pre></div>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-⏱️ Download Time
+<span class="screen-reader-only">Warning</span>⏱️ Download Time
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -630,7 +631,7 @@ font-style: inherit;">print</span>(data)</span></code></pre></div>
 <section id="verify-the-downloaded-files" class="level3">
 <h3 class="anchored" data-anchor-id="verify-the-downloaded-files">Verify the Downloaded Files</h3>
 <div id="verify-files" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> glob, os</span>
 <span id="cb15-2"></span>
@@ -673,7 +674,7 @@ font-style: inherit;">"Last  3 :"</span>, files[<span class="op" style="color: #
 background-color: null;
 font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">3</span>:])</span></code></pre></div>
+font-style: inherit;">3</span>:])</span></code></pre></div></div>
 </div>
 <p>You should see 61 files with the pattern <code>rain_YYYY.grd</code>.</p>
 <hr>
@@ -683,7 +684,7 @@ font-style: inherit;">3</span>:])</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="step-2-load-data-into-python-xarray">📂 Step 2: Load Data into Python (xarray)</h2>
 <p>Read all the binary <code>.grd</code> files into a single in-memory dataset using <code>xarray</code>. Think of it as pandas — but for multi-dimensional arrays with labelled axes (time, latitude, longitude).</p>
 <div id="open-data" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> imdlib <span class="im" style="color: #00769E;
 background-color: null;
@@ -799,7 +800,7 @@ font-style: inherit;">"→"</span>, <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">float</span>(ds.lon.<span class="bu" style="color: null;
 background-color: null;
-font-style: inherit;">max</span>()))</span></code></pre></div>
+font-style: inherit;">max</span>()))</span></code></pre></div></div>
 </div>
 <p>Expected output:</p>
 <pre><code>&lt;xarray.Dataset&gt;
@@ -816,7 +817,7 @@ Data variables:
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🧩 Understanding the xarray Dataset
+<span class="screen-reader-only">Note</span>🧩 Understanding the xarray Dataset
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -855,7 +856,7 @@ Data variables:
 <h2 class="anchored" data-anchor-id="step-3-subset-to-your-region-of-interest">✂️ Step 3: Subset to Your Region of Interest</h2>
 <p>Loading all of India when you only need one region wastes memory. Use <code>.sel()</code> to clip to your bounding box.</p>
 <div id="subset-region" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">LAT_MIN, LAT_MAX <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">LAT_MIN, LAT_MAX <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
@@ -935,7 +936,7 @@ font-style: inherit;">365</span><span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
-font-style: inherit;"> years)"</span>)</span></code></pre></div>
+font-style: inherit;"> years)"</span>)</span></code></pre></div></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -943,7 +944,7 @@ font-style: inherit;"> years)"</span>)</span></code></pre></div>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📍 Bounding Boxes for Common Indian Regions
+<span class="screen-reader-only">Tip</span>📍 Bounding Boxes for Common Indian Regions
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -989,7 +990,7 @@ font-style: inherit;"> years)"</span>)</span></code></pre></div>
 <h3 class="anchored" data-anchor-id="adding-cf-metadata-attributes">Adding CF Metadata Attributes</h3>
 <p>Rename <code>rain</code> → <code>pr</code> and add standard attributes so downstream climate libraries (<code>xclim</code>, <code>xcdat</code>) recognise the variable automatically:</p>
 <div id="add-attributes" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">ds_nei <span class="op" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">ds_nei <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ds_nei.rename({<span class="st" style="color: #20794D;
 background-color: null;
@@ -1043,7 +1044,7 @@ font-style: inherit;">"✅ Attributes added:"</span>)</span>
 background-color: null;
 font-style: inherit;">print</span>(ds_nei[<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'pr'</span>].attrs)</span></code></pre></div>
+font-style: inherit;">'pr'</span>].attrs)</span></code></pre></div></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1051,7 +1052,7 @@ font-style: inherit;">'pr'</span>].attrs)</span></code></pre></div>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Why <code>'pr'</code> and Not <code>'rain'</code>?
+<span class="screen-reader-only">Note</span>Why <code>'pr'</code> and Not <code>'rain'</code>?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1065,7 +1066,7 @@ Why <code>'pr'</code> and Not <code>'rain'</code>?
 <h2 class="anchored" data-anchor-id="step-4-data-quality-checks">🔍 Step 4: Data Quality Checks</h2>
 <p>Never skip this. IMD data can contain fill values (often <code>-999</code>), unexpected negatives, or missing time steps. Catching them now prevents silent errors later.</p>
 <div id="quality-check" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
 background-color: null;
@@ -1283,7 +1284,7 @@ font-style: inherit;">"</span><span class="ch" style="color: #20794D;
 background-color: null;
 font-style: inherit;">\n</span><span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">  → Negative values replaced with NaN."</span>)</span></code></pre></div>
+font-style: inherit;">  → Negative values replaced with NaN."</span>)</span></code></pre></div></div>
 </div>
 <p>Expected output for a clean download:</p>
 <pre><code>=============================================
@@ -1304,7 +1305,7 @@ font-style: inherit;">  → Negative values replaced with NaN."</span>)</span></
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🚩 Red Flags to Watch For
+<span class="screen-reader-only">Warning</span>🚩 Red Flags to Watch For
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1351,29 +1352,29 @@ font-style: inherit;">  → Negative values replaced with NaN."</span>)</span></
 <section id="step-5-visualise-mean-annual-rainfall-map" class="level2">
 <h2 class="anchored" data-anchor-id="step-5-visualise-mean-annual-rainfall-map">🗺️ Step 5: Visualise — Mean Annual Rainfall Map</h2>
 <p>A spatial map is the fastest sanity check. North East India should show some of the highest rainfall values in the subcontinent — if it doesn’t, something is wrong with the data or subset.</p>
-<div id="fig-annual-rainfall" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="8" data-fig-height="7" data-fig-width="9">
+<div id="fig-annual-rainfall" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-fig-height="7" data-execution_count="8" data-fig-width="9">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-annual-rainfall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="fig-annual-rainfall" data-execution_count="8" data-fig-height="7" data-fig-width="9" style="background: #f1f3f5;"><pre class="sourceCode python cell code-with-copy"><code class="sourceCode python"><span id="fig-annual-rainfall-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> plt</span>
-<span id="fig-annual-rainfall-2"><span class="im" style="color: #00769E;
+<span id="cb22-2"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> cartopy.crs <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> ccrs</span>
-<span id="fig-annual-rainfall-3"><span class="im" style="color: #00769E;
+<span id="cb22-3"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> cartopy.feature <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> cfeature</span>
-<span id="fig-annual-rainfall-4"></span>
-<span id="fig-annual-rainfall-5"><span class="co" style="color: #5E5E5E;
+<span id="cb22-4"></span>
+<span id="cb22-5"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Sum over each year → average across all years</span></span>
-<span id="fig-annual-rainfall-6">annual_mean <span class="op" style="color: #5E5E5E;
+<span id="cb22-6">annual_mean <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ds_nei[<span class="st" style="color: #20794D;
 background-color: null;
@@ -1386,68 +1387,68 @@ background-color: null;
 font-style: inherit;">sum</span>().mean(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'time'</span>)</span>
-<span id="fig-annual-rainfall-7"></span>
-<span id="fig-annual-rainfall-8">fig, ax <span class="op" style="color: #5E5E5E;
+<span id="cb22-7"></span>
+<span id="cb22-8">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(</span>
-<span id="fig-annual-rainfall-9">    figsize<span class="op" style="color: #5E5E5E;
+<span id="cb22-9">    figsize<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">9</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">7</span>),</span>
-<span id="fig-annual-rainfall-10">    subplot_kw<span class="op" style="color: #5E5E5E;
+<span id="cb22-10">    subplot_kw<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>{<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'projection'</span>: ccrs.PlateCarree()}</span>
-<span id="fig-annual-rainfall-11">)</span>
-<span id="fig-annual-rainfall-12"></span>
-<span id="fig-annual-rainfall-13">annual_mean.plot(</span>
-<span id="fig-annual-rainfall-14">    ax<span class="op" style="color: #5E5E5E;
+<span id="cb22-11">)</span>
+<span id="cb22-12"></span>
+<span id="cb22-13">annual_mean.plot(</span>
+<span id="cb22-14">    ax<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>ax,</span>
-<span id="fig-annual-rainfall-15">    transform<span class="op" style="color: #5E5E5E;
+<span id="cb22-15">    transform<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>ccrs.PlateCarree(),</span>
-<span id="fig-annual-rainfall-16">    cmap<span class="op" style="color: #5E5E5E;
+<span id="cb22-16">    cmap<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'YlGnBu'</span>,</span>
-<span id="fig-annual-rainfall-17">    cbar_kwargs<span class="op" style="color: #5E5E5E;
+<span id="cb22-17">    cbar_kwargs<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>{</span>
-<span id="fig-annual-rainfall-18">        <span class="st" style="color: #20794D;
+<span id="cb22-18">        <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'label'</span>  : <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Mean Annual Rainfall (mm)'</span>,</span>
-<span id="fig-annual-rainfall-19">        <span class="st" style="color: #20794D;
+<span id="cb22-19">        <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'shrink'</span> : <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.85</span>,</span>
-<span id="fig-annual-rainfall-20">        <span class="st" style="color: #20794D;
+<span id="cb22-20">        <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'pad'</span>    : <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.03</span></span>
-<span id="fig-annual-rainfall-21">    }</span>
-<span id="fig-annual-rainfall-22">)</span>
-<span id="fig-annual-rainfall-23"></span>
-<span id="fig-annual-rainfall-24">ax.add_feature(cfeature.BORDERS,   linewidth<span class="op" style="color: #5E5E5E;
+<span id="cb22-21">    }</span>
+<span id="cb22-22">)</span>
+<span id="cb22-23"></span>
+<span id="cb22-24">ax.add_feature(cfeature.BORDERS,   linewidth<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1.0</span>)</span>
-<span id="fig-annual-rainfall-25">ax.add_feature(cfeature.COASTLINE, linewidth<span class="op" style="color: #5E5E5E;
+<span id="cb22-25">ax.add_feature(cfeature.COASTLINE, linewidth<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.8</span>)</span>
-<span id="fig-annual-rainfall-26">ax.add_feature(cfeature.STATES,    linewidth<span class="op" style="color: #5E5E5E;
+<span id="cb22-26">ax.add_feature(cfeature.STATES,    linewidth<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
 background-color: null;
@@ -1456,8 +1457,8 @@ background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'gray'</span>)</span>
-<span id="fig-annual-rainfall-27"></span>
-<span id="fig-annual-rainfall-28">gl <span class="op" style="color: #5E5E5E;
+<span id="cb22-27"></span>
+<span id="cb22-28">gl <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ax.gridlines(draw_labels<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1476,18 +1477,18 @@ background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'gray'</span>)</span>
-<span id="fig-annual-rainfall-29">gl.top_labels   <span class="op" style="color: #5E5E5E;
+<span id="cb22-29">gl.top_labels   <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">False</span></span>
-<span id="fig-annual-rainfall-30">gl.right_labels <span class="op" style="color: #5E5E5E;
+<span id="cb22-30">gl.right_labels <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">False</span></span>
-<span id="fig-annual-rainfall-31"></span>
-<span id="fig-annual-rainfall-32">ax.set_extent([<span class="dv" style="color: #AD0000;
+<span id="cb22-31"></span>
+<span id="cb22-32">ax.set_extent([<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">88</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
@@ -1496,11 +1497,11 @@ background-color: null;
 font-style: inherit;">21</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">29.5</span>])</span>
-<span id="fig-annual-rainfall-33">ax.set_title(</span>
-<span id="fig-annual-rainfall-34">    <span class="st" style="color: #20794D;
+<span id="cb22-33">ax.set_title(</span>
+<span id="cb22-34">    <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Mean Annual Rainfall — North East India (1965–2025)'</span>,</span>
-<span id="fig-annual-rainfall-35">    fontsize<span class="op" style="color: #5E5E5E;
+<span id="cb22-35">    fontsize<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -1513,10 +1514,10 @@ background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'bold'</span></span>
-<span id="fig-annual-rainfall-36">)</span>
-<span id="fig-annual-rainfall-37"></span>
-<span id="fig-annual-rainfall-38">plt.tight_layout()</span>
-<span id="fig-annual-rainfall-39">plt.savefig(<span class="st" style="color: #20794D;
+<span id="cb22-36">)</span>
+<span id="cb22-37"></span>
+<span id="cb22-38">plt.tight_layout()</span>
+<span id="cb22-39">plt.savefig(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'./outputs/fig01_mean_annual_rainfall_NEI.png'</span>, dpi<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1527,12 +1528,12 @@ background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'tight'</span>)</span>
-<span id="fig-annual-rainfall-40">plt.show()</span>
-<span id="fig-annual-rainfall-41"><span class="bu" style="color: null;
+<span id="cb22-40">plt.show()</span>
+<span id="cb22-41"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"✅ Figure saved → ./outputs/fig01_mean_annual_rainfall_NEI.png"</span>)</span></code></pre></div>
+font-style: inherit;">"✅ Figure saved → ./outputs/fig01_mean_annual_rainfall_NEI.png"</span>)</span></code></pre></div></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-annual-rainfall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1
@@ -1545,7 +1546,7 @@ Figure&nbsp;1
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🎨 Choosing a Good Colormap
+<span class="screen-reader-only">Tip</span>🎨 Choosing a Good Colormap
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1584,18 +1585,18 @@ Figure&nbsp;1
 <h2 class="anchored" data-anchor-id="step-6-save-the-processed-data">💾 Step 6: Save the Processed Data</h2>
 <p>Save the clean, subsetted dataset as <strong>NetCDF</strong> — the standard format in climate science.</p>
 <div id="save-netcdf" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><span class="im" style="color: #00769E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> os</span>
-<span id="cb22-2"></span>
-<span id="cb22-3">out_path <span class="op" style="color: #5E5E5E;
+<span id="cb23-2"></span>
+<span id="cb23-3">out_path <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'./data/NEI_rainfall_1965_2025.nc'</span></span>
-<span id="cb22-4">ds_nei.to_netcdf(out_path)</span>
-<span id="cb22-5"></span>
-<span id="cb22-6"><span class="bu" style="color: null;
+<span id="cb23-4">ds_nei.to_netcdf(out_path)</span>
+<span id="cb23-5"></span>
+<span id="cb23-6"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
 background-color: null;
@@ -1606,7 +1607,7 @@ background-color: null;
 font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span>)</span>
-<span id="cb22-7"><span class="bu" style="color: null;
+<span id="cb23-7"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
 background-color: null;
@@ -1624,7 +1625,7 @@ font-style: inherit;">1e6</span><span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:.1f}</span><span class="ss" style="color: #20794D;
 background-color: null;
-font-style: inherit;"> MB"</span>)</span></code></pre></div>
+font-style: inherit;"> MB"</span>)</span></code></pre></div></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1632,7 +1633,7 @@ font-style: inherit;"> MB"</span>)</span></code></pre></div>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📁 Why NetCDF?
+<span class="screen-reader-only">Note</span>📁 Why NetCDF?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1723,7 +1724,7 @@ font-style: inherit;"> MB"</span>)</span></code></pre></div>
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-💬 Common Issues &amp; Fixes
+<span class="screen-reader-only">Note</span>💬 Common Issues &amp; Fixes
 </div>
 </div>
 <div class="callout-body-container callout-body">
