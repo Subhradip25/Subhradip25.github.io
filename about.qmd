@@ -25,22 +25,16 @@ page-layout: full
 <div class="rp-body">
 <div class="rp-body-inner">
 
-<!-- ══════════════════════════
-     PERSONAL STATEMENT
-══════════════════════════ -->
+<!-- PERSONAL STATEMENT -->
 <div class="about-statement">
-  <div class="about-statement-icon"></div>
+  <div class="about-statement-icon">❝</div>
   <div class="about-statement-text">
-    I believe the most urgent problems in agriculture - land degradation, climate vulnerability, soil health decline - are fundamentally spatial problems that demand open-source geospatial solutions. My work sits at the intersection of remote sensing, agronomy, and natural resource management, translating satellite data into actionable insights for food security and sustainable development. I am driven by the conviction that science done openly, reproducibly, and in service of SDG targets is science that truly matters.
+    I believe the most urgent problems in agriculture — land degradation, climate vulnerability, soil health decline — are fundamentally spatial problems that demand open-source geospatial solutions. My work sits at the intersection of remote sensing, agronomy, and natural resource management, translating satellite data into actionable insights for food security and sustainable development. I am driven by the conviction that science done openly, reproducibly, and in service of SDG targets is science that truly matters.
   </div>
 </div>
 
-<!-- ══════════════════════════
-     PROFILE + CURRENT ROLE
-══════════════════════════ -->
+<!-- PROFILE + CURRENT ROLE -->
 <div class="about-grid-2">
-
-  <!-- LEFT: Profile summary -->
   <div class="about-card about-profile-card">
     <div class="about-card-label">Current Position</div>
     <div class="about-role-title">Research Associate</div>
@@ -51,11 +45,9 @@ page-layout: full
     <div class="about-role-divider"></div>
     <div class="about-role-unit">Institute Technology Management Unit (NAIF Component 1)</div>
     <div class="about-role-desc">
-      Managing the institute's intellectual property portfolio - overseeing 3 patents, 2 design registrations, and 18 copyrights - alongside 8+ MoUs with industry and research partners. Also contributes to the Priority Setting, Monitoring and Evaluation Cell and provides geospatial analytical support to ongoing research programs.
+      Managing the institute's intellectual property portfolio — overseeing 3 patents, 2 design registrations, and 18 copyrights — alongside 8+ MoUs with industry and research partners. Also contributes to the Priority Setting, Monitoring and Evaluation Cell and provides geospatial analytical support to ongoing research programs.
     </div>
   </div>
-
-  <!-- RIGHT: Specialisations + Languages -->
   <div>
     <div class="about-card" style="margin-bottom:12px;">
       <div class="about-card-label">Specialisations</div>
@@ -86,7 +78,6 @@ page-layout: full
         </div>
       </div>
     </div>
-
     <div class="about-card">
       <div class="about-card-label">Languages</div>
       <div class="about-lang-row">
@@ -108,571 +99,311 @@ page-layout: full
       </div>
     </div>
   </div>
-
 </div>
 
-<!-- ══════════════════════════
-     EDUCATION TIMELINE
-══════════════════════════ -->
+<!-- EDUCATION -->
 <div class="rp-sec-header" style="margin-top:2.5rem;">
   <div class="rp-sec-title">Education</div>
   <div class="rp-sec-line"></div>
 </div>
-
 <div class="about-timeline">
-
   <div class="about-tl-item">
-    <div class="about-tl-left">
-      <div class="about-tl-year">2018–2023</div>
-      <div class="about-tl-line"></div>
-    </div>
+    <div class="about-tl-left"><div class="about-tl-year">2018–2023</div><div class="about-tl-line"></div></div>
     <div class="about-tl-card">
       <div class="about-tl-badge" style="background:#E1F5EE;color:#085041;">PhD</div>
       <div class="about-tl-title">Doctor of Philosophy in Agronomy</div>
       <div class="about-tl-inst">ICAR – National Dairy Research Institute, Karnal, Haryana</div>
-      <div class="about-tl-thesis">
-        <span class="about-tl-thesis-label">Thesis:</span>
-        Performance of Wheat–Maize–Cowpea Cropping Sequence Under Continuous Use of Municipal Solid Waste Compost
-      </div>
-      <div class="about-tl-tags">
-        <span class="ptag ptag-green">Cropping Systems</span>
-        <span class="ptag ptag-blue">MSW Compost</span>
-        <span class="ptag ptag-green">Soil Health</span>
-        <span class="ptag ptag-amber">Carbon Cycling</span>
-      </div>
+      <div class="about-tl-thesis"><span class="about-tl-thesis-label">Thesis:</span>Performance of Wheat–Maize–Cowpea Cropping Sequence Under Continuous Use of Municipal Solid Waste Compost</div>
+      <div class="about-tl-tags"><span class="ptag ptag-green">Cropping Systems</span><span class="ptag ptag-blue">MSW Compost</span><span class="ptag ptag-green">Soil Health</span><span class="ptag ptag-amber">Carbon Cycling</span></div>
     </div>
   </div>
-
   <div class="about-tl-item">
-    <div class="about-tl-left">
-      <div class="about-tl-year">2015–2017</div>
-      <div class="about-tl-line"></div>
-    </div>
+    <div class="about-tl-left"><div class="about-tl-year">2015–2017</div><div class="about-tl-line"></div></div>
     <div class="about-tl-card">
       <div class="about-tl-badge" style="background:#E6F1FB;color:#0C447C;">M.Sc.</div>
       <div class="about-tl-title">Master of Science in Agronomy</div>
       <div class="about-tl-inst">Dr. Panjabrao Deshmukh Krishi Vidyapeeth, Akola, Maharashtra</div>
-      <div class="about-tl-thesis">
-        <span class="about-tl-thesis-label">Research:</span>
-        Performance of Maize Under Zinc and Potassium Nutrition in Dryland Vertisol Conditions
-      </div>
-      <div class="about-tl-tags">
-        <span class="ptag ptag-green">Maize Agronomy</span>
-        <span class="ptag ptag-green">Zinc Nutrition</span>
-        <span class="ptag ptag-green">Dryland Agriculture</span>
-      </div>
+      <div class="about-tl-thesis"><span class="about-tl-thesis-label">Research:</span>Performance of Maize Under Zinc and Potassium Nutrition in Dryland Vertisol Conditions</div>
+      <div class="about-tl-tags"><span class="ptag ptag-green">Maize Agronomy</span><span class="ptag ptag-green">Zinc Nutrition</span><span class="ptag ptag-green">Dryland Agriculture</span></div>
     </div>
   </div>
-
   <div class="about-tl-item">
-    <div class="about-tl-left">
-      <div class="about-tl-year">2011–2015</div>
-      <div class="about-tl-line" style="display:none;"></div>
-    </div>
+    <div class="about-tl-left"><div class="about-tl-year">2011–2015</div><div class="about-tl-line" style="display:none;"></div></div>
     <div class="about-tl-card">
       <div class="about-tl-badge" style="background:#FAEEDA;color:#633806;">B.Sc.</div>
       <div class="about-tl-title">Bachelor of Science in Agriculture</div>
       <div class="about-tl-inst">Doon (PG) College, Hemwati Nandan Bahuguna Garhwal University, Dehradun, Uttarakhand</div>
-      <div class="about-tl-tags">
-        <span class="ptag ptag-amber">Agricultural Sciences</span>
-        <span class="ptag ptag-amber">Foundation Studies</span>
-      </div>
+      <div class="about-tl-tags"><span class="ptag ptag-amber">Agricultural Sciences</span><span class="ptag ptag-amber">Foundation Studies</span></div>
     </div>
   </div>
-
 </div>
 
-<!-- ══════════════════════════
-     CAREER TIMELINE
-══════════════════════════ -->
+<!-- CAREER -->
 <div class="rp-sec-header" style="margin-top:2.5rem;">
   <div class="rp-sec-title">Research Career</div>
   <div class="rp-sec-line"></div>
 </div>
-
 <div class="about-timeline">
-
   <div class="about-tl-item">
-    <div class="about-tl-left">
-      <div class="about-tl-year">2024–</div>
-      <div class="about-tl-line"></div>
-    </div>
+    <div class="about-tl-left"><div class="about-tl-year">2024–</div><div class="about-tl-line"></div></div>
     <div class="about-tl-card" style="border-left:3px solid #1D9E75;">
       <div class="about-tl-badge" style="background:#E1F5EE;color:#085041;">Current</div>
       <div class="about-tl-title">Research Associate</div>
       <div class="about-tl-inst">ICAR – Central Coastal Agricultural Research Institute, Goa</div>
       <div class="about-tl-desc">Working under the Institute Technology Management Unit (NAIF Component 1). Managing institutional intellectual property including 3 patents, 2 design registrations, and 18 copyrights. Coordinating 8+ MoUs with industry and research partners. Supporting Priority Setting, Monitoring and Evaluation activities while conducting geospatial research on coastal agricultural systems.</div>
-      <div class="about-tl-tags">
-        <span class="ptag ptag-green">Coastal Agriculture</span>
-        <span class="ptag ptag-green">Geospatial Analysis</span>
-        <span class="ptag ptag-blue">IP Management</span>
-        <span class="ptag ptag-blue">Technology Transfer</span>
-      </div>
+      <div class="about-tl-tags"><span class="ptag ptag-green">Coastal Agriculture</span><span class="ptag ptag-green">Geospatial Analysis</span><span class="ptag ptag-blue">IP Management</span><span class="ptag ptag-blue">Technology Transfer</span></div>
     </div>
   </div>
-
   <div class="about-tl-item">
-    <div class="about-tl-left">
-      <div class="about-tl-year">2023–2024</div>
-      <div class="about-tl-line"></div>
-    </div>
+    <div class="about-tl-left"><div class="about-tl-year">2023–2024</div><div class="about-tl-line"></div></div>
     <div class="about-tl-card">
       <div class="about-tl-badge" style="background:#E6F1FB;color:#0C447C;">Post-PhD</div>
-      <div class="about-tl-title">Junior Research Fellow - DST Funded Project</div>
+      <div class="about-tl-title">Junior Research Fellow — DST Funded Project</div>
       <div class="about-tl-inst">Climate Change Impact Assessment, Cold Arid Ladakh</div>
       <div class="about-tl-desc">Conducted long-term climate change assessment in the cold arid region of Ladakh, analysing impacts on agricultural systems and animal husbandry. Used remote sensing and climatological tools including CDO and NCO to quantify trends in temperature, precipitation, and growing season dynamics in one of India's most climate-sensitive regions.</div>
-      <div class="about-tl-tags">
-        <span class="ptag ptag-blue">Climate Change</span>
-        <span class="ptag ptag-blue">Ladakh Cold Desert</span>
-        <span class="ptag ptag-amber">Livestock Systems</span>
-        <span class="ptag ptag-green">Remote Sensing</span>
-      </div>
+      <div class="about-tl-tags"><span class="ptag ptag-blue">Climate Change</span><span class="ptag ptag-blue">Ladakh Cold Desert</span><span class="ptag ptag-amber">Livestock Systems</span><span class="ptag ptag-green">Remote Sensing</span></div>
     </div>
   </div>
-
   <div class="about-tl-item">
-    <div class="about-tl-left">
-      <div class="about-tl-year">2018–2023</div>
-      <div class="about-tl-line" style="display:none;"></div>
-    </div>
+    <div class="about-tl-left"><div class="about-tl-year">2018–2023</div><div class="about-tl-line" style="display:none;"></div></div>
     <div class="about-tl-card">
       <div class="about-tl-badge" style="background:#FAEEDA;color:#633806;">Doctoral</div>
       <div class="about-tl-title">PhD Research Scholar</div>
       <div class="about-tl-inst">ICAR – National Dairy Research Institute, Karnal, Haryana</div>
-      <div class="about-tl-desc">Investigated long-term agronomic and soil quality effects of continuous municipal solid waste compost application in wheat–maize–cowpea cropping sequences. Developed expertise in crop production systems, soil carbon dynamics, nutrient cycling, and bibliometric research methodology. Published multiple high-impact papers during this period.</div>
-      <div class="about-tl-tags">
-        <span class="ptag ptag-green">Cropping Systems</span>
-        <span class="ptag ptag-blue">MSW Compost</span>
-        <span class="ptag ptag-green">Soil Carbon</span>
-        <span class="ptag ptag-purple">Bibliometrics</span>
-      </div>
+      <div class="about-tl-desc">Investigated long-term agronomic and soil quality effects of continuous municipal solid waste compost application in wheat–maize–cowpea cropping sequences. Developed expertise in crop production systems, soil carbon dynamics, nutrient cycling, and bibliometric research methodology.</div>
+      <div class="about-tl-tags"><span class="ptag ptag-green">Cropping Systems</span><span class="ptag ptag-blue">MSW Compost</span><span class="ptag ptag-green">Soil Carbon</span><span class="ptag ptag-purple">Bibliometrics</span></div>
     </div>
   </div>
-
 </div>
 
-<!-- ══════════════════════════
-     SKILLS
-══════════════════════════ -->
+<!-- SKILLS -->
 <div class="rp-sec-header" style="margin-top:2.5rem;">
   <div class="rp-sec-title">Technical Skills</div>
   <div class="rp-sec-line"></div>
 </div>
-
 <div class="about-grid-skills">
-
   <div class="about-skill-card">
-    <div class="about-skill-icon" style="background:#E1F5EE;color:#085041;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-    </div>
+    <div class="about-skill-icon" style="background:#E1F5EE;color:#085041;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
     <div class="about-skill-title">Geospatial Platforms</div>
-    <div class="about-skill-items">
-      <span class="about-skill-tag">Google Earth Engine</span>
-      <span class="about-skill-tag">QGIS</span>
-      <span class="about-skill-tag">ArcGIS</span>
-      <span class="about-skill-tag">GRASS GIS</span>
-    </div>
+    <div class="about-skill-items"><span class="about-skill-tag">Google Earth Engine</span><span class="about-skill-tag">QGIS</span><span class="about-skill-tag">ArcGIS</span><span class="about-skill-tag">GRASS GIS</span></div>
   </div>
-
   <div class="about-skill-card">
-    <div class="about-skill-icon" style="background:#E6F1FB;color:#0C447C;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-    </div>
+    <div class="about-skill-icon" style="background:#E6F1FB;color:#0C447C;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
     <div class="about-skill-title">Programming</div>
-    <div class="about-skill-items">
-      <span class="about-skill-tag">Python</span>
-      <span class="about-skill-tag">R</span>
-      <span class="about-skill-tag">JavaScript (GEE)</span>
-      <span class="about-skill-tag">Bash / Shell</span>
-    </div>
+    <div class="about-skill-items"><span class="about-skill-tag">Python</span><span class="about-skill-tag">R</span><span class="about-skill-tag">JavaScript (GEE)</span><span class="about-skill-tag">Bash / Shell</span></div>
   </div>
-
   <div class="about-skill-card">
-    <div class="about-skill-icon" style="background:#E6F1FB;color:#0C447C;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-    </div>
+    <div class="about-skill-icon" style="background:#E6F1FB;color:#0C447C;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
     <div class="about-skill-title">Climate Data Tools</div>
-    <div class="about-skill-items">
-      <span class="about-skill-tag">CDO</span>
-      <span class="about-skill-tag">NCO</span>
-      <span class="about-skill-tag">NetCDF / HDF5</span>
-      <span class="about-skill-tag">ERA5 / CMIP6</span>
-    </div>
+    <div class="about-skill-items"><span class="about-skill-tag">CDO</span><span class="about-skill-tag">NCO</span><span class="about-skill-tag">NetCDF / HDF5</span><span class="about-skill-tag">ERA5 / CMIP6</span></div>
   </div>
-
   <div class="about-skill-card">
-    <div class="about-skill-icon" style="background:#EEEDFE;color:#3C3489;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-    </div>
+    <div class="about-skill-icon" style="background:#EEEDFE;color:#3C3489;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
     <div class="about-skill-title">Research Methods</div>
-    <div class="about-skill-items">
-      <span class="about-skill-tag">Bibliometrics</span>
-      <span class="about-skill-tag">Scientometrics</span>
-      <span class="about-skill-tag">VOSviewer</span>
-      <span class="about-skill-tag">Metagenomics</span>
-    </div>
+    <div class="about-skill-items"><span class="about-skill-tag">Bibliometrics</span><span class="about-skill-tag">Scientometrics</span><span class="about-skill-tag">VOSviewer</span><span class="about-skill-tag">Metagenomics</span></div>
   </div>
-
   <div class="about-skill-card">
-    <div class="about-skill-icon" style="background:#E1F5EE;color:#085041;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    </div>
+    <div class="about-skill-icon" style="background:#E1F5EE;color:#085041;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
     <div class="about-skill-title">IP & Technology Management</div>
-    <div class="about-skill-items">
-      <span class="about-skill-tag">Patent Filing</span>
-      <span class="about-skill-tag">Copyright Registration</span>
-      <span class="about-skill-tag">MoU Coordination</span>
-      <span class="about-skill-tag">Technology Transfer</span>
-    </div>
+    <div class="about-skill-items"><span class="about-skill-tag">Patent Filing</span><span class="about-skill-tag">Copyright Registration</span><span class="about-skill-tag">MoU Coordination</span><span class="about-skill-tag">Technology Transfer</span></div>
   </div>
-
   <div class="about-skill-card">
-    <div class="about-skill-icon" style="background:#FAEEDA;color:#633806;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    </div>
+    <div class="about-skill-icon" style="background:#FAEEDA;color:#633806;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
     <div class="about-skill-title">Field Research</div>
-    <div class="about-skill-items">
-      <span class="about-skill-tag">Soil Sampling</span>
-      <span class="about-skill-tag">Crop Experiments</span>
-      <span class="about-skill-tag">Field Surveys</span>
-      <span class="about-skill-tag">SDG Monitoring</span>
-    </div>
+    <div class="about-skill-items"><span class="about-skill-tag">Soil Sampling</span><span class="about-skill-tag">Crop Experiments</span><span class="about-skill-tag">Field Surveys</span><span class="about-skill-tag">SDG Monitoring</span></div>
   </div>
-
 </div>
 
-<!-- ══════════════════════════
-     AWARDS
-══════════════════════════ -->
+<!-- AWARDS -->
 <div class="rp-sec-header" style="margin-top:2.5rem;">
   <div class="rp-sec-title">Awards & Recognition</div>
   <div class="rp-sec-line"></div>
 </div>
-
 <div class="about-awards-grid">
-
   <div class="about-award-card">
     <div class="about-award-year">2020</div>
     <div class="about-award-body">
       <div class="about-award-org">Indian Association of Soil & Water Conservationists</div>
       <div class="about-award-title">Best Poster Award</div>
       <div class="about-award-event">National Conference on Resource Conservation for Soil Security and Jalshakti: Farmers Perspective in Bundelkhand</div>
-      <div class="about-award-tags">
-        <span class="about-award-tag" style="background:#E1F5EE;color:#085041;">National</span>
-        <span class="about-award-tag" style="background:#E6F1FB;color:#0C447C;">Soil Science</span>
-      </div>
+      <div class="about-award-tags"><span class="about-award-tag" style="background:#E1F5EE;color:#085041;">National</span><span class="about-award-tag" style="background:#E6F1FB;color:#0C447C;">Soil Science</span></div>
     </div>
   </div>
-
   <div class="about-award-card">
     <div class="about-award-year">2022</div>
     <div class="about-award-body">
       <div class="about-award-org">Institute of Forestry, Tribhuvan University, Nepal</div>
       <div class="about-award-title">Best Poster Presentation Award</div>
       <div class="about-award-event">International conference recognising excellence in scientific poster communication</div>
-      <div class="about-award-tags">
-        <span class="about-award-tag" style="background:#EEEDFE;color:#3C3489;">International</span>
-        <span class="about-award-tag" style="background:#E1F5EE;color:#085041;">Nepal</span>
-      </div>
+      <div class="about-award-tags"><span class="about-award-tag" style="background:#EEEDFE;color:#3C3489;">International</span><span class="about-award-tag" style="background:#E1F5EE;color:#085041;">Nepal</span></div>
     </div>
   </div>
-
   <div class="about-award-card">
     <div class="about-award-year">2025</div>
     <div class="about-award-body">
       <div class="about-award-org">Indian Society of Soil Salinity and Water Quality</div>
       <div class="about-award-title">Best Poster Presentation Award</div>
-      <div class="about-award-event">International Salinity Conference - recognising cutting-edge research in soil salinity and water quality</div>
-      <div class="about-award-tags">
-        <span class="about-award-tag" style="background:#EEEDFE;color:#3C3489;">International</span>
-        <span class="about-award-tag" style="background:#E6F1FB;color:#0C447C;">Soil Salinity</span>
-      </div>
+      <div class="about-award-event">International Salinity Conference — recognising cutting-edge research in soil salinity and water quality</div>
+      <div class="about-award-tags"><span class="about-award-tag" style="background:#EEEDFE;color:#3C3489;">International</span><span class="about-award-tag" style="background:#E6F1FB;color:#0C447C;">Soil Salinity</span></div>
     </div>
   </div>
-
 </div>
 
-<!-- ══════════════════════════
-     MEMBERSHIPS
-══════════════════════════ -->
+<!-- MEMBERSHIPS -->
 <div class="rp-sec-header" style="margin-top:2.5rem;">
   <div class="rp-sec-title">Professional Memberships</div>
   <div class="rp-sec-line"></div>
 </div>
-
 <div class="about-mem-grid">
-  <div class="about-mem-card">
-    <div class="about-mem-abbr" style="background:#E1F5EE;color:#085041;">ISA</div>
-    <div class="about-mem-name">Indian Society of Agronomy</div>
-    <div class="about-mem-type">Life Member</div>
-  </div>
-  <div class="about-mem-card">
-    <div class="about-mem-abbr" style="background:#E6F1FB;color:#0C447C;">ISAP</div>
-    <div class="about-mem-name">Indian Society of Agrophysics</div>
-    <div class="about-mem-type">Life Member</div>
-  </div>
-  <div class="about-mem-card">
-    <div class="about-mem-abbr" style="background:#E1F5EE;color:#085041;">RSSI</div>
-    <div class="about-mem-name">Indian Society of Remote Sensing</div>
-    <div class="about-mem-type">Life Member</div>
-  </div>
-  <div class="about-mem-card">
-    <div class="about-mem-abbr" style="background:#FAEEDA;color:#633806;">ACAR</div>
-    <div class="about-mem-name">Association of Coastal Agricultural Research</div>
-    <div class="about-mem-type">Life Member</div>
-  </div>
+  <div class="about-mem-card"><div class="about-mem-abbr" style="background:#E1F5EE;color:#085041;">ISA</div><div class="about-mem-name">Indian Society of Agronomy</div><div class="about-mem-type">Life Member</div></div>
+  <div class="about-mem-card"><div class="about-mem-abbr" style="background:#E6F1FB;color:#0C447C;">ISAP</div><div class="about-mem-name">Indian Society of Agrophysics</div><div class="about-mem-type">Life Member</div></div>
+  <div class="about-mem-card"><div class="about-mem-abbr" style="background:#E1F5EE;color:#085041;">RSSI</div><div class="about-mem-name">Remote Sensing Society of India</div><div class="about-mem-type">Life Member</div></div>
+  <div class="about-mem-card"><div class="about-mem-abbr" style="background:#FAEEDA;color:#633806;">ACAR</div><div class="about-mem-name">Association of Coastal Agricultural Research</div><div class="about-mem-type">Life Member</div></div>
 </div>
 
-<!-- ══════════════════════════
-     CONNECT
-══════════════════════════ -->
+<!-- CONNECT -->
 <div class="rp-sec-header" style="margin-top:2.5rem;">
   <div class="rp-sec-title">Connect</div>
   <div class="rp-sec-line"></div>
 </div>
-
 <div class="about-connect-grid">
-  <a class="about-connect-card" href="https://scholar.google.com/citations?user=SP1Mx3QAAAAJ&hl=en" target="_blank">
-    <div class="about-connect-icon" style="background:#E1F5EE;color:#085041;">GS</div>
-    <div class="about-connect-info">
-      <div class="about-connect-name">Google Scholar</div>
-      <div class="about-connect-handle">SP1Mx3QAAAAJ</div>
-    </div>
-    <div class="about-connect-arrow">→</div>
-  </a>
-  <a class="about-connect-card" href="https://www.researchgate.net/profile/Subhradip-Bhattacharjee?ev=hdr_xprf" target="_blank">
-    <div class="about-connect-icon" style="background:#E6F1FB;color:#0C447C;">RG</div>
-    <div class="about-connect-info">
-      <div class="about-connect-name">ResearchGate</div>
-      <div class="about-connect-handle">Subhradip-Bhattacharjee</div>
-    </div>
-    <div class="about-connect-arrow">→</div>
-  </a>
-  <a class="about-connect-card" href="https://orcid.org/0000-0003-2330-2979" target="_blank">
-    <div class="about-connect-icon" style="background:#E1F5EE;color:#085041;">OR</div>
-    <div class="about-connect-info">
-      <div class="about-connect-name">ORCID</div>
-      <div class="about-connect-handle">0000-0003-2330-2979</div>
-    </div>
-    <div class="about-connect-arrow">→</div>
-  </a>
-  <a class="about-connect-card" href="https://www.scopus.com/authid/detail.uri?authorId=57219652426" target="_blank">
-    <div class="about-connect-icon" style="background:#FAEEDA;color:#633806;">SC</div>
-    <div class="about-connect-info">
-      <div class="about-connect-name">Scopus</div>
-      <div class="about-connect-handle">ID: 57219652426</div>
-    </div>
-    <div class="about-connect-arrow">→</div>
-  </a>
-  <a class="about-connect-card" href="https://www.webofscience.com/wos/author/record/IWM-7081-2023" target="_blank">
-    <div class="about-connect-icon" style="background:#EEEDFE;color:#3C3489;">WS</div>
-    <div class="about-connect-info">
-      <div class="about-connect-name">Web of Science</div>
-      <div class="about-connect-handle">IWM-7081-2023</div>
-    </div>
-    <div class="about-connect-arrow">→</div>
-  </a>
-  <a class="about-connect-card" href="mailto:subhradip25@gmail.com">
-    <div class="about-connect-icon" style="background:#E6F1FB;color:#0C447C;">✉</div>
-    <div class="about-connect-info">
-      <div class="about-connect-name">Email</div>
-      <div class="about-connect-handle">subhradip25@gmail.com</div>
-    </div>
-    <div class="about-connect-arrow">→</div>
-  </a>
+  <a class="about-connect-card" href="https://scholar.google.com/citations?user=SP1Mx3QAAAAJ&hl=en" target="_blank"><div class="about-connect-icon" style="background:#E1F5EE;color:#085041;">GS</div><div class="about-connect-info"><div class="about-connect-name">Google Scholar</div><div class="about-connect-handle">SP1Mx3QAAAAJ</div></div><div class="about-connect-arrow">→</div></a>
+  <a class="about-connect-card" href="https://www.researchgate.net/profile/Subhradip-Bhattacharjee?ev=hdr_xprf" target="_blank"><div class="about-connect-icon" style="background:#E6F1FB;color:#0C447C;">RG</div><div class="about-connect-info"><div class="about-connect-name">ResearchGate</div><div class="about-connect-handle">Subhradip-Bhattacharjee</div></div><div class="about-connect-arrow">→</div></a>
+  <a class="about-connect-card" href="https://orcid.org/0000-0003-2330-2979" target="_blank"><div class="about-connect-icon" style="background:#E1F5EE;color:#085041;">OR</div><div class="about-connect-info"><div class="about-connect-name">ORCID</div><div class="about-connect-handle">0000-0003-2330-2979</div></div><div class="about-connect-arrow">→</div></a>
+  <a class="about-connect-card" href="https://www.scopus.com/authid/detail.uri?authorId=57219652426" target="_blank"><div class="about-connect-icon" style="background:#FAEEDA;color:#633806;">SC</div><div class="about-connect-info"><div class="about-connect-name">Scopus</div><div class="about-connect-handle">ID: 57219652426</div></div><div class="about-connect-arrow">→</div></a>
+  <a class="about-connect-card" href="https://www.webofscience.com/wos/author/record/IWM-7081-2023" target="_blank"><div class="about-connect-icon" style="background:#EEEDFE;color:#3C3489;">WS</div><div class="about-connect-info"><div class="about-connect-name">Web of Science</div><div class="about-connect-handle">IWM-7081-2023</div></div><div class="about-connect-arrow">→</div></a>
+  <a class="about-connect-card" href="mailto:subhradip25@gmail.com"><div class="about-connect-icon" style="background:#E6F1FB;color:#0C447C;">✉</div><div class="about-connect-info"><div class="about-connect-name">Email</div><div class="about-connect-handle">subhradip25@gmail.com</div></div><div class="about-connect-arrow">→</div></a>
 </div>
 
 </div>
 </div>
 
 <style>
-.about-statement {
-  background: #0D2137;
-  border-left: 4px solid #1D9E75;
-  border-radius: 0 10px 10px 0;
-  padding: 1.5rem 2rem;
-  margin: 1.5rem 0 2rem;
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
-.about-statement-icon {
-  color: #1D9E75; font-size: 2.5rem; line-height: 1;
-  flex-shrink: 0; margin-top: -4px; font-family: Georgia, serif;
-}
-.about-statement-text {
-  color: rgba(255,255,255,0.82); font-size: 0.95rem;
-  line-height: 1.8; font-style: italic;
-}
-.about-grid-2 {
-  display: grid; grid-template-columns: 1.2fr 1fr;
-  gap: 16px; margin-bottom: 0;
-}
-.about-card {
-  background: white; border-radius: 10px;
-  border: 0.5px solid #e0ddd5; padding: 1.2rem 1.4rem;
-}
-.about-card-label {
-  font-size: 0.62rem; font-weight: 700; color: #1D9E75;
-  text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px;
-}
-.about-role-title { font-size: 1.1rem; font-weight: 700; color: #0D2137; margin-bottom: 3px; }
-.about-role-inst { font-size: 0.85rem; color: #444; margin-bottom: 4px; }
-.about-role-loc {
-  font-size: 0.78rem; color: #888;
-  display: flex; align-items: center; gap: 5px; margin-bottom: 12px;
-}
-.about-dot { color: #1D9E75; font-size: 8px; }
-.about-role-divider { height: 1px; background: #f0efea; margin: 12px 0; }
-.about-role-unit { font-size: 0.78rem; font-weight: 600; color: #1D9E75; margin-bottom: 8px; }
-.about-role-desc { font-size: 0.83rem; color: #555; line-height: 1.65; }
-.about-spec-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-}
-.about-spec-item { text-align: center; }
-.about-spec-icon {
-  width: 36px; height: 36px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.04em;
-  margin: 0 auto 5px;
-}
-.about-spec-name { font-size: 0.65rem; color: #666; line-height: 1.3; }
-.about-lang-row { display: flex; flex-direction: column; gap: 8px; }
-.about-lang-name { font-size: 0.8rem; font-weight: 600; color: #0D2137; margin-bottom: 1px; }
-.about-lang-level { font-size: 0.65rem; color: #aaa; margin-bottom: 4px; }
-.about-lang-bar { height: 4px; background: #f0efea; border-radius: 4px; overflow: hidden; }
-.about-lang-fill { height: 100%; border-radius: 4px; }
+/* ── About layout ── */
+.about-statement { background:#0D2137; border-left:4px solid #1D9E75; border-radius:0 10px 10px 0; padding:1.5rem 2rem; margin:1.5rem 0 2rem; display:flex; gap:16px; align-items:flex-start; }
+.about-statement-icon { color:#1D9E75; font-size:2.5rem; line-height:1; flex-shrink:0; margin-top:-4px; font-family:Georgia,serif; }
+.about-statement-text { color:rgba(255,255,255,0.82); font-size:0.95rem; line-height:1.8; font-style:italic; }
+.about-grid-2 { display:grid; grid-template-columns:1.2fr 1fr; gap:16px; }
+.about-card { background:white; border-radius:10px; border:0.5px solid #e0ddd5; padding:1.2rem 1.4rem; }
+.about-card-label { font-size:0.62rem; font-weight:700; color:#1D9E75; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:10px; }
+.about-role-title { font-size:1.1rem; font-weight:700; color:#0D2137; margin-bottom:3px; }
+.about-role-inst { font-size:0.85rem; color:#444; margin-bottom:4px; }
+.about-role-loc { font-size:0.78rem; color:#888; display:flex; align-items:center; gap:5px; margin-bottom:12px; }
+.about-dot { color:#1D9E75; font-size:8px; }
+.about-role-divider { height:1px; background:#f0efea; margin:12px 0; }
+.about-role-unit { font-size:0.78rem; font-weight:600; color:#1D9E75; margin-bottom:8px; }
+.about-role-desc { font-size:0.83rem; color:#555; line-height:1.65; }
+.about-spec-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.about-spec-item { text-align:center; }
+.about-spec-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.58rem; font-weight:700; letter-spacing:0.04em; margin:0 auto 5px; }
+.about-spec-name { font-size:0.65rem; color:#666; line-height:1.3; }
+.about-lang-row { display:flex; flex-direction:column; gap:8px; }
+.about-lang-name { font-size:0.8rem; font-weight:600; color:#0D2137; margin-bottom:1px; }
+.about-lang-level { font-size:0.65rem; color:#aaa; margin-bottom:4px; }
+.about-lang-bar { height:4px; background:#f0efea; border-radius:4px; overflow:hidden; }
+.about-lang-fill { height:100%; border-radius:4px; }
+.about-timeline { display:flex; flex-direction:column; }
+.about-tl-item { display:flex; gap:20px; }
+.about-tl-left { display:flex; flex-direction:column; align-items:center; flex-shrink:0; width:80px; }
+.about-tl-year { font-size:0.7rem; font-weight:700; color:#1D9E75; white-space:nowrap; margin-bottom:6px; text-align:center; }
+.about-tl-line { width:2px; flex:1; background:linear-gradient(to bottom,#1D9E75,rgba(29,158,117,0.1)); min-height:20px; }
+.about-tl-card { background:white; border-radius:10px; border:0.5px solid #e0ddd5; border-left:3px solid #e0ddd5; padding:1rem 1.2rem; margin-bottom:12px; flex:1; }
+.about-tl-badge { display:inline-block; font-size:0.6rem; font-weight:700; padding:2px 9px; border-radius:20px; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.06em; }
+.about-tl-title { font-size:0.92rem; font-weight:700; color:#0D2137; margin-bottom:3px; }
+.about-tl-inst { font-size:0.78rem; color:#666; margin-bottom:8px; }
+.about-tl-thesis { font-size:0.78rem; color:#555; line-height:1.55; background:#f8f8f5; padding:7px 10px; border-radius:5px; margin-bottom:8px; }
+.about-tl-thesis-label { font-weight:700; color:#1D9E75; margin-right:4px; }
+.about-tl-desc { font-size:0.8rem; color:#555; line-height:1.65; margin-bottom:8px; }
+.about-tl-tags { display:flex; gap:5px; flex-wrap:wrap; }
+.about-grid-skills { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.about-skill-card { background:white; border-radius:10px; border:0.5px solid #e0ddd5; padding:1rem 1.1rem; transition:transform 0.18s,box-shadow 0.18s; }
+.about-skill-card:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(13,33,55,0.08); }
+.about-skill-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px; }
+.about-skill-title { font-size:0.82rem; font-weight:700; color:#0D2137; margin-bottom:8px; }
+.about-skill-items { display:flex; flex-wrap:wrap; gap:4px; }
+.about-skill-tag { font-size:0.62rem; background:#f0efea; color:#555; padding:2px 8px; border-radius:20px; font-weight:500; }
+.about-awards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.about-award-card { background:white; border-radius:10px; border:0.5px solid #e0ddd5; overflow:hidden; transition:transform 0.18s,box-shadow 0.18s; }
+.about-award-card:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(13,33,55,0.1); }
+.about-award-year { background:#0D2137; color:#1D9E75; font-size:1.1rem; font-weight:700; padding:10px 14px; border-bottom:2px solid #1D9E75; }
+.about-award-body { padding:12px 14px; }
+.about-award-org { font-size:0.68rem; font-weight:700; color:#1D9E75; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:5px; line-height:1.4; }
+.about-award-title { font-size:0.9rem; font-weight:700; color:#0D2137; margin-bottom:5px; }
+.about-award-event { font-size:0.75rem; color:#666; line-height:1.5; margin-bottom:8px; }
+.about-award-tags { display:flex; gap:5px; flex-wrap:wrap; }
+.about-award-tag { font-size:0.6rem; padding:2px 8px; border-radius:20px; font-weight:600; }
+.about-mem-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.about-mem-card { background:white; border-radius:10px; border:0.5px solid #e0ddd5; padding:1.1rem; text-align:center; transition:transform 0.18s; }
+.about-mem-card:hover { transform:translateY(-2px); }
+.about-mem-abbr { width:48px; height:48px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700; margin:0 auto 10px; letter-spacing:0.04em; }
+.about-mem-name { font-size:0.78rem; font-weight:600; color:#0D2137; line-height:1.4; margin-bottom:4px; }
+.about-mem-type { font-size:0.65rem; color:#1D9E75; font-weight:600; }
+.about-connect-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:2rem; }
+.about-connect-card { background:white; border-radius:10px; border:0.5px solid #e0ddd5; padding:0.9rem 1rem; display:flex; align-items:center; gap:12px; text-decoration:none; transition:transform 0.18s,box-shadow 0.18s; }
+.about-connect-card:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(13,33,55,0.1); text-decoration:none; }
+.about-connect-icon { width:38px; height:38px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:700; flex-shrink:0; }
+.about-connect-name { font-size:0.82rem; font-weight:600; color:#0D2137; margin-bottom:2px; }
+.about-connect-handle { font-size:0.68rem; color:#999; }
+.about-connect-arrow { margin-left:auto; color:#1D9E75; font-weight:700; font-size:0.9rem; }
 
-/* Timeline */
-.about-timeline { display: flex; flex-direction: column; gap: 0; }
-.about-tl-item { display: flex; gap: 20px; }
-.about-tl-left {
-  display: flex; flex-direction: column;
-  align-items: center; flex-shrink: 0; width: 80px;
-}
-.about-tl-year {
-  font-size: 0.7rem; font-weight: 700; color: #1D9E75;
-  white-space: nowrap; margin-bottom: 6px; text-align: center;
-}
-.about-tl-line {
-  width: 2px; flex: 1;
-  background: linear-gradient(to bottom, #1D9E75, rgba(29,158,117,0.1));
-  min-height: 20px;
-}
-.about-tl-card {
-  background: white; border-radius: 10px;
-  border: 0.5px solid #e0ddd5; border-left: 3px solid #e0ddd5;
-  padding: 1rem 1.2rem; margin-bottom: 12px; flex: 1;
-}
-.about-tl-badge {
-  display: inline-block; font-size: 0.6rem; font-weight: 700;
-  padding: 2px 9px; border-radius: 20px; margin-bottom: 6px;
-  text-transform: uppercase; letter-spacing: 0.06em;
-}
-.about-tl-title { font-size: 0.92rem; font-weight: 700; color: #0D2137; margin-bottom: 3px; }
-.about-tl-inst { font-size: 0.78rem; color: #666; margin-bottom: 8px; }
-.about-tl-thesis {
-  font-size: 0.78rem; color: #555; line-height: 1.55;
-  background: #f8f8f5; padding: 7px 10px; border-radius: 5px; margin-bottom: 8px;
-}
-.about-tl-thesis-label { font-weight: 700; color: #1D9E75; margin-right: 4px; }
-.about-tl-desc { font-size: 0.8rem; color: #555; line-height: 1.65; margin-bottom: 8px; }
-.about-tl-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+/* ══════════════════════════════════════
+   ABOUT PAGE MOBILE RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
 
-/* Skills */
-.about-grid-skills {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-}
-.about-skill-card {
-  background: white; border-radius: 10px; border: 0.5px solid #e0ddd5;
-  padding: 1rem 1.1rem; transition: transform 0.18s, box-shadow 0.18s;
-}
-.about-skill-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(13,33,55,0.08); }
-.about-skill-icon {
-  width: 36px; height: 36px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
-}
-.about-skill-title { font-size: 0.82rem; font-weight: 700; color: #0D2137; margin-bottom: 8px; }
-.about-skill-items { display: flex; flex-wrap: wrap; gap: 4px; }
-.about-skill-tag {
-  font-size: 0.62rem; background: #f0efea; color: #555;
-  padding: 2px 8px; border-radius: 20px; font-weight: 500;
-}
+  /* Personal statement */
+  .about-statement {
+    flex-direction: column !important;
+    padding: 1.2rem !important;
+    gap: 8px !important;
+  }
+  .about-statement-icon { font-size: 1.8rem !important; }
+  .about-statement-text { font-size: 0.88rem !important; }
 
-/* Awards - revised design */
-.about-awards-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-}
-.about-award-card {
-  background: white; border-radius: 10px;
-  border: 0.5px solid #e0ddd5;
-  overflow: hidden;
-  transition: transform 0.18s, box-shadow 0.18s;
-}
-.about-award-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(13,33,55,0.1); }
-.about-award-year {
-  background: #0D2137;
-  color: #1D9E75;
-  font-size: 1.1rem;
-  font-weight: 700;
-  padding: 10px 14px;
-  border-bottom: 2px solid #1D9E75;
-}
-.about-award-body { padding: 12px 14px; }
-.about-award-org {
-  font-size: 0.68rem; font-weight: 700; color: #1D9E75;
-  text-transform: uppercase; letter-spacing: 0.07em;
-  margin-bottom: 5px; line-height: 1.4;
-}
-.about-award-title {
-  font-size: 0.9rem; font-weight: 700; color: #0D2137;
-  margin-bottom: 5px;
-}
-.about-award-event {
-  font-size: 0.75rem; color: #666; line-height: 1.5; margin-bottom: 8px;
-}
-.about-award-tags { display: flex; gap: 5px; flex-wrap: wrap; }
-.about-award-tag {
-  font-size: 0.6rem; padding: 2px 8px; border-radius: 20px; font-weight: 600;
+  /* Profile grid: single column */
+  .about-grid-2 {
+    display: block !important;
+    grid-template-columns: 1fr !important;
+  }
+  .about-grid-2 > div:first-child { margin-bottom: 12px; }
+
+  /* Timeline */
+  .about-tl-left { width: 56px !important; }
+  .about-tl-year { font-size: 0.6rem !important; white-space: normal !important; text-align: center !important; }
+  .about-tl-card { padding: 0.8rem 0.9rem !important; }
+  .about-tl-title { font-size: 0.85rem !important; }
+  .about-tl-inst { font-size: 0.74rem !important; }
+  .about-tl-desc { font-size: 0.76rem !important; }
+
+  /* Skills: 2 column */
+  .about-grid-skills {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Awards: single column */
+  .about-awards-grid {
+    display: block !important;
+    grid-template-columns: 1fr !important;
+  }
+  .about-award-card { margin-bottom: 10px !important; }
+
+  /* Memberships: 2 column */
+  .about-mem-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Connect: 2 column */
+  .about-connect-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .about-connect-handle { display: none; }
 }
 
-/* Memberships */
-.about-mem-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+@media (max-width: 480px) {
+  .about-grid-skills { grid-template-columns: 1fr !important; }
+  .about-mem-grid { grid-template-columns: 1fr 1fr !important; }
+  .about-connect-grid { grid-template-columns: 1fr !important; }
+  .about-tl-item { gap: 10px !important; }
 }
-.about-mem-card {
-  background: white; border-radius: 10px; border: 0.5px solid #e0ddd5;
-  padding: 1.1rem; text-align: center; transition: transform 0.18s;
-}
-.about-mem-card:hover { transform: translateY(-2px); }
-.about-mem-abbr {
-  width: 48px; height: 48px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; font-weight: 700; margin: 0 auto 10px; letter-spacing: 0.04em;
-}
-.about-mem-name { font-size: 0.78rem; font-weight: 600; color: #0D2137; line-height: 1.4; margin-bottom: 4px; }
-.about-mem-type { font-size: 0.65rem; color: #1D9E75; font-weight: 600; }
-
-/* Connect */
-.about-connect-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 2rem;
-}
-.about-connect-card {
-  background: white; border-radius: 10px; border: 0.5px solid #e0ddd5;
-  padding: 0.9rem 1rem; display: flex; align-items: center; gap: 12px;
-  text-decoration: none; transition: transform 0.18s, box-shadow 0.18s;
-}
-.about-connect-card:hover {
-  transform: translateY(-2px); box-shadow: 0 6px 20px rgba(13,33,55,0.1);
-  text-decoration: none;
-}
-.about-connect-icon {
-  width: 38px; height: 38px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.68rem; font-weight: 700; flex-shrink: 0;
-}
-.about-connect-name { font-size: 0.82rem; font-weight: 600; color: #0D2137; margin-bottom: 2px; }
-.about-connect-handle { font-size: 0.68rem; color: #999; }
-.about-connect-arrow { margin-left: auto; color: #1D9E75; font-weight: 700; font-size: 0.9rem; }
 </style>
 ```

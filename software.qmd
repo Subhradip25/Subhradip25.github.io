@@ -36,9 +36,6 @@ page-layout: full
 <div class="rp-body">
 <div class="rp-body-inner">
 
-<!-- ══════════════════════
-     imdR PACKAGE
-══════════════════════ -->
 <div id="imdr" style="scroll-margin-top:60px;">
 
   <!-- Package hero card -->
@@ -62,10 +59,10 @@ page-layout: full
     <div class="sw-hero-right">
       <div class="sw-desc-label">About the Package</div>
       <p class="sw-desc">
-        <strong>imdR</strong> is an R package that provides a complete pipeline for working with India Meteorological Department (IMD) gridded daily meteorological data- from raw binary download to climate index computation, trend analysis, and publication-quality maps, all within R.
+        <strong>imdR</strong> is an R package that provides a complete pipeline for working with India Meteorological Department (IMD) gridded daily meteorological data — from raw binary download to climate index computation, trend analysis, and publication-quality maps, all within R.
       </p>
       <p class="sw-desc">
-        imdR bundles <strong>Survey of India (SOI) approved administrative boundaries</strong> for all 36 states and union territories and 808 districts, allowing users to extract and visualize climate data at any administrative level with a single line of code- with no additional downloads required.
+        Unlike existing tools, imdR bundles <strong>Survey of India (SOI) approved administrative boundaries</strong> for all 36 states and 808 districts, allowing users to extract and visualize climate data at any administrative level with a single line of code — with no additional downloads required.
       </p>
       <p class="sw-desc">
         The package was developed out of the practical need to streamline IMD data workflows for agricultural and climate research in India, where accessing and processing gridded climate data has traditionally required significant programming expertise.
@@ -245,12 +242,11 @@ goa_idx &lt;- compute_rainfall_indices(rain2020,
     <div class="sw-code-label">If you use imdR in your research, please cite:</div>
     <div class="sw-code-block">citation("imdR")</div>
     <div class="sw-code-label" style="margin-top:14px;">Or cite directly:</div>
-    <div class="sw-code-block">Bhattacharjee S, Panja A, Chakraborty A, Basavareddy (2026).
+    <div class="sw-code-block">Bhattacharjee S, Panja A, Chakraborty A, Basavareddy (2024).
 imdR: Download, Process and Visualize IMD Gridded Meteorological Data.
 R package. https://CRAN.R-project.org/package=imdR</div>
   </div>
 
-  <!-- Data source note -->
   <div class="sw-note-card" style="margin-top:1.5rem;">
     <div class="sw-note-icon">ℹ️</div>
     <div>
@@ -260,20 +256,28 @@ R package. https://CRAN.R-project.org/package=imdR</div>
   </div>
 
 </div>
-
 </div>
 </div>
 
 <style>
 /* ── Package hero ── */
 .sw-hero-card {
-  display: grid; grid-template-columns: 280px 1fr; gap: 28px;
-  background: white; border-radius: 12px; border: 0.5px solid #e0ddd5;
-  overflow: hidden; margin-bottom: 8px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  background: white;
+  border-radius: 12px;
+  border: 0.5px solid #e0ddd5;
+  overflow: hidden;
+  margin-bottom: 8px;
 }
 .sw-hero-left {
-  background: #0D2137; padding: 2rem 1.5rem; text-align: center;
-  display: flex; flex-direction: column; align-items: center;
+  background: #0D2137;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .sw-pkg-icon { font-size: 3rem; margin-bottom: 8px; }
 .sw-pkg-name { color: white; font-size: 1.8rem; font-weight: 700; margin-bottom: 2px; }
@@ -350,5 +354,72 @@ R package. https://CRAN.R-project.org/package=imdR</div>
   font-size: 0.8rem; color: #444; line-height: 1.6;
 }
 .sw-note-icon { flex-shrink: 0; }
+
+/* ══════════════════════════════════════
+   SOFTWARE PAGE MOBILE RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Hero: stack dark panel above description */
+  .sw-hero-card {
+    grid-template-columns: 1fr !important;
+    display: block !important;
+  }
+  .sw-hero-left {
+    padding: 1.5rem !important;
+    border-radius: 10px 10px 0 0 !important;
+  }
+  .sw-hero-right {
+    padding: 1.2rem !important;
+  }
+  .sw-pkg-btns {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+  }
+  .sw-pkg-btn {
+    flex: 1 !important;
+    min-width: 120px !important;
+  }
+
+  /* Data coverage: single column */
+  .sw-coverage-grid {
+    grid-template-columns: 1fr !important;
+    display: block !important;
+  }
+  .sw-coverage-card {
+    margin-bottom: 10px !important;
+  }
+
+  /* Functions: single column */
+  .sw-fn-grid {
+    grid-template-columns: 1fr !important;
+    display: block !important;
+  }
+  .sw-fn-group {
+    margin-bottom: 10px !important;
+  }
+
+  /* Indices: single column */
+  .sw-indices-grid {
+    grid-template-columns: 1fr !important;
+    display: block !important;
+  }
+  .sw-indices-card {
+    margin-bottom: 10px !important;
+  }
+
+  /* Code blocks: smaller font */
+  .sw-code-block {
+    font-size: 0.72rem !important;
+    padding: 10px 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sw-pkg-btns {
+    flex-direction: column !important;
+  }
+  .sw-pkg-name { font-size: 1.4rem !important; }
+}
 </style>
 ```
