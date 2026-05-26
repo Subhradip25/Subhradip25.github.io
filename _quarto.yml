@@ -4,7 +4,7 @@ project:
 
 website:
   title: "Subhradip Bhattacharjee"
-  site-url: "https://subhradip25.github.io"  
+  site-url: "https://subhradip25.github.io"
   navbar:
     background: "#0D2137"
     foreground: "white"
@@ -15,11 +15,13 @@ website:
         text: About
       - href: research.qmd
         text: Research
+      - href: software.qmd
+        text: Software
       - href: blog.qmd
         text: Blog
   page-footer:
     background: "#0D2137"
-    left: "© 2025 Subhradip Bhattacharjee "
+    left: "© 2025 Subhradip Bhattacharjee"
     right: "subhradip25.github.io"
 
 format:

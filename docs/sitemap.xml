@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://subhradip25.github.io/research.html</loc>
-    <lastmod>2026-05-26T04:42:18.169Z</lastmod>
-  </url>
-  <url>
-    <loc>https://subhradip25.github.io/index.html</loc>
-    <lastmod>2026-05-25T20:03:48.377Z</lastmod>
-  </url>
-  <url>
-    <loc>https://subhradip25.github.io/blog.html</loc>
-    <lastmod>2026-05-25T20:03:48.266Z</lastmod>
-  </url>
-  <url>
-    <loc>https://subhradip25.github.io/about.html</loc>
-    <lastmod>2026-05-25T20:09:16.333Z</lastmod>
+    <loc>https://subhradip25.github.io/software.html</loc>
+    <lastmod>2026-05-26T07:37:35.533Z</lastmod>
   </url>
   <url>
     <loc>https://subhradip25.github.io/posts/01-imd-gridded-data/index.html</loc>
-    <lastmod>2026-05-25T20:03:48.380Z</lastmod>
+    <lastmod>2026-05-26T05:16:43.932Z</lastmod>
+  </url>
+  <url>
+    <loc>https://subhradip25.github.io/about.html</loc>
+    <lastmod>2026-05-26T05:16:43.904Z</lastmod>
+  </url>
+  <url>
+    <loc>https://subhradip25.github.io/blog.html</loc>
+    <lastmod>2026-05-26T05:16:43.904Z</lastmod>
+  </url>
+  <url>
+    <loc>https://subhradip25.github.io/index.html</loc>
+    <lastmod>2026-05-26T07:21:21.795Z</lastmod>
+  </url>
+  <url>
+    <loc>https://subhradip25.github.io/research.html</loc>
+    <lastmod>2026-05-26T05:45:34.140Z</lastmod>
   </url>
 </urlset>

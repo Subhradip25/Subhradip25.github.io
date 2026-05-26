@@ -5,18 +5,15 @@ toc: false
 ---
 
 ```{=html}
-
 <!-- ═══ HERO ═══ -->
 <div class="sb-hero">
   <div class="sb-hero-inner">
     <img src="images/profile.png" class="sb-photo" alt="Subhradip Bhattacharjee"/>
     <div class="sb-hero-text">
       <div class="sb-name">Subhradip Bhattacharjee</div>
-      <div class="sb-role">Agronomist  Turned  Open- Source Geospatial Analyst and Climate Change Researcher</div>
+      <div class="sb-role">Agronomist · Open-Source Geospatial Analyst · Climate Change Researcher</div>
       <p class="sb-bio">
-        Specialising in (typical) forage agronomy, open-source remote sensing techniques, agriculture linked big data analysis in climate & climate change science and few other workflows involving R, Python Linux Shell & GEE. 
-        
-        
+        Specialising in forage agronomy, open-source remote sensing, and agriculture-linked big data analysis in climate science — using R, Python, Linux Shell and Google Earth Engine.
       </p>
       <div class="sb-tags">
         <span class="sb-tag">Remote Sensing</span>
@@ -28,12 +25,13 @@ toc: false
         <span class="sb-tag">Coastal Agronomy</span>
       </div>
       <div class="sb-btns">
+        <a class="sb-btn sb-btn-green" href="software.html">📦 imdR Package</a>
         <a class="sb-btn sb-btn-out" href="https://scholar.google.com/citations?user=SP1Mx3QAAAAJ&hl=en" target="_blank">Google Scholar</a>
         <a class="sb-btn sb-btn-out" href="https://www.researchgate.net/profile/Subhradip-Bhattacharjee" target="_blank">ResearchGate</a>
-        <a class="sb-btn sb-btn-out" href="https://orcid.org" target="_blank">ORCID</a>
+        <a class="sb-btn sb-btn-out" href="https://orcid.org/0000-0003-2330-2979" target="_blank">ORCID</a>
         <a class="sb-btn sb-btn-out" href="https://www.scopus.com/authid/detail.uri?authorId=57219652426" target="_blank">Scopus</a>
         <a class="sb-btn sb-btn-out" href="https://www.webofscience.com/wos/author/record/IWM-7081-2023" target="_blank">Web of Science</a>
-        <a class="sb-btn sb-btn-out" href="mailto:your@email.com">Email Me</a>
+        <a class="sb-btn sb-btn-out" href="mailto:subhradip25@gmail.com">Email Me</a>
       </div>
     </div>
   </div>
@@ -61,7 +59,7 @@ fetch('/data/citations.json')
 <div class="sb-content-wrapper">
   <div class="sb-content">
 
-    <!-- LEFT COLUMN: Research Areas + Blog Posts -->
+    <!-- LEFT COLUMN -->
     <div class="sb-left">
 
       <div class="sb-section">
@@ -82,6 +80,40 @@ fetch('/data/citations.json')
           <div class="sb-ri-card">
             <div class="sb-ri-title">Bibliometrics</div>
             <div class="sb-ri-sub">Systematic research mapping · Scientometrics · Knowledge synthesis</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOFTWARE CARD -->
+      <div class="sb-section">
+        <div class="sb-section-title">Open-Source Software</div>
+        <div class="sb-software-card">
+          <div class="sb-sw-header">
+            <div class="sb-sw-icon">📦</div>
+            <div>
+              <div class="sb-sw-name">imdR</div>
+              <div class="sb-sw-badges">
+                <span class="sb-sw-badge sb-sw-badge-cran">CRAN</span>
+                <span class="sb-sw-badge sb-sw-badge-r">R Package</span>
+                <span class="sb-sw-badge sb-sw-badge-mit">MIT</span>
+              </div>
+            </div>
+            <a class="sb-sw-btn" href="software.html">View Details →</a>
+          </div>
+          <div class="sb-sw-desc">
+            Download, process, and visualize India Meteorological Department (IMD) gridded daily climate data entirely in R. Includes SOI-approved state and district boundaries, 24+ climate indices, Mann-Kendall trend analysis, and publication-quality maps — covering rainfall from 1901 and temperatures from 1951.
+          </div>
+          <div class="sb-sw-footer">
+            <div class="sb-sw-tags">
+              <span class="sb-tag">IMD Data</span>
+              <span class="sb-tag">Climate Indices</span>
+              <span class="sb-tag">Trend Analysis</span>
+              <span class="sb-tag">808 Districts</span>
+            </div>
+            <div class="sb-sw-links">
+              <a href="https://github.com/Subhradip25/imdR" target="_blank" class="sb-sw-link">GitHub</a>
+              <a href="https://CRAN.R-project.org/package=imdR" target="_blank" class="sb-sw-link">CRAN</a>
+            </div>
           </div>
         </div>
       </div>
@@ -109,7 +141,7 @@ fetch('/data/citations.json')
 
     </div>
 
-    <!-- RIGHT COLUMN: Recent Publications (linked) -->
+    <!-- RIGHT COLUMN: Recent Publications -->
     <div class="sb-right">
       <div class="sb-section">
         <div class="sb-section-title">Recent Publications</div>
@@ -168,14 +200,69 @@ fetch('/data/citations.json')
 
   </div>
 </div>
+
 <!-- ═══ STUDY SITES MAP ═══ -->
 <div style="width:100vw; position:relative; left:50%; margin-left:-50vw;">
   <iframe src="maps/study-sites-map.html"
-          width="100%"
-          height="580px"
-          frameborder="0"
-          scrolling="no"
+          width="100%" height="580px"
+          frameborder="0" scrolling="no"
           style="display:block;">
   </iframe>
 </div>
+
+<style>
+/* ── imdR Software Card ── */
+.sb-software-card {
+  background: white;
+  border-radius: 10px;
+  border: 0.5px solid #e0ddd5;
+  border-left: 3px solid #1D9E75;
+  padding: 1.2rem 1.4rem;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+.sb-software-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(13,33,55,0.1);
+}
+.sb-sw-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+}
+.sb-sw-icon { font-size: 1.8rem; flex-shrink: 0; }
+.sb-sw-name { font-size: 1.05rem; font-weight: 700; color: #0D2137; margin-bottom: 4px; }
+.sb-sw-badges { display: flex; gap: 5px; flex-wrap: wrap; }
+.sb-sw-badge {
+  font-size: 0.58rem; font-weight: 700; padding: 2px 7px;
+  border-radius: 20px; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.sb-sw-badge-cran  { background: #1565C0; color: white; }
+.sb-sw-badge-r     { background: #E1F5EE; color: #085041; }
+.sb-sw-badge-mit   { background: #f0efea; color: #666; }
+.sb-sw-btn {
+  margin-left: auto; background: #0D2137; color: #5DCAA5 !important;
+  border: 1px solid #1D9E75; padding: 6px 14px; border-radius: 5px;
+  font-size: 0.75rem; font-weight: 600; text-decoration: none !important;
+  white-space: nowrap; transition: all 0.18s; flex-shrink: 0;
+}
+.sb-sw-btn:hover { background: #1D9E75; color: white !important; }
+.sb-sw-desc {
+  font-size: 0.82rem; color: #555; line-height: 1.65; margin-bottom: 12px;
+}
+.sb-sw-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.sb-sw-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.sb-sw-links { display: flex; gap: 8px; flex-shrink: 0; }
+.sb-sw-link {
+  font-size: 0.72rem; font-weight: 600; color: #1D9E75 !important;
+  text-decoration: none; border-bottom: 1px solid rgba(29,158,117,0.3);
+  padding-bottom: 1px; transition: border-color 0.15s;
+}
+.sb-sw-link:hover { border-color: #1D9E75; }
+
+/* ── Publication title links ── */
+.sb-ptitle a { color: #0D2137 !important; text-decoration: none !important; font-weight: 600; }
+.sb-ptitle a:hover { color: #1D9E75 !important; text-decoration: underline !important; }
+
+/* ── imdR hero button ── */
+.sb-btn-green { background: #1D9E75 !important; color: white !important; border: none !important; }
+.sb-btn-green:hover { background: #178c66 !important; color: white !important; }
+</style>
 ```

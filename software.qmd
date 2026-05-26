@@ -1,0 +1,354 @@
+---
+title: ""
+toc: false
+page-layout: full
+---
+
+```{=html}
+
+<!-- ═══ PAGE HEADER ═══ -->
+<div class="rp-header">
+  <div class="rp-header-inner">
+    <div class="rp-label">Open-Source Contributions</div>
+    <div class="rp-title">Software & Tools</div>
+    <div class="rp-stats">
+      <div class="rp-stat"><div class="rp-snum">1</div><div class="rp-slbl">CRAN Package</div></div>
+      <div class="rp-stat"><div class="rp-snum">24+</div><div class="rp-slbl">Climate Indices</div></div>
+      <div class="rp-stat"><div class="rp-snum">808</div><div class="rp-slbl">Districts Covered</div></div>
+      <div class="rp-stat"><div class="rp-snum">1901</div><div class="rp-slbl">Data From</div></div>
+      <div class="rp-stat"><div class="rp-snum">MIT</div><div class="rp-slbl">License</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ QUICK NAV ═══ -->
+<div class="rp-nav">
+  <div class="rp-nav-inner">
+    <a href="#imdr">imdR Package</a>
+    <a href="#installation">Installation</a>
+    <a href="#functions">Functions</a>
+    <a href="#indices">Climate Indices</a>
+    <a href="#citation">Citation</a>
+  </div>
+</div>
+
+<!-- ═══ BODY ═══ -->
+<div class="rp-body">
+<div class="rp-body-inner">
+
+<!-- ══════════════════════
+     imdR PACKAGE
+══════════════════════ -->
+<div id="imdr" style="scroll-margin-top:60px;">
+
+  <!-- Package hero card -->
+  <div class="sw-hero-card">
+    <div class="sw-hero-left">
+      <div class="sw-pkg-icon">📦</div>
+      <div class="sw-pkg-name">imdR</div>
+      <div class="sw-pkg-tagline">Download · Process · Visualize</div>
+      <div class="sw-pkg-full">IMD Gridded Meteorological Data for India</div>
+      <div class="sw-pkg-badges">
+        <a href="https://CRAN.R-project.org/package=imdR" target="_blank" class="sw-badge sw-badge-cran">CRAN</a>
+        <span class="sw-badge sw-badge-r">R Package</span>
+        <span class="sw-badge sw-badge-mit">MIT License</span>
+        <a href="https://github.com/Subhradip25/imdR/actions/workflows/R-CMD-check.yaml" target="_blank" class="sw-badge sw-badge-check">R-CMD-check ✓</a>
+      </div>
+      <div class="sw-pkg-btns">
+        <a class="sw-pkg-btn sw-pkg-btn-primary" href="https://github.com/Subhradip25/imdR" target="_blank">View on GitHub</a>
+        <a class="sw-pkg-btn sw-pkg-btn-outline" href="https://CRAN.R-project.org/package=imdR" target="_blank">CRAN Page</a>
+      </div>
+    </div>
+    <div class="sw-hero-right">
+      <div class="sw-desc-label">About the Package</div>
+      <p class="sw-desc">
+        <strong>imdR</strong> is an R package that provides a complete pipeline for working with India Meteorological Department (IMD) gridded daily meteorological data- from raw binary download to climate index computation, trend analysis, and publication-quality maps, all within R.
+      </p>
+      <p class="sw-desc">
+        imdR bundles <strong>Survey of India (SOI) approved administrative boundaries</strong> for all 36 states and union territories and 808 districts, allowing users to extract and visualize climate data at any administrative level with a single line of code- with no additional downloads required.
+      </p>
+      <p class="sw-desc">
+        The package was developed out of the practical need to streamline IMD data workflows for agricultural and climate research in India, where accessing and processing gridded climate data has traditionally required significant programming expertise.
+      </p>
+      <div class="sw-authors">
+        <div class="sw-authors-label">Authors</div>
+        <div class="sw-authors-list">Subhradip Bhattacharjee (maintainer) · Amitava Panja · Ankita Chakraborty · Basavareddy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data coverage -->
+  <div class="rp-sec-header" style="margin-top:2rem;">
+    <div class="rp-sec-title">Data Coverage</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-coverage-grid">
+    <div class="sw-coverage-card">
+      <div class="sw-cov-icon">🌧️</div>
+      <div class="sw-cov-var">Rainfall</div>
+      <div class="sw-cov-res">0.25° resolution</div>
+      <div class="sw-cov-period">1901 – Present</div>
+      <div class="sw-cov-note">Daily gridded rainfall · ~125 years of records</div>
+    </div>
+    <div class="sw-coverage-card">
+      <div class="sw-cov-icon">🌡️</div>
+      <div class="sw-cov-var">Maximum Temperature</div>
+      <div class="sw-cov-res">1.0° resolution</div>
+      <div class="sw-cov-period">1951 – Present</div>
+      <div class="sw-cov-note">Daily Tmax · 70+ years of records</div>
+    </div>
+    <div class="sw-coverage-card">
+      <div class="sw-cov-icon">❄️</div>
+      <div class="sw-cov-var">Minimum Temperature</div>
+      <div class="sw-cov-res">1.0° resolution</div>
+      <div class="sw-cov-period">1951 – Present</div>
+      <div class="sw-cov-note">Daily Tmin · 70+ years of records</div>
+    </div>
+  </div>
+
+  <!-- Installation -->
+  <div class="rp-sec-header" id="installation" style="margin-top:2rem; scroll-margin-top:60px;">
+    <div class="rp-sec-title">Installation</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-code-card">
+    <div class="sw-code-label">Install from CRAN (stable)</div>
+    <div class="sw-code-block">install.packages("imdR")</div>
+    <div class="sw-code-label" style="margin-top:14px;">Install development version from GitHub</div>
+    <div class="sw-code-block">install.packages("remotes")
+remotes::install_github("Subhradip25/imdR")</div>
+  </div>
+
+  <!-- Quick Start -->
+  <div class="rp-sec-header" style="margin-top:2rem;">
+    <div class="rp-sec-title">Quick Start</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-code-card">
+    <div class="sw-code-label">Download and visualize IMD data in minutes</div>
+    <div class="sw-code-block">library(imdR)
+
+file_dir &lt;- "~/imdR_data"
+
+# Download 2020 rainfall data
+rain2020 &lt;- get_data("rain", 2020, 2020, file_dir)
+
+# Plot full India map with SOI boundaries
+plot_imd(rain2020, "2020-06-28", "rain")
+
+# Zoom to any state
+plot_imd(rain2020, "2020-06-28", "rain",
+         level = "state", name = "Kerala")
+
+# Extract daily time series at a point
+goa_ts &lt;- get_point(lat = 15.5, lon = 73.8,
+                    variable = "rain",
+                    start_yr = 2020, end_yr = 2020,
+                    file_dir = file_dir)
+
+# Plot time series with 30-day rolling mean
+plot_timeseries(goa_ts, variable = "rain",
+                title = "Goa Daily Rainfall 2020")
+
+# Compute rainfall climate indices
+goa_idx &lt;- compute_rainfall_indices(rain2020,
+                                    level = "state",
+                                    name  = "Goa",
+                                    file_dir = file_dir)</div>
+  </div>
+
+  <!-- Functions -->
+  <div class="rp-sec-header" id="functions" style="margin-top:2rem; scroll-margin-top:60px;">
+    <div class="rp-sec-title">Functions</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-fn-grid">
+    <div class="sw-fn-group">
+      <div class="sw-fn-group-title">📥 Data Access</div>
+      <div class="sw-fn-item"><code>get_data()</code><span>Download and read IMD binary data</span></div>
+      <div class="sw-fn-item"><code>open_data()</code><span>Read cached IMD data from disk</span></div>
+      <div class="sw-fn-item"><code>get_point()</code><span>Extract daily time series at a point</span></div>
+      <div class="sw-fn-item"><code>get_point_all()</code><span>Extract all variables at a point</span></div>
+      <div class="sw-fn-item"><code>get_bbox()</code><span>Extract data within a bounding box</span></div>
+    </div>
+    <div class="sw-fn-group">
+      <div class="sw-fn-group-title">🗺️ Boundaries</div>
+      <div class="sw-fn-item"><code>extract_by_boundary()</code><span>Mask data to state or district</span></div>
+      <div class="sw-fn-item"><code>list_states()</code><span>List all 36 states and UTs</span></div>
+      <div class="sw-fn-item"><code>list_districts()</code><span>List districts by state</span></div>
+      <div class="sw-fn-item"><code>get_boundary()</code><span>Get sf boundary object</span></div>
+    </div>
+    <div class="sw-fn-group">
+      <div class="sw-fn-group-title">📊 Analysis & Visualisation</div>
+      <div class="sw-fn-item"><code>plot_imd()</code><span>Publication-quality daily map</span></div>
+      <div class="sw-fn-item"><code>plot_timeseries()</code><span>Time series with rolling mean</span></div>
+      <div class="sw-fn-item"><code>compute_rainfall_indices()</code><span>11 rainfall climate indices</span></div>
+      <div class="sw-fn-item"><code>compute_temp_indices()</code><span>13 temperature climate indices</span></div>
+      <div class="sw-fn-item"><code>trend_analysis()</code><span>Mann-Kendall test &amp; Sen's slope</span></div>
+    </div>
+  </div>
+
+  <!-- Climate Indices -->
+  <div class="rp-sec-header" id="indices" style="margin-top:2rem; scroll-margin-top:60px;">
+    <div class="rp-sec-title">Climate Indices</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-indices-grid">
+    <div class="sw-indices-card">
+      <div class="sw-indices-title">🌧️ Rainfall Indices (11)</div>
+      <div class="sw-indices-list">
+        <div class="sw-index-item"><code>dr</code><span>Dry days</span></div>
+        <div class="sw-index-item"><code>d64</code><span>Heavy rainfall days (&gt;64mm)</span></div>
+        <div class="sw-index-item"><code>d115</code><span>Very heavy rainfall days (&gt;115mm)</span></div>
+        <div class="sw-index-item"><code>rx1day</code><span>Max 1-day rainfall</span></div>
+        <div class="sw-index-item"><code>rx5day</code><span>Max 5-day rainfall</span></div>
+        <div class="sw-index-item"><code>rtwd</code><span>Rainy time wet days</span></div>
+        <div class="sw-index-item"><code>sdii</code><span>Simple daily intensity index</span></div>
+        <div class="sw-index-item"><code>total</code><span>Total seasonal rainfall</span></div>
+        <div class="sw-index-item"><code>cwd</code><span>Consecutive wet days</span></div>
+        <div class="sw-index-item"><code>cdd</code><span>Consecutive dry days</span></div>
+        <div class="sw-index-item"><code>pci</code><span>Precipitation concentration index</span></div>
+      </div>
+    </div>
+    <div class="sw-indices-card">
+      <div class="sw-indices-title">🌡️ Temperature Indices (13)</div>
+      <div class="sw-indices-list">
+        <div class="sw-index-item"><code>mean_tmax</code><span>Mean maximum temperature</span></div>
+        <div class="sw-index-item"><code>mean_tmin</code><span>Mean minimum temperature</span></div>
+        <div class="sw-index-item"><code>mean_dtr</code><span>Mean diurnal temperature range</span></div>
+        <div class="sw-index-item"><code>txx</code><span>Monthly max of Tmax</span></div>
+        <div class="sw-index-item"><code>txn</code><span>Monthly min of Tmax</span></div>
+        <div class="sw-index-item"><code>tnx</code><span>Monthly max of Tmin</span></div>
+        <div class="sw-index-item"><code>tnn</code><span>Monthly min of Tmin</span></div>
+        <div class="sw-index-item"><code>su35</code><span>Summer days (Tmax &gt;35°C)</span></div>
+        <div class="sw-index-item"><code>su40</code><span>Extreme heat days (Tmax &gt;40°C)</span></div>
+        <div class="sw-index-item"><code>tr10</code><span>Tropical nights (Tmin &gt;10°C)</span></div>
+        <div class="sw-index-item"><code>tr25</code><span>Warm nights (Tmin &gt;25°C)</span></div>
+        <div class="sw-index-item"><code>wsdi</code><span>Warm spell duration index</span></div>
+        <div class="sw-index-item"><code>csdi</code><span>Cold spell duration index</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Citation -->
+  <div class="rp-sec-header" id="citation" style="margin-top:2rem; scroll-margin-top:60px;">
+    <div class="rp-sec-title">Citation</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-code-card">
+    <div class="sw-code-label">If you use imdR in your research, please cite:</div>
+    <div class="sw-code-block">citation("imdR")</div>
+    <div class="sw-code-label" style="margin-top:14px;">Or cite directly:</div>
+    <div class="sw-code-block">Bhattacharjee S, Panja A, Chakraborty A, Basavareddy (2026).
+imdR: Download, Process and Visualize IMD Gridded Meteorological Data.
+R package. https://CRAN.R-project.org/package=imdR</div>
+  </div>
+
+  <!-- Data source note -->
+  <div class="sw-note-card" style="margin-top:1.5rem;">
+    <div class="sw-note-icon">ℹ️</div>
+    <div>
+      <strong>Data Source:</strong> IMD gridded meteorological data is sourced from the India Meteorological Department (IMD Pune) at <a href="https://imdpune.gov.in/" target="_blank" style="color:#1D9E75;">imdpune.gov.in</a>.
+      Administrative boundaries are Survey of India (SOI) approved shapefiles.
+    </div>
+  </div>
+
+</div>
+
+</div>
+</div>
+
+<style>
+/* ── Package hero ── */
+.sw-hero-card {
+  display: grid; grid-template-columns: 280px 1fr; gap: 28px;
+  background: white; border-radius: 12px; border: 0.5px solid #e0ddd5;
+  overflow: hidden; margin-bottom: 8px;
+}
+.sw-hero-left {
+  background: #0D2137; padding: 2rem 1.5rem; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+}
+.sw-pkg-icon { font-size: 3rem; margin-bottom: 8px; }
+.sw-pkg-name { color: white; font-size: 1.8rem; font-weight: 700; margin-bottom: 2px; }
+.sw-pkg-tagline { color: #5DCAA5; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+.sw-pkg-full { color: rgba(255,255,255,0.55); font-size: 0.78rem; line-height: 1.5; margin-bottom: 14px; text-align: center; }
+.sw-pkg-badges { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-bottom: 16px; }
+.sw-badge { font-size: 0.6rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-decoration: none !important; }
+.sw-badge-cran  { background: #1565C0; color: white !important; }
+.sw-badge-r     { background: rgba(29,158,117,0.2); color: #5DCAA5; border: 1px solid rgba(29,158,117,0.3); }
+.sw-badge-mit   { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+.sw-badge-check { background: #1D9E75; color: white !important; }
+.sw-pkg-btns { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.sw-pkg-btn {
+  padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;
+  text-decoration: none !important; text-align: center; transition: all 0.18s;
+}
+.sw-pkg-btn-primary { background: #1D9E75; color: white !important; }
+.sw-pkg-btn-primary:hover { background: #178c66; }
+.sw-pkg-btn-outline { background: transparent; color: rgba(255,255,255,0.8) !important; border: 1px solid rgba(255,255,255,0.25); }
+.sw-pkg-btn-outline:hover { background: rgba(255,255,255,0.1); }
+.sw-hero-right { padding: 1.8rem; }
+.sw-desc-label { font-size: 0.62rem; font-weight: 700; color: #1D9E75; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
+.sw-desc { font-size: 0.85rem; color: #444; line-height: 1.7; margin-bottom: 10px; }
+.sw-authors { border-top: 0.5px solid #f0efea; padding-top: 12px; margin-top: 4px; }
+.sw-authors-label { font-size: 0.62rem; font-weight: 700; color: #1D9E75; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+.sw-authors-list { font-size: 0.78rem; color: #666; }
+
+/* ── Data coverage ── */
+.sw-coverage-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.sw-coverage-card {
+  background: white; border-radius: 10px; border: 0.5px solid #e0ddd5;
+  border-top: 3px solid #1D9E75; padding: 1.1rem; text-align: center;
+}
+.sw-cov-icon { font-size: 1.5rem; margin-bottom: 6px; }
+.sw-cov-var { font-size: 0.88rem; font-weight: 700; color: #0D2137; margin-bottom: 4px; }
+.sw-cov-res { font-size: 0.72rem; color: #1D9E75; font-weight: 600; margin-bottom: 2px; }
+.sw-cov-period { font-size: 0.82rem; font-weight: 700; color: #0D2137; margin-bottom: 6px; }
+.sw-cov-note { font-size: 0.7rem; color: #888; line-height: 1.4; }
+
+/* ── Code cards ── */
+.sw-code-card {
+  background: white; border-radius: 10px; border: 0.5px solid #e0ddd5;
+  border-left: 3px solid #1D9E75; padding: 1.2rem 1.4rem;
+}
+.sw-code-label { font-size: 0.68rem; font-weight: 700; color: #1D9E75; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+.sw-code-block {
+  background: #0D2137; color: #5DCAA5; font-family: 'Courier New', monospace;
+  font-size: 0.82rem; line-height: 1.7; padding: 12px 16px;
+  border-radius: 6px; white-space: pre; overflow-x: auto;
+}
+
+/* ── Functions grid ── */
+.sw-fn-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.sw-fn-group { background: white; border-radius: 10px; border: 0.5px solid #e0ddd5; padding: 1.1rem; }
+.sw-fn-group-title { font-size: 0.75rem; font-weight: 700; color: #0D2137; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px solid #f0efea; }
+.sw-fn-item { display: flex; gap: 8px; align-items: flex-start; padding: 5px 0; border-bottom: 0.5px solid #f8f8f5; font-size: 0.75rem; }
+.sw-fn-item:last-child { border-bottom: none; }
+.sw-fn-item code { color: #1D9E75; font-weight: 600; flex-shrink: 0; font-size: 0.72rem; }
+.sw-fn-item span { color: #666; }
+
+/* ── Indices grid ── */
+.sw-indices-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sw-indices-card { background: white; border-radius: 10px; border: 0.5px solid #e0ddd5; padding: 1.1rem; }
+.sw-indices-title { font-size: 0.78rem; font-weight: 700; color: #0D2137; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px solid #f0efea; }
+.sw-index-item { display: flex; gap: 10px; align-items: baseline; padding: 4px 0; border-bottom: 0.5px solid #f8f8f5; font-size: 0.75rem; }
+.sw-index-item:last-child { border-bottom: none; }
+.sw-index-item code { color: #1D9E75; font-weight: 600; min-width: 80px; flex-shrink: 0; font-size: 0.72rem; }
+.sw-index-item span { color: #666; }
+
+/* ── Note card ── */
+.sw-note-card {
+  background: #edf7f2; border-left: 3px solid #1D9E75; border-radius: 0 8px 8px 0;
+  padding: 10px 14px; display: flex; gap: 10px; align-items: flex-start;
+  font-size: 0.8rem; color: #444; line-height: 1.6;
+}
+.sw-note-icon { flex-shrink: 0; }
+</style>
+```

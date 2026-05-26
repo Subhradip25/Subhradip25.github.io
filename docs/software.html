@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Subhradip Bhattacharjee</title>
+<title>software – Subhradip Bhattacharjee</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -94,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -106,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./software.html"> 
+    <a class="nav-link active" href="./software.html" aria-current="page"> 
 <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
@@ -116,6 +116,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -131,262 +132,351 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<!-- ═══ HERO ═══ -->
-<div class="sb-hero">
-  <div class="sb-hero-inner">
-    <img src="images/profile.png" class="sb-photo" alt="Subhradip Bhattacharjee">
-    <div class="sb-hero-text">
-      <div class="sb-name">Subhradip Bhattacharjee</div>
-      <div class="sb-role">Agronomist · Open-Source Geospatial Analyst · Climate Change Researcher</div>
-      <p class="sb-bio">
-        Specialising in forage agronomy, open-source remote sensing, and agriculture-linked big data analysis in climate science — using R, Python, Linux Shell and Google Earth Engine.
+
+<!-- ═══ PAGE HEADER ═══ -->
+<div class="rp-header">
+  <div class="rp-header-inner">
+    <div class="rp-label">Open-Source Contributions</div>
+    <div class="rp-title">Software &amp; Tools</div>
+    <div class="rp-stats">
+      <div class="rp-stat"><div class="rp-snum">1</div><div class="rp-slbl">CRAN Package</div></div>
+      <div class="rp-stat"><div class="rp-snum">24+</div><div class="rp-slbl">Climate Indices</div></div>
+      <div class="rp-stat"><div class="rp-snum">808</div><div class="rp-slbl">Districts Covered</div></div>
+      <div class="rp-stat"><div class="rp-snum">1901</div><div class="rp-slbl">Data From</div></div>
+      <div class="rp-stat"><div class="rp-snum">MIT</div><div class="rp-slbl">License</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ QUICK NAV ═══ -->
+<div class="rp-nav">
+  <div class="rp-nav-inner">
+    <a href="#imdr">imdR Package</a>
+    <a href="#installation">Installation</a>
+    <a href="#functions">Functions</a>
+    <a href="#indices">Climate Indices</a>
+    <a href="#citation">Citation</a>
+  </div>
+</div>
+
+<!-- ═══ BODY ═══ -->
+<div class="rp-body">
+<div class="rp-body-inner">
+
+<!-- ══════════════════════
+     imdR PACKAGE
+══════════════════════ -->
+<div id="imdr" style="scroll-margin-top:60px;">
+
+  <!-- Package hero card -->
+  <div class="sw-hero-card">
+    <div class="sw-hero-left">
+      <div class="sw-pkg-icon">📦</div>
+      <div class="sw-pkg-name">imdR</div>
+      <div class="sw-pkg-tagline">Download · Process · Visualize</div>
+      <div class="sw-pkg-full">IMD Gridded Meteorological Data for India</div>
+      <div class="sw-pkg-badges">
+        <a href="https://CRAN.R-project.org/package=imdR" target="_blank" class="sw-badge sw-badge-cran">CRAN</a>
+        <span class="sw-badge sw-badge-r">R Package</span>
+        <span class="sw-badge sw-badge-mit">MIT License</span>
+        <a href="https://github.com/Subhradip25/imdR/actions/workflows/R-CMD-check.yaml" target="_blank" class="sw-badge sw-badge-check">R-CMD-check ✓</a>
+      </div>
+      <div class="sw-pkg-btns">
+        <a class="sw-pkg-btn sw-pkg-btn-primary" href="https://github.com/Subhradip25/imdR" target="_blank">View on GitHub</a>
+        <a class="sw-pkg-btn sw-pkg-btn-outline" href="https://CRAN.R-project.org/package=imdR" target="_blank">CRAN Page</a>
+      </div>
+    </div>
+    <div class="sw-hero-right">
+      <div class="sw-desc-label">About the Package</div>
+      <p class="sw-desc">
+        <strong>imdR</strong> is an R package that provides a complete pipeline for working with India Meteorological Department (IMD) gridded daily meteorological data- from raw binary download to climate index computation, trend analysis, and publication-quality maps, all within R.
       </p>
-      <div class="sb-tags">
-        <span class="sb-tag">Remote Sensing</span>
-        <span class="sb-tag">Google Earth Engine</span>
-        <span class="sb-tag">Soil Health</span>
-        <span class="sb-tag">SDG Monitoring</span>
-        <span class="sb-tag">Conservation Agriculture</span>
-        <span class="sb-tag">Bibliometrics</span>
-        <span class="sb-tag">Coastal Agronomy</span>
-      </div>
-      <div class="sb-btns">
-        <a class="sb-btn sb-btn-green" href="software.html">📦 imdR Package</a>
-        <a class="sb-btn sb-btn-out" href="https://scholar.google.com/citations?user=SP1Mx3QAAAAJ&amp;hl=en" target="_blank">Google Scholar</a>
-        <a class="sb-btn sb-btn-out" href="https://www.researchgate.net/profile/Subhradip-Bhattacharjee" target="_blank">ResearchGate</a>
-        <a class="sb-btn sb-btn-out" href="https://orcid.org/0000-0003-2330-2979" target="_blank">ORCID</a>
-        <a class="sb-btn sb-btn-out" href="https://www.scopus.com/authid/detail.uri?authorId=57219652426" target="_blank">Scopus</a>
-        <a class="sb-btn sb-btn-out" href="https://www.webofscience.com/wos/author/record/IWM-7081-2023" target="_blank">Web of Science</a>
-        <a class="sb-btn sb-btn-out" href="mailto:subhradip25@gmail.com">Email Me</a>
+      <p class="sw-desc">
+        imdR bundles <strong>Survey of India (SOI) approved administrative boundaries</strong> for all 36 states and union territories and 808 districts, allowing users to extract and visualize climate data at any administrative level with a single line of code- with no additional downloads required.
+      </p>
+      <p class="sw-desc">
+        The package was developed out of the practical need to streamline IMD data workflows for agricultural and climate research in India, where accessing and processing gridded climate data has traditionally required significant programming expertise.
+      </p>
+      <div class="sw-authors">
+        <div class="sw-authors-label">Authors</div>
+        <div class="sw-authors-list">Subhradip Bhattacharjee (maintainer) · Amitava Panja · Ankita Chakraborty · Basavareddy</div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ═══ STATS BAR ═══ -->
-<div class="sb-stats">
-  <div class="sb-stat"><div class="sb-snum">60+</div><div class="sb-slbl">Publications</div></div>
-  <div class="sb-stat"><div class="sb-snum">8+</div><div class="sb-slbl">Years of Research</div></div>
-  <div class="sb-stat"><div class="sb-snum" id="stat-citations">324</div><div class="sb-slbl">Total Citations</div></div>
-  <div class="sb-stat"><div class="sb-snum" id="stat-hindex">9</div><div class="sb-slbl">h-index</div></div>
-</div>
-
-<script>
-fetch('/data/citations.json')
-  .then(function(r){ return r.json(); })
-  .then(function(d){
-    document.getElementById('stat-citations').textContent = d.citations_total;
-    document.getElementById('stat-hindex').textContent = d.h_index;
-  })
-  .catch(function(){});
-</script>
-
-<!-- ═══ MAIN CONTENT ═══ -->
-<div class="sb-content-wrapper">
-  <div class="sb-content">
-
-    <!-- LEFT COLUMN -->
-    <div class="sb-left">
-
-      <div class="sb-section">
-        <div class="sb-section-title">Research Areas</div>
-        <div class="sb-ri-grid">
-          <div class="sb-ri-card">
-            <div class="sb-ri-title">Geospatial Analysis</div>
-            <div class="sb-ri-sub">GIS · Remote Sensing · Google Earth Engine · Land degradation mapping</div>
-          </div>
-          <div class="sb-ri-card">
-            <div class="sb-ri-title">Coastal Agronomy</div>
-            <div class="sb-ri-sub">Soil health · Coastal crop systems · Integrated nutrient management</div>
-          </div>
-          <div class="sb-ri-card">
-            <div class="sb-ri-title">Climate Adaptation</div>
-            <div class="sb-ri-sub">Coastal vulnerability · SDG monitoring · Climate-smart agriculture</div>
-          </div>
-          <div class="sb-ri-card">
-            <div class="sb-ri-title">Bibliometrics</div>
-            <div class="sb-ri-sub">Systematic research mapping · Scientometrics · Knowledge synthesis</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SOFTWARE CARD -->
-      <div class="sb-section">
-        <div class="sb-section-title">Open-Source Software</div>
-        <div class="sb-software-card">
-          <div class="sb-sw-header">
-            <div class="sb-sw-icon">📦</div>
-            <div>
-              <div class="sb-sw-name">imdR</div>
-              <div class="sb-sw-badges">
-                <span class="sb-sw-badge sb-sw-badge-cran">CRAN</span>
-                <span class="sb-sw-badge sb-sw-badge-r">R Package</span>
-                <span class="sb-sw-badge sb-sw-badge-mit">MIT</span>
-              </div>
-            </div>
-            <a class="sb-sw-btn" href="software.html">View Details →</a>
-          </div>
-          <div class="sb-sw-desc">
-            Download, process, and visualize India Meteorological Department (IMD) gridded daily climate data entirely in R. Includes SOI-approved state and district boundaries, 24+ climate indices, Mann-Kendall trend analysis, and publication-quality maps — covering rainfall from 1901 and temperatures from 1951.
-          </div>
-          <div class="sb-sw-footer">
-            <div class="sb-sw-tags">
-              <span class="sb-tag">IMD Data</span>
-              <span class="sb-tag">Climate Indices</span>
-              <span class="sb-tag">Trend Analysis</span>
-              <span class="sb-tag">808 Districts</span>
-            </div>
-            <div class="sb-sw-links">
-              <a href="https://github.com/Subhradip25/imdR" target="_blank" class="sb-sw-link">GitHub</a>
-              <a href="https://CRAN.R-project.org/package=imdR" target="_blank" class="sb-sw-link">CRAN</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sb-section">
-        <div class="sb-section-title">Recent Blog Posts</div>
-        <div class="sb-blog-grid">
-          <div class="sb-blog-card">
-            <div class="sb-blog-cat">Remote Sensing</div>
-            <div class="sb-blog-title">Using NDVI to monitor crop stress in coastal paddy fields</div>
-            <div class="sb-blog-date">May 2025</div>
-          </div>
-          <div class="sb-blog-card">
-            <div class="sb-blog-cat">Bibliometrics</div>
-            <div class="sb-blog-title">How conservation agriculture research evolved over 50 years</div>
-            <div class="sb-blog-date">April 2025</div>
-          </div>
-          <div class="sb-blog-card">
-            <div class="sb-blog-cat">Field Notes</div>
-            <div class="sb-blog-title">Soil sampling protocol for mycorrhizal fungi assessment</div>
-            <div class="sb-blog-date">March 2025</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RIGHT COLUMN: Recent Publications -->
-    <div class="sb-right">
-      <div class="sb-section">
-        <div class="sb-section-title">Recent Publications</div>
-
-        <div class="sb-pub">
-          <span class="sb-pyear">2026</span>
-          <div>
-            <div class="sb-ptitle"><a href="https://www.sciencedirect.com/science/article/pii/S2665972726001492" target="_blank">Comparative Assessment of Ecosystem Services under Conservation Agriculture, Agroforestry, and Traditional Integrated Farming Systems in Tribal Regions of Central India</a></div>
-            <div class="sb-pjournal">Environmental and Sustainability Indicators · Elsevier</div>
-          </div>
-        </div>
-
-        <div class="sb-pub">
-          <span class="sb-pyear">2026</span>
-          <div>
-            <div class="sb-ptitle"><a href="https://www.sciencedirect.com/science/article/pii/S2667006226000080" target="_blank">Long-term effect of rice-rice and rice-cowpea systems on soil carbon and soil quality indicators under rice-based cropping systems in West Coast India</a></div>
-            <div class="sb-pjournal">Soil Security · Elsevier</div>
-          </div>
-        </div>
-
-        <div class="sb-pub">
-          <span class="sb-pyear">2025</span>
-          <div>
-            <div class="sb-ptitle"><a href="https://www.sciencedirect.com/science/article/pii/S2666154325006490" target="_blank">Assessing the impact of nutrient management on productivity, economics, soil quality, energy efficiency, and life cycle assessment in rice-based farming systems</a></div>
-            <div class="sb-pjournal">Journal of Agriculture and Food Research · Elsevier</div>
-          </div>
-        </div>
-
-        <div class="sb-pub">
-          <span class="sb-pyear">2025</span>
-          <div>
-            <div class="sb-ptitle"><a href="https://link.springer.com/article/10.1007/s10661-025-14371-1" target="_blank">Assessing land degradation and drought vulnerability in the Trans-Gangetic Plains using Google Earth Engine for SDG 15.3.1 monitoring</a></div>
-            <div class="sb-pjournal">Environmental Monitoring and Assessment · Springer</div>
-          </div>
-        </div>
-
-        <div class="sb-pub">
-          <span class="sb-pyear">2025</span>
-          <div>
-            <div class="sb-ptitle"><a href="https://link.springer.com/article/10.1134/S1064229324604165" target="_blank">Impact of Seasonal Dynamics and Agronomic Practices on Soil Health Indicators: AMF, GRSP, and Ergosterol</a></div>
-            <div class="sb-pjournal">Eurasian Soil Science · Springer</div>
-          </div>
-        </div>
-
-        <div class="sb-pub">
-          <span class="sb-pyear">2023</span>
-          <div>
-            <div class="sb-ptitle"><a href="https://link.springer.com/article/10.1007/s10668-023-04145-5" target="_blank">From garbage to global warming: a bibliometric analysis of greenhouse gas emissions from municipal solid waste</a></div>
-            <div class="sb-pjournal">Environment, Development and Sustainability · Springer</div>
-          </div>
-        </div>
-
-        <a href="research.html" class="sb-view-all">View all 60+ publications →</a>
-      </div>
-    </div>
-
+  <!-- Data coverage -->
+  <div class="rp-sec-header" style="margin-top:2rem;">
+    <div class="rp-sec-title">Data Coverage</div>
+    <div class="rp-sec-line"></div>
   </div>
+
+  <div class="sw-coverage-grid">
+    <div class="sw-coverage-card">
+      <div class="sw-cov-icon">🌧️</div>
+      <div class="sw-cov-var">Rainfall</div>
+      <div class="sw-cov-res">0.25° resolution</div>
+      <div class="sw-cov-period">1901 – Present</div>
+      <div class="sw-cov-note">Daily gridded rainfall · ~125 years of records</div>
+    </div>
+    <div class="sw-coverage-card">
+      <div class="sw-cov-icon">🌡️</div>
+      <div class="sw-cov-var">Maximum Temperature</div>
+      <div class="sw-cov-res">1.0° resolution</div>
+      <div class="sw-cov-period">1951 – Present</div>
+      <div class="sw-cov-note">Daily Tmax · 70+ years of records</div>
+    </div>
+    <div class="sw-coverage-card">
+      <div class="sw-cov-icon">❄️</div>
+      <div class="sw-cov-var">Minimum Temperature</div>
+      <div class="sw-cov-res">1.0° resolution</div>
+      <div class="sw-cov-period">1951 – Present</div>
+      <div class="sw-cov-note">Daily Tmin · 70+ years of records</div>
+    </div>
+  </div>
+
+  <!-- Installation -->
+  <div class="rp-sec-header" id="installation" style="margin-top:2rem; scroll-margin-top:60px;">
+    <div class="rp-sec-title">Installation</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-code-card">
+    <div class="sw-code-label">Install from CRAN (stable)</div>
+    <div class="sw-code-block">install.packages("imdR")</div>
+    <div class="sw-code-label" style="margin-top:14px;">Install development version from GitHub</div>
+    <div class="sw-code-block">install.packages("remotes")
+remotes::install_github("Subhradip25/imdR")</div>
+  </div>
+
+  <!-- Quick Start -->
+  <div class="rp-sec-header" style="margin-top:2rem;">
+    <div class="rp-sec-title">Quick Start</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-code-card">
+    <div class="sw-code-label">Download and visualize IMD data in minutes</div>
+    <div class="sw-code-block">library(imdR)
+
+file_dir &lt;- "~/imdR_data"
+
+# Download 2020 rainfall data
+rain2020 &lt;- get_data("rain", 2020, 2020, file_dir)
+
+# Plot full India map with SOI boundaries
+plot_imd(rain2020, "2020-06-28", "rain")
+
+# Zoom to any state
+plot_imd(rain2020, "2020-06-28", "rain",
+         level = "state", name = "Kerala")
+
+# Extract daily time series at a point
+goa_ts &lt;- get_point(lat = 15.5, lon = 73.8,
+                    variable = "rain",
+                    start_yr = 2020, end_yr = 2020,
+                    file_dir = file_dir)
+
+# Plot time series with 30-day rolling mean
+plot_timeseries(goa_ts, variable = "rain",
+                title = "Goa Daily Rainfall 2020")
+
+# Compute rainfall climate indices
+goa_idx &lt;- compute_rainfall_indices(rain2020,
+                                    level = "state",
+                                    name  = "Goa",
+                                    file_dir = file_dir)</div>
+  </div>
+
+  <!-- Functions -->
+  <div class="rp-sec-header" id="functions" style="margin-top:2rem; scroll-margin-top:60px;">
+    <div class="rp-sec-title">Functions</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-fn-grid">
+    <div class="sw-fn-group">
+      <div class="sw-fn-group-title">📥 Data Access</div>
+      <div class="sw-fn-item"><code>get_data()</code><span>Download and read IMD binary data</span></div>
+      <div class="sw-fn-item"><code>open_data()</code><span>Read cached IMD data from disk</span></div>
+      <div class="sw-fn-item"><code>get_point()</code><span>Extract daily time series at a point</span></div>
+      <div class="sw-fn-item"><code>get_point_all()</code><span>Extract all variables at a point</span></div>
+      <div class="sw-fn-item"><code>get_bbox()</code><span>Extract data within a bounding box</span></div>
+    </div>
+    <div class="sw-fn-group">
+      <div class="sw-fn-group-title">🗺️ Boundaries</div>
+      <div class="sw-fn-item"><code>extract_by_boundary()</code><span>Mask data to state or district</span></div>
+      <div class="sw-fn-item"><code>list_states()</code><span>List all 36 states and UTs</span></div>
+      <div class="sw-fn-item"><code>list_districts()</code><span>List districts by state</span></div>
+      <div class="sw-fn-item"><code>get_boundary()</code><span>Get sf boundary object</span></div>
+    </div>
+    <div class="sw-fn-group">
+      <div class="sw-fn-group-title">📊 Analysis &amp; Visualisation</div>
+      <div class="sw-fn-item"><code>plot_imd()</code><span>Publication-quality daily map</span></div>
+      <div class="sw-fn-item"><code>plot_timeseries()</code><span>Time series with rolling mean</span></div>
+      <div class="sw-fn-item"><code>compute_rainfall_indices()</code><span>11 rainfall climate indices</span></div>
+      <div class="sw-fn-item"><code>compute_temp_indices()</code><span>13 temperature climate indices</span></div>
+      <div class="sw-fn-item"><code>trend_analysis()</code><span>Mann-Kendall test &amp; Sen's slope</span></div>
+    </div>
+  </div>
+
+  <!-- Climate Indices -->
+  <div class="rp-sec-header" id="indices" style="margin-top:2rem; scroll-margin-top:60px;">
+    <div class="rp-sec-title">Climate Indices</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-indices-grid">
+    <div class="sw-indices-card">
+      <div class="sw-indices-title">🌧️ Rainfall Indices (11)</div>
+      <div class="sw-indices-list">
+        <div class="sw-index-item"><code>dr</code><span>Dry days</span></div>
+        <div class="sw-index-item"><code>d64</code><span>Heavy rainfall days (&gt;64mm)</span></div>
+        <div class="sw-index-item"><code>d115</code><span>Very heavy rainfall days (&gt;115mm)</span></div>
+        <div class="sw-index-item"><code>rx1day</code><span>Max 1-day rainfall</span></div>
+        <div class="sw-index-item"><code>rx5day</code><span>Max 5-day rainfall</span></div>
+        <div class="sw-index-item"><code>rtwd</code><span>Rainy time wet days</span></div>
+        <div class="sw-index-item"><code>sdii</code><span>Simple daily intensity index</span></div>
+        <div class="sw-index-item"><code>total</code><span>Total seasonal rainfall</span></div>
+        <div class="sw-index-item"><code>cwd</code><span>Consecutive wet days</span></div>
+        <div class="sw-index-item"><code>cdd</code><span>Consecutive dry days</span></div>
+        <div class="sw-index-item"><code>pci</code><span>Precipitation concentration index</span></div>
+      </div>
+    </div>
+    <div class="sw-indices-card">
+      <div class="sw-indices-title">🌡️ Temperature Indices (13)</div>
+      <div class="sw-indices-list">
+        <div class="sw-index-item"><code>mean_tmax</code><span>Mean maximum temperature</span></div>
+        <div class="sw-index-item"><code>mean_tmin</code><span>Mean minimum temperature</span></div>
+        <div class="sw-index-item"><code>mean_dtr</code><span>Mean diurnal temperature range</span></div>
+        <div class="sw-index-item"><code>txx</code><span>Monthly max of Tmax</span></div>
+        <div class="sw-index-item"><code>txn</code><span>Monthly min of Tmax</span></div>
+        <div class="sw-index-item"><code>tnx</code><span>Monthly max of Tmin</span></div>
+        <div class="sw-index-item"><code>tnn</code><span>Monthly min of Tmin</span></div>
+        <div class="sw-index-item"><code>su35</code><span>Summer days (Tmax &gt;35°C)</span></div>
+        <div class="sw-index-item"><code>su40</code><span>Extreme heat days (Tmax &gt;40°C)</span></div>
+        <div class="sw-index-item"><code>tr10</code><span>Tropical nights (Tmin &gt;10°C)</span></div>
+        <div class="sw-index-item"><code>tr25</code><span>Warm nights (Tmin &gt;25°C)</span></div>
+        <div class="sw-index-item"><code>wsdi</code><span>Warm spell duration index</span></div>
+        <div class="sw-index-item"><code>csdi</code><span>Cold spell duration index</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Citation -->
+  <div class="rp-sec-header" id="citation" style="margin-top:2rem; scroll-margin-top:60px;">
+    <div class="rp-sec-title">Citation</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-code-card">
+    <div class="sw-code-label">If you use imdR in your research, please cite:</div>
+    <div class="sw-code-block">citation("imdR")</div>
+    <div class="sw-code-label" style="margin-top:14px;">Or cite directly:</div>
+    <div class="sw-code-block">Bhattacharjee S, Panja A, Chakraborty A, Basavareddy (2026).
+imdR: Download, Process and Visualize IMD Gridded Meteorological Data.
+R package. https://CRAN.R-project.org/package=imdR</div>
+  </div>
+
+  <!-- Data source note -->
+  <div class="sw-note-card" style="margin-top:1.5rem;">
+    <div class="sw-note-icon">ℹ️</div>
+    <div>
+      <strong>Data Source:</strong> IMD gridded meteorological data is sourced from the India Meteorological Department (IMD Pune) at <a href="https://imdpune.gov.in/" target="_blank" style="color:#1D9E75;">imdpune.gov.in</a>.
+      Administrative boundaries are Survey of India (SOI) approved shapefiles.
+    </div>
+  </div>
+
 </div>
 
-<!-- ═══ STUDY SITES MAP ═══ -->
-<div style="width:100vw; position:relative; left:50%; margin-left:-50vw;">
-  <iframe src="maps/study-sites-map.html" width="100%" height="580px" frameborder="0" scrolling="no" style="display:block;">
-  </iframe>
+</div>
 </div>
 
 <style>
-/* ── imdR Software Card ── */
-.sb-software-card {
-  background: white;
-  border-radius: 10px;
-  border: 0.5px solid #e0ddd5;
-  border-left: 3px solid #1D9E75;
-  padding: 1.2rem 1.4rem;
-  transition: transform 0.18s, box-shadow 0.18s;
+/* ── Package hero ── */
+.sw-hero-card {
+  display: grid; grid-template-columns: 280px 1fr; gap: 28px;
+  background: white; border-radius: 12px; border: 0.5px solid #e0ddd5;
+  overflow: hidden; margin-bottom: 8px;
 }
-.sb-software-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(13,33,55,0.1);
+.sw-hero-left {
+  background: #0D2137; padding: 2rem 1.5rem; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
 }
-.sb-sw-header {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+.sw-pkg-icon { font-size: 3rem; margin-bottom: 8px; }
+.sw-pkg-name { color: white; font-size: 1.8rem; font-weight: 700; margin-bottom: 2px; }
+.sw-pkg-tagline { color: #5DCAA5; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+.sw-pkg-full { color: rgba(255,255,255,0.55); font-size: 0.78rem; line-height: 1.5; margin-bottom: 14px; text-align: center; }
+.sw-pkg-badges { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-bottom: 16px; }
+.sw-badge { font-size: 0.6rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-decoration: none !important; }
+.sw-badge-cran  { background: #1565C0; color: white !important; }
+.sw-badge-r     { background: rgba(29,158,117,0.2); color: #5DCAA5; border: 1px solid rgba(29,158,117,0.3); }
+.sw-badge-mit   { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+.sw-badge-check { background: #1D9E75; color: white !important; }
+.sw-pkg-btns { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.sw-pkg-btn {
+  padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;
+  text-decoration: none !important; text-align: center; transition: all 0.18s;
 }
-.sb-sw-icon { font-size: 1.8rem; flex-shrink: 0; }
-.sb-sw-name { font-size: 1.05rem; font-weight: 700; color: #0D2137; margin-bottom: 4px; }
-.sb-sw-badges { display: flex; gap: 5px; flex-wrap: wrap; }
-.sb-sw-badge {
-  font-size: 0.58rem; font-weight: 700; padding: 2px 7px;
-  border-radius: 20px; text-transform: uppercase; letter-spacing: 0.06em;
-}
-.sb-sw-badge-cran  { background: #1565C0; color: white; }
-.sb-sw-badge-r     { background: #E1F5EE; color: #085041; }
-.sb-sw-badge-mit   { background: #f0efea; color: #666; }
-.sb-sw-btn {
-  margin-left: auto; background: #0D2137; color: #5DCAA5 !important;
-  border: 1px solid #1D9E75; padding: 6px 14px; border-radius: 5px;
-  font-size: 0.75rem; font-weight: 600; text-decoration: none !important;
-  white-space: nowrap; transition: all 0.18s; flex-shrink: 0;
-}
-.sb-sw-btn:hover { background: #1D9E75; color: white !important; }
-.sb-sw-desc {
-  font-size: 0.82rem; color: #555; line-height: 1.65; margin-bottom: 12px;
-}
-.sb-sw-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-.sb-sw-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-.sb-sw-links { display: flex; gap: 8px; flex-shrink: 0; }
-.sb-sw-link {
-  font-size: 0.72rem; font-weight: 600; color: #1D9E75 !important;
-  text-decoration: none; border-bottom: 1px solid rgba(29,158,117,0.3);
-  padding-bottom: 1px; transition: border-color 0.15s;
-}
-.sb-sw-link:hover { border-color: #1D9E75; }
+.sw-pkg-btn-primary { background: #1D9E75; color: white !important; }
+.sw-pkg-btn-primary:hover { background: #178c66; }
+.sw-pkg-btn-outline { background: transparent; color: rgba(255,255,255,0.8) !important; border: 1px solid rgba(255,255,255,0.25); }
+.sw-pkg-btn-outline:hover { background: rgba(255,255,255,0.1); }
+.sw-hero-right { padding: 1.8rem; }
+.sw-desc-label { font-size: 0.62rem; font-weight: 700; color: #1D9E75; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
+.sw-desc { font-size: 0.85rem; color: #444; line-height: 1.7; margin-bottom: 10px; }
+.sw-authors { border-top: 0.5px solid #f0efea; padding-top: 12px; margin-top: 4px; }
+.sw-authors-label { font-size: 0.62rem; font-weight: 700; color: #1D9E75; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+.sw-authors-list { font-size: 0.78rem; color: #666; }
 
-/* ── Publication title links ── */
-.sb-ptitle a { color: #0D2137 !important; text-decoration: none !important; font-weight: 600; }
-.sb-ptitle a:hover { color: #1D9E75 !important; text-decoration: underline !important; }
+/* ── Data coverage ── */
+.sw-coverage-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.sw-coverage-card {
+  background: white; border-radius: 10px; border: 0.5px solid #e0ddd5;
+  border-top: 3px solid #1D9E75; padding: 1.1rem; text-align: center;
+}
+.sw-cov-icon { font-size: 1.5rem; margin-bottom: 6px; }
+.sw-cov-var { font-size: 0.88rem; font-weight: 700; color: #0D2137; margin-bottom: 4px; }
+.sw-cov-res { font-size: 0.72rem; color: #1D9E75; font-weight: 600; margin-bottom: 2px; }
+.sw-cov-period { font-size: 0.82rem; font-weight: 700; color: #0D2137; margin-bottom: 6px; }
+.sw-cov-note { font-size: 0.7rem; color: #888; line-height: 1.4; }
 
-/* ── imdR hero button ── */
-.sb-btn-green { background: #1D9E75 !important; color: white !important; border: none !important; }
-.sb-btn-green:hover { background: #178c66 !important; color: white !important; }
+/* ── Code cards ── */
+.sw-code-card {
+  background: white; border-radius: 10px; border: 0.5px solid #e0ddd5;
+  border-left: 3px solid #1D9E75; padding: 1.2rem 1.4rem;
+}
+.sw-code-label { font-size: 0.68rem; font-weight: 700; color: #1D9E75; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+.sw-code-block {
+  background: #0D2137; color: #5DCAA5; font-family: 'Courier New', monospace;
+  font-size: 0.82rem; line-height: 1.7; padding: 12px 16px;
+  border-radius: 6px; white-space: pre; overflow-x: auto;
+}
+
+/* ── Functions grid ── */
+.sw-fn-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.sw-fn-group { background: white; border-radius: 10px; border: 0.5px solid #e0ddd5; padding: 1.1rem; }
+.sw-fn-group-title { font-size: 0.75rem; font-weight: 700; color: #0D2137; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px solid #f0efea; }
+.sw-fn-item { display: flex; gap: 8px; align-items: flex-start; padding: 5px 0; border-bottom: 0.5px solid #f8f8f5; font-size: 0.75rem; }
+.sw-fn-item:last-child { border-bottom: none; }
+.sw-fn-item code { color: #1D9E75; font-weight: 600; flex-shrink: 0; font-size: 0.72rem; }
+.sw-fn-item span { color: #666; }
+
+/* ── Indices grid ── */
+.sw-indices-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sw-indices-card { background: white; border-radius: 10px; border: 0.5px solid #e0ddd5; padding: 1.1rem; }
+.sw-indices-title { font-size: 0.78rem; font-weight: 700; color: #0D2137; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px solid #f0efea; }
+.sw-index-item { display: flex; gap: 10px; align-items: baseline; padding: 4px 0; border-bottom: 0.5px solid #f8f8f5; font-size: 0.75rem; }
+.sw-index-item:last-child { border-bottom: none; }
+.sw-index-item code { color: #1D9E75; font-weight: 600; min-width: 80px; flex-shrink: 0; font-size: 0.72rem; }
+.sw-index-item span { color: #666; }
+
+/* ── Note card ── */
+.sw-note-card {
+  background: #edf7f2; border-left: 3px solid #1D9E75; border-radius: 0 8px 8px 0;
+  padding: 10px 14px; display: flex; gap: 10px; align-items: flex-start;
+  font-size: 0.8rem; color: #444; line-height: 1.6;
+}
+.sw-note-icon { flex-shrink: 0; }
 </style>
 
 
