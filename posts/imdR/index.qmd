@@ -1,6 +1,6 @@
 ---
 title: "A Complete Guide to IMD Gridded Weather Data in R with **imdR**"
-subtitle: "Downloading, extracting, mapping, and analysing India's gridded rainfall and temperature records — a reference tutorial for climatologists, agricultural scientists, and researchers"
+subtitle: "Downloading, extracting, mapping, and analysing India's gridded rainfall and temperature records: a reference tutorial for climatologists, agricultural scientists, and researchers"
 author: "Subhradip Bhattacharjee"
 date: "2026-06-29"
 date-modified: today
@@ -62,7 +62,7 @@ description: |
 
 ## Scope and Audience
 
-Researchers working on the Indian climate — in agricultural meteorology, hydrology, climatology, or allied fields — depend on reliable, long-term rainfall and temperature records. This tutorial documents the complete `imdR` workflow, from installation to statistical trend analysis. It assumes no prior experience with the package and only basic familiarity with R.
+Researchers working on the Indian climate , in agricultural meteorology, hydrology, climatology, or allied fields , depend on reliable, long-term rainfall and temperature records. This tutorial documents the complete `imdR` workflow, from installation to statistical trend analysis. It assumes no prior experience with the package and only basic familiarity with R.
 
 On completion, the reader will be able to download multi-decadal daily data; extract it for any point, district, state, or custom region; export it in the format required for downstream analysis; compute standard climate indices; and perform Mann-Kendall trend analysis with Sen's slope estimation.
 
@@ -81,7 +81,7 @@ A clear understanding of the underlying data structure informs correct use of th
 ::: {.imd-concept}
 #### From station observations to a regular grid
 
-The India Meteorological Department maintains a dense network of rain-gauge and temperature stations. Station records, however, are point measurements distributed unevenly across the country, which makes area-based questions — such as the rainfall received by an entire district — difficult to answer directly.
+The India Meteorological Department maintains a dense network of rain-gauge and temperature stations. Station records, however, are point measurements distributed unevenly across the country, which makes area-based questions , such as the rainfall received by an entire district , difficult to answer directly.
 
 To address this, IMD interpolates station observations onto a regular **grid**: a uniform lattice of cells covering the country, each holding a single daily value. This interpolation principle underlies most modern gridded climate datasets. The resulting product is a continuous, spatially complete surface that can be subset by any administrative or geographic region.
 :::
@@ -133,8 +133,8 @@ Two principles govern the correct aggregation of gridded data and are applied th
 
 Two components are required:
 
-- **R**, the language itself — available from [cran.r-project.org](https://cran.r-project.org)
-- **RStudio Desktop**, an integrated development environment — available from [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/)
+- **R**, the language itself , available from [cran.r-project.org](https://cran.r-project.org)
+- **RStudio Desktop**, an integrated development environment , available from [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/)
 
 Both should be installed with default settings.
 
@@ -248,7 +248,7 @@ cat("Rows:", nrow(oldgoa_tmax),
     "| Mean tmax:", round(mean(oldgoa_tmax$tmax, na.rm = TRUE), 1), "C\n")
 ```
 
-The function returns a data frame with one row per day — columns `date`, `lat`, `lon`, and the variable — and saves a corresponding CSV in `file_dir`. For rainfall, the equivalent call covers the longer record, 1901–2025.
+The function returns a data frame with one row per day , columns `date`, `lat`, `lon`, and the variable , and saves a corresponding CSV in `file_dir`. For rainfall, the equivalent call covers the longer record, 1901–2025.
 
 ::: {.imd-card .warn}
 <div class="imd-card-title">Download volume and server availability</div>
@@ -380,7 +380,7 @@ Setting `save_csv = FALSE` on each call suppresses the individual CSVs, allowing
 <div class="imd-step"><span class="imd-step-num">5</span><h2>Spatial Export: NetCDF and GeoTIFF</h2></div>
 ```
 
-Certain analyses require the full gridded surface for a region rather than a collapsed time series — for example, for use in QGIS, ArcGIS, Panoply, or Python. The `extract_by_boundary()` function masks the national grid to a region and writes the result as NetCDF or GeoTIFF.
+Certain analyses require the full gridded surface for a region rather than a collapsed time series , for example, for use in QGIS, ArcGIS, Panoply, or Python. The `extract_by_boundary()` function masks the national grid to a region and writes the result as NetCDF or GeoTIFF.
 
 ::: {.imd-concept}
 #### Choice of output format
@@ -456,7 +456,7 @@ extract_by_boundary(
 <div class="imd-step"><span class="imd-step-num">6</span><h2>Custom Regions: The Bounding Box</h2></div>
 ```
 
-Where a study area does not correspond to an administrative unit — for instance, the Indo-Gangetic Plains, the Western Ghats, or the rectangular extent of a river basin — `get_bbox()` extracts a region defined by explicit latitude and longitude limits.
+Where a study area does not correspond to an administrative unit , for instance, the Indo-Gangetic Plains, the Western Ghats, or the rectangular extent of a river basin , `get_bbox()` extracts a region defined by explicit latitude and longitude limits.
 
 ```{r}
 #| label: bbox-formats
@@ -536,7 +536,7 @@ Supplying `save_path = file.path(file_dir, "kerala_rain.png")` writes a 300-dpi 
 <div class="imd-step"><span class="imd-step-num">8</span><h2>Long-Term Trend Plots</h2></div>
 ```
 
-A plot of daily values over many decades is difficult to interpret. For the assessment of long-term change, the data are aggregated to one value per year — annual totals for rainfall, annual means for temperature — with the year on the horizontal axis.
+A plot of daily values over many decades is difficult to interpret. For the assessment of long-term change, the data are aggregated to one value per year , annual totals for rainfall, annual means for temperature , with the year on the horizontal axis.
 
 ::: {.imd-concept}
 #### Annual aggregation
@@ -560,7 +560,7 @@ annual_rain <- aggregate(rain ~ year, karnal_rain, sum)
 ggplot(annual_rain, aes(year, rain)) +
   geom_col(fill = "#2E86C1", alpha = 0.85) +
   geom_smooth(method = "lm", se = FALSE, color = "#C0392B", linewidth = 1) +
-  labs(title = "Karnal — Annual Total Rainfall",
+  labs(title = "Karnal , Annual Total Rainfall",
        x = "Year", y = "Rainfall (mm/year)") +
   theme_bw(base_size = 13)
 ```
@@ -580,7 +580,7 @@ ggplot(annual_tmax, aes(year, tmax)) +
   geom_line(color = "#C0392B", linewidth = 0.8) +
   geom_point(color = "#922B21", size = 1.6) +
   geom_smooth(method = "lm", se = FALSE, linetype = "dashed") +
-  labs(title = "Karnal — Annual Mean Maximum Temperature",
+  labs(title = "Karnal , Annual Mean Maximum Temperature",
        x = "Year", y = "Tmax (°C)") +
   theme_bw(base_size = 13)
 ```
@@ -597,12 +597,12 @@ The fitted regression line indicates the direction and approximate magnitude of 
 <div class="imd-step"><span class="imd-step-num">9</span><h2>Climate Indices</h2></div>
 ```
 
-Daily data are seldom the final analytical product. Climate indices condense the daily record into interpretable annual metrics — the frequency of rainy days, the duration of dry spells, the number of hot days — which form the basis of climate-change assessment.
+Daily data are seldom the final analytical product. Climate indices condense the daily record into interpretable annual metrics , the frequency of rainy days, the duration of dry spells, the number of hot days , which form the basis of climate-change assessment.
 
 ::: {.imd-concept}
 #### The purpose of indices
 
-A change in total rainfall does not, by itself, reveal whether that change arose from a greater number of rainy days or from fewer but more intense events — a distinction of considerable importance for agriculture and flood risk. Indices such as the number of rainy days, consecutive dry days, and very-heavy-rainfall days separate these signals. The package computes a standard suite in a single call.
+A change in total rainfall does not, by itself, reveal whether that change arose from a greater number of rainy days or from fewer but more intense events , a distinction of considerable importance for agriculture and flood risk. Indices such as the number of rainy days, consecutive dry days, and very-heavy-rainfall days separate these signals. The package computes a standard suite in a single call.
 :::
 
 ### Rainfall indices
@@ -668,7 +668,7 @@ The final stage establishes whether an observed long-term change is statisticall
 
 Climate series frequently violate the assumptions of ordinary least-squares regression: they may be non-normally distributed, skewed, and influenced by extreme values. The **Mann-Kendall test** is non-parametric. It evaluates only whether values tend to increase or decrease over time, making no distributional assumption and remaining robust to outliers.
 
-The associated **Sen's slope** estimates the magnitude of change — for example, a change of 2.1 mm per year — as the median of all pairwise slopes between observations, and is likewise resistant to outliers. Together, the two methods constitute the standard approach to trend detection in climatology.
+The associated **Sen's slope** estimates the magnitude of change , for example, a change of 2.1 mm per year , as the median of all pairwise slopes between observations, and is likewise resistant to outliers. Together, the two methods constitute the standard approach to trend detection in climatology.
 :::
 
 ```{=html}
@@ -708,7 +708,7 @@ The function reports the Mann-Kendall statistics, writes a CSV of the results, a
 
 ### Trend analysis of climate indices
 
-The principal application is the analysis of trends in the indices computed in Step 9 — for instance, whether heavy-rainfall days are increasing, or whether the number of rainy days is declining while the total remains unchanged.
+The principal application is the analysis of trends in the indices computed in Step 9 , for instance, whether heavy-rainfall days are increasing, or whether the number of rainy days is declining while the total remains unchanged.
 
 ```{r}
 #| label: trend-indices
@@ -753,9 +753,9 @@ The individual components combine into a complete analysis. Consider the questio
 
 ::: {.imd-concept}
 1. **Acquisition.** Obtain the 1901–2025 rainfall series with `get_district_series("rain", "Karnal", 1901, 2025, ...)`.
-2. **Index computation.** Derive annual indices with `compute_rainfall_indices(...)` — rainy days, consecutive dry days, very-heavy-rainfall days.
+2. **Index computation.** Derive annual indices with `compute_rainfall_indices(...)` , rainy days, consecutive dry days, very-heavy-rainfall days.
 3. **Trend testing.** Apply `trend_analysis()` to each index of interest (`cdd`, `dr`, `d115`).
-4. **Interpretation.** A simultaneous increase in consecutive dry days and very-heavy-rainfall days, with a stable annual total, indicates that the same quantity of rain is being delivered in fewer, more intense events — that is, increased variability. This constitutes a complete and defensible climatological finding, obtained in a small number of lines of code.
+4. **Interpretation.** A simultaneous increase in consecutive dry days and very-heavy-rainfall days, with a stable annual total, indicates that the same quantity of rain is being delivered in fewer, more intense events , that is, increased variability. This constitutes a complete and defensible climatological finding, obtained in a small number of lines of code.
 :::
 
 ---

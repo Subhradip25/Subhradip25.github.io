@@ -27,7 +27,7 @@
   </div>
 </div>
 <section id="scope-and-audience" class="level2"><h2 class="anchored" data-anchor-id="scope-and-audience">Scope and Audience</h2>
-<p>Researchers working on the Indian climate — in agricultural meteorology, hydrology, climatology, or allied fields — depend on reliable, long-term rainfall and temperature records. This tutorial documents the complete <code>imdR</code> workflow, from installation to statistical trend analysis. It assumes no prior experience with the package and only basic familiarity with R.</p>
+<p>Researchers working on the Indian climate , in agricultural meteorology, hydrology, climatology, or allied fields , depend on reliable, long-term rainfall and temperature records. This tutorial documents the complete <code>imdR</code> workflow, from installation to statistical trend analysis. It assumes no prior experience with the package and only basic familiarity with R.</p>
 <p>On completion, the reader will be able to download multi-decadal daily data; extract it for any point, district, state, or custom region; export it in the format required for downstream analysis; compute standard climate indices; and perform Mann-Kendall trend analysis with Sen’s slope estimation.</p>
 <div class="imd-card theory">
 <div class="imd-card-title">
@@ -38,7 +38,7 @@ Workflow overview
 <hr></section><section id="background-the-structure-of-imd-gridded-data" class="level2"><h2 class="anchored" data-anchor-id="background-the-structure-of-imd-gridded-data">Background: The Structure of IMD Gridded Data</h2>
 <p>A clear understanding of the underlying data structure informs correct use of the package.</p>
 <section id="from-station-observations-to-a-regular-grid" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="from-station-observations-to-a-regular-grid">From station observations to a regular grid</h4>
-<p>The India Meteorological Department maintains a dense network of rain-gauge and temperature stations. Station records, however, are point measurements distributed unevenly across the country, which makes area-based questions — such as the rainfall received by an entire district — difficult to answer directly.</p>
+<p>The India Meteorological Department maintains a dense network of rain-gauge and temperature stations. Station records, however, are point measurements distributed unevenly across the country, which makes area-based questions , such as the rainfall received by an entire district , difficult to answer directly.</p>
 <p>To address this, IMD interpolates station observations onto a regular <strong>grid</strong>: a uniform lattice of cells covering the country, each holding a single daily value. This interpolation principle underlies most modern gridded climate datasets. The resulting product is a continuous, spatially complete surface that can be subset by any administrative or geographic region.</p>
 </section><p>The datasets accessible through <code>imdR</code> are summarised below.</p>
 <div class="imd-table">
@@ -100,10 +100,10 @@ A note on spatial resolution
 <p>Two components are required:</p>
 <ul>
 <li>
-<strong>R</strong>, the language itself — available from <a href="https://cran.r-project.org">cran.r-project.org</a>
+<strong>R</strong>, the language itself , available from <a href="https://cran.r-project.org">cran.r-project.org</a>
 </li>
 <li>
-<strong>RStudio Desktop</strong>, an integrated development environment — available from <a href="https://posit.co/download/rstudio-desktop/">posit.co/download/rstudio-desktop</a>
+<strong>RStudio Desktop</strong>, an integrated development environment , available from <a href="https://posit.co/download/rstudio-desktop/">posit.co/download/rstudio-desktop</a>
 </li>
 </ul>
 <p>Both should be installed with default settings.</p>
@@ -403,7 +403,7 @@ font-style: inherit;">"C\n"</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)</span></span></code></pre></div></div>
 </div>
-<p>The function returns a data frame with one row per day — columns <code>date</code>, <code>lat</code>, <code>lon</code>, and the variable — and saves a corresponding CSV in <code>file_dir</code>. For rainfall, the equivalent call covers the longer record, 1901–2025.</p>
+<p>The function returns a data frame with one row per day , columns <code>date</code>, <code>lat</code>, <code>lon</code>, and the variable , and saves a corresponding CSV in <code>file_dir</code>. For rainfall, the equivalent call covers the longer record, 1901–2025.</p>
 <div class="imd-card warn">
 <div class="imd-card-title">
 Download volume and server availability
@@ -961,7 +961,7 @@ Producing a single merged file
 <div class="imd-step">
 <span class="imd-step-num">5</span><h2 class="anchored" data-anchor-id="all-variables-for-a-district-as-a-single-file">Spatial Export: NetCDF and GeoTIFF</h2>
 </div>
-<p>Certain analyses require the full gridded surface for a region rather than a collapsed time series — for example, for use in QGIS, ArcGIS, Panoply, or Python. The <code><a href="https://rdrr.io/pkg/imdR/man/extract_by_boundary.html">extract_by_boundary()</a></code> function masks the national grid to a region and writes the result as NetCDF or GeoTIFF.</p>
+<p>Certain analyses require the full gridded surface for a region rather than a collapsed time series , for example, for use in QGIS, ArcGIS, Panoply, or Python. The <code><a href="https://rdrr.io/pkg/imdR/man/extract_by_boundary.html">extract_by_boundary()</a></code> function masks the national grid to a region and writes the result as NetCDF or GeoTIFF.</p>
 <section id="choice-of-output-format" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="choice-of-output-format">Choice of output format</h4>
 <p><strong>NetCDF (<code>.nc</code>)</strong> is the standard format in the climate sciences. It stores the complete latitude × longitude × time array together with metadata, and is appropriate for further analysis in R, Python, or CDO.</p>
 <p><strong>GeoTIFF (<code>.tif</code>)</strong> is the standard format in geographic information systems. Each day is stored as a separate raster band, suitable for mapping in QGIS or ArcGIS.</p>
@@ -1266,7 +1266,7 @@ font-style: inherit;">)</span></span></code></pre></div></div>
 <div class="imd-step">
 <span class="imd-step-num">6</span><h2 class="anchored" data-anchor-id="a-single-year-as-geotiff">Custom Regions: The Bounding Box</h2>
 </div>
-<p>Where a study area does not correspond to an administrative unit — for instance, the Indo-Gangetic Plains, the Western Ghats, or the rectangular extent of a river basin — <code><a href="https://rdrr.io/pkg/imdR/man/get_bbox.html">get_bbox()</a></code> extracts a region defined by explicit latitude and longitude limits.</p>
+<p>Where a study area does not correspond to an administrative unit , for instance, the Indo-Gangetic Plains, the Western Ghats, or the rectangular extent of a river basin , <code><a href="https://rdrr.io/pkg/imdR/man/get_bbox.html">get_bbox()</a></code> extracts a region defined by explicit latitude and longitude limits.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1568,7 +1568,7 @@ Saving a map
 <div class="imd-step">
 <span class="imd-step-num">8</span><h2 class="anchored">Long-Term Trend Plots</h2>
 </div>
-<p>A plot of daily values over many decades is difficult to interpret. For the assessment of long-term change, the data are aggregated to one value per year — annual totals for rainfall, annual means for temperature — with the year on the horizontal axis.</p>
+<p>A plot of daily values over many decades is difficult to interpret. For the assessment of long-term change, the data are aggregated to one value per year , annual totals for rainfall, annual means for temperature , with the year on the horizontal axis.</p>
 <section id="annual-aggregation" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="annual-aggregation">Annual aggregation</h4>
 <p>Following the aggregation principles, each year is reduced to a sum (rainfall) or a mean (temperature). This converts the daily record into one value per year, the resolution at which long-term trends are appropriately examined.</p>
 </section><div class="cell">
@@ -1736,7 +1736,7 @@ font-style: inherit;">(</span>title <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Karnal — Annual Total Rainfall"</span>,</span>
+font-style: inherit;">"Karnal , Annual Total Rainfall"</span>,</span>
 <span>       x <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
@@ -1930,7 +1930,7 @@ font-style: inherit;">(</span>title <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"Karnal — Annual Mean Maximum Temperature"</span>,</span>
+font-style: inherit;">"Karnal , Annual Mean Maximum Temperature"</span>,</span>
 <span>       x <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
@@ -1966,9 +1966,9 @@ Interpretation of the fitted line
 <div class="imd-step">
 <span class="imd-step-num">9</span><h2 class="anchored">Climate Indices</h2>
 </div>
-<p>Daily data are seldom the final analytical product. Climate indices condense the daily record into interpretable annual metrics — the frequency of rainy days, the duration of dry spells, the number of hot days — which form the basis of climate-change assessment.</p>
+<p>Daily data are seldom the final analytical product. Climate indices condense the daily record into interpretable annual metrics , the frequency of rainy days, the duration of dry spells, the number of hot days , which form the basis of climate-change assessment.</p>
 <section id="the-purpose-of-indices" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="the-purpose-of-indices">The purpose of indices</h4>
-<p>A change in total rainfall does not, by itself, reveal whether that change arose from a greater number of rainy days or from fewer but more intense events — a distinction of considerable importance for agriculture and flood risk. Indices such as the number of rainy days, consecutive dry days, and very-heavy-rainfall days separate these signals. The package computes a standard suite in a single call.</p>
+<p>A change in total rainfall does not, by itself, reveal whether that change arose from a greater number of rainy days or from fewer but more intense events , a distinction of considerable importance for agriculture and flood risk. Indices such as the number of rainy days, consecutive dry days, and very-heavy-rainfall days separate these signals. The package computes a standard suite in a single call.</p>
 </section></section><section id="rainfall-indices" class="level3"><h3 class="anchored" data-anchor-id="rainfall-indices">Rainfall indices</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;
@@ -2167,7 +2167,7 @@ font-style: inherit;">)</span></span></code></pre></div></div>
 <p>The final stage establishes whether an observed long-term change is statistically significant or attributable to random variation.</p>
 <section id="the-rationale-for-a-non-parametric-approach" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="the-rationale-for-a-non-parametric-approach">The rationale for a non-parametric approach</h4>
 <p>Climate series frequently violate the assumptions of ordinary least-squares regression: they may be non-normally distributed, skewed, and influenced by extreme values. The <strong>Mann-Kendall test</strong> is non-parametric. It evaluates only whether values tend to increase or decrease over time, making no distributional assumption and remaining robust to outliers.</p>
-<p>The associated <strong>Sen’s slope</strong> estimates the magnitude of change — for example, a change of 2.1 mm per year — as the median of all pairwise slopes between observations, and is likewise resistant to outliers. Together, the two methods constitute the standard approach to trend detection in climatology.</p>
+<p>The associated <strong>Sen’s slope</strong> estimates the magnitude of change , for example, a change of 2.1 mm per year , as the median of all pairwise slopes between observations, and is likewise resistant to outliers. Together, the two methods constitute the standard approach to trend detection in climatology.</p>
 </section><div class="imd-table">
 
 <table class="caption-top table">
@@ -2281,7 +2281,7 @@ font-style: inherit;">)</span></span></code></pre></div></div>
 </div>
 <p>The function reports the Mann-Kendall statistics, writes a CSV of the results, and produces a plot with the Sen’s-slope line superimposed.</p>
 </section><section id="trend-analysis-of-climate-indices" class="level3"><h3 class="anchored" data-anchor-id="trend-analysis-of-climate-indices">Trend analysis of climate indices</h3>
-<p>The principal application is the analysis of trends in the indices computed in Step 9 — for instance, whether heavy-rainfall days are increasing, or whether the number of rainy days is declining while the total remains unchanged.</p>
+<p>The principal application is the analysis of trends in the indices computed in Step 9 , for instance, whether heavy-rainfall days are increasing, or whether the number of rainy days is declining while the total remains unchanged.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -2413,11 +2413,11 @@ Length of record
 <li>
 <strong>Acquisition.</strong> Obtain the 1901–2025 rainfall series with <code>get_district_series("rain", "Karnal", 1901, 2025, ...)</code>.</li>
 <li>
-<strong>Index computation.</strong> Derive annual indices with <code>compute_rainfall_indices(...)</code> — rainy days, consecutive dry days, very-heavy-rainfall days.</li>
+<strong>Index computation.</strong> Derive annual indices with <code>compute_rainfall_indices(...)</code> , rainy days, consecutive dry days, very-heavy-rainfall days.</li>
 <li>
 <strong>Trend testing.</strong> Apply <code><a href="https://rdrr.io/pkg/imdR/man/trend_analysis.html">trend_analysis()</a></code> to each index of interest (<code>cdd</code>, <code>dr</code>, <code>d115</code>).</li>
 <li>
-<strong>Interpretation.</strong> A simultaneous increase in consecutive dry days and very-heavy-rainfall days, with a stable annual total, indicates that the same quantity of rain is being delivered in fewer, more intense events — that is, increased variability. This constitutes a complete and defensible climatological finding, obtained in a small number of lines of code.</li>
+<strong>Interpretation.</strong> A simultaneous increase in consecutive dry days and very-heavy-rainfall days, with a stable annual total, indicates that the same quantity of rain is being delivered in fewer, more intense events , that is, increased variability. This constitutes a complete and defensible climatological finding, obtained in a small number of lines of code.</li>
 </ol>
 </div>
 <hr></section><section id="troubleshooting" class="level2"><h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
@@ -3883,7 +3883,7 @@ font-style: inherit;">  → Negative values replaced with NaN."</span>)</span></
 <section id="step-5-visualise-mean-annual-rainfall-map" class="level2">
 <h2 class="anchored" data-anchor-id="step-5-visualise-mean-annual-rainfall-map">🗺️ Step 5: Visualise — Mean Annual Rainfall Map</h2>
 <p>A spatial map is the fastest sanity check. North East India should show some of the highest rainfall values in the subcontinent — if it doesn’t, something is wrong with the data or subset.</p>
-<div id="fig-annual-rainfall" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-fig-height="7" data-execution_count="8" data-fig-width="9">
+<div id="fig-annual-rainfall" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-fig-width="9" data-fig-height="7" data-execution_count="8">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-annual-rainfall-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><span class="im" style="color: #00769E;
