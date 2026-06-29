@@ -1,0 +1,152 @@
+/* ============================================================
+   imdR Tutorial — custom stylesheet
+   Drop this next to index.qmd. Works standalone or alongside
+   your existing site CSS.
+   ============================================================ */
+
+:root {
+  --imd-blue:    #1565C0;
+  --imd-blue-lt: #E3F2FD;
+  --imd-teal:    #00897B;
+  --imd-teal-lt: #E0F2F1;
+  --imd-rain:    #2E86C1;
+  --imd-warm:    #E74C3C;
+  --imd-amber:   #F39C12;
+  --imd-amber-lt:#FEF5E7;
+  --imd-green:   #2E7D32;
+  --imd-green-lt:#E8F5E9;
+  --imd-ink:     #1A2733;
+  --imd-grey:    #5B6B7A;
+  --imd-line:    #E2E8F0;
+}
+
+/* ---------- Hero banner ---------- */
+.imd-hero {
+  background: linear-gradient(135deg, #1565C0 0%, #00897B 100%);
+  color: #fff;
+  border-radius: 18px;
+  padding: 2.4rem 2rem;
+  margin: 0 0 2rem 0;
+  box-shadow: 0 10px 30px rgba(21,101,192,0.25);
+}
+.imd-hero h1 {
+  color: #fff !important;
+  border: none !important;
+  margin: 0 0 .5rem 0;
+  font-size: 2.1rem;
+  line-height: 1.15;
+}
+.imd-hero p { margin: 0; font-size: 1.05rem; opacity: .95; }
+.imd-hero .imd-badges { margin-top: 1.1rem; }
+.imd-hero .imd-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+  padding: .28rem .7rem;
+  border-radius: 999px;
+  font-size: .8rem;
+  margin: .15rem .25rem .15rem 0;
+  backdrop-filter: blur(4px);
+}
+
+/* ---------- Section dividers ---------- */
+.imd-step {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin: 2.6rem 0 1rem 0;
+  padding-bottom: .5rem;
+  border-bottom: 3px solid var(--imd-blue-lt);
+}
+.imd-step .imd-step-num {
+  flex: 0 0 auto;
+  width: 2.2rem; height: 2.2rem;
+  border-radius: 50%;
+  background: var(--imd-blue);
+  color: #fff;
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 1.05rem;
+  box-shadow: 0 3px 8px rgba(21,101,192,0.35);
+}
+.imd-step h2 { margin: 0 !important; border: none !important; padding: 0 !important; }
+
+/* ---------- Callout cards ---------- */
+.imd-card {
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin: 1.2rem 0;
+  border-left: 5px solid var(--imd-blue);
+  background: var(--imd-blue-lt);
+}
+.imd-card.tip   { border-left-color: var(--imd-green); background: var(--imd-green-lt); }
+.imd-card.warn  { border-left-color: var(--imd-amber); background: var(--imd-amber-lt); }
+.imd-card.theory{ border-left-color: var(--imd-teal); background: var(--imd-teal-lt); }
+.imd-card .imd-card-title { font-weight: 700; margin-bottom: .35rem; color: var(--imd-ink); }
+
+/* ---------- Concept / theory box ---------- */
+.imd-concept {
+  background: #fff;
+  border: 1px solid var(--imd-line);
+  border-top: 4px solid var(--imd-teal);
+  border-radius: 12px;
+  padding: 1.2rem 1.4rem;
+  margin: 1.4rem 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+}
+.imd-concept h4 { margin-top: 0; color: var(--imd-teal); }
+
+/* ---------- Tables ---------- */
+.imd-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: .92rem;
+}
+.imd-table th {
+  background: var(--imd-blue);
+  color: #fff;
+  text-align: left;
+  padding: .6rem .8rem;
+}
+.imd-table td {
+  padding: .55rem .8rem;
+  border-bottom: 1px solid var(--imd-line);
+}
+.imd-table tr:nth-child(even) td { background: #F8FAFC; }
+
+/* ---------- Variable chips ---------- */
+.imd-chip {
+  display: inline-block; padding: .15rem .55rem; border-radius: 6px;
+  font-size: .82rem; font-weight: 600; font-family: monospace;
+}
+.imd-chip.rain { background: #D6EAF8; color: #1A5276; }
+.imd-chip.tmax { background: #FADBD8; color: #922B21; }
+.imd-chip.tmin { background: #D4E6F1; color: #1B4F72; }
+
+/* ---------- Pro tip footer line ---------- */
+.imd-protip {
+  font-size: .9rem; color: var(--imd-grey);
+  border-top: 1px dashed var(--imd-line);
+  padding-top: .6rem; margin-top: 1rem;
+}
+
+/* ---------- Code block polish ---------- */
+div.sourceCode {
+  border-radius: 10px !important;
+  border: 1px solid var(--imd-line);
+}
+
+/* ---------- Summary grid ---------- */
+.imd-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 1rem; margin: 1.5rem 0;
+}
+.imd-grid .imd-tile {
+  background: #fff; border: 1px solid var(--imd-line);
+  border-radius: 12px; padding: 1.1rem; text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+}
+.imd-grid .imd-tile .ico { font-size: 1.8rem; }
+.imd-grid .imd-tile .lab { font-weight: 700; margin-top: .4rem; color: var(--imd-ink); }
+.imd-grid .imd-tile .sub { font-size: .82rem; color: var(--imd-grey); }

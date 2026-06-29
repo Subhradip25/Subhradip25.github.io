@@ -1,0 +1,820 @@
+---
+title: "A Complete Guide to IMD Gridded Weather Data in R with **imdR**"
+subtitle: "Downloading, extracting, mapping, and analysing India's gridded rainfall and temperature records — a reference tutorial for climatologists, agricultural scientists, and researchers"
+author: "Subhradip Bhattacharjee"
+date: "2026-06-29"
+date-modified: today
+categories: [R, Climate Data, Agriculture, IMD, Tutorial, imdR, Trend Analysis]
+image: "thumbnail.png"
+
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    toc-location: left
+    number-sections: false
+    code-fold: false
+    code-tools: true
+    code-copy: true
+    code-link: true
+    highlight-style: github
+    fig-align: center
+    fig-cap-location: bottom
+    fig-width: 9
+    fig-height: 5
+    css: imd-post.css
+    theme:
+      light: flatly
+      dark: darkly
+    grid:
+      body-width: 920px
+
+execute:
+  eval: false
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+
+draft: false
+
+description: |
+  A reference tutorial on the imdR package: installation from CRAN and GitHub,
+  listing of states and districts, downloading IMD daily rainfall and
+  temperature, extraction by point, district, state, and bounding box, export
+  to CSV, NetCDF, and GeoTIFF, computation of climate indices, and Mann-Kendall
+  trend analysis with Sen's slope, applied to long-term records.
+---
+
+```{=html}
+<div class="imd-hero">
+  <h1>A Complete Guide to IMD Gridded Weather Data in R</h1>
+  <p>A reference workflow for converting India Meteorological Department gridded data into research-ready time series, maps, climate indices, and statistical trends using the <strong>imdR</strong> package.</p>
+  <div class="imd-badges">
+    <span class="imd-badge">CRAN published</span>
+    <span class="imd-badge">Rainfall &amp; Temperature</span>
+    <span class="imd-badge">State &amp; District boundaries</span>
+    <span class="imd-badge">Indices &amp; Trends</span>
+  </div>
+</div>
+```
+
+## Scope and Audience
+
+Researchers working on the Indian climate — in agricultural meteorology, hydrology, climatology, or allied fields — depend on reliable, long-term rainfall and temperature records. This tutorial documents the complete `imdR` workflow, from installation to statistical trend analysis. It assumes no prior experience with the package and only basic familiarity with R.
+
+On completion, the reader will be able to download multi-decadal daily data; extract it for any point, district, state, or custom region; export it in the format required for downstream analysis; compute standard climate indices; and perform Mann-Kendall trend analysis with Sen's slope estimation.
+
+::: {.imd-card .theory}
+<div class="imd-card-title">Workflow overview</div>
+
+Install `imdR` → explore administrative boundaries → download and extract data (point, district, state, bounding box) → export (CSV, NetCDF, GeoTIFF) → visualise → compute climate indices → perform Mann-Kendall trend analysis with Sen's slope.
+:::
+
+---
+
+## Background: The Structure of IMD Gridded Data
+
+A clear understanding of the underlying data structure informs correct use of the package.
+
+::: {.imd-concept}
+#### From station observations to a regular grid
+
+The India Meteorological Department maintains a dense network of rain-gauge and temperature stations. Station records, however, are point measurements distributed unevenly across the country, which makes area-based questions — such as the rainfall received by an entire district — difficult to answer directly.
+
+To address this, IMD interpolates station observations onto a regular **grid**: a uniform lattice of cells covering the country, each holding a single daily value. This interpolation principle underlies most modern gridded climate datasets. The resulting product is a continuous, spatially complete surface that can be subset by any administrative or geographic region.
+:::
+
+The datasets accessible through `imdR` are summarised below.
+
+```{=html}
+<div class="imd-table">
+<table>
+<thead><tr><th>Variable</th><th>Resolution</th><th>Grid size</th><th>Available period</th><th>Code</th></tr></thead>
+<tbody>
+<tr><td>Rainfall</td><td>0.25° (≈ 28 km)</td><td>135 × 129</td><td><strong>1901 – present</strong></td><td><span class="imd-chip rain">rain</span></td></tr>
+<tr><td>Maximum temperature</td><td>1.0° (≈ 111 km)</td><td>31 × 31</td><td><strong>1951 – present</strong></td><td><span class="imd-chip tmax">tmax</span></td></tr>
+<tr><td>Minimum temperature</td><td>1.0° (≈ 111 km)</td><td>31 × 31</td><td><strong>1951 – present</strong></td><td><span class="imd-chip tmin">tmin</span></td></tr>
+</tbody>
+</table>
+</div>
+```
+
+::: {.imd-card .warn}
+<div class="imd-card-title">Differing periods of record</div>
+
+Rainfall is available from **1901**, but temperature only from **1951**. Any analysis that combines all three variables must therefore begin no earlier than 1951. Requesting temperature data before 1951, or rainfall before 1901, will return an error.
+:::
+
+::: {.imd-card .warn}
+<div class="imd-card-title">A note on spatial resolution</div>
+
+Rainfall is resolved at 0.25° (≈ 28 km), whereas temperature is resolved at 1.0° (≈ 111 km). Consequently, a small district may contain no temperature grid-cell centre. The package addresses this through a `touches = TRUE` option, discussed below. In practice, temperature maps will appear coarser than rainfall maps for the same region.
+:::
+
+::: {.imd-concept}
+#### Two principles of spatial-temporal aggregation
+
+Two principles govern the correct aggregation of gridded data and are applied throughout this tutorial.
+
+**Average over space.** Grid cells within a region each sample the same area; the regional value for a given day is therefore the **mean** of those cells, not their sum. Summing the cells would scale the value by the number of cells and yield a meaningless quantity.
+
+**Sum over time for rainfall; average over time for temperature.** Rainfall accumulates, so a seasonal or annual rainfall total is the **sum** of daily values. Temperature does not accumulate; its summary over time is the **mean**.
+:::
+
+---
+
+```{=html}
+<div class="imd-step"><span class="imd-step-num">1</span><h2>Installation</h2></div>
+```
+
+### Prerequisites
+
+Two components are required:
+
+- **R**, the language itself — available from [cran.r-project.org](https://cran.r-project.org)
+- **RStudio Desktop**, an integrated development environment — available from [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/)
+
+Both should be installed with default settings.
+
+### Installing imdR
+
+The package may be installed from CRAN (the stable release) or from GitHub (the development version, which may contain features not yet on CRAN). Installation is performed once.
+
+**From CRAN:**
+
+```{r}
+#| label: install-cran
+#| eval: false
+install.packages("imdR")
+```
+
+**From GitHub:**
+
+```{r}
+#| label: install-github
+#| eval: false
+install.packages("remotes")
+remotes::install_github("Subhradip25/imdR")
+```
+
+::: {.imd-card .warn}
+<div class="imd-card-title">Windows: Rtools</div>
+
+If installation from GitHub requests "Rtools", it should be obtained from [cran.r-project.org/bin/windows/Rtools](https://cran.r-project.org/bin/windows/Rtools/) and the command re-run. Installation from CRAN provides pre-compiled binaries and generally does not require Rtools.
+:::
+
+### Loading the package and defining a data directory
+
+```{r}
+#| label: load-setup
+#| eval: false
+library(imdR)
+packageVersion("imdR")
+
+# imdR does not write to a default location; the output directory must
+# always be specified explicitly via file_dir. On Windows, use forward
+# slashes in the path.
+file_dir <- "C:/Users/YourName/Documents/imdR_data"
+dir.create(file_dir, showWarnings = FALSE, recursive = TRUE)
+```
+
+::: {.imd-card .tip}
+<div class="imd-card-title">Installation versus loading</div>
+
+`install.packages()` is run once. `library(imdR)` must be run at the start of each new R session. The `file_dir` object defined here is reused by every subsequent command.
+:::
+
+```{=html}
+<div class="imd-step"><span class="imd-step-num">2</span><h2>Administrative Boundaries</h2></div>
+```
+
+The package includes Survey of India (SOI) approved boundaries for 36 states and union territories and over 800 districts, enabling extraction by name rather than by coordinate.
+
+```{r}
+#| label: list-boundaries
+#| eval: false
+# List all states and union territories
+list_states()
+
+# List all districts within a given state
+list_districts("Tripura")
+list_districts("Haryana")
+
+# Retrieve the boundary object (an sf polygon) for a region
+goa    <- get_boundary("state",    "Goa")
+karnal <- get_boundary("district", "Karnal")
+```
+
+::: {.imd-card .tip}
+<div class="imd-card-title">Exact names are required</div>
+
+Region names must match the SOI nomenclature. Where `get_boundary()` does not find a name, `list_districts("State")` returns the exact spelling to use (for example, "North Tripura" or "North Goa").
+:::
+
+::: {.imd-concept}
+#### The role of bundled boundaries
+
+Many gridded-data packages provide only the raw grid, leaving the user to source shapefiles, reconcile projections, and resolve geometry errors. By bundling validated administrative boundaries, `imdR` reduces regional extraction to a single function call. This is among the principal practical advantages of the package over direct access to the raw data files.
+:::
+
+---
+
+```{=html}
+<div class="imd-step"><span class="imd-step-num">3</span><h2>Point Extraction: A Single Location</h2></div>
+```
+
+The extraction of a daily time series at a single location is a common requirement. The user specifies a latitude, longitude, variable, and range of years. Coordinates for any location may be obtained from a mapping service such as Google Maps.
+
+### A single variable at a point
+
+The following extracts maximum temperature for a location in Old Goa over the full temperature record (1951–2025) and writes a CSV automatically.
+
+```{r}
+#| label: point-single
+#| eval: false
+oldgoa_tmax <- get_point(
+  lat      = 15.50,
+  lon      = 73.91,
+  variable = "tmax",          # alternatively "rain" or "tmin"
+  start_yr = 1951,
+  end_yr   = 2025,
+  file_dir = file_dir
+)
+
+head(oldgoa_tmax)
+cat("Rows:", nrow(oldgoa_tmax),
+    "| Mean tmax:", round(mean(oldgoa_tmax$tmax, na.rm = TRUE), 1), "C\n")
+```
+
+The function returns a data frame with one row per day — columns `date`, `lat`, `lon`, and the variable — and saves a corresponding CSV in `file_dir`. For rainfall, the equivalent call covers the longer record, 1901–2025.
+
+::: {.imd-card .warn}
+<div class="imd-card-title">Download volume and server availability</div>
+
+A multi-decadal request retrieves one file per year. Temperature files are small (≈ 1.3 MB each); rainfall files are larger (≈ 25 MB each, hence on the order of 1.6 GB for the full record). The first retrieval is therefore slow; subsequent runs read from the local cache and are immediate. Should the IMD server be temporarily unavailable (indicated by a connection timeout), re-running the same command resumes the download, as completed years are skipped.
+:::
+
+### All variables at a point
+
+`get_point_all()` returns rainfall, maximum temperature, minimum temperature, and the diurnal temperature range (DTR = tmax − tmin) in a single merged table. Because it includes temperature, the record begins in 1951.
+
+```{r}
+#| label: point-all
+#| eval: false
+oldgoa_all <- get_point_all(
+  lat      = 15.50,
+  lon      = 73.91,
+  start_yr = 1951,
+  end_yr   = 2025,
+  file_dir = file_dir
+)
+
+head(oldgoa_all)   # columns: date, lat, lon, rain, tmax, tmin, dtr
+```
+
+::: {.imd-concept}
+#### Interpretation of a point value
+
+A point rarely coincides exactly with a grid node, so the package returns the value of the nearest cell centre. For rainfall (28 km cells) this approximates the location closely; for temperature (111 km cells) the returned value represents a substantially larger area. This is a property of the gridded data rather than a limitation of the extraction, and coarse-grid temperature should be interpreted accordingly.
+:::
+
+---
+
+```{=html}
+<div class="imd-step"><span class="imd-step-num">4</span><h2>Regional Extraction: State and District</h2></div>
+```
+
+To summarise an entire state or district as a single daily series, `get_district_series()` extracts all grid cells within the region and returns their **spatial mean** per day, in accordance with the first aggregation principle.
+
+### A single variable for a state
+
+```{r}
+#| label: state-series
+#| eval: false
+# Rainfall record begins in 1901
+kerala_rain <- get_district_series(
+  variable = "rain",
+  name     = "Kerala",
+  start    = 1901,
+  end      = 2025,
+  level    = "state",
+  file_dir = file_dir
+)
+
+head(kerala_rain)
+
+# Mean annual rainfall: daily means summed over time, divided by the
+# number of years
+n_years <- length(unique(format(kerala_rain$date, "%Y")))
+cat("Kerala mean annual rainfall:",
+    round(sum(kerala_rain$rain, na.rm = TRUE) / n_years, 1), "mm/year\n")
+```
+
+### A single variable for a district
+
+```{r}
+#| label: district-series
+#| eval: false
+karnal_rain <- get_district_series(
+  variable = "rain",
+  name     = "Karnal",
+  start    = 1901,
+  end      = 2025,
+  level    = "district",
+  file_dir = file_dir
+)
+head(karnal_rain)
+```
+
+::: {.imd-card .warn}
+<div class="imd-card-title">Small regions on the coarse temperature grid</div>
+
+For temperature over a small state or district, no grid-cell centre may fall within the boundary, producing an all-NA result. The `touches = TRUE` argument captures every cell that the boundary overlaps and resolves this:
+
+```r
+goa_tmax <- get_district_series("tmax", "Goa",
+                                start = 1951, end = 2025,
+                                level = "state",
+                                file_dir = file_dir,
+                                touches  = TRUE)
+```
+:::
+
+### All variables for a district as a single file
+
+For agricultural and agrometeorological applications, rainfall, maximum and minimum temperature, and DTR are frequently required together. Because temperature constrains the period, the record begins in 1951.
+
+```{r}
+#| label: district-all
+#| eval: false
+kr <- get_district_series("rain", "Karnal", 1951, 2025,
+                          file_dir = file_dir, save_csv = FALSE)
+kx <- get_district_series("tmax", "Karnal", 1951, 2025,
+                          file_dir = file_dir, save_csv = FALSE, touches = TRUE)
+kn <- get_district_series("tmin", "Karnal", 1951, 2025,
+                          file_dir = file_dir, save_csv = FALSE, touches = TRUE)
+
+# Merge on date and region, then derive DTR
+karnal_all <- Reduce(function(a, b) merge(a, b, by = c("date", "region")),
+                     list(kr, kx, kn))
+karnal_all$dtr <- round(karnal_all$tmax - karnal_all$tmin, 3)
+karnal_all <- karnal_all[order(karnal_all$date), ]
+
+write.csv(karnal_all,
+          file.path(file_dir, "karnal_all_vars_1951_2025.csv"),
+          row.names = FALSE)
+head(karnal_all)
+```
+
+::: {.imd-card .tip}
+<div class="imd-card-title">Producing a single merged file</div>
+
+Setting `save_csv = FALSE` on each call suppresses the individual CSVs, allowing the three variables to be merged and written as a single tidy file.
+:::
+
+---
+
+```{=html}
+<div class="imd-step"><span class="imd-step-num">5</span><h2>Spatial Export: NetCDF and GeoTIFF</h2></div>
+```
+
+Certain analyses require the full gridded surface for a region rather than a collapsed time series — for example, for use in QGIS, ArcGIS, Panoply, or Python. The `extract_by_boundary()` function masks the national grid to a region and writes the result as NetCDF or GeoTIFF.
+
+::: {.imd-concept}
+#### Choice of output format
+
+**NetCDF (`.nc`)** is the standard format in the climate sciences. It stores the complete latitude × longitude × time array together with metadata, and is appropriate for further analysis in R, Python, or CDO.
+
+**GeoTIFF (`.tif`)** is the standard format in geographic information systems. Each day is stored as a separate raster band, suitable for mapping in QGIS or ArcGIS.
+
+**CSV** stores a long-format table (date, latitude, longitude, value) for every cell and every day. It is convenient for spreadsheet and tidyverse workflows, but the file size grows rapidly: a state over many years may produce several million rows.
+:::
+
+### A single variable for a state, as NetCDF
+
+```{r}
+#| label: state-netcdf
+#| eval: false
+# Load the multi-year grid (a named list, one SpatRaster per year)
+rain_long <- get_data("rain", 1901, 2025, file_dir)
+
+# Extract Kerala for each year and write NetCDF
+for (yr in names(rain_long)) {
+  extract_by_boundary(
+    rain_long[[yr]],
+    level = "state", name = "Kerala",
+    variable = "rain", save = TRUE,
+    format = "netcdf", file_dir = file_dir
+  )
+}
+```
+
+::: {.imd-card .tip}
+<div class="imd-card-title">Year-by-year processing</div>
+
+For a multi-year request, `get_data()` returns a named list with one `SpatRaster` per year, because leap years contain 366 daily layers and other years 365. Iterating over the years keeps memory usage low and produces one file per year, which is considerably safer than stacking the entire record in memory.
+:::
+
+### All variables for a district, as NetCDF
+
+```{r}
+#| label: district-netcdf-all
+#| eval: false
+for (v in c("rain", "tmax", "tmin")) {
+  # Temperature begins in 1951; rainfall could begin in 1901, but a common
+  # start year is used here for a consistent multi-variable archive
+  vg <- get_data(v, 1951, 2025, file_dir)
+  for (yr in names(vg)) {
+    extract_by_boundary(
+      vg[[yr]],
+      level = "district", name = "Dhalai",
+      variable = v, save = TRUE,
+      format = "netcdf", file_dir = file_dir
+    )
+  }
+}
+```
+
+### A single year as GeoTIFF
+
+```{r}
+#| label: district-geotiff
+#| eval: false
+rain2020 <- get_data("rain", 2020, 2020, file_dir)
+extract_by_boundary(
+  rain2020, level = "district", name = "North Goa",
+  variable = "rain", save = TRUE,
+  format = "geotiff", file_dir = file_dir
+)
+```
+
+---
+
+```{=html}
+<div class="imd-step"><span class="imd-step-num">6</span><h2>Custom Regions: The Bounding Box</h2></div>
+```
+
+Where a study area does not correspond to an administrative unit — for instance, the Indo-Gangetic Plains, the Western Ghats, or the rectangular extent of a river basin — `get_bbox()` extracts a region defined by explicit latitude and longitude limits.
+
+```{r}
+#| label: bbox-formats
+#| eval: false
+# Western Ghats, single year, NetCDF
+wghats_nc <- get_bbox(
+  lat_min = 8,  lat_max = 21,
+  lon_min = 73, lon_max = 78,
+  variable = "rain", start_yr = 2020, end_yr = 2020,
+  file_dir = file_dir, format = "netcdf"
+)
+
+# The same region as GeoTIFF
+wghats_tif <- get_bbox(
+  lat_min = 8,  lat_max = 21,
+  lon_min = 73, lon_max = 78,
+  variable = "rain", start_yr = 2020, end_yr = 2020,
+  file_dir = file_dir, format = "geotiff"
+)
+```
+
+For a long-term bounding-box archive, the request is iterated by year to manage memory:
+
+```{r}
+#| label: bbox-longterm
+#| eval: false
+for (yr in 1901:2025) {
+  get_bbox(
+    lat_min = 24, lat_max = 30,   # Indo-Gangetic Plains
+    lon_min = 73, lon_max = 88,
+    variable = "rain", start_yr = yr, end_yr = yr,
+    file_dir = file_dir, format = "netcdf"
+  )
+}
+```
+
+::: {.imd-card .warn}
+<div class="imd-card-title">Clipping to the data extent</div>
+
+`get_bbox()` automatically clips the requested box to the spatial extent of the IMD data. Coordinates outside the area of coverage produce a warning, and the box is trimmed to the valid region.
+:::
+
+---
+
+```{=html}
+<div class="imd-step"><span class="imd-step-num">7</span><h2>Mapping a Single Day</h2></div>
+```
+
+The `plot_imd()` function produces maps with administrative boundaries overlaid, for either the whole of India or a specified state or district.
+
+```{r}
+#| label: maps
+#| eval: false
+rain2020 <- get_data("rain", 2020, 2020, file_dir)
+
+# National extent
+plot_imd(rain2020, "2020-06-28", "rain")
+
+# State
+plot_imd(rain2020, "2020-06-28", "rain",
+         level = "state", name = "Kerala")
+
+# District
+plot_imd(rain2020, "2020-06-28", "rain",
+         level = "district", name = "North Goa")
+```
+
+::: {.imd-card .tip}
+<div class="imd-card-title">Saving a map</div>
+
+Supplying `save_path = file.path(file_dir, "kerala_rain.png")` writes a 300-dpi PNG suitable for publication.
+:::
+
+---
+
+```{=html}
+<div class="imd-step"><span class="imd-step-num">8</span><h2>Long-Term Trend Plots</h2></div>
+```
+
+A plot of daily values over many decades is difficult to interpret. For the assessment of long-term change, the data are aggregated to one value per year — annual totals for rainfall, annual means for temperature — with the year on the horizontal axis.
+
+::: {.imd-concept}
+#### Annual aggregation
+
+Following the aggregation principles, each year is reduced to a sum (rainfall) or a mean (temperature). This converts the daily record into one value per year, the resolution at which long-term trends are appropriately examined.
+:::
+
+```{r}
+#| label: annual-trend-rain
+#| eval: false
+library(ggplot2)
+
+# District daily rainfall series (rainfall record from 1901)
+karnal_rain <- get_district_series("rain", "Karnal", 1901, 2025,
+                                   file_dir = file_dir)
+
+# Annual total: sum over time
+karnal_rain$year <- as.integer(format(karnal_rain$date, "%Y"))
+annual_rain <- aggregate(rain ~ year, karnal_rain, sum)
+
+ggplot(annual_rain, aes(year, rain)) +
+  geom_col(fill = "#2E86C1", alpha = 0.85) +
+  geom_smooth(method = "lm", se = FALSE, color = "#C0392B", linewidth = 1) +
+  labs(title = "Karnal — Annual Total Rainfall",
+       x = "Year", y = "Rainfall (mm/year)") +
+  theme_bw(base_size = 13)
+```
+
+For temperature, the annual value is a mean rather than a sum:
+
+```{r}
+#| label: annual-trend-temp
+#| eval: false
+# Temperature record from 1951
+karnal_tmax <- get_district_series("tmax", "Karnal", 1951, 2025,
+                                   file_dir = file_dir, touches = TRUE)
+karnal_tmax$year <- as.integer(format(karnal_tmax$date, "%Y"))
+annual_tmax <- aggregate(tmax ~ year, karnal_tmax, mean)
+
+ggplot(annual_tmax, aes(year, tmax)) +
+  geom_line(color = "#C0392B", linewidth = 0.8) +
+  geom_point(color = "#922B21", size = 1.6) +
+  geom_smooth(method = "lm", se = FALSE, linetype = "dashed") +
+  labs(title = "Karnal — Annual Mean Maximum Temperature",
+       x = "Year", y = "Tmax (°C)") +
+  theme_bw(base_size = 13)
+```
+
+::: {.imd-card .tip}
+<div class="imd-card-title">Interpretation of the fitted line</div>
+
+The fitted regression line indicates the direction and approximate magnitude of change. It does not, however, establish whether the trend is statistically significant; that assessment is provided by the Mann-Kendall test described in Step 10.
+:::
+
+---
+
+```{=html}
+<div class="imd-step"><span class="imd-step-num">9</span><h2>Climate Indices</h2></div>
+```
+
+Daily data are seldom the final analytical product. Climate indices condense the daily record into interpretable annual metrics — the frequency of rainy days, the duration of dry spells, the number of hot days — which form the basis of climate-change assessment.
+
+::: {.imd-concept}
+#### The purpose of indices
+
+A change in total rainfall does not, by itself, reveal whether that change arose from a greater number of rainy days or from fewer but more intense events — a distinction of considerable importance for agriculture and flood risk. Indices such as the number of rainy days, consecutive dry days, and very-heavy-rainfall days separate these signals. The package computes a standard suite in a single call.
+:::
+
+### Rainfall indices
+
+```{r}
+#| label: rain-indices
+#| eval: false
+rain_long <- get_data("rain", 1901, 2025, file_dir)
+
+# District-level indices, one row per year
+karnal_idx <- compute_rainfall_indices(
+  rain_long, level = "district", name = "Karnal",
+  file_dir = file_dir
+)
+head(karnal_idx)
+```
+
+```{=html}
+<div class="imd-table">
+<table>
+<thead><tr><th>Index</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td><code>total</code></td><td>Annual total rainfall (mm)</td></tr>
+<tr><td><code>dr</code></td><td>Number of rainy days (≥ 2.5 mm)</td></tr>
+<tr><td><code>d64</code>, <code>d115</code></td><td>Heavy and very-heavy rainfall days (≥ 64.5 and ≥ 115.6 mm)</td></tr>
+<tr><td><code>rx1day</code>, <code>rx5day</code></td><td>Maximum 1-day and 5-day rainfall</td></tr>
+<tr><td><code>sdii</code></td><td>Simple daily intensity index</td></tr>
+<tr><td><code>cwd</code>, <code>cdd</code></td><td>Maximum consecutive wet and dry days</td></tr>
+<tr><td><code>pci</code></td><td>Precipitation concentration index</td></tr>
+</tbody>
+</table>
+</div>
+```
+
+### Temperature indices
+
+```{r}
+#| label: temp-indices
+#| eval: false
+tmax_long <- get_data("tmax", 1951, 2025, file_dir)
+tmin_long <- get_data("tmin", 1951, 2025, file_dir)
+
+temp_idx <- compute_temp_indices(
+  tmax_long, tmin_long,
+  level = "state", name = "Goa",
+  file_dir = file_dir
+)
+head(temp_idx)
+```
+
+The temperature indices include the hottest day (`txx`), coldest night (`tnn`), summer days at or above 35 °C (`su35`), tropical nights at or above 25 °C (`tr25`), and warm- and cold-spell durations (`wsdi`, `csdi`), corresponding to the standard ETCCDI climate-change indicators.
+
+---
+
+```{=html}
+<div class="imd-step"><span class="imd-step-num">10</span><h2>Trend Analysis: Mann-Kendall and Sen's Slope</h2></div>
+```
+
+The final stage establishes whether an observed long-term change is statistically significant or attributable to random variation.
+
+::: {.imd-concept}
+#### The rationale for a non-parametric approach
+
+Climate series frequently violate the assumptions of ordinary least-squares regression: they may be non-normally distributed, skewed, and influenced by extreme values. The **Mann-Kendall test** is non-parametric. It evaluates only whether values tend to increase or decrease over time, making no distributional assumption and remaining robust to outliers.
+
+The associated **Sen's slope** estimates the magnitude of change — for example, a change of 2.1 mm per year — as the median of all pairwise slopes between observations, and is likewise resistant to outliers. Together, the two methods constitute the standard approach to trend detection in climatology.
+:::
+
+```{=html}
+<div class="imd-table">
+<table>
+<thead><tr><th>Output</th><th>Interpretation</th></tr></thead>
+<tbody>
+<tr><td><code>tau</code></td><td>Direction and strength of the trend (−1 to +1)</td></tr>
+<tr><td><code>pvalue</code></td><td>Statistical significance (smaller values indicate a more robust trend)</td></tr>
+<tr><td><code>sens_slope</code></td><td>Estimated rate of change per year</td></tr>
+<tr><td><code>trend_direction</code></td><td>Increasing, decreasing, or no trend</td></tr>
+</tbody>
+</table>
+</div>
+```
+
+### Trend analysis of an annual series
+
+An annual series is first constructed and then tested. `trend_analysis()` requires a data frame containing a `year` column and the metric of interest.
+
+```{r}
+#| label: trend-annual
+#| eval: false
+# Annual total rainfall for Karnal (from Step 8)
+karnal_rain$year <- as.integer(format(karnal_rain$date, "%Y"))
+annual_rain <- aggregate(rain ~ year, karnal_rain, sum)
+
+trend_analysis(
+  annual_rain,
+  index_col = "rain",
+  name      = "Karnal",
+  file_dir  = file_dir
+)
+```
+
+The function reports the Mann-Kendall statistics, writes a CSV of the results, and produces a plot with the Sen's-slope line superimposed.
+
+### Trend analysis of climate indices
+
+The principal application is the analysis of trends in the indices computed in Step 9 — for instance, whether heavy-rainfall days are increasing, or whether the number of rainy days is declining while the total remains unchanged.
+
+```{r}
+#| label: trend-indices
+#| eval: false
+# karnal_idx (from compute_rainfall_indices) contains one row per year
+# with a 'year' column.
+
+# Annual total rainfall
+trend_analysis(karnal_idx, index_col = "total",
+               name = "Karnal", file_dir = file_dir)
+
+# Number of rainy days
+trend_analysis(karnal_idx, index_col = "dr",
+               name = "Karnal", file_dir = file_dir)
+
+# Very-heavy-rainfall days
+trend_analysis(karnal_idx, index_col = "d115",
+               name = "Karnal", file_dir = file_dir)
+
+# Consecutive dry days (a drought-related signal)
+trend_analysis(karnal_idx, index_col = "cdd",
+               name = "Karnal", file_dir = file_dir)
+```
+
+::: {.imd-card .tip}
+<div class="imd-card-title">Significance notation</div>
+
+Significance is indicated by the conventional notation: `***` for p ≤ 0.001, `**` for p ≤ 0.01, `*` for p ≤ 0.05, `.` for p ≤ 0.1, and `ns` where not significant. A result marked `ns` may reflect a real tendency that is nonetheless statistically indistinguishable from noise over the period examined, and should be reported as such.
+:::
+
+::: {.imd-card .warn}
+<div class="imd-card-title">Length of record</div>
+
+The Mann-Kendall test requires a minimum of three years, but trends are meaningful only over extended periods. The World Meteorological Organization climate-normal period of 30 years is a common reference. A significant result derived from a short record is statistically fragile, and significance should always be evaluated against a long record.
+:::
+
+---
+
+## A Representative Analytical Workflow
+
+The individual components combine into a complete analysis. Consider the question: *is monsoon rainfall in Karnal becoming more variable?*
+
+::: {.imd-concept}
+1. **Acquisition.** Obtain the 1901–2025 rainfall series with `get_district_series("rain", "Karnal", 1901, 2025, ...)`.
+2. **Index computation.** Derive annual indices with `compute_rainfall_indices(...)` — rainy days, consecutive dry days, very-heavy-rainfall days.
+3. **Trend testing.** Apply `trend_analysis()` to each index of interest (`cdd`, `dr`, `d115`).
+4. **Interpretation.** A simultaneous increase in consecutive dry days and very-heavy-rainfall days, with a stable annual total, indicates that the same quantity of rain is being delivered in fewer, more intense events — that is, increased variability. This constitutes a complete and defensible climatological finding, obtained in a small number of lines of code.
+:::
+
+---
+
+## Troubleshooting
+
+```{=html}
+<div class="imd-table">
+<table>
+<thead><tr><th>Symptom</th><th>Cause and resolution</th></tr></thead>
+<tbody>
+<tr><td>Connection timeout</td><td>The IMD server is temporarily unavailable. Re-run the command later; completed years are skipped.</td></tr>
+<tr><td>All values NA for a small region's temperature</td><td>The region is smaller than the 1.0° temperature cell. Add <code>touches = TRUE</code>.</td></tr>
+<tr><td><code>Can't retrieve empty body</code></td><td>The requested year is not yet published (for example, the current year). Use the most recent completed year, or <code>get_realtime()</code> for recent days.</td></tr>
+<tr><td>District name not found</td><td>A spelling mismatch. Use <code>list_districts("State")</code> to obtain the exact name.</td></tr>
+<tr><td>Memory error on large multi-year requests</td><td>Process the data year by year (iterating over <code>names(get_data(...))</code>) rather than stacking all years.</td></tr>
+<tr><td>Temperature request before 1951, or rainfall before 1901</td><td>Outside the available period of record. Adjust the start year accordingly.</td></tr>
+</tbody>
+</table>
+</div>
+```
+
+---
+
+## Function Reference
+
+```{=html}
+<div class="imd-grid">
+  <div class="imd-tile"><div class="lab">list_states()<br>list_districts()</div><div class="sub">Explore boundaries</div></div>
+  <div class="imd-tile"><div class="lab">get_point()<br>get_point_all()</div><div class="sub">Point time series</div></div>
+  <div class="imd-tile"><div class="lab">get_district_series()</div><div class="sub">State / district mean series</div></div>
+  <div class="imd-tile"><div class="lab">get_data()<br>open_data()</div><div class="sub">Download / read grids</div></div>
+  <div class="imd-tile"><div class="lab">extract_by_boundary()<br>get_bbox()</div><div class="sub">NetCDF / GeoTIFF / CSV export</div></div>
+  <div class="imd-tile"><div class="lab">get_realtime()</div><div class="sub">Recent provisional data</div></div>
+  <div class="imd-tile"><div class="lab">plot_imd()<br>plot_timeseries()</div><div class="sub">Maps and series plots</div></div>
+  <div class="imd-tile"><div class="lab">compute_rainfall_indices()<br>compute_temp_indices()</div><div class="sub">Climate indices</div></div>
+  <div class="imd-tile"><div class="lab">trend_analysis()</div><div class="sub">Mann-Kendall and Sen's slope</div></div>
+</div>
+```
+
+---
+
+## Citation and Resources
+
+Researchers who use `imdR` are requested to cite it:
+
+```{r}
+#| label: citation
+#| eval: false
+citation("imdR")
+```
+
+- **GitHub (development version):** [github.com/Subhradip25/imdR](https://github.com/Subhradip25/imdR)
+- **CRAN (stable version):** `install.packages("imdR")`
+- **Data source:** India Meteorological Department, Pune
+- **Boundaries:** Survey of India
+
+::: {.imd-card .theory}
+<div class="imd-card-title">Data provenance</div>
+
+The archive data are quality-controlled and released annually, and are the appropriate source for research. Real-time data, accessed through `get_realtime()`, are provisional and subject to subsequent revision; they should be used only for recent dates not yet covered by the archive, and this status should be stated in the methods of any resulting work.
+:::
