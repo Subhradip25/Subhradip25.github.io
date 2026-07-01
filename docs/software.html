@@ -116,7 +116,6 @@ ul.task-list li input[type="checkbox"] {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -139,10 +138,10 @@ ul.task-list li input[type="checkbox"] {
     <div class="rp-label">Open-Source Contributions</div>
     <div class="rp-title">Software &amp; Tools</div>
     <div class="rp-stats">
-      <div class="rp-stat"><div class="rp-snum">1</div><div class="rp-slbl">CRAN Package</div></div>
+      <div class="rp-stat"><div class="rp-snum">2</div><div class="rp-slbl">CRAN Packages</div></div>
       <div class="rp-stat"><div class="rp-snum">24+</div><div class="rp-slbl">Climate Indices</div></div>
       <div class="rp-stat"><div class="rp-snum">808</div><div class="rp-slbl">Districts Covered</div></div>
-      <div class="rp-stat"><div class="rp-snum">1901</div><div class="rp-slbl">Data From</div></div>
+      <div class="rp-stat"><div class="rp-snum">Auto</div><div class="rp-slbl">Test Selection</div></div>
       <div class="rp-stat"><div class="rp-snum">MIT</div><div class="rp-slbl">License</div></div>
     </div>
   </div>
@@ -151,7 +150,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- ═══ QUICK NAV ═══ -->
 <div class="rp-nav">
   <div class="rp-nav-inner">
-    <a href="#imdr">imdR Package</a>
+    <a href="#imdr">imdR</a>
+    <a href="#statdecider">statdecideR</a>
     <a href="#installation">Installation</a>
     <a href="#functions">Functions</a>
     <a href="#indices">Climate Indices</a>
@@ -163,9 +163,11 @@ ul.task-list li input[type="checkbox"] {
 <div class="rp-body">
 <div class="rp-body-inner">
 
+<!-- ════════════════════════════════════
+     PACKAGE 1: imdR
+════════════════════════════════════ -->
 <div id="imdr" style="scroll-margin-top:60px;">
 
-  <!-- Package hero card -->
   <div class="sw-hero-card">
     <div class="sw-hero-left">
       <div class="sw-pkg-icon">📦</div>
@@ -359,7 +361,7 @@ goa_idx &lt;- compute_rainfall_indices(rain2020,
     </div>
   </div>
 
-  <!-- Citation -->
+  <!-- Citation imdR -->
   <div class="rp-sec-header" id="citation" style="margin-top:2rem; scroll-margin-top:60px;">
     <div class="rp-sec-title">Citation</div>
     <div class="rp-sec-line"></div>
@@ -379,6 +381,214 @@ R package. https://CRAN.R-project.org/package=imdR</div>
     <div>
       <strong>Data Source:</strong> IMD gridded meteorological data is sourced from the India Meteorological Department (IMD Pune) at <a href="https://imdpune.gov.in/" target="_blank" style="color:#1D9E75;">imdpune.gov.in</a>.
       Administrative boundaries are Survey of India (SOI) approved shapefiles.
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════
+     PACKAGE 2: statdecideR
+════════════════════════════════════ -->
+<div id="statdecider" style="scroll-margin-top:60px; margin-top:3rem;">
+
+  <!-- Package divider -->
+  <div class="rp-sec-header" style="margin-bottom:1.5rem;">
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-hero-card">
+    <div class="sw-hero-left">
+      <div class="sw-pkg-icon">🧪</div>
+      <div class="sw-pkg-name">statdecideR</div>
+      <div class="sw-pkg-tagline">Detect · Test · Visualize</div>
+      <div class="sw-pkg-full">Automated Statistical Analysis and Plotting with CLD</div>
+      <div class="sw-pkg-badges">
+        <a href="https://cran.r-project.org/web/packages/statdecideR/index.html" target="_blank" class="sw-badge sw-badge-cran">CRAN</a>
+        <span class="sw-badge sw-badge-r">R Package</span>
+        <span class="sw-badge sw-badge-mit">MIT License</span>
+        <span class="sw-badge sw-badge-ver">v0.1.6</span>
+      </div>
+      <div class="sw-pkg-btns">
+        <a class="sw-pkg-btn sw-pkg-btn-primary" href="https://cran.r-project.org/web/packages/statdecideR/index.html" target="_blank">CRAN Page</a>
+        <span class="sw-pkg-btn sw-pkg-btn-outline" style="cursor:default; opacity:0.6;">GitHub (soon)</span>
+      </div>
+    </div>
+    <div class="sw-hero-right">
+      <div class="sw-desc-label">About the Package</div>
+      <p class="sw-desc">
+        <strong>statdecideR</strong> is a lightweight R package that automates the entire statistical decision workflow for one-way and two-way experimental designs. Instead of manually checking assumptions and selecting tests, you call a single function and the package handles everything: normality testing, test selection, post-hoc analysis, and publication-ready visualisation.
+      </p>
+      <p class="sw-desc">
+        The package automatically runs a <strong>Shapiro-Wilk normality test</strong> on your data. If the data are normal, it proceeds with <strong>ANOVA</strong> and <strong>Tukey HSD</strong> post-hoc analysis. If not, it switches to <strong>Kruskal-Wallis</strong> with a non-parametric post-hoc test. In both cases, results are annotated with <strong>Compact Letter Displays (CLD)</strong> directly on publication-ready boxplots, faceted plots, and heatmaps.
+      </p>
+      <p class="sw-desc">
+        Designed for agricultural scientists, ecologists, and researchers who need rigorous, reproducible statistical summaries without spending time on test selection or plot formatting.
+      </p>
+      <div class="sw-authors">
+        <div class="sw-authors-label">Authors</div>
+        <div class="sw-authors-list">Subhradip Bhattacharjee (maintainer) · Bappa Das · Parveen Kumar · Rakesh Kumar · Amitava Panja · Pritam Roy · Divyacrotu Majumder · Susanta Dutta</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Workflow -->
+  <div class="rp-sec-header" style="margin-top:2rem;">
+    <div class="rp-sec-title">Automated Workflow</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-workflow-grid">
+    <div class="sw-workflow-step">
+      <div class="sw-wf-num">1</div>
+      <div class="sw-wf-title">Normality Check</div>
+      <div class="sw-wf-desc">Shapiro-Wilk test applied to the dependent variable. p &gt; 0.05 indicates normality.</div>
+    </div>
+    <div class="sw-workflow-arrow">→</div>
+    <div class="sw-workflow-step">
+      <div class="sw-wf-num">2</div>
+      <div class="sw-wf-title">Test Selection</div>
+      <div class="sw-wf-desc">Normal data: ANOVA. Non-normal data: Kruskal-Wallis. Selected automatically.</div>
+    </div>
+    <div class="sw-workflow-arrow">→</div>
+    <div class="sw-workflow-step">
+      <div class="sw-wf-num">3</div>
+      <div class="sw-wf-title">Post-hoc Analysis</div>
+      <div class="sw-wf-desc">Tukey HSD (parametric) or Kruskal post-hoc (non-parametric) with CLD grouping letters.</div>
+    </div>
+    <div class="sw-workflow-arrow">→</div>
+    <div class="sw-workflow-step">
+      <div class="sw-wf-num">4</div>
+      <div class="sw-wf-title">Visualisation</div>
+      <div class="sw-wf-desc">Boxplots with CLD labels, faceted plots, and heatmaps generated automatically.</div>
+    </div>
+  </div>
+
+  <!-- Installation statdecideR -->
+  <div class="rp-sec-header" style="margin-top:2rem;">
+    <div class="rp-sec-title">Installation</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-code-card">
+    <div class="sw-code-label">Install from CRAN (stable)</div>
+    <div class="sw-code-block">install.packages("statdecideR")</div>
+  </div>
+
+  <!-- Quick Start statdecideR -->
+  <div class="rp-sec-header" style="margin-top:2rem;">
+    <div class="rp-sec-title">Quick Start</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-code-card">
+    <div class="sw-code-label">One-way analysis with automatic test selection</div>
+    <div class="sw-code-block">library(statdecideR)
+
+# Use the built-in example dataset (honeybee pollen collection)
+# One grouping variable: Month
+results &lt;- run_statdecide(
+  data       = df_nonparam,
+  dep_var    = "Pollen",
+  group_vars = "Month"
+)
+
+# Access individual outputs
+results$normality_test   # Shapiro-Wilk result and decision
+results$main_effects     # Test result, post-hoc, and CLD table
+results$plots            # Named list of ggplot2 boxplot objects</div>
+    <div class="sw-code-label" style="margin-top:14px;">Two-way analysis with interaction, faceted plot, and heatmap</div>
+    <div class="sw-code-block">results2 &lt;- run_statdecide(
+  data       = df_nonparam,
+  dep_var    = "Pollen",
+  group_vars = c("Month", "Time"),  # two grouping variables
+  verbose    = FALSE                 # suppress console messages
+)
+
+# For two-way designs, additional outputs are available
+results2$interaction   # interaction effect test and CLD
+results2$facet_plot    # faceted boxplot across the two factors
+results2$heatmap       # mean value heatmap (factor 1 × factor 2)</div>
+  </div>
+
+  <!-- Functions statdecideR -->
+  <div class="rp-sec-header" style="margin-top:2rem;">
+    <div class="rp-sec-title">Functions</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-fn-grid-2">
+    <div class="sw-fn-group">
+      <div class="sw-fn-group-title">⚙️ Core Functions</div>
+      <div class="sw-fn-item">
+        <code>run_statdecide()</code>
+        <span>Main function. Runs the complete workflow: normality test, parametric or non-parametric test, post-hoc analysis with CLD, and all plots. Returns a named list with all results.</span>
+      </div>
+      <div class="sw-fn-item">
+        <code>df_nonparam</code>
+        <span>Built-in example dataset. Honeybee pollen collection (mg) recorded at six time slots across multiple months. Useful for testing non-parametric workflows.</span>
+      </div>
+    </div>
+    <div class="sw-fn-group">
+      <div class="sw-fn-group-title">📤 Output Objects</div>
+      <div class="sw-fn-item"><code>$normality_test</code><span>Shapiro-Wilk p-value and normality decision</span></div>
+      <div class="sw-fn-item"><code>$main_effects</code><span>Test result, significance, post-hoc table, and effect size for each grouping variable</span></div>
+      <div class="sw-fn-item"><code>$interaction</code><span>Interaction effect test and CLD (two-way designs only)</span></div>
+      <div class="sw-fn-item"><code>$plots</code><span>Named list of ggplot2 boxplot objects with CLD labels</span></div>
+      <div class="sw-fn-item"><code>$facet_plot</code><span>Faceted boxplot across both factors (two-way designs only)</span></div>
+      <div class="sw-fn-item"><code>$heatmap</code><span>Mean-value heatmap (factor 1 × factor 2, two-way designs only)</span></div>
+    </div>
+  </div>
+
+  <!-- Statistical methods -->
+  <div class="rp-sec-header" style="margin-top:2rem;">
+    <div class="rp-sec-title">Statistical Methods</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-indices-grid">
+    <div class="sw-indices-card">
+      <div class="sw-indices-title">📐 Parametric Path (normal data)</div>
+      <div class="sw-indices-list">
+        <div class="sw-index-item"><code>Shapiro-Wilk</code><span>Normality test (p &gt; 0.05 = normal)</span></div>
+        <div class="sw-index-item"><code>ANOVA</code><span>One-way or two-way analysis of variance</span></div>
+        <div class="sw-index-item"><code>Tukey HSD</code><span>Post-hoc pairwise comparisons</span></div>
+        <div class="sw-index-item"><code>eta²</code><span>Effect size (proportion of variance explained)</span></div>
+        <div class="sw-index-item"><code>CLD</code><span>Compact Letter Display grouping</span></div>
+        <div class="sw-index-item"><code>Boxplot</code><span>ggplot2 boxplot with CLD labels</span></div>
+      </div>
+    </div>
+    <div class="sw-indices-card">
+      <div class="sw-indices-title">📊 Non-parametric Path (non-normal data)</div>
+      <div class="sw-indices-list">
+        <div class="sw-index-item"><code>Shapiro-Wilk</code><span>Normality test (p ≤ 0.05 = non-normal)</span></div>
+        <div class="sw-index-item"><code>Kruskal-Wallis</code><span>Rank-based non-parametric test</span></div>
+        <div class="sw-index-item"><code>Kruskal post-hoc</code><span>Multiple comparisons via agricolae</span></div>
+        <div class="sw-index-item"><code>CLD</code><span>Compact Letter Display grouping</span></div>
+        <div class="sw-index-item"><code>Boxplot</code><span>ggplot2 boxplot with CLD labels</span></div>
+        <div class="sw-index-item"><code>Facet + Heatmap</code><span>Two-way interaction visualisation</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Citation statdecideR -->
+  <div class="rp-sec-header" style="margin-top:2rem;">
+    <div class="rp-sec-title">Citation</div>
+    <div class="rp-sec-line"></div>
+  </div>
+
+  <div class="sw-code-card">
+    <div class="sw-code-label">If you use statdecideR in your research, please cite:</div>
+    <div class="sw-code-block">citation("statdecideR")</div>
+    <div class="sw-code-label" style="margin-top:14px;">Or cite directly:</div>
+    <div class="sw-code-block">Bhattacharjee S, Das B, Kumar P, Kumar R, Panja A, Roy P, Majumder D, Dutta S (2025).
+statdecideR: Automated Statistical Analysis and Plotting with CLD.
+R package version 0.1.6. https://cran.r-project.org/web/packages/statdecideR/index.html</div>
+  </div>
+
+  <div class="sw-note-card" style="margin-top:1.5rem;">
+    <div class="sw-note-icon">ℹ️</div>
+    <div>
+      <strong>Copyright:</strong> Indian Council of Agricultural Research (ICAR). Package developed at ICAR-Central Coastal Agricultural Research Institute, Goa. Statistical methods follow Shapiro &amp; Wilk (1965), Kruskal &amp; Wallis (1952), and Tukey (1949).
     </div>
   </div>
 
@@ -416,6 +626,7 @@ R package. https://CRAN.R-project.org/package=imdR</div>
 .sw-badge-r     { background: rgba(29,158,117,0.2); color: #5DCAA5; border: 1px solid rgba(29,158,117,0.3); }
 .sw-badge-mit   { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
 .sw-badge-check { background: #1D9E75; color: white !important; }
+.sw-badge-ver   { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.2); }
 .sw-pkg-btns { display: flex; flex-direction: column; gap: 8px; width: 100%; }
 .sw-pkg-btn {
   padding: 8px 16px; border-radius: 6px; font-size: 0.8rem; font-weight: 600;
@@ -456,8 +667,12 @@ R package. https://CRAN.R-project.org/package=imdR</div>
   border-radius: 6px; white-space: pre; overflow-x: auto;
 }
 
-/* ── Functions grid ── */
+/* ── Functions grid (3-col for imdR) ── */
 .sw-fn-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+
+/* ── Functions grid (2-col for statdecideR) ── */
+.sw-fn-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
 .sw-fn-group { background: white; border-radius: 10px; border: 0.5px solid #e0ddd5; padding: 1.1rem; }
 .sw-fn-group-title { font-size: 0.75rem; font-weight: 700; color: #0D2137; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px solid #f0efea; }
 .sw-fn-item { display: flex; gap: 8px; align-items: flex-start; padding: 5px 0; border-bottom: 0.5px solid #f8f8f5; font-size: 0.75rem; }
@@ -474,6 +689,27 @@ R package. https://CRAN.R-project.org/package=imdR</div>
 .sw-index-item code { color: #1D9E75; font-weight: 600; min-width: 80px; flex-shrink: 0; font-size: 0.72rem; }
 .sw-index-item span { color: #666; }
 
+/* ── Workflow steps ── */
+.sw-workflow-grid {
+  display: flex; align-items: center; gap: 8px;
+  background: white; border-radius: 10px; border: 0.5px solid #e0ddd5;
+  padding: 1.2rem 1.4rem; flex-wrap: wrap;
+}
+.sw-workflow-step {
+  flex: 1; min-width: 140px; background: #f8faf9;
+  border-radius: 8px; border: 1px solid #e0ddd5;
+  border-top: 3px solid #1D9E75; padding: 0.9rem 1rem; text-align: center;
+}
+.sw-wf-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #0D2137; color: #1D9E75; font-size: 0.8rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 6px; border: 1px solid #1D9E75;
+}
+.sw-wf-title { font-size: 0.8rem; font-weight: 700; color: #0D2137; margin-bottom: 4px; }
+.sw-wf-desc { font-size: 0.7rem; color: #666; line-height: 1.45; }
+.sw-workflow-arrow { color: #1D9E75; font-size: 1.2rem; font-weight: 700; flex-shrink: 0; }
+
 /* ── Note card ── */
 .sw-note-card {
   background: #edf7f2; border-left: 3px solid #1D9E75; border-radius: 0 8px 8px 0;
@@ -483,11 +719,10 @@ R package. https://CRAN.R-project.org/package=imdR</div>
 .sw-note-icon { flex-shrink: 0; }
 
 /* ══════════════════════════════════════
-   SOFTWARE PAGE MOBILE RESPONSIVE
+   MOBILE RESPONSIVE
 ══════════════════════════════════════ */
 @media (max-width: 768px) {
 
-  /* Hero: stack dark panel above description */
   .sw-hero-card {
     grid-template-columns: 1fr !important;
     display: block !important;
@@ -496,56 +731,29 @@ R package. https://CRAN.R-project.org/package=imdR</div>
     padding: 1.5rem !important;
     border-radius: 10px 10px 0 0 !important;
   }
-  .sw-hero-right {
-    padding: 1.2rem !important;
-  }
-  .sw-pkg-btns {
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-  }
-  .sw-pkg-btn {
-    flex: 1 !important;
-    min-width: 120px !important;
-  }
+  .sw-hero-right { padding: 1.2rem !important; }
+  .sw-pkg-btns { flex-direction: row !important; flex-wrap: wrap !important; }
+  .sw-pkg-btn { flex: 1 !important; min-width: 120px !important; }
 
-  /* Data coverage: single column */
-  .sw-coverage-grid {
-    grid-template-columns: 1fr !important;
-    display: block !important;
-  }
-  .sw-coverage-card {
-    margin-bottom: 10px !important;
-  }
+  .sw-coverage-grid { grid-template-columns: 1fr !important; display: block !important; }
+  .sw-coverage-card { margin-bottom: 10px !important; }
 
-  /* Functions: single column */
-  .sw-fn-grid {
-    grid-template-columns: 1fr !important;
-    display: block !important;
-  }
-  .sw-fn-group {
-    margin-bottom: 10px !important;
-  }
+  .sw-fn-grid { grid-template-columns: 1fr !important; display: block !important; }
+  .sw-fn-grid-2 { grid-template-columns: 1fr !important; display: block !important; }
+  .sw-fn-group { margin-bottom: 10px !important; }
 
-  /* Indices: single column */
-  .sw-indices-grid {
-    grid-template-columns: 1fr !important;
-    display: block !important;
-  }
-  .sw-indices-card {
-    margin-bottom: 10px !important;
-  }
+  .sw-indices-grid { grid-template-columns: 1fr !important; display: block !important; }
+  .sw-indices-card { margin-bottom: 10px !important; }
 
-  /* Code blocks: smaller font */
-  .sw-code-block {
-    font-size: 0.72rem !important;
-    padding: 10px 12px !important;
-  }
+  .sw-workflow-grid { flex-direction: column !important; }
+  .sw-workflow-arrow { transform: rotate(90deg); }
+  .sw-workflow-step { min-width: 100% !important; }
+
+  .sw-code-block { font-size: 0.72rem !important; padding: 10px 12px !important; }
 }
 
 @media (max-width: 480px) {
-  .sw-pkg-btns {
-    flex-direction: column !important;
-  }
+  .sw-pkg-btns { flex-direction: column !important; }
   .sw-pkg-name { font-size: 1.4rem !important; }
 }
 </style>

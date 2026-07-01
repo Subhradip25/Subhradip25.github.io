@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.37">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Subhradip Bhattacharjee">
 <meta name="dcterms.date" content="2026-06-29">
 <meta name="description" content="A reference tutorial on the imdR package: installation from CRAN and GitHub, listing of states and districts, downloading IMD daily rainfall and temperature, extraction by point, district, state, and bounding box, export to CSV, NetCDF, and GeoTIFF, computation of climate indices, and Mann-Kendall trend analysis with Sen’s slope, applied to long-term records.">
-
 <title>A Complete Guide to IMD Gridded Weather Data in R with imdR – Subhradip Bhattacharjee</title>
 <style>
 /* Default styles provided by pandoc.
@@ -63,7 +60,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
@@ -84,8 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-03a4d218a2b25877e37476bd0bd9b56f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark-2fac84c806a41e660c24112b9436305e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-03a4d218a2b25877e37476bd0bd9b56f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-03a4d218a2b25877e37476bd0bd9b56f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -111,13 +106,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<style>html{ scroll-behavior: smooth; }</style>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -142,12 +132,9 @@ const typesetMath = (el) => {
 window.Quarto = {
   typesetMath
 };
-</script>
-
-<link rel="stylesheet" href="../../styles.css">
+</script><link rel="stylesheet" href="../../styles.css">
 <link rel="stylesheet" href="imd-post.css">
 </head>
-
 <body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -313,9 +300,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Subhradip Bhattacharjee</span>
@@ -327,7 +312,7 @@ window.Quarto = {
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -348,25 +333,21 @@ window.Quarto = {
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#scope-and-audience" id="toc-scope-and-audience" class="nav-link active" data-scroll-target="#scope-and-audience">Scope and Audience</a></li>
-  <li><a href="#background-how-imd-gridded-data-works" id="toc-background-how-imd-gridded-data-works" class="nav-link" data-scroll-target="#background-how-imd-gridded-data-works">Background: How IMD Gridded Data Works</a>
+<li><a href="#scope-and-audience" id="toc-scope-and-audience" class="nav-link active" data-scroll-target="#scope-and-audience">Scope and Audience</a></li>
+  <li>
+<a href="#background-how-imd-gridded-data-works" id="toc-background-how-imd-gridded-data-works" class="nav-link" data-scroll-target="#background-how-imd-gridded-data-works">Background: How IMD Gridded Data Works</a>
   <ul class="collapse">
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+<li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
   <li><a href="#installing-imdr" id="toc-installing-imdr" class="nav-link" data-scroll-target="#installing-imdr">Installing imdR</a></li>
   <li><a href="#loading-the-package-and-setting-your-data-directory" id="toc-loading-the-package-and-setting-your-data-directory" class="nav-link" data-scroll-target="#loading-the-package-and-setting-your-data-directory">Loading the package and setting your data directory</a></li>
   <li><a href="#extracting-a-single-variable-at-a-point" id="toc-extracting-a-single-variable-at-a-point" class="nav-link" data-scroll-target="#extracting-a-single-variable-at-a-point">Extracting a single variable at a point</a></li>
@@ -383,25 +364,21 @@ window.Quarto = {
   <li><a href="#temperature-indices" id="toc-temperature-indices" class="nav-link" data-scroll-target="#temperature-indices">Temperature indices</a></li>
   <li><a href="#testing-the-trend-in-an-annual-series" id="toc-testing-the-trend-in-an-annual-series" class="nav-link" data-scroll-target="#testing-the-trend-in-an-annual-series">Testing the trend in an annual series</a></li>
   <li><a href="#testing-trends-in-climate-indices" id="toc-testing-trends-in-climate-indices" class="nav-link" data-scroll-target="#testing-trends-in-climate-indices">Testing trends in climate indices</a></li>
-  </ul></li>
+  </ul>
+</li>
   <li><a href="#putting-it-all-together-a-complete-research-example" id="toc-putting-it-all-together-a-complete-research-example" class="nav-link" data-scroll-target="#putting-it-all-together-a-complete-research-example">Putting It All Together: A Complete Research Example</a></li>
   <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
   <li><a href="#function-reference" id="toc-function-reference" class="nav-link" data-scroll-target="#function-reference">Function Reference</a></li>
   <li><a href="#citation-and-resources" id="toc-citation-and-resources" class="nav-link" data-scroll-target="#citation-and-resources">Citation and Resources</a></li>
-  </ul>
-</nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+  </ul></nav>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">A Complete Guide to IMD Gridded Weather Data in R with <strong>imdR</strong></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">A Complete Guide to IMD Gridded Weather Data in R with <strong>imdR</strong>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 <p class="subtitle lead">Downloading, extracting, mapping, and analysing India’s gridded rainfall and temperature records: a reference tutorial for climatologists, agricultural scientists, and researchers</p>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
@@ -448,10 +425,7 @@ window.Quarto = {
   
 
 
-</header>
-
-
-<div class="imd-hero">
+</header><div class="imd-hero">
   <h1>A Complete Guide to IMD Gridded Weather Data in R</h1>
   <p>A step-by-step workflow for converting India Meteorological Department gridded data into research-ready time series, maps, climate indices, and statistical trends using the <strong>imdR</strong> package.</p>
   <div class="imd-badges">
@@ -461,8 +435,7 @@ window.Quarto = {
     <span class="imd-badge">Indices &amp; Trends</span>
   </div>
 </div>
-<section id="scope-and-audience" class="level2">
-<h2 class="anchored" data-anchor-id="scope-and-audience">Scope and Audience</h2>
+<section id="scope-and-audience" class="level2"><h2 class="anchored" data-anchor-id="scope-and-audience">Scope and Audience</h2>
 <p>If you work on Indian climate science, whether in agricultural meteorology, hydrology, or environmental research, you almost certainly need long-term daily rainfall and temperature records. Getting those records, clipping them to your study area, and preparing them for statistical analysis has traditionally required downloading raw binary files from the IMD FTP server, writing custom parsers, and sourcing shapefiles independently. The <code>imdR</code> package handles all of that in a few lines of R.</p>
 <p>This tutorial walks you through the entire workflow: installing the package, exploring administrative boundaries, downloading and extracting data for points and regions, exporting to CSV or spatial formats, computing standard climate indices, and testing for statistically significant trends using the Mann-Kendall method. No prior experience with <code>imdR</code> is assumed, though basic familiarity with R helps.</p>
 <div class="imd-card theory">
@@ -471,32 +444,25 @@ Workflow at a glance
 </div>
 <p>Install <code>imdR</code> → explore administrative boundaries → download and extract data (point, district, state, bounding box) → export (CSV, NetCDF, GeoTIFF) → visualise → compute climate indices → perform Mann-Kendall trend analysis with Sen’s slope.</p>
 </div>
-<hr>
-</section>
-<section id="background-how-imd-gridded-data-works" class="level2">
-<h2 class="anchored" data-anchor-id="background-how-imd-gridded-data-works">Background: How IMD Gridded Data Works</h2>
+<hr></section><section id="background-how-imd-gridded-data-works" class="level2"><h2 class="anchored" data-anchor-id="background-how-imd-gridded-data-works">Background: How IMD Gridded Data Works</h2>
 <p>Before running any code, it helps to understand what the data actually are and how the package interacts with them. This section explains the structure of the gridded datasets and the aggregation rules you need to follow to get correct results.</p>
-<section id="from-station-observations-to-a-regular-grid" class="level4 imd-concept">
-<h4 class="anchored" data-anchor-id="from-station-observations-to-a-regular-grid">From station observations to a regular grid</h4>
+<section id="from-station-observations-to-a-regular-grid" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="from-station-observations-to-a-regular-grid">From station observations to a regular grid</h4>
 <p>IMD maintains a network of rain-gauge and temperature stations across India. Each station records measurements at a single geographic point, so the raw data are spatially irregular: dense in some regions and sparse in others. That makes it difficult to answer area-based questions such as “how much rain fell over Karnal district last monsoon?”</p>
 <p>To solve this, IMD applies spatial interpolation to convert the irregular station observations into a <strong>regular grid</strong>: a uniform lattice of cells that tiles the entire country. Each grid cell holds a single value for each day, representing the estimated average for that cell’s area. This is the same principle used by global reanalysis products such as ERA5 and CFSR.</p>
 <p>The interpolation method IMD uses is inverse-distance weighted (IDW) interpolation. For each grid cell, the estimated value <span class="math inline">\(\hat{z}\)</span> at location <span class="math inline">\((x, y)\)</span> is:</p>
 <p><span class="math display">\[\hat{z}(x, y) = \frac{\displaystyle\sum_{i=1}^{n} \frac{z_i}{d_i^p}}{\displaystyle\sum_{i=1}^{n} \frac{1}{d_i^p}}\]</span></p>
 <p>where <span class="math inline">\(z_i\)</span> is the observed value at station <span class="math inline">\(i\)</span>, <span class="math inline">\(d_i\)</span> is the distance from that station to the grid cell centre, and <span class="math inline">\(p\)</span> is the power parameter (typically <span class="math inline">\(p = 2\)</span>). Stations closer to the cell centre receive higher weight; distant stations contribute less. The result is a spatially smooth, continuous surface that can be subset by any administrative or geographic boundary.</p>
-</section>
-<p>The three variables available through <code>imdR</code> differ in both spatial resolution and period of record:</p>
+</section><p>The three variables available through <code>imdR</code> differ in both spatial resolution and period of record:</p>
 <div class="imd-table">
 
 <table class="caption-top table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th data-quarto-table-cell-role="th">Variable</th>
 <th data-quarto-table-cell-role="th">Resolution</th>
 <th data-quarto-table-cell-role="th">Grid size</th>
 <th data-quarto-table-cell-role="th">Available period</th>
 <th data-quarto-table-cell-role="th">Code</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td>Rainfall</td>
@@ -521,7 +487,6 @@ Workflow at a glance
 </tr>
 </tbody>
 </table>
-
 </div>
 <div class="imd-card warn">
 <div class="imd-card-title">
@@ -535,8 +500,7 @@ Spatial resolution matters for small regions
 </div>
 <p>Rainfall is gridded at 0.25° (roughly 28 km per cell), while temperature uses a coarser 1.0° grid (roughly 111 km per cell). For a small district, there may be no temperature grid-cell centre falling within the boundary at all. The package provides a <code>touches = TRUE</code> argument to capture cells that merely overlap the boundary rather than requiring their centres to fall inside it. This is discussed in detail in Step 4.</p>
 </div>
-<section id="two-rules-for-aggregating-gridded-data-correctly" class="level4 imd-concept">
-<h4 class="anchored" data-anchor-id="two-rules-for-aggregating-gridded-data-correctly">Two rules for aggregating gridded data correctly</h4>
+<section id="two-rules-for-aggregating-gridded-data-correctly" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="two-rules-for-aggregating-gridded-data-correctly">Two rules for aggregating gridded data correctly</h4>
 <p>Getting regional summaries right requires following two simple but important principles.</p>
 <p><strong>Rule 1: Average across space.</strong> When you want a single value for a region on a given day, you take the <strong>mean</strong> of all grid cells within that region, not their sum. Each cell represents the same area, so summing them would multiply the value by the number of cells and give a physically meaningless result. The spatial mean is the correct areal estimate.</p>
 <p>Mathematically, the areal mean <span class="math inline">\(\bar{z}\)</span> for a region containing <span class="math inline">\(N\)</span> grid cells on day <span class="math inline">\(t\)</span> is:</p>
@@ -545,456 +509,443 @@ Spatial resolution matters for small regions
 <p>For annual totals and means:</p>
 <p><span class="math display">\[\text{Annual rainfall} = \sum_{t=1}^{365} \bar{z}_t \qquad \text{Annual mean temperature} = \frac{1}{365} \sum_{t=1}^{365} \bar{z}_t\]</span></p>
 <p>These two rules apply throughout every step of this tutorial.</p>
-</section>
-<hr>
-<div class="imd-step"><span class="imd-step-num">1</span><h2 class="anchored">Installation</h2></div>
-<section id="prerequisites" class="level3">
-<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
+</section><hr>
+<div class="imd-step">
+<span class="imd-step-num">1</span><h2 class="anchored">Installation</h2>
+</div>
+<section id="prerequisites" class="level3"><h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
 <p>You need two pieces of software before anything else:</p>
 <ul>
-<li><strong>R</strong> (the language): download from <a href="https://cran.r-project.org">cran.r-project.org</a></li>
-<li><strong>RStudio Desktop</strong> (the interface): download from <a href="https://posit.co/download/rstudio-desktop/">posit.co/download/rstudio-desktop</a></li>
+<li>
+<strong>R</strong> (the language): download from <a href="https://cran.r-project.org">cran.r-project.org</a>
+</li>
+<li>
+<strong>RStudio Desktop</strong> (the interface): download from <a href="https://posit.co/download/rstudio-desktop/">posit.co/download/rstudio-desktop</a>
+</li>
 </ul>
 <p>Install both with their default settings. Once installed, open RStudio. Everything from here on runs inside the RStudio console or an R script.</p>
-</section>
-<section id="installing-imdr" class="level3">
-<h3 class="anchored" data-anchor-id="installing-imdr">Installing imdR</h3>
+</section><section id="installing-imdr" class="level3"><h3 class="anchored" data-anchor-id="installing-imdr">Installing imdR</h3>
 <p>You can install <code>imdR</code> from CRAN (the stable release, recommended for most users) or from GitHub (the development version, which may include new features not yet on CRAN). You only need to do this once.</p>
 <p><strong>From CRAN (stable, recommended):</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"imdR"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"imdR"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This downloads the pre-compiled binary package from the CRAN mirror nearest to you and installs it. No additional tools are needed.</p>
 <p><strong>From GitHub (development version):</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remotes lets R install packages directly from GitHub</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"Subhradip25/imdR"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># remotes lets R install packages directly from GitHub</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Subhradip25/imdR"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><code>remotes::install_github()</code> clones the repository, compiles the source code, and installs the package. On Windows this requires Rtools; see the note below.</p>
+<p><code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code> clones the repository, compiles the source code, and installs the package. On Windows this requires Rtools; see the note below.</p>
 <div class="imd-card warn">
 <div class="imd-card-title">
 Windows users: Rtools
 </div>
-<p>If the GitHub installation asks for Rtools, download and install it from <a href="https://cran.r-project.org/bin/windows/Rtools/">cran.r-project.org/bin/windows/Rtools</a>, then re-run the <code>remotes::install_github()</code> line. The CRAN version does not require Rtools because it ships pre-compiled binaries.</p>
+<p>If the GitHub installation asks for Rtools, download and install it from <a href="https://cran.r-project.org/bin/windows/Rtools/">cran.r-project.org/bin/windows/Rtools</a>, then re-run the <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code> line. The CRAN version does not require Rtools because it ships pre-compiled binaries.</p>
 </div>
-</section>
-<section id="loading-the-package-and-setting-your-data-directory" class="level3">
-<h3 class="anchored">Loading the package and setting your data directory</h3>
+</section><section id="loading-the-package-and-setting-your-data-directory" class="level3"><h3 class="anchored">Loading the package and setting your data directory</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load imdR into your R session</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(imdR)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check which version you have installed</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"imdR"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define where downloaded data files will be saved.</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># imdR never writes to a default location; you must always specify file_dir.</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># On Windows, use forward slashes even though Windows usually uses backslashes.</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>file_dir <span class="ot">&lt;-</span> <span class="st">"C:/Users/YourName/Documents/imdR_data"</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the folder if it does not exist yet</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(file_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load imdR into your R session</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Subhradip25/imdR">imdR</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Check which version you have installed</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"imdR"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define where downloaded data files will be saved.</span></span>
+<span><span class="co"># imdR never writes to a default location; you must always specify file_dir.</span></span>
+<span><span class="co"># On Windows, use forward slashes even though Windows usually uses backslashes.</span></span>
+<span><span class="va">file_dir</span> <span class="op">&lt;-</span> <span class="st">"C:/Users/YourName/Documents/imdR_data"</span></span>
+<span></span>
+<span><span class="co"># Create the folder if it does not exist yet</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">file_dir</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The <code>file_dir</code> object is reused by every function in this tutorial. Setting it once here means you do not have to repeat the path in every call. The <code>showWarnings = FALSE</code> argument suppresses the warning that would appear if the folder already exists, and <code>recursive = TRUE</code> creates any parent folders that are missing.</p>
 <div class="imd-card tip">
 <div class="imd-card-title">
 Install once, load every session
 </div>
-<p><code>install.packages()</code> runs once and permanently adds the package to your R library. <code>library(imdR)</code> must be run at the start of every new R session to make the functions available. Think of installation as putting a book on your shelf and <code>library()</code> as opening it.</p>
+<p><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> runs once and permanently adds the package to your R library. <code><a href="https://github.com/Subhradip25/imdR">library(imdR)</a></code> must be run at the start of every new R session to make the functions available. Think of installation as putting a book on your shelf and <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> as opening it.</p>
 </div>
 <hr>
-<div class="imd-step"><span class="imd-step-num">2</span><h2 class="anchored" data-anchor-id="loading-the-package-and-setting-your-data-directory">Administrative Boundaries</h2></div>
+<div class="imd-step">
+<span class="imd-step-num">2</span><h2 class="anchored" data-anchor-id="loading-the-package-and-setting-your-data-directory">Administrative Boundaries</h2>
+</div>
 <p>One of <code>imdR</code>’s most practical features is its bundled set of administrative boundaries. The package includes Survey of India (SOI) approved polygons for all 36 states and union territories of India and over 800 districts. You can extract data for any of these regions by name, without ever sourcing or loading a shapefile yourself.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a data frame of all states and union territories</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">list_states</span>()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print all districts within a given state</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the exact state name as it appears in list_states()</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">list_districts</span>(<span class="st">"Tripura"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">list_districts</span>(<span class="st">"Haryana"</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve the boundary polygon for a region as an sf object</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># This is useful if you want to inspect or plot the boundary</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>goa    <span class="ot">&lt;-</span> <span class="fu">get_boundary</span>(<span class="st">"state"</span>,    <span class="st">"Goa"</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>karnal <span class="ot">&lt;-</span> <span class="fu">get_boundary</span>(<span class="st">"district"</span>, <span class="st">"Karnal"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Print a data frame of all states and union territories</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/list_states.html">list_states</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print all districts within a given state</span></span>
+<span><span class="co"># Use the exact state name as it appears in list_states()</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/list_districts.html">list_districts</a></span><span class="op">(</span><span class="st">"Tripura"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/list_districts.html">list_districts</a></span><span class="op">(</span><span class="st">"Haryana"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Retrieve the boundary polygon for a region as an sf object</span></span>
+<span><span class="co"># This is useful if you want to inspect or plot the boundary</span></span>
+<span><span class="va">goa</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_boundary.html">get_boundary</a></span><span class="op">(</span><span class="st">"state"</span>,    <span class="st">"Goa"</span><span class="op">)</span></span>
+<span><span class="va">karnal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_boundary.html">get_boundary</a></span><span class="op">(</span><span class="st">"district"</span>, <span class="st">"Karnal"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><code>list_states()</code> and <code>list_districts()</code> simply print the names recognised by the package. <code>get_boundary()</code> returns an <code>sf</code> polygon object, which you can pass to <code>plot()</code> or <code>ggplot2</code> if you want to see the boundary before extracting data.</p>
+<p><code><a href="https://rdrr.io/pkg/imdR/man/list_states.html">list_states()</a></code> and <code><a href="https://rdrr.io/pkg/imdR/man/list_districts.html">list_districts()</a></code> simply print the names recognised by the package. <code><a href="https://rdrr.io/pkg/imdR/man/get_boundary.html">get_boundary()</a></code> returns an <code>sf</code> polygon object, which you can pass to <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> or <code>ggplot2</code> if you want to see the boundary before extracting data.</p>
 <div class="imd-card tip">
 <div class="imd-card-title">
 Exact spelling is required
 </div>
 <p>All extraction functions match names exactly against the SOI nomenclature. If a name is not recognised, run <code>list_districts("YourState")</code> to find the correct spelling. Common sources of mismatch include prefixes like “North” or “West” and abbreviations (for example, “North Goa” not “N. Goa”).</p>
 </div>
-<section id="why-bundled-boundaries-matter" class="level4 imd-concept">
-<h4 class="anchored" data-anchor-id="why-bundled-boundaries-matter">Why bundled boundaries matter</h4>
+<section id="why-bundled-boundaries-matter" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="why-bundled-boundaries-matter">Why bundled boundaries matter</h4>
 <p>Most gridded-data tools give you only the raw grid. To extract data for a specific region, you would normally have to find an appropriate shapefile, check that its coordinate reference system matches the grid, resolve any geometry errors, and write the clipping code yourself. By bundling validated, projection-matched boundaries, <code>imdR</code> reduces all of that to a single function call with a text argument. This is particularly valuable for district-level work, where publicly available shapefiles are often inconsistent in naming conventions across sources.</p>
-</section>
-<hr>
-<div class="imd-step"><span class="imd-step-num">3</span><h2 class="anchored">Point Extraction: Getting a Time Series for a Single Location</h2></div>
+</section><hr>
+<div class="imd-step">
+<span class="imd-step-num">3</span><h2 class="anchored">Point Extraction: Getting a Time Series for a Single Location</h2>
+</div>
 <p>The most common starting point in climate analysis is extracting a daily time series for a specific location, such as a field station, a weather observatory, or a project site. You provide a latitude and longitude, specify the variable and year range, and <code>imdR</code> returns a tidy data frame with one row per day.</p>
-</section>
-<section id="extracting-a-single-variable-at-a-point" class="level3">
-<h3 class="anchored" data-anchor-id="extracting-a-single-variable-at-a-point">Extracting a single variable at a point</h3>
+</section><section id="extracting-a-single-variable-at-a-point" class="level3"><h3 class="anchored" data-anchor-id="extracting-a-single-variable-at-a-point">Extracting a single variable at a point</h3>
 <p>The example below downloads the maximum temperature record (1951 to 2025) for a location in Old Goa:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>oldgoa_tmax <span class="ot">&lt;-</span> <span class="fu">get_point</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lat      =</span> <span class="fl">15.50</span>,     <span class="co"># decimal degrees, WGS 84</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lon      =</span> <span class="fl">73.91</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">"tmax"</span>,    <span class="co"># "rain", "tmax", or "tmin"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">start_yr =</span> <span class="dv">1951</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">end_yr   =</span> <span class="dv">2025</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_dir =</span> file_dir   <span class="co"># data files are cached here</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview the output</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oldgoa_tmax)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick summary</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total rows:"</span>, <span class="fu">nrow</span>(oldgoa_tmax),</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"| Mean tmax:"</span>, <span class="fu">round</span>(<span class="fu">mean</span>(oldgoa_tmax<span class="sc">$</span>tmax, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>), <span class="st">"°C</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">oldgoa_tmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_point.html">get_point</a></span><span class="op">(</span></span>
+<span>  lat      <span class="op">=</span> <span class="fl">15.50</span>,     <span class="co"># decimal degrees, WGS 84</span></span>
+<span>  lon      <span class="op">=</span> <span class="fl">73.91</span>,</span>
+<span>  variable <span class="op">=</span> <span class="st">"tmax"</span>,    <span class="co"># "rain", "tmax", or "tmin"</span></span>
+<span>  start_yr <span class="op">=</span> <span class="fl">1951</span>,</span>
+<span>  end_yr   <span class="op">=</span> <span class="fl">2025</span>,</span>
+<span>  file_dir <span class="op">=</span> <span class="va">file_dir</span>   <span class="co"># data files are cached here</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Preview the output</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">oldgoa_tmax</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Quick summary</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Total rows:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">oldgoa_tmax</span><span class="op">)</span>,</span>
+<span>    <span class="st">"| Mean tmax:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">oldgoa_tmax</span><span class="op">$</span><span class="va">tmax</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">"°C\n"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>What this code does, step by step:</strong></p>
 <ol type="1">
-<li><code>get_point()</code> checks whether the annual data files for the requested variable and year range already exist in <code>file_dir</code>. Any missing years are downloaded from the IMD server; years already cached are read from disk.</li>
+<li>
+<code><a href="https://rdrr.io/pkg/imdR/man/get_point.html">get_point()</a></code> checks whether the annual data files for the requested variable and year range already exist in <code>file_dir</code>. Any missing years are downloaded from the IMD server; years already cached are read from disk.</li>
 <li>For each day, the function identifies the nearest grid-cell centre to the supplied coordinates and extracts that cell’s value. This is the nearest-neighbour assignment: no interpolation is applied between cells.</li>
 <li>The function assembles a data frame with columns <code>date</code>, <code>lat</code>, <code>lon</code>, and the variable name (<code>tmax</code> in this case), and writes a CSV to <code>file_dir</code> automatically.</li>
-<li>The returned object is a standard R data frame. <code>head()</code> shows the first six rows; <code>mean()</code> with <code>na.rm = TRUE</code> computes the overall average ignoring any missing values.</li>
+<li>The returned object is a standard R data frame. <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> shows the first six rows; <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> with <code>na.rm = TRUE</code> computes the overall average ignoring any missing values.</li>
 </ol>
 <p>For rainfall, you would substitute <code>variable = "tmax"</code> with <code>variable = "rain"</code> and set <code>start_yr = 1901</code> to access the full 125-year record.</p>
 <div class="imd-card warn">
 <div class="imd-card-title">
 Expect the first download to be slow
 </div>
-<p><code>get_point()</code> fetches one file per year from the IMD server. Temperature files are roughly 1.3 MB each; rainfall files are roughly 25 MB each. Downloading the full 1901 to 2025 rainfall record therefore transfers around 1.6 GB of data. This first download is slow and depends on your internet connection. On all subsequent runs, the cached files are used and the function completes in seconds. If the server times out mid-download, simply re-run the same command: completed years are detected automatically and skipped.</p>
+<p><code><a href="https://rdrr.io/pkg/imdR/man/get_point.html">get_point()</a></code> fetches one file per year from the IMD server. Temperature files are roughly 1.3 MB each; rainfall files are roughly 25 MB each. Downloading the full 1901 to 2025 rainfall record therefore transfers around 1.6 GB of data. This first download is slow and depends on your internet connection. On all subsequent runs, the cached files are used and the function completes in seconds. If the server times out mid-download, simply re-run the same command: completed years are detected automatically and skipped.</p>
 </div>
-</section>
-<section id="extracting-all-three-variables-at-once" class="level3">
-<h3 class="anchored">Extracting all three variables at once</h3>
-<p>If you need rainfall, maximum temperature, minimum temperature, and the diurnal temperature range (DTR) together, <code>get_point_all()</code> retrieves all four in one call and merges them into a single data frame:</p>
+</section><section id="extracting-all-three-variables-at-once" class="level3"><h3 class="anchored">Extracting all three variables at once</h3>
+<p>If you need rainfall, maximum temperature, minimum temperature, and the diurnal temperature range (DTR) together, <code><a href="https://rdrr.io/pkg/imdR/man/get_point_all.html">get_point_all()</a></code> retrieves all four in one call and merges them into a single data frame:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>oldgoa_all <span class="ot">&lt;-</span> <span class="fu">get_point_all</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lat      =</span> <span class="fl">15.50</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lon      =</span> <span class="fl">73.91</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">start_yr =</span> <span class="dv">1951</span>,   <span class="co"># limited by temperature availability</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">end_yr   =</span> <span class="dv">2025</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_dir =</span> file_dir</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oldgoa_all)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Columns: date, lat, lon, rain, tmax, tmin, dtr</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># dtr = tmax - tmin (diurnal temperature range, in °C)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">oldgoa_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_point_all.html">get_point_all</a></span><span class="op">(</span></span>
+<span>  lat      <span class="op">=</span> <span class="fl">15.50</span>,</span>
+<span>  lon      <span class="op">=</span> <span class="fl">73.91</span>,</span>
+<span>  start_yr <span class="op">=</span> <span class="fl">1951</span>,   <span class="co"># limited by temperature availability</span></span>
+<span>  end_yr   <span class="op">=</span> <span class="fl">2025</span>,</span>
+<span>  file_dir <span class="op">=</span> <span class="va">file_dir</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">oldgoa_all</span><span class="op">)</span></span>
+<span><span class="co"># Columns: date, lat, lon, rain, tmax, tmin, dtr</span></span>
+<span><span class="co"># dtr = tmax - tmin (diurnal temperature range, in °C)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The diurnal temperature range (DTR) is computed internally as <span class="math inline">\(\text{DTR} = T_{max} - T_{min}\)</span>. It is a useful indicator of continentality and cloud cover: high DTR values suggest clear skies and dry conditions, while low DTR values often indicate cloudy, humid, or rainy periods.</p>
-<section id="understanding-what-a-point-value-represents" class="level4 imd-concept">
-<h4 class="anchored" data-anchor-id="understanding-what-a-point-value-represents">Understanding what a “point” value represents</h4>
-<p>Your coordinates will rarely fall exactly on a grid-cell centre. <code>get_point()</code> assigns the value of the <strong>nearest</strong> cell centre to your location. For the rainfall grid (0.25° cells, roughly 28 km wide), the nearest cell is usually within 14 km of your location, which is a reasonable approximation for most purposes. For the temperature grid (1.0° cells, roughly 111 km wide), the nearest cell could be up to 55 km away and represents conditions over a much larger area. This is a fundamental property of the gridded data, not a limitation of the package. Temperature point values should therefore be interpreted as regional estimates rather than site-specific measurements.</p>
-</section>
-<hr>
-<div class="imd-step"><span class="imd-step-num">4</span><h2 class="anchored" data-anchor-id="extracting-all-three-variables-at-once">Regional Extraction: States and Districts</h2></div>
-<p>In most research applications you want a daily time series that represents an entire administrative region rather than a single point. <code>get_district_series()</code> does this by identifying all grid cells whose centres fall within the region’s boundary, extracting their values for each day, and returning their spatial mean. This follows Rule 1 from the background section: aggregate across space by averaging, not summing.</p>
-</section>
-<section id="rainfall-for-an-entire-state" class="level3">
-<h3 class="anchored" data-anchor-id="rainfall-for-an-entire-state">Rainfall for an entire state</h3>
+<section id="understanding-what-a-point-value-represents" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="understanding-what-a-point-value-represents">Understanding what a “point” value represents</h4>
+<p>Your coordinates will rarely fall exactly on a grid-cell centre. <code><a href="https://rdrr.io/pkg/imdR/man/get_point.html">get_point()</a></code> assigns the value of the <strong>nearest</strong> cell centre to your location. For the rainfall grid (0.25° cells, roughly 28 km wide), the nearest cell is usually within 14 km of your location, which is a reasonable approximation for most purposes. For the temperature grid (1.0° cells, roughly 111 km wide), the nearest cell could be up to 55 km away and represents conditions over a much larger area. This is a fundamental property of the gridded data, not a limitation of the package. Temperature point values should therefore be interpreted as regional estimates rather than site-specific measurements.</p>
+</section><hr>
+<div class="imd-step">
+<span class="imd-step-num">4</span><h2 class="anchored" data-anchor-id="extracting-all-three-variables-at-once">Regional Extraction: States and Districts</h2>
+</div>
+<p>In most research applications you want a daily time series that represents an entire administrative region rather than a single point. <code><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series()</a></code> does this by identifying all grid cells whose centres fall within the region’s boundary, extracting their values for each day, and returning their spatial mean. This follows Rule 1 from the background section: aggregate across space by averaging, not summing.</p>
+</section><section id="rainfall-for-an-entire-state" class="level3"><h3 class="anchored" data-anchor-id="rainfall-for-an-entire-state">Rainfall for an entire state</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Daily area-mean rainfall for Kerala, 1901 to 2025</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>kerala_rain <span class="ot">&lt;-</span> <span class="fu">get_district_series</span>(</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">"rain"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">name     =</span> <span class="st">"Kerala"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">start    =</span> <span class="dv">1901</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">end      =</span> <span class="dv">2025</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">level    =</span> <span class="st">"state"</span>,    <span class="co"># "state" or "district"</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_dir =</span> file_dir</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(kerala_rain)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute mean annual rainfall (Rule 2: sum daily rain, then average over years)</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>n_years <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(<span class="fu">format</span>(kerala_rain<span class="sc">$</span>date, <span class="st">"%Y"</span>)))</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>mean_annual_rain <span class="ot">&lt;-</span> <span class="fu">sum</span>(kerala_rain<span class="sc">$</span>rain, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> n_years</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Kerala mean annual rainfall:"</span>, <span class="fu">round</span>(mean_annual_rain, <span class="dv">1</span>), <span class="st">"mm/year</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Daily area-mean rainfall for Kerala, 1901 to 2025</span></span>
+<span><span class="va">kerala_rain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series</a></span><span class="op">(</span></span>
+<span>  variable <span class="op">=</span> <span class="st">"rain"</span>,</span>
+<span>  name     <span class="op">=</span> <span class="st">"Kerala"</span>,</span>
+<span>  start    <span class="op">=</span> <span class="fl">1901</span>,</span>
+<span>  end      <span class="op">=</span> <span class="fl">2025</span>,</span>
+<span>  level    <span class="op">=</span> <span class="st">"state"</span>,    <span class="co"># "state" or "district"</span></span>
+<span>  file_dir <span class="op">=</span> <span class="va">file_dir</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">kerala_rain</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compute mean annual rainfall (Rule 2: sum daily rain, then average over years)</span></span>
+<span><span class="va">n_years</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">kerala_rain</span><span class="op">$</span><span class="va">date</span>, <span class="st">"%Y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">mean_annual_rain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">kerala_rain</span><span class="op">$</span><span class="va">rain</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">/</span> <span class="va">n_years</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Kerala mean annual rainfall:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mean_annual_rain</span>, <span class="fl">1</span><span class="op">)</span>, <span class="st">"mm/year\n"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>What this code does:</strong></p>
 <ol type="1">
-<li><code>get_district_series()</code> retrieves the state boundary polygon for Kerala from the bundled shapefile.</li>
+<li>
+<code><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series()</a></code> retrieves the state boundary polygon for Kerala from the bundled shapefile.</li>
 <li>It identifies all rainfall grid-cell centres that fall within that polygon for each requested year.</li>
 <li>For each day, it computes the spatial mean across those cells: <span class="math inline">\(\bar{z}_t = \frac{1}{N}\sum_{i=1}^{N} z_{i,t}\)</span>.</li>
 <li>It returns a data frame with columns <code>date</code>, <code>region</code>, and <code>rain</code>, and saves a CSV in <code>file_dir</code>.</li>
-<li>To get mean annual rainfall, we sum all daily values (Rule 2: rainfall accumulates) and divide by the number of years. The <code>format(kerala_rain$date, "%Y")</code> call extracts the four-digit year from each date string, and <code>unique()</code> gives us the count of distinct years.</li>
-</ol>
-</section>
-<section id="rainfall-for-a-district" class="level3">
-<h3 class="anchored" data-anchor-id="rainfall-for-a-district">Rainfall for a district</h3>
+<li>To get mean annual rainfall, we sum all daily values (Rule 2: rainfall accumulates) and divide by the number of years. The <code>format(kerala_rain$date, "%Y")</code> call extracts the four-digit year from each date string, and <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> gives us the count of distinct years.</li>
+</ol></section><section id="rainfall-for-a-district" class="level3"><h3 class="anchored" data-anchor-id="rainfall-for-a-district">Rainfall for a district</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Daily area-mean rainfall for Karnal district, 1901 to 2025</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>karnal_rain <span class="ot">&lt;-</span> <span class="fu">get_district_series</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">"rain"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">name     =</span> <span class="st">"Karnal"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">start    =</span> <span class="dv">1901</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">end      =</span> <span class="dv">2025</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">level    =</span> <span class="st">"district"</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_dir =</span> file_dir</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(karnal_rain)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Daily area-mean rainfall for Karnal district, 1901 to 2025</span></span>
+<span><span class="va">karnal_rain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series</a></span><span class="op">(</span></span>
+<span>  variable <span class="op">=</span> <span class="st">"rain"</span>,</span>
+<span>  name     <span class="op">=</span> <span class="st">"Karnal"</span>,</span>
+<span>  start    <span class="op">=</span> <span class="fl">1901</span>,</span>
+<span>  end      <span class="op">=</span> <span class="fl">2025</span>,</span>
+<span>  level    <span class="op">=</span> <span class="st">"district"</span>,</span>
+<span>  file_dir <span class="op">=</span> <span class="va">file_dir</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">karnal_rain</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The code is identical to the state-level call except that <code>level = "district"</code>. The function automatically looks up the Karnal district polygon and clips the national rainfall grid to it.</p>
 <div class="imd-card warn">
 <div class="imd-card-title">
 Small districts and the coarse temperature grid
 </div>
-<p>A district smaller than a 1.0° temperature cell may contain no grid-cell centre within its boundary. In that case <code>get_district_series()</code> returns all-NA values for temperature. The solution is <code>touches = TRUE</code>, which captures any cell that the boundary <em>touches or overlaps</em>, even if its centre lies outside:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>goa_tmax <span class="ot">&lt;-</span> <span class="fu">get_district_series</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">"tmax"</span>,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">name     =</span> <span class="st">"Goa"</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">start    =</span> <span class="dv">1951</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">end      =</span> <span class="dv">2025</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">level    =</span> <span class="st">"state"</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_dir =</span> file_dir,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">touches  =</span> <span class="cn">TRUE</span>       <span class="co"># include cells overlapping the boundary</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A district smaller than a 1.0° temperature cell may contain no grid-cell centre within its boundary. In that case <code><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series()</a></code> returns all-NA values for temperature. The solution is <code>touches = TRUE</code>, which captures any cell that the boundary <em>touches or overlaps</em>, even if its centre lies outside:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">goa_tmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series</a></span><span class="op">(</span></span>
+<span>  variable <span class="op">=</span> <span class="st">"tmax"</span>,</span>
+<span>  name     <span class="op">=</span> <span class="st">"Goa"</span>,</span>
+<span>  start    <span class="op">=</span> <span class="fl">1951</span>,</span>
+<span>  end      <span class="op">=</span> <span class="fl">2025</span>,</span>
+<span>  level    <span class="op">=</span> <span class="st">"state"</span>,</span>
+<span>  file_dir <span class="op">=</span> <span class="va">file_dir</span>,</span>
+<span>  touches  <span class="op">=</span> <span class="cn">TRUE</span>       <span class="co"># include cells overlapping the boundary</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This is the recommended default for all temperature extractions over small regions.</p>
 </div>
-</section>
-<section id="combining-all-three-variables-for-a-district" class="level3">
-<h3 class="anchored">Combining all three variables for a district</h3>
+</section><section id="combining-all-three-variables-for-a-district" class="level3"><h3 class="anchored">Combining all three variables for a district</h3>
 <p>Many agricultural and agrometeorology applications need rainfall, maximum temperature, and minimum temperature in a single tidy table. Because temperature constrains the period, the record starts in 1951:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download each variable separately, suppressing individual CSVs</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>kr <span class="ot">&lt;-</span> <span class="fu">get_district_series</span>(<span class="st">"rain"</span>, <span class="st">"Karnal"</span>, <span class="dv">1951</span>, <span class="dv">2025</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">file_dir =</span> file_dir, <span class="at">save_csv =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>kx <span class="ot">&lt;-</span> <span class="fu">get_district_series</span>(<span class="st">"tmax"</span>, <span class="st">"Karnal"</span>, <span class="dv">1951</span>, <span class="dv">2025</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">file_dir =</span> file_dir, <span class="at">save_csv =</span> <span class="cn">FALSE</span>, <span class="at">touches =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>kn <span class="ot">&lt;-</span> <span class="fu">get_district_series</span>(<span class="st">"tmin"</span>, <span class="st">"Karnal"</span>, <span class="dv">1951</span>, <span class="dv">2025</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">file_dir =</span> file_dir, <span class="at">save_csv =</span> <span class="cn">FALSE</span>, <span class="at">touches =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge the three data frames on the date and region columns</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>karnal_all <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(a, b) <span class="fu">merge</span>(a, b, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"date"</span>, <span class="st">"region"</span>)),</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(kr, kx, kn)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute diurnal temperature range and sort by date</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>karnal_all<span class="sc">$</span>dtr <span class="ot">&lt;-</span> <span class="fu">round</span>(karnal_all<span class="sc">$</span>tmax <span class="sc">-</span> karnal_all<span class="sc">$</span>tmin, <span class="dv">3</span>)</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>karnal_all     <span class="ot">&lt;-</span> karnal_all[<span class="fu">order</span>(karnal_all<span class="sc">$</span>date), ]</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Save as a single merged CSV</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(karnal_all,</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>          <span class="fu">file.path</span>(file_dir, <span class="st">"karnal_all_vars_1951_2025.csv"</span>),</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(karnal_all)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Download each variable separately, suppressing individual CSVs</span></span>
+<span><span class="va">kr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series</a></span><span class="op">(</span><span class="st">"rain"</span>, <span class="st">"Karnal"</span>, <span class="fl">1951</span>, <span class="fl">2025</span>,</span>
+<span>                          file_dir <span class="op">=</span> <span class="va">file_dir</span>, save_csv <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">kx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series</a></span><span class="op">(</span><span class="st">"tmax"</span>, <span class="st">"Karnal"</span>, <span class="fl">1951</span>, <span class="fl">2025</span>,</span>
+<span>                          file_dir <span class="op">=</span> <span class="va">file_dir</span>, save_csv <span class="op">=</span> <span class="cn">FALSE</span>, touches <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">kn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series</a></span><span class="op">(</span><span class="st">"tmin"</span>, <span class="st">"Karnal"</span>, <span class="fl">1951</span>, <span class="fl">2025</span>,</span>
+<span>                          file_dir <span class="op">=</span> <span class="va">file_dir</span>, save_csv <span class="op">=</span> <span class="cn">FALSE</span>, touches <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Merge the three data frames on the date and region columns</span></span>
+<span><span class="va">karnal_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/funprog.html">Reduce</a></span><span class="op">(</span></span>
+<span>  <span class="kw">function</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"date"</span>, <span class="st">"region"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">kr</span>, <span class="va">kx</span>, <span class="va">kn</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compute diurnal temperature range and sort by date</span></span>
+<span><span class="va">karnal_all</span><span class="op">$</span><span class="va">dtr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">karnal_all</span><span class="op">$</span><span class="va">tmax</span> <span class="op">-</span> <span class="va">karnal_all</span><span class="op">$</span><span class="va">tmin</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">karnal_all</span>     <span class="op">&lt;-</span> <span class="va">karnal_all</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">karnal_all</span><span class="op">$</span><span class="va">date</span><span class="op">)</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Save as a single merged CSV</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">karnal_all</span>,</span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">file_dir</span>, <span class="st">"karnal_all_vars_1951_2025.csv"</span><span class="op">)</span>,</span>
+<span>          row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">karnal_all</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>What <code>Reduce()</code> does here:</strong> <code>Reduce()</code> applies a two-argument function (<code>merge</code>) repeatedly across a list of data frames, merging them pairwise. With three data frames <code>kr</code>, <code>kx</code>, and <code>kn</code>, it first merges <code>kr</code> and <code>kx</code> on <code>date</code> and <code>region</code>, then merges that result with <code>kn</code>. The final output has one row per day with all four variables. Setting <code>save_csv = FALSE</code> on each <code>get_district_series()</code> call suppresses the three separate output files so that only your merged file is written to disk.</p>
+<p><strong>What <code><a href="https://rdrr.io/r/base/funprog.html">Reduce()</a></code> does here:</strong> <code><a href="https://rdrr.io/r/base/funprog.html">Reduce()</a></code> applies a two-argument function (<code>merge</code>) repeatedly across a list of data frames, merging them pairwise. With three data frames <code>kr</code>, <code>kx</code>, and <code>kn</code>, it first merges <code>kr</code> and <code>kx</code> on <code>date</code> and <code>region</code>, then merges that result with <code>kn</code>. The final output has one row per day with all four variables. Setting <code>save_csv = FALSE</code> on each <code><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series()</a></code> call suppresses the three separate output files so that only your merged file is written to disk.</p>
 <div class="imd-card tip">
 <div class="imd-card-title">
 Why suppress individual CSVs?
 </div>
-<p>By default, <code>get_district_series()</code> writes a separate CSV for each variable. If you intend to merge them anyway, setting <code>save_csv = FALSE</code> keeps your <code>file_dir</code> tidy and avoids three partially redundant files alongside your merged output.</p>
+<p>By default, <code><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series()</a></code> writes a separate CSV for each variable. If you intend to merge them anyway, setting <code>save_csv = FALSE</code> keeps your <code>file_dir</code> tidy and avoids three partially redundant files alongside your merged output.</p>
 </div>
 <hr>
-<div class="imd-step"><span class="imd-step-num">5</span><h2 class="anchored" data-anchor-id="combining-all-three-variables-for-a-district">Spatial Export: NetCDF and GeoTIFF</h2></div>
-<p>A collapsed time series (one value per day for a region) is ideal for statistical analysis, but some workflows require the full gridded surface for a region. For instance, you might want to visualise spatial rainfall patterns within a state in QGIS, or supply a 3-D array (latitude × longitude × time) to a Python-based crop model. The <code>extract_by_boundary()</code> function handles this by masking the national grid to your region and writing the result to a file.</p>
-<section id="choosing-the-right-output-format" class="level4 imd-concept">
-<h4 class="anchored" data-anchor-id="choosing-the-right-output-format">Choosing the right output format</h4>
+<div class="imd-step">
+<span class="imd-step-num">5</span><h2 class="anchored" data-anchor-id="combining-all-three-variables-for-a-district">Spatial Export: NetCDF and GeoTIFF</h2>
+</div>
+<p>A collapsed time series (one value per day for a region) is ideal for statistical analysis, but some workflows require the full gridded surface for a region. For instance, you might want to visualise spatial rainfall patterns within a state in QGIS, or supply a 3-D array (latitude × longitude × time) to a Python-based crop model. The <code><a href="https://rdrr.io/pkg/imdR/man/extract_by_boundary.html">extract_by_boundary()</a></code> function handles this by masking the national grid to your region and writing the result to a file.</p>
+<section id="choosing-the-right-output-format" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="choosing-the-right-output-format">Choosing the right output format</h4>
 <p>Three formats are supported, each suited to different downstream tools:</p>
 <p><strong>NetCDF (.nc)</strong> stores the complete latitude × longitude × time data array together with coordinate metadata and variable attributes in a single self-describing file. It is the standard format in climate science and is readable by R (<code>terra</code>, <code>ncdf4</code>), Python (<code>xarray</code>, <code>netCDF4</code>), CDO, and NCO. Choose NetCDF when you need to do further analysis programmatically.</p>
 <p><strong>GeoTIFF (.tif)</strong> stores raster data with spatial reference information embedded, with each day as a separate band. It is the standard format for GIS software (QGIS, ArcGIS) and is suitable when your primary goal is mapping or spatial overlay. Choose GeoTIFF when your downstream tool is a GIS.</p>
 <p><strong>CSV</strong> stores a long-format table with one row per cell per day, with columns for date, latitude, longitude, and value. File size grows rapidly for multi-year, multi-cell exports (a state over many decades can run to hundreds of megabytes or more), but CSV is convenient for spreadsheet and tidyverse workflows.</p>
-</section>
-</section>
-<section id="exporting-a-state-to-netcdf-year-by-year" class="level3">
-<h3 class="anchored" data-anchor-id="exporting-a-state-to-netcdf-year-by-year">Exporting a state to NetCDF, year by year</h3>
+</section></section><section id="exporting-a-state-to-netcdf-year-by-year" class="level3"><h3 class="anchored" data-anchor-id="exporting-a-state-to-netcdf-year-by-year">Exporting a state to NetCDF, year by year</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: download all years as a named list of SpatRaster objects</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>rain_long <span class="ot">&lt;-</span> <span class="fu">get_data</span>(<span class="st">"rain"</span>, <span class="dv">1901</span>, <span class="dv">2025</span>, file_dir)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: loop over years and clip each raster to Kerala's boundary</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (yr <span class="cf">in</span> <span class="fu">names</span>(rain_long)) {</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_by_boundary</span>(</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    rain_long[[yr]],</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">level    =</span> <span class="st">"state"</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">name     =</span> <span class="st">"Kerala"</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">variable =</span> <span class="st">"rain"</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">save     =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">format   =</span> <span class="st">"netcdf"</span>,</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">file_dir =</span> file_dir</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Step 1: download all years as a named list of SpatRaster objects</span></span>
+<span><span class="va">rain_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"rain"</span>, <span class="fl">1901</span>, <span class="fl">2025</span>, <span class="va">file_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Step 2: loop over years and clip each raster to Kerala's boundary</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">yr</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">rain_long</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/extract_by_boundary.html">extract_by_boundary</a></span><span class="op">(</span></span>
+<span>    <span class="va">rain_long</span><span class="op">[[</span><span class="va">yr</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    level    <span class="op">=</span> <span class="st">"state"</span>,</span>
+<span>    name     <span class="op">=</span> <span class="st">"Kerala"</span>,</span>
+<span>    variable <span class="op">=</span> <span class="st">"rain"</span>,</span>
+<span>    save     <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    format   <span class="op">=</span> <span class="st">"netcdf"</span>,</span>
+<span>    file_dir <span class="op">=</span> <span class="va">file_dir</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Why loop year by year?</strong> <code>get_data()</code> returns a named list where each element is a <code>SpatRaster</code> object for one year, with daily layers (365 or 366 depending on leap years). Loading all years into memory at once would create a stack of over 45,000 layers, which would overwhelm RAM for most computers. Processing one year at a time keeps memory usage low and produces one NetCDF file per year, which is a common and manageable archive structure.</p>
-</section>
-<section id="exporting-all-three-variables-for-a-district" class="level3">
-<h3 class="anchored" data-anchor-id="exporting-all-three-variables-for-a-district">Exporting all three variables for a district</h3>
+<p><strong>Why loop year by year?</strong> <code><a href="https://rdrr.io/pkg/imdR/man/get_data.html">get_data()</a></code> returns a named list where each element is a <code>SpatRaster</code> object for one year, with daily layers (365 or 366 depending on leap years). Loading all years into memory at once would create a stack of over 45,000 layers, which would overwhelm RAM for most computers. Processing one year at a time keeps memory usage low and produces one NetCDF file per year, which is a common and manageable archive structure.</p>
+</section><section id="exporting-all-three-variables-for-a-district" class="level3"><h3 class="anchored" data-anchor-id="exporting-all-three-variables-for-a-district">Exporting all three variables for a district</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (v <span class="cf">in</span> <span class="fu">c</span>(<span class="st">"rain"</span>, <span class="st">"tmax"</span>, <span class="st">"tmin"</span>)) {</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use 1951 as the start year for all variables so the archive is consistent</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  vg <span class="ot">&lt;-</span> <span class="fu">get_data</span>(v, <span class="dv">1951</span>, <span class="dv">2025</span>, file_dir)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (yr <span class="cf">in</span> <span class="fu">names</span>(vg)) {</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">extract_by_boundary</span>(</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>      vg[[yr]],</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">level    =</span> <span class="st">"district"</span>,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">name     =</span> <span class="st">"Dhalai"</span>,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">variable =</span> v,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">save     =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">format   =</span> <span class="st">"netcdf"</span>,</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">file_dir =</span> file_dir</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">v</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rain"</span>, <span class="st">"tmax"</span>, <span class="st">"tmin"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Use 1951 as the start year for all variables so the archive is consistent</span></span>
+<span>  <span class="va">vg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_data.html">get_data</a></span><span class="op">(</span><span class="va">v</span>, <span class="fl">1951</span>, <span class="fl">2025</span>, <span class="va">file_dir</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">yr</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">vg</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/extract_by_boundary.html">extract_by_boundary</a></span><span class="op">(</span></span>
+<span>      <span class="va">vg</span><span class="op">[[</span><span class="va">yr</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>      level    <span class="op">=</span> <span class="st">"district"</span>,</span>
+<span>      name     <span class="op">=</span> <span class="st">"Dhalai"</span>,</span>
+<span>      variable <span class="op">=</span> <span class="va">v</span>,</span>
+<span>      save     <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>      format   <span class="op">=</span> <span class="st">"netcdf"</span>,</span>
+<span>      file_dir <span class="op">=</span> <span class="va">file_dir</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The outer loop iterates over variable names; the inner loop iterates over years. The result is a set of NetCDF files organised by variable and year in <code>file_dir</code>.</p>
-</section>
-<section id="exporting-a-single-year-as-geotiff" class="level3">
-<h3 class="anchored">Exporting a single year as GeoTIFF</h3>
+</section><section id="exporting-a-single-year-as-geotiff" class="level3"><h3 class="anchored">Exporting a single year as GeoTIFF</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rain2020 <span class="ot">&lt;-</span> <span class="fu">get_data</span>(<span class="st">"rain"</span>, <span class="dv">2020</span>, <span class="dv">2020</span>, file_dir)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">extract_by_boundary</span>(</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  rain2020,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">level    =</span> <span class="st">"district"</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">name     =</span> <span class="st">"North Goa"</span>,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">"rain"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">save     =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">format   =</span> <span class="st">"geotiff"</span>,</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_dir =</span> file_dir</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rain2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"rain"</span>, <span class="fl">2020</span>, <span class="fl">2020</span>, <span class="va">file_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/extract_by_boundary.html">extract_by_boundary</a></span><span class="op">(</span></span>
+<span>  <span class="va">rain2020</span>,</span>
+<span>  level    <span class="op">=</span> <span class="st">"district"</span>,</span>
+<span>  name     <span class="op">=</span> <span class="st">"North Goa"</span>,</span>
+<span>  variable <span class="op">=</span> <span class="st">"rain"</span>,</span>
+<span>  save     <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  format   <span class="op">=</span> <span class="st">"geotiff"</span>,</span>
+<span>  file_dir <span class="op">=</span> <span class="va">file_dir</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This produces a multi-band GeoTIFF with 366 bands (2020 was a leap year), one per day. Open it in QGIS and use the band selector to navigate through the monsoon season.</p>
 <hr>
-<div class="imd-step"><span class="imd-step-num">6</span><h2 class="anchored" data-anchor-id="exporting-a-single-year-as-geotiff">Custom Regions: The Bounding Box</h2></div>
-<p>Administrative boundaries do not always match ecological or hydrological study areas. If your region of interest is defined by coordinates rather than by a state or district name, use <code>get_bbox()</code>. You specify the latitude and longitude limits of a rectangle, and the function extracts everything within that box.</p>
+<div class="imd-step">
+<span class="imd-step-num">6</span><h2 class="anchored" data-anchor-id="exporting-a-single-year-as-geotiff">Custom Regions: The Bounding Box</h2>
+</div>
+<p>Administrative boundaries do not always match ecological or hydrological study areas. If your region of interest is defined by coordinates rather than by a state or district name, use <code><a href="https://rdrr.io/pkg/imdR/man/get_bbox.html">get_bbox()</a></code>. You specify the latitude and longitude limits of a rectangle, and the function extracts everything within that box.</p>
 <p>Typical use cases include the Indo-Gangetic Plains, the Western Ghats, a river basin extent, or a rectangular domain for a regional climate model.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Western Ghats bounding box, single year, saved as NetCDF</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>wghats_nc <span class="ot">&lt;-</span> <span class="fu">get_bbox</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lat_min  =</span> <span class="dv">8</span>,   <span class="at">lat_max =</span> <span class="dv">21</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lon_min  =</span> <span class="dv">73</span>,  <span class="at">lon_max =</span> <span class="dv">78</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">"rain"</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">start_yr =</span> <span class="dv">2020</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">end_yr   =</span> <span class="dv">2020</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_dir =</span> file_dir,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">format   =</span> <span class="st">"netcdf"</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Same region, same year, saved as GeoTIFF instead</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>wghats_tif <span class="ot">&lt;-</span> <span class="fu">get_bbox</span>(</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">lat_min  =</span> <span class="dv">8</span>,   <span class="at">lat_max =</span> <span class="dv">21</span>,</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">lon_min  =</span> <span class="dv">73</span>,  <span class="at">lon_max =</span> <span class="dv">78</span>,</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="st">"rain"</span>,</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">start_yr =</span> <span class="dv">2020</span>,</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">end_yr   =</span> <span class="dv">2020</span>,</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_dir =</span> file_dir,</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">format   =</span> <span class="st">"geotiff"</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Western Ghats bounding box, single year, saved as NetCDF</span></span>
+<span><span class="va">wghats_nc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_bbox.html">get_bbox</a></span><span class="op">(</span></span>
+<span>  lat_min  <span class="op">=</span> <span class="fl">8</span>,   lat_max <span class="op">=</span> <span class="fl">21</span>,</span>
+<span>  lon_min  <span class="op">=</span> <span class="fl">73</span>,  lon_max <span class="op">=</span> <span class="fl">78</span>,</span>
+<span>  variable <span class="op">=</span> <span class="st">"rain"</span>,</span>
+<span>  start_yr <span class="op">=</span> <span class="fl">2020</span>,</span>
+<span>  end_yr   <span class="op">=</span> <span class="fl">2020</span>,</span>
+<span>  file_dir <span class="op">=</span> <span class="va">file_dir</span>,</span>
+<span>  format   <span class="op">=</span> <span class="st">"netcdf"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Same region, same year, saved as GeoTIFF instead</span></span>
+<span><span class="va">wghats_tif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_bbox.html">get_bbox</a></span><span class="op">(</span></span>
+<span>  lat_min  <span class="op">=</span> <span class="fl">8</span>,   lat_max <span class="op">=</span> <span class="fl">21</span>,</span>
+<span>  lon_min  <span class="op">=</span> <span class="fl">73</span>,  lon_max <span class="op">=</span> <span class="fl">78</span>,</span>
+<span>  variable <span class="op">=</span> <span class="st">"rain"</span>,</span>
+<span>  start_yr <span class="op">=</span> <span class="fl">2020</span>,</span>
+<span>  end_yr   <span class="op">=</span> <span class="fl">2020</span>,</span>
+<span>  file_dir <span class="op">=</span> <span class="va">file_dir</span>,</span>
+<span>  format   <span class="op">=</span> <span class="st">"geotiff"</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>For long-term bounding-box archives, iterate over years to keep memory manageable:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download 125 years of rainfall for the Indo-Gangetic Plains</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (yr <span class="cf">in</span> <span class="dv">1901</span><span class="sc">:</span><span class="dv">2025</span>) {</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_bbox</span>(</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat_min  =</span> <span class="dv">24</span>,  <span class="at">lat_max =</span> <span class="dv">30</span>,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">lon_min  =</span> <span class="dv">73</span>,  <span class="at">lon_max =</span> <span class="dv">88</span>,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">variable =</span> <span class="st">"rain"</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">start_yr =</span> yr,</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">end_yr   =</span> yr,</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">file_dir =</span> file_dir,</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">format   =</span> <span class="st">"netcdf"</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Download 125 years of rainfall for the Indo-Gangetic Plains</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">yr</span> <span class="kw">in</span> <span class="fl">1901</span><span class="op">:</span><span class="fl">2025</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_bbox.html">get_bbox</a></span><span class="op">(</span></span>
+<span>    lat_min  <span class="op">=</span> <span class="fl">24</span>,  lat_max <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>    lon_min  <span class="op">=</span> <span class="fl">73</span>,  lon_max <span class="op">=</span> <span class="fl">88</span>,</span>
+<span>    variable <span class="op">=</span> <span class="st">"rain"</span>,</span>
+<span>    start_yr <span class="op">=</span> <span class="va">yr</span>,</span>
+<span>    end_yr   <span class="op">=</span> <span class="va">yr</span>,</span>
+<span>    file_dir <span class="op">=</span> <span class="va">file_dir</span>,</span>
+<span>    format   <span class="op">=</span> <span class="st">"netcdf"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Each iteration of the loop downloads and saves one year’s worth of data. If the loop is interrupted (for example, by a server timeout), you can restart it: years already saved to <code>file_dir</code> are detected and skipped automatically.</p>
 <div class="imd-card warn">
 <div class="imd-card-title">
 Automatic clipping at the data boundary
 </div>
-<p><code>get_bbox()</code> clips the requested rectangle to the spatial extent of the IMD dataset. If your coordinates extend beyond the coverage area (for example, into the ocean or into neighbouring countries), a warning is issued and the box is trimmed to the valid region automatically. No data are returned for areas outside IMD coverage.</p>
+<p><code><a href="https://rdrr.io/pkg/imdR/man/get_bbox.html">get_bbox()</a></code> clips the requested rectangle to the spatial extent of the IMD dataset. If your coordinates extend beyond the coverage area (for example, into the ocean or into neighbouring countries), a warning is issued and the box is trimmed to the valid region automatically. No data are returned for areas outside IMD coverage.</p>
 </div>
 <hr>
-<div class="imd-step"><span class="imd-step-num">7</span><h2 class="anchored">Mapping a Single Day</h2></div>
-<p>Before moving to time series analysis, it is useful to look at the spatial pattern of a variable on a specific day. <code>plot_imd()</code> produces a ready-to-use map with administrative boundaries overlaid, for the whole of India or a specific region.</p>
+<div class="imd-step">
+<span class="imd-step-num">7</span><h2 class="anchored">Mapping a Single Day</h2>
+</div>
+<p>Before moving to time series analysis, it is useful to look at the spatial pattern of a variable on a specific day. <code><a href="https://rdrr.io/pkg/imdR/man/plot_imd.html">plot_imd()</a></code> produces a ready-to-use map with administrative boundaries overlaid, for the whole of India or a specific region.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the 2020 rainfall raster (already cached from earlier steps)</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>rain2020 <span class="ot">&lt;-</span> <span class="fu">get_data</span>(<span class="st">"rain"</span>, <span class="dv">2020</span>, <span class="dv">2020</span>, file_dir)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Map rainfall across all of India on 28 June 2020</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_imd</span>(rain2020, <span class="st">"2020-06-28"</span>, <span class="st">"rain"</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom in to Kerala</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_imd</span>(rain2020, <span class="st">"2020-06-28"</span>, <span class="st">"rain"</span>,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">level =</span> <span class="st">"state"</span>, <span class="at">name =</span> <span class="st">"Kerala"</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom in to a district</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_imd</span>(rain2020, <span class="st">"2020-06-28"</span>, <span class="st">"rain"</span>,</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">level =</span> <span class="st">"district"</span>, <span class="at">name =</span> <span class="st">"North Goa"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load the 2020 rainfall raster (already cached from earlier steps)</span></span>
+<span><span class="va">rain2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"rain"</span>, <span class="fl">2020</span>, <span class="fl">2020</span>, <span class="va">file_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Map rainfall across all of India on 28 June 2020</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/plot_imd.html">plot_imd</a></span><span class="op">(</span><span class="va">rain2020</span>, <span class="st">"2020-06-28"</span>, <span class="st">"rain"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Zoom in to Kerala</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/plot_imd.html">plot_imd</a></span><span class="op">(</span><span class="va">rain2020</span>, <span class="st">"2020-06-28"</span>, <span class="st">"rain"</span>,</span>
+<span>         level <span class="op">=</span> <span class="st">"state"</span>, name <span class="op">=</span> <span class="st">"Kerala"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Zoom in to a district</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/plot_imd.html">plot_imd</a></span><span class="op">(</span><span class="va">rain2020</span>, <span class="st">"2020-06-28"</span>, <span class="st">"rain"</span>,</span>
+<span>         level <span class="op">=</span> <span class="st">"district"</span>, name <span class="op">=</span> <span class="st">"North Goa"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The date argument accepts the format <code>"YYYY-MM-DD"</code>. The function selects the corresponding layer from the multi-layer <code>SpatRaster</code> object, clips it to the specified region, and draws the map with boundary overlays. 28 June 2020 is used here because it falls during the active southwest monsoon season, so the spatial contrast between the wet west coast and the drier interior is clearly visible.</p>
 <div class="imd-card tip">
 <div class="imd-card-title">
 Saving maps for publication
 </div>
-<p>Add <code>save_path = file.path(file_dir, "kerala_rain_20200628.png")</code> to the <code>plot_imd()</code> call to write a 300-dpi PNG file suitable for journal figures. The file is saved to the path you specify.</p>
+<p>Add <code>save_path = file.path(file_dir, "kerala_rain_20200628.png")</code> to the <code><a href="https://rdrr.io/pkg/imdR/man/plot_imd.html">plot_imd()</a></code> call to write a 300-dpi PNG file suitable for journal figures. The file is saved to the path you specify.</p>
 </div>
 <hr>
-<div class="imd-step"><span class="imd-step-num">8</span><h2 class="anchored">Long-Term Trend Plots</h2></div>
+<div class="imd-step">
+<span class="imd-step-num">8</span><h2 class="anchored">Long-Term Trend Plots</h2>
+</div>
 <p>A time series of daily values spanning several decades produces a graph that is too dense to read. For long-term analysis, the standard approach is to aggregate daily data to one value per year and plot that annual series. This transforms tens of thousands of data points into a manageable sequence of 75 to 125 values that clearly shows multi-decadal patterns.</p>
-<section id="annual-aggregation-applying-the-two-rules" class="level4 imd-concept">
-<h4 class="anchored" data-anchor-id="annual-aggregation-applying-the-two-rules">Annual aggregation: applying the two rules</h4>
+<section id="annual-aggregation-applying-the-two-rules" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="annual-aggregation-applying-the-two-rules">Annual aggregation: applying the two rules</h4>
 <p>Following Rule 2 from the background section, rainfall is aggregated by <strong>summing</strong> daily values within each calendar year to get the annual total (mm/year). Temperature is aggregated by <strong>averaging</strong> daily values within each year to get the annual mean (°C).</p>
 <p><span class="math display">\[\text{Annual total rainfall in year } y = \sum_{t \in y} \bar{z}_t\]</span></p>
 <p><span class="math display">\[\text{Annual mean temperature in year } y = \frac{1}{|y|} \sum_{t \in y} \bar{z}_t\]</span></p>
 <p>where <span class="math inline">\(|y|\)</span> is the number of days in year <span class="math inline">\(y\)</span> (365 or 366). Plotting these annual values reveals multi-decadal trends, periodic signals like ENSO, and interannual variability that is completely invisible in daily data.</p>
-</section>
-</section>
-<section id="annual-rainfall-trend-plot" class="level3">
-<h3 class="anchored" data-anchor-id="annual-rainfall-trend-plot">Annual rainfall trend plot</h3>
+</section></section><section id="annual-rainfall-trend-plot" class="level3"><h3 class="anchored" data-anchor-id="annual-rainfall-trend-plot">Annual rainfall trend plot</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the Karnal district series downloaded in Step 4</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the four-digit year from each date</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>karnal_rain<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(karnal_rain<span class="sc">$</span>date, <span class="st">"%Y"</span>))</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Sum daily rainfall within each year (Rule 2: rainfall accumulates)</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>annual_rain <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(rain <span class="sc">~</span> year, karnal_rain, sum)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_rain, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> rain)) <span class="sc">+</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#2E86C1"</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>) <span class="sc">+</span>          <span class="co"># annual bars</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"#C0392B"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>      <span class="co"># linear trend line</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Karnal: Annual Total Rainfall (1901 to 2025)"</span>,</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x     =</span> <span class="st">"Year"</span>,</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y     =</span> <span class="st">"Rainfall (mm/year)"</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Use the Karnal district series downloaded in Step 4</span></span>
+<span><span class="co"># Extract the four-digit year from each date</span></span>
+<span><span class="va">karnal_rain</span><span class="op">$</span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">karnal_rain</span><span class="op">$</span><span class="va">date</span>, <span class="st">"%Y"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Sum daily rainfall within each year (Rule 2: rainfall accumulates)</span></span>
+<span><span class="va">annual_rain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">rain</span> <span class="op">~</span> <span class="va">year</span>, <span class="va">karnal_rain</span>, <span class="va">sum</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">annual_rain</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">rain</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#2E86C1"</span>, alpha <span class="op">=</span> <span class="fl">0.85</span><span class="op">)</span> <span class="op">+</span>          <span class="co"># annual bars</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>              color <span class="op">=</span> <span class="st">"#C0392B"</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>      <span class="co"># linear trend line</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Karnal: Annual Total Rainfall (1901 to 2025)"</span>,</span>
+<span>    x     <span class="op">=</span> <span class="st">"Year"</span>,</span>
+<span>    y     <span class="op">=</span> <span class="st">"Rainfall (mm/year)"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">13</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Reading the code:</strong> <code>format(karnal_rain$date, "%Y")</code> converts each date to a four-digit year string; <code>as.integer()</code> makes it numeric so ggplot2 treats it as a continuous variable. <code>aggregate(rain ~ year, karnal_rain, sum)</code> groups the data frame by year and applies <code>sum()</code> to the <code>rain</code> column, producing one row per year. <code>geom_col()</code> draws the bars; <code>geom_smooth(method = "lm")</code> overlays an ordinary least-squares regression line to show the long-term direction of change.</p>
-</section>
-<section id="annual-temperature-trend-plot" class="level3">
-<h3 class="anchored">Annual temperature trend plot</h3>
+<p><strong>Reading the code:</strong> <code>format(karnal_rain$date, "%Y")</code> converts each date to a four-digit year string; <code><a href="https://rdrr.io/r/base/integer.html">as.integer()</a></code> makes it numeric so ggplot2 treats it as a continuous variable. <code>aggregate(rain ~ year, karnal_rain, sum)</code> groups the data frame by year and applies <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> to the <code>rain</code> column, producing one row per year. <code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col()</a></code> draws the bars; <code>geom_smooth(method = "lm")</code> overlays an ordinary least-squares regression line to show the long-term direction of change.</p>
+</section><section id="annual-temperature-trend-plot" class="level3"><h3 class="anchored">Annual temperature trend plot</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperature record starts in 1951</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>karnal_tmax <span class="ot">&lt;-</span> <span class="fu">get_district_series</span>(<span class="st">"tmax"</span>, <span class="st">"Karnal"</span>, <span class="dv">1951</span>, <span class="dv">2025</span>,</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">file_dir =</span> file_dir, <span class="at">touches =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>karnal_tmax<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(karnal_tmax<span class="sc">$</span>date, <span class="st">"%Y"</span>))</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Average daily tmax within each year (Rule 2: temperature does not accumulate)</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>annual_tmax <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(tmax <span class="sc">~</span> year, karnal_tmax, mean)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_tmax, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> tmax)) <span class="sc">+</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#C0392B"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"#922B21"</span>, <span class="at">size =</span> <span class="fl">1.6</span>) <span class="sc">+</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Karnal: Annual Mean Maximum Temperature (1951 to 2025)"</span>,</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x     =</span> <span class="st">"Year"</span>,</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y     =</span> <span class="st">"Mean Tmax (°C)"</span></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Temperature record starts in 1951</span></span>
+<span><span class="va">karnal_tmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series</a></span><span class="op">(</span><span class="st">"tmax"</span>, <span class="st">"Karnal"</span>, <span class="fl">1951</span>, <span class="fl">2025</span>,</span>
+<span>                                   file_dir <span class="op">=</span> <span class="va">file_dir</span>, touches <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">karnal_tmax</span><span class="op">$</span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">karnal_tmax</span><span class="op">$</span><span class="va">date</span>, <span class="st">"%Y"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Average daily tmax within each year (Rule 2: temperature does not accumulate)</span></span>
+<span><span class="va">annual_tmax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">tmax</span> <span class="op">~</span> <span class="va">year</span>, <span class="va">karnal_tmax</span>, <span class="va">mean</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">annual_tmax</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">tmax</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#C0392B"</span>, linewidth <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#922B21"</span>, size <span class="op">=</span> <span class="fl">1.6</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Karnal: Annual Mean Maximum Temperature (1951 to 2025)"</span>,</span>
+<span>    x     <span class="op">=</span> <span class="st">"Year"</span>,</span>
+<span>    y     <span class="op">=</span> <span class="st">"Mean Tmax (°C)"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">13</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>A line-and-point style (<code>geom_line</code> + <code>geom_point</code>) is conventional for temperature series because temperature is a continuous quantity without natural breaks between years, unlike rainfall totals which are conceptually discrete annual sums.</p>
 <div class="imd-card tip">
@@ -1004,43 +955,39 @@ The regression line shows direction, not significance
 <p>The dashed trend line fitted by <code>geom_smooth(method = "lm")</code> tells you whether values are generally going up or down, but it does not tell you whether the trend is statistically significant. A visually obvious upward slope might still fail a significance test if the year-to-year variability is very high. Step 10 covers the proper statistical test for trend significance.</p>
 </div>
 <hr>
-<div class="imd-step"><span class="imd-step-num">9</span><h2 class="anchored" data-anchor-id="annual-temperature-trend-plot">Climate Indices</h2></div>
+<div class="imd-step">
+<span class="imd-step-num">9</span><h2 class="anchored" data-anchor-id="annual-temperature-trend-plot">Climate Indices</h2>
+</div>
 <p>Annual totals and means summarise the quantity of a climate variable but say nothing about its distribution within the year. Two districts might have identical annual rainfall totals but very different rainfall regimes: one might receive its rain in many moderate events spread through the year, while the other receives the same total in a few intense bursts separated by long dry spells. These differences have large consequences for agriculture, water resources, and flood risk.</p>
 <p>Climate indices are designed to capture these characteristics. Each index reduces the daily record to a single value per year that describes a specific aspect of the distribution, such as the number of rainy days, the length of the longest dry spell, or the intensity of the heaviest events.</p>
-<section id="why-indices-matter-more-than-totals" class="level4 imd-concept">
-<h4 class="anchored" data-anchor-id="why-indices-matter-more-than-totals">Why indices matter more than totals</h4>
+<section id="why-indices-matter-more-than-totals" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="why-indices-matter-more-than-totals">Why indices matter more than totals</h4>
 <p>Consider two districts, A and B, each receiving 800 mm of annual rainfall. District A receives it over 120 rainy days; District B receives it over 30 days. For agriculture, these are completely different climates. In District A, the risk of prolonged moisture stress is low. In District B, even though the total is the same, crops face extended dry periods between infrequent heavy rains, and the risk of flash flooding during rain events is much higher.</p>
 <p>The WMO/ETCCDI (Expert Team on Climate Change Detection and Indices) has defined a standard suite of daily climate indices specifically to document these differences and track how they change over time. <code>imdR</code> implements the most widely used subset of these indices for both rainfall and temperature.</p>
-</section>
-</section>
-<section id="rainfall-indices" class="level3">
-<h3 class="anchored" data-anchor-id="rainfall-indices">Rainfall indices</h3>
+</section></section><section id="rainfall-indices" class="level3"><h3 class="anchored" data-anchor-id="rainfall-indices">Rainfall indices</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the full rainfall grid as a list of annual SpatRasters</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>rain_long <span class="ot">&lt;-</span> <span class="fu">get_data</span>(<span class="st">"rain"</span>, <span class="dv">1901</span>, <span class="dv">2025</span>, file_dir)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute standard annual rainfall indices for Karnal district</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Returns one row per year with all index values</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>karnal_idx <span class="ot">&lt;-</span> <span class="fu">compute_rainfall_indices</span>(</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  rain_long,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">level    =</span> <span class="st">"district"</span>,</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">name     =</span> <span class="st">"Karnal"</span>,</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_dir =</span> file_dir</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(karnal_idx)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load the full rainfall grid as a list of annual SpatRasters</span></span>
+<span><span class="va">rain_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"rain"</span>, <span class="fl">1901</span>, <span class="fl">2025</span>, <span class="va">file_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compute standard annual rainfall indices for Karnal district</span></span>
+<span><span class="co"># Returns one row per year with all index values</span></span>
+<span><span class="va">karnal_idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/compute_rainfall_indices.html">compute_rainfall_indices</a></span><span class="op">(</span></span>
+<span>  <span class="va">rain_long</span>,</span>
+<span>  level    <span class="op">=</span> <span class="st">"district"</span>,</span>
+<span>  name     <span class="op">=</span> <span class="st">"Karnal"</span>,</span>
+<span>  file_dir <span class="op">=</span> <span class="va">file_dir</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">karnal_idx</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><code>compute_rainfall_indices()</code> loops over each year’s raster, clips it to the Karnal boundary, and computes the spatial mean for each day before calculating the indices from that daily mean series. The output data frame has one row per year. The indices returned are:</p>
+<p><code><a href="https://rdrr.io/pkg/imdR/man/compute_rainfall_indices.html">compute_rainfall_indices()</a></code> loops over each year’s raster, clips it to the Karnal boundary, and computes the spatial mean for each day before calculating the indices from that daily mean series. The output data frame has one row per year. The indices returned are:</p>
 <div class="imd-table">
 
 <table class="caption-top table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th data-quarto-table-cell-role="th">Index</th>
 <th data-quarto-table-cell-role="th">Definition</th>
 <th data-quarto-table-cell-role="th">Formula / threshold</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td><code>total</code></td>
@@ -1094,47 +1041,52 @@ The regression line shows direction, not significance
 </tr>
 </tbody>
 </table>
-
 </div>
 <p>The PCI is worth explaining in a little more detail. It measures how evenly rainfall is distributed across the months of the year. A value near 8.3 (the theoretical minimum for 12 equal months) means rainfall is uniformly spread through the year. Higher values indicate increasing concentration into fewer months, which is characteristic of strongly monsoonal climates. Values above 20 indicate a highly seasonal distribution.</p>
-</section>
-<section id="temperature-indices" class="level3">
-<h3 class="anchored">Temperature indices</h3>
+</section><section id="temperature-indices" class="level3"><h3 class="anchored">Temperature indices</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the temperature grids</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>tmax_long <span class="ot">&lt;-</span> <span class="fu">get_data</span>(<span class="st">"tmax"</span>, <span class="dv">1951</span>, <span class="dv">2025</span>, file_dir)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>tmin_long <span class="ot">&lt;-</span> <span class="fu">get_data</span>(<span class="st">"tmin"</span>, <span class="dv">1951</span>, <span class="dv">2025</span>, file_dir)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute annual temperature indices for Goa state</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Both tmax and tmin grids are required simultaneously</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>temp_idx <span class="ot">&lt;-</span> <span class="fu">compute_temp_indices</span>(</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  tmax_long,</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  tmin_long,</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">level    =</span> <span class="st">"state"</span>,</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">name     =</span> <span class="st">"Goa"</span>,</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_dir =</span> file_dir</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(temp_idx)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Load the temperature grids</span></span>
+<span><span class="va">tmax_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"tmax"</span>, <span class="fl">1951</span>, <span class="fl">2025</span>, <span class="va">file_dir</span><span class="op">)</span></span>
+<span><span class="va">tmin_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"tmin"</span>, <span class="fl">1951</span>, <span class="fl">2025</span>, <span class="va">file_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compute annual temperature indices for Goa state</span></span>
+<span><span class="co"># Both tmax and tmin grids are required simultaneously</span></span>
+<span><span class="va">temp_idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/compute_temp_indices.html">compute_temp_indices</a></span><span class="op">(</span></span>
+<span>  <span class="va">tmax_long</span>,</span>
+<span>  <span class="va">tmin_long</span>,</span>
+<span>  level    <span class="op">=</span> <span class="st">"state"</span>,</span>
+<span>  name     <span class="op">=</span> <span class="st">"Goa"</span>,</span>
+<span>  file_dir <span class="op">=</span> <span class="va">file_dir</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">temp_idx</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The function requires both <code>tmax</code> and <code>tmin</code> grids because some indices (such as DTR and tropical nights) combine both. The output includes:</p>
 <ul>
-<li><strong>TXx / TNn</strong>: hottest day of the year (<span class="math inline">\(\max T_{max}\)</span>) and coldest night (<span class="math inline">\(\min T_{min}\)</span>)</li>
-<li><strong>SU35</strong>: number of summer days where <span class="math inline">\(T_{max} \geq 35\)</span> °C (heat stress threshold for most crops)</li>
-<li><strong>TR25</strong>: number of tropical nights where <span class="math inline">\(T_{min} \geq 25\)</span> °C (relevant for human thermal comfort)</li>
-<li><strong>WSDI / CSDI</strong>: warm-spell and cold-spell duration indices, defined as the number of days in runs of at least 6 consecutive days above the 90th or below the 10th percentile of daily temperature</li>
+<li>
+<strong>TXx / TNn</strong>: hottest day of the year (<span class="math inline">\(\max T_{max}\)</span>) and coldest night (<span class="math inline">\(\min T_{min}\)</span>)</li>
+<li>
+<strong>SU35</strong>: number of summer days where <span class="math inline">\(T_{max} \geq 35\)</span> °C (heat stress threshold for most crops)</li>
+<li>
+<strong>TR25</strong>: number of tropical nights where <span class="math inline">\(T_{min} \geq 25\)</span> °C (relevant for human thermal comfort)</li>
+<li>
+<strong>WSDI / CSDI</strong>: warm-spell and cold-spell duration indices, defined as the number of days in runs of at least 6 consecutive days above the 90th or below the 10th percentile of daily temperature</li>
 </ul>
 <p>These correspond to the standard ETCCDI temperature indicators used in IPCC assessment reports and national climate change assessments.</p>
 <hr>
-<div class="imd-step"><span class="imd-step-num">10</span><h2 class="anchored" data-anchor-id="temperature-indices">Trend Analysis: Mann-Kendall Test and Sen's Slope</h2></div>
+<div class="imd-step">
+<span class="imd-step-num">10</span><h2 class="anchored" data-anchor-id="temperature-indices">Trend Analysis: Mann-Kendall Test and Sen's Slope</h2>
+</div>
 <p>Once you have an annual series, whether a raw total, a mean, or a climate index, the natural next question is: is there a statistically significant long-term trend? This section explains why ordinary regression is not the best tool for climate data and how the Mann-Kendall test and Sen’s slope together provide a more appropriate analysis.</p>
-<section id="why-not-just-use-linear-regression" class="level4 imd-concept">
-<h4 class="anchored" data-anchor-id="why-not-just-use-linear-regression">Why not just use linear regression?</h4>
+<section id="why-not-just-use-linear-regression" class="level4 imd-concept"><h4 class="anchored" data-anchor-id="why-not-just-use-linear-regression">Why not just use linear regression?</h4>
 <p>Ordinary least-squares (OLS) linear regression fits a line by minimising the sum of squared residuals. It has several assumptions that climate data frequently violate:</p>
 <ol type="1">
-<li><strong>Normality</strong>: OLS assumes residuals are normally distributed. Rainfall series are often right-skewed because of years with extreme events.</li>
-<li><strong>Homoscedasticity</strong>: OLS assumes constant variance. Climate variability often increases in wetter years.</li>
-<li><strong>Sensitivity to outliers</strong>: One extremely wet or dry year can substantially change the slope estimate.</li>
+<li>
+<strong>Normality</strong>: OLS assumes residuals are normally distributed. Rainfall series are often right-skewed because of years with extreme events.</li>
+<li>
+<strong>Homoscedasticity</strong>: OLS assumes constant variance. Climate variability often increases in wetter years.</li>
+<li>
+<strong>Sensitivity to outliers</strong>: One extremely wet or dry year can substantially change the slope estimate.</li>
 </ol>
 <p>The <strong>Mann-Kendall test</strong> avoids all three problems because it is non-parametric: it makes no assumptions about the distribution of the data. Instead of fitting a line, it counts the number of concordant pairs (pairs where the later value is larger than the earlier) minus the number of discordant pairs (pairs where the later value is smaller). The test statistic <span class="math inline">\(S\)</span> is:</p>
 <p><span class="math display">\[S = \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} \text{sgn}(x_j - x_i)\]</span></p>
@@ -1144,16 +1096,13 @@ The regression line shows direction, not significance
 <p><strong>Sen’s slope</strong> estimates the magnitude of change. It is the median of all pairwise slopes:</p>
 <p><span class="math display">\[\hat{\beta} = \text{median}\left(\frac{x_j - x_i}{j - i}\right) \quad \text{for all } j &gt; i\]</span></p>
 <p>Because it uses the median rather than the mean, Sen’s slope is resistant to the influence of single extreme years. The units are “change per year” (for example, mm/year for rainfall or °C/year for temperature).</p>
-</section>
-<div class="imd-table">
+</section><div class="imd-table">
 
 <table class="caption-top table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th data-quarto-table-cell-role="th">Output column</th>
 <th data-quarto-table-cell-role="th">What it tells you</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td><code>tau</code></td>
@@ -1173,48 +1122,43 @@ The regression line shows direction, not significance
 </tr>
 </tbody>
 </table>
-
 </div>
-</section>
-<section id="testing-the-trend-in-an-annual-series" class="level3">
-<h3 class="anchored" data-anchor-id="testing-the-trend-in-an-annual-series">Testing the trend in an annual series</h3>
+</section><section id="testing-the-trend-in-an-annual-series" class="level3"><h3 class="anchored" data-anchor-id="testing-the-trend-in-an-annual-series">Testing the trend in an annual series</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build the annual total rainfall series (from Step 8)</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>karnal_rain<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">format</span>(karnal_rain<span class="sc">$</span>date, <span class="st">"%Y"</span>))</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>annual_rain      <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(rain <span class="sc">~</span> year, karnal_rain, sum)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the Mann-Kendall test and compute Sen's slope</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># trend_analysis() expects a data frame with a 'year' column</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">trend_analysis</span>(</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  annual_rain,</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">index_col =</span> <span class="st">"rain"</span>,</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">name      =</span> <span class="st">"Karnal"</span>,</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">file_dir  =</span> file_dir</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Build the annual total rainfall series (from Step 8)</span></span>
+<span><span class="va">karnal_rain</span><span class="op">$</span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">karnal_rain</span><span class="op">$</span><span class="va">date</span>, <span class="st">"%Y"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">annual_rain</span>      <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span><span class="op">(</span><span class="va">rain</span> <span class="op">~</span> <span class="va">year</span>, <span class="va">karnal_rain</span>, <span class="va">sum</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run the Mann-Kendall test and compute Sen's slope</span></span>
+<span><span class="co"># trend_analysis() expects a data frame with a 'year' column</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/trend_analysis.html">trend_analysis</a></span><span class="op">(</span></span>
+<span>  <span class="va">annual_rain</span>,</span>
+<span>  index_col <span class="op">=</span> <span class="st">"rain"</span>,</span>
+<span>  name      <span class="op">=</span> <span class="st">"Karnal"</span>,</span>
+<span>  file_dir  <span class="op">=</span> <span class="va">file_dir</span></span>
+<span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><code>trend_analysis()</code> prints the Mann-Kendall statistics to the console, writes a CSV of the results to <code>file_dir</code>, and produces a plot of the annual series with the Sen’s slope line superimposed. The Sen’s slope line is more appropriate than an OLS line for this plot because it is not distorted by extreme years.</p>
-</section>
-<section id="testing-trends-in-climate-indices" class="level3">
-<h3 class="anchored" data-anchor-id="testing-trends-in-climate-indices">Testing trends in climate indices</h3>
+<p><code><a href="https://rdrr.io/pkg/imdR/man/trend_analysis.html">trend_analysis()</a></code> prints the Mann-Kendall statistics to the console, writes a CSV of the results to <code>file_dir</code>, and produces a plot of the annual series with the Sen’s slope line superimposed. The Sen’s slope line is more appropriate than an OLS line for this plot because it is not distorted by extreme years.</p>
+</section><section id="testing-trends-in-climate-indices" class="level3"><h3 class="anchored" data-anchor-id="testing-trends-in-climate-indices">Testing trends in climate indices</h3>
 <p>The most informative application of trend analysis is not the annual total but the indices. It is entirely possible for annual rainfall to be stationary while the <em>character</em> of that rainfall changes: fewer rainy days, higher intensity, longer dry spells. Detecting this requires testing each index independently:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># karnal_idx was computed in Step 9 and has one row per year</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Is annual total rainfall changing?</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">trend_analysis</span>(karnal_idx, <span class="at">index_col =</span> <span class="st">"total"</span>,</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">name =</span> <span class="st">"Karnal"</span>, <span class="at">file_dir =</span> file_dir)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Are the number of rainy days changing?</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">trend_analysis</span>(karnal_idx, <span class="at">index_col =</span> <span class="st">"dr"</span>,</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">name =</span> <span class="st">"Karnal"</span>, <span class="at">file_dir =</span> file_dir)</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Are very heavy rainfall events becoming more frequent?</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="fu">trend_analysis</span>(karnal_idx, <span class="at">index_col =</span> <span class="st">"d115"</span>,</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">name =</span> <span class="st">"Karnal"</span>, <span class="at">file_dir =</span> file_dir)</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Is the longest dry spell within each year getting longer?</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="fu">trend_analysis</span>(karnal_idx, <span class="at">index_col =</span> <span class="st">"cdd"</span>,</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">name =</span> <span class="st">"Karnal"</span>, <span class="at">file_dir =</span> file_dir)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># karnal_idx was computed in Step 9 and has one row per year</span></span>
+<span></span>
+<span><span class="co"># Is annual total rainfall changing?</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/trend_analysis.html">trend_analysis</a></span><span class="op">(</span><span class="va">karnal_idx</span>, index_col <span class="op">=</span> <span class="st">"total"</span>,</span>
+<span>               name <span class="op">=</span> <span class="st">"Karnal"</span>, file_dir <span class="op">=</span> <span class="va">file_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Are the number of rainy days changing?</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/trend_analysis.html">trend_analysis</a></span><span class="op">(</span><span class="va">karnal_idx</span>, index_col <span class="op">=</span> <span class="st">"dr"</span>,</span>
+<span>               name <span class="op">=</span> <span class="st">"Karnal"</span>, file_dir <span class="op">=</span> <span class="va">file_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Are very heavy rainfall events becoming more frequent?</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/trend_analysis.html">trend_analysis</a></span><span class="op">(</span><span class="va">karnal_idx</span>, index_col <span class="op">=</span> <span class="st">"d115"</span>,</span>
+<span>               name <span class="op">=</span> <span class="st">"Karnal"</span>, file_dir <span class="op">=</span> <span class="va">file_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Is the longest dry spell within each year getting longer?</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/trend_analysis.html">trend_analysis</a></span><span class="op">(</span><span class="va">karnal_idx</span>, index_col <span class="op">=</span> <span class="st">"cdd"</span>,</span>
+<span>               name <span class="op">=</span> <span class="st">"Karnal"</span>, file_dir <span class="op">=</span> <span class="va">file_dir</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Each call produces an independent test for that index. You can run as many as you need; just keep in mind that testing many indices simultaneously increases the chance of a false positive, so consider applying a Bonferroni correction to your significance threshold if you are reporting results formally.</p>
 <div class="imd-card tip">
@@ -1229,40 +1173,31 @@ Minimum record length for meaningful trend analysis
 </div>
 <p>The Mann-Kendall test is mathematically valid with as few as three observations, but trend results are only scientifically meaningful over extended periods. The World Meteorological Organization recommends a minimum of 30 years for climate normals, and this is a reasonable minimum for trend analysis too. Over short records, even strong visual patterns in a plot may not be statistically distinguishable from noise. Where possible, use the full available record (1901 to 2025 for rainfall, 1951 to 2025 for temperature) to maximise statistical power.</p>
 </div>
-<hr>
-</section>
-</section>
-<section id="putting-it-all-together-a-complete-research-example" class="level2">
-<h2 class="anchored" data-anchor-id="putting-it-all-together-a-complete-research-example">Putting It All Together: A Complete Research Example</h2>
+<hr></section></section><section id="putting-it-all-together-a-complete-research-example" class="level2"><h2 class="anchored" data-anchor-id="putting-it-all-together-a-complete-research-example">Putting It All Together: A Complete Research Example</h2>
 <p>To see how the individual steps combine, consider this research question: <strong>Is monsoon rainfall in Karnal becoming more intense and erratic over time, even if the annual total has not changed significantly?</strong></p>
 <div class="imd-concept">
 <p>Here is the complete analytical pipeline:</p>
 <p><strong>Step 1: Acquire the data.</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>karnal_rain <span class="ot">&lt;-</span> <span class="fu">get_district_series</span>(<span class="st">"rain"</span>, <span class="st">"Karnal"</span>, <span class="dv">1901</span>, <span class="dv">2025</span>, <span class="at">file_dir =</span> file_dir)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">karnal_rain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_district_series.html">get_district_series</a></span><span class="op">(</span><span class="st">"rain"</span>, <span class="st">"Karnal"</span>, <span class="fl">1901</span>, <span class="fl">2025</span>, file_dir <span class="op">=</span> <span class="va">file_dir</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Step 2: Compute climate indices.</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>rain_long  <span class="ot">&lt;-</span> <span class="fu">get_data</span>(<span class="st">"rain"</span>, <span class="dv">1901</span>, <span class="dv">2025</span>, file_dir)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>karnal_idx <span class="ot">&lt;-</span> <span class="fu">compute_rainfall_indices</span>(rain_long, <span class="at">level =</span> <span class="st">"district"</span>,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">name =</span> <span class="st">"Karnal"</span>, <span class="at">file_dir =</span> file_dir)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">rain_long</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/get_data.html">get_data</a></span><span class="op">(</span><span class="st">"rain"</span>, <span class="fl">1901</span>, <span class="fl">2025</span>, <span class="va">file_dir</span><span class="op">)</span></span>
+<span><span class="va">karnal_idx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/imdR/man/compute_rainfall_indices.html">compute_rainfall_indices</a></span><span class="op">(</span><span class="va">rain_long</span>, level <span class="op">=</span> <span class="st">"district"</span>,</span>
+<span>                                       name <span class="op">=</span> <span class="st">"Karnal"</span>, file_dir <span class="op">=</span> <span class="va">file_dir</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Step 3: Test three indices.</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trend_analysis</span>(karnal_idx, <span class="st">"total"</span>, <span class="st">"Karnal"</span>, file_dir)   <span class="co"># Is the total changing?</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">trend_analysis</span>(karnal_idx, <span class="st">"dr"</span>,    <span class="st">"Karnal"</span>, file_dir)   <span class="co"># Are rainy days declining?</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">trend_analysis</span>(karnal_idx, <span class="st">"d115"</span>,  <span class="st">"Karnal"</span>, file_dir)   <span class="co"># Are extreme events increasing?</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">trend_analysis</span>(karnal_idx, <span class="st">"cdd"</span>,   <span class="st">"Karnal"</span>, file_dir)   <span class="co"># Are dry spells getting longer?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/trend_analysis.html">trend_analysis</a></span><span class="op">(</span><span class="va">karnal_idx</span>, <span class="st">"total"</span>, <span class="st">"Karnal"</span>, <span class="va">file_dir</span><span class="op">)</span>   <span class="co"># Is the total changing?</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/trend_analysis.html">trend_analysis</a></span><span class="op">(</span><span class="va">karnal_idx</span>, <span class="st">"dr"</span>,    <span class="st">"Karnal"</span>, <span class="va">file_dir</span><span class="op">)</span>   <span class="co"># Are rainy days declining?</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/trend_analysis.html">trend_analysis</a></span><span class="op">(</span><span class="va">karnal_idx</span>, <span class="st">"d115"</span>,  <span class="st">"Karnal"</span>, <span class="va">file_dir</span><span class="op">)</span>   <span class="co"># Are extreme events increasing?</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/imdR/man/trend_analysis.html">trend_analysis</a></span><span class="op">(</span><span class="va">karnal_idx</span>, <span class="st">"cdd"</span>,   <span class="st">"Karnal"</span>, <span class="va">file_dir</span><span class="op">)</span>   <span class="co"># Are dry spells getting longer?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Step 4: Interpret the combination.</strong> If the annual total shows <code>ns</code> (no significant trend) but the number of rainy days shows a significant <em>decreasing</em> trend while very-heavy-rainfall days show a significant <em>increasing</em> trend, your conclusion is clear: the same quantity of rain is arriving in fewer, more intense events. This is a well-documented signal of changing rainfall regimes across South Asia and constitutes a publishable finding supported by 125 years of daily data.</p>
 </div>
-<hr>
-</section>
-<section id="troubleshooting" class="level2">
-<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<hr></section><section id="troubleshooting" class="level2"><h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
 <div class="imd-table">
 
 <table class="caption-top table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th data-quarto-table-cell-role="th">Symptom</th>
 <th data-quarto-table-cell-role="th">Likely cause and fix</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td>Connection timeout during download</td>
@@ -1274,7 +1209,7 @@ Minimum record length for meaningful trend analysis
 </tr>
 <tr class="odd">
 <td><code>Can't retrieve empty body</code></td>
-<td>The requested year has not yet been published by IMD (this typically happens if you request the current calendar year before its data are released). Use the most recent completed year, or use <code>get_realtime()</code> for recent provisional data.</td>
+<td>The requested year has not yet been published by IMD (this typically happens if you request the current calendar year before its data are released). Use the most recent completed year, or use <code><a href="https://rdrr.io/pkg/imdR/man/get_realtime.html">get_realtime()</a></code> for recent provisional data.</td>
 </tr>
 <tr class="even">
 <td>District name not found</td>
@@ -1290,53 +1225,87 @@ Minimum record length for meaningful trend analysis
 </tr>
 </tbody>
 </table>
-
 </div>
-<hr>
-</section>
-<section id="function-reference" class="level2">
-<h2 class="anchored" data-anchor-id="function-reference">Function Reference</h2>
+<hr></section><section id="function-reference" class="level2"><h2 class="anchored" data-anchor-id="function-reference">Function Reference</h2>
 <div class="imd-grid">
-  <div class="imd-tile"><div class="ico">🗺️</div><div class="lab">list_states()<br>list_districts()</div><div class="sub">Explore administrative boundaries</div></div>
-  <div class="imd-tile"><div class="ico">📍</div><div class="lab">get_point()<br>get_point_all()</div><div class="sub">Daily time series for a coordinate</div></div>
-  <div class="imd-tile"><div class="ico">📐</div><div class="lab">get_district_series()</div><div class="sub">Area-mean series for a state or district</div></div>
-  <div class="imd-tile"><div class="ico">⬇️</div><div class="lab">get_data()<br>open_data()</div><div class="sub">Download or read full annual grids</div></div>
-  <div class="imd-tile"><div class="ico">💾</div><div class="lab">extract_by_boundary()<br>get_bbox()</div><div class="sub">Export to NetCDF, GeoTIFF, or CSV</div></div>
-  <div class="imd-tile"><div class="ico">📡</div><div class="lab">get_realtime()</div><div class="sub">Recent provisional (near-real-time) data</div></div>
-  <div class="imd-tile"><div class="ico">🗾</div><div class="lab">plot_imd()<br>plot_timeseries()</div><div class="sub">Spatial maps and time series plots</div></div>
-  <div class="imd-tile"><div class="ico">📊</div><div class="lab">compute_rainfall_indices()<br>compute_temp_indices()</div><div class="sub">Standard ETCCDI climate indices</div></div>
-  <div class="imd-tile"><div class="ico">📈</div><div class="lab">trend_analysis()</div><div class="sub">Mann-Kendall test and Sen's slope</div></div>
+  <div class="imd-tile">
+<div class="ico">🗺️</div>
+<div class="lab">list_states()<br>list_districts()</div>
+<div class="sub">Explore administrative boundaries</div>
 </div>
-<hr>
-</section>
-<section id="citation-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="citation-and-resources">Citation and Resources</h2>
+  <div class="imd-tile">
+<div class="ico">📍</div>
+<div class="lab">get_point()<br>get_point_all()</div>
+<div class="sub">Daily time series for a coordinate</div>
+</div>
+  <div class="imd-tile">
+<div class="ico">📐</div>
+<div class="lab">get_district_series()</div>
+<div class="sub">Area-mean series for a state or district</div>
+</div>
+  <div class="imd-tile">
+<div class="ico">⬇️</div>
+<div class="lab">get_data()<br>open_data()</div>
+<div class="sub">Download or read full annual grids</div>
+</div>
+  <div class="imd-tile">
+<div class="ico">💾</div>
+<div class="lab">extract_by_boundary()<br>get_bbox()</div>
+<div class="sub">Export to NetCDF, GeoTIFF, or CSV</div>
+</div>
+  <div class="imd-tile">
+<div class="ico">📡</div>
+<div class="lab">get_realtime()</div>
+<div class="sub">Recent provisional (near-real-time) data</div>
+</div>
+  <div class="imd-tile">
+<div class="ico">🗾</div>
+<div class="lab">plot_imd()<br>plot_timeseries()</div>
+<div class="sub">Spatial maps and time series plots</div>
+</div>
+  <div class="imd-tile">
+<div class="ico">📊</div>
+<div class="lab">compute_rainfall_indices()<br>compute_temp_indices()</div>
+<div class="sub">Standard ETCCDI climate indices</div>
+</div>
+  <div class="imd-tile">
+<div class="ico">📈</div>
+<div class="lab">trend_analysis()</div>
+<div class="sub">Mann-Kendall test and Sen's slope</div>
+</div>
+</div>
+<hr></section><section id="citation-and-resources" class="level2"><h2 class="anchored" data-anchor-id="citation-and-resources">Citation and Resources</h2>
 <p>If you use <code>imdR</code> in your research, please cite it. Run the following to get the current citation in BibTeX format:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">"imdR"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">"imdR"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Additional resources:</p>
 <ul>
-<li><strong>GitHub (source code and development version):</strong> <a href="https://github.com/Subhradip25/imdR">github.com/Subhradip25/imdR</a></li>
-<li><strong>CRAN (stable release):</strong> <code>install.packages("imdR")</code></li>
-<li><strong>Data source:</strong> India Meteorological Department, Pune (<a href="https://imd.gov.in">imd.gov.in</a>)</li>
-<li><strong>Administrative boundaries:</strong> Survey of India</li>
-<li><strong>ETCCDI index definitions:</strong> <a href="https://etccdi.pacificclimate.org">etccdi.pacificclimate.org</a></li>
+<li>
+<strong>GitHub (source code and development version):</strong> <a href="https://github.com/Subhradip25/imdR">github.com/Subhradip25/imdR</a>
+</li>
+<li>
+<strong>CRAN (stable release):</strong> <code>install.packages("imdR")</code>
+</li>
+<li>
+<strong>Data source:</strong> India Meteorological Department, Pune (<a href="https://imd.gov.in">imd.gov.in</a>)</li>
+<li>
+<strong>Administrative boundaries:</strong> Survey of India</li>
+<li>
+<strong>ETCCDI index definitions:</strong> <a href="https://etccdi.pacificclimate.org">etccdi.pacificclimate.org</a>
+</li>
 </ul>
 <div class="imd-card theory">
 <div class="imd-card-title">
 A note on data provenance
 </div>
-<p>The gridded datasets provided through <code>imdR</code> are the quality-controlled archive products released by IMD on an annual basis. They are appropriate for research and publication. The provisional near-real-time data available through <code>get_realtime()</code> have not undergone the same quality-control procedures and are subject to revision after the fact. Use provisional data only for recent dates not yet covered by the archive, and clearly state their provisional status in your methods section.</p>
+<p>The gridded datasets provided through <code>imdR</code> are the quality-controlled archive products released by IMD on an annual basis. They are appropriate for research and publication. The provisional near-real-time data available through <code><a href="https://rdrr.io/pkg/imdR/man/get_realtime.html">get_realtime()</a></code> have not undergone the same quality-control procedures and are subject to revision after the fact. Use provisional data only for recent dates not yet covered by the archive, and clearly state their provisional status in your methods section.</p>
 </div>
 
 
 <!-- -->
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2819,8 +2788,7 @@ A note on data provenance
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
 <p>© 2025 Subhradip Bhattacharjee</p>
 </div>   
@@ -2832,8 +2800,6 @@ A note on data provenance
 </div>
   </div>
 </footer>
-
-
 
 
 <script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
