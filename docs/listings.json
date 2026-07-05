@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/goa-rainfall-ndvi/index.html",
       "/posts/imdR/index.html",
       "/posts/01-imd-gridded-data/index.html"
     ]
